@@ -16,13 +16,13 @@ export function AppFooter() {
         try {
             const score = await checkout(cartTotal)
             showSuccessMsg(`Charged, your new score: ${score.toLocaleString()}`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot checkout')
         }
     }
 
     return (
-        <footer className="app-footer">
+        <footer className="app-footer full">
             <p>
                 coffeerights - count: {count}
             </p>
