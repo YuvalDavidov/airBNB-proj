@@ -33,7 +33,6 @@ export function StayIndex() {
 
         function convertLocation(location) {
             console.log(location)
-
         }
     }
 
@@ -54,9 +53,14 @@ export function StayIndex() {
         setAddModal(false)
     }
 
+    function onUpdateStay(stay) {
+        setStayToEdit({...stay})
+        setAddModal(true)
+    }
+
     return <section className="stay-index">
         <button className="add-btn" onClick={() => setAddModal(true)}>Add Stay</button>
-        < StayList stays={stays} userLocation={userLocation} />
+        < StayList stays={stays} userLocation={userLocation} onUpdateStay={onUpdateStay} />
         {addModal && <>
         <div className="main-screen" onClick={() => setAddModal(false)}></div>
         <div className="edit-stay-modal">
@@ -66,6 +70,7 @@ export function StayIndex() {
                     <input
                     type="text"
                     name="city"
+                    placeholder="Enter city"
                     value={stayToEdit.loc.city}
                     onChange={handleChangeLoc}
                     />
@@ -74,6 +79,7 @@ export function StayIndex() {
                     <input
                     type="text"
                     name="country"
+                    placeholder="Enter country"
                     value={stayToEdit.loc.country}
                     onChange={handleChangeLoc}
                     />
@@ -82,6 +88,7 @@ export function StayIndex() {
                     <input
                     type="number"
                     name="price"
+                    placeholder="Enter price"
                     value={stayToEdit.price}
                     onChange={handleChangePrice}
                     />

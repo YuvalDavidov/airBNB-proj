@@ -1,10 +1,28 @@
 .stay-preview {
+  position: relative;
   display: flex;
   flex-direction: column;
 
   .image-slider {
     border-radius: 10px;
     overflow: auto;
+  }
+
+  .actions {
+    position: absolute;
+    display: none;
+    right: 0;
+    bottom: 0;
+
+    &>* {
+      margin-right: 0;
+      margin-left: 5px;
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover .actions {
+    display: block;
   }
 
   img {
@@ -26,8 +44,8 @@
 
         svg {
             position: relative;
-            transform: translateY(-2px);
-            transform: translate(-4px,-2px);
+            // transform: translateY(-2px);
+            transform: translate(-4px,-1px);
 
         }
         .rate-number {

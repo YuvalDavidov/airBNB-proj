@@ -1,6 +1,9 @@
+import { removeStay } from '../store/stay.actions'
+
 import { ImageSlider } from './image-slider'
 
-export function StayPreview({ stay, userLocation }) {
+
+export function StayPreview({ stay, userLocation, onUpdateStay }) {
   function calcMeanRate(stayReviews) {
     if (!stayReviews || !stayReviews.length) return null
     const sum = stayReviews.reduce((acc, review) => {
@@ -78,6 +81,10 @@ export function StayPreview({ stay, userLocation }) {
       <div className='dates'>Jan 17 – 22</div>
       <div className='price'>
         <span>₪{stay.price.toLocaleString('en-US')}</span> night
+      </div>
+      <div className="actions">
+        <button onClick={() => onUpdateStay(stay)}>Edit</button>
+        <button onClick={() => removeStay(stay._id)}>X</button>
       </div>
     </article>
   )
