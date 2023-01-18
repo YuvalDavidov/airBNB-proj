@@ -80,7 +80,13 @@ function getEmptyStay() {
       ],
       "price": "",
       "summary": "The luxurious spacious suite is furnished with a cozy seating area, flat-screen TV, minibar, double box spring, double sink, jacuzzi, hairdryer, bathroom with spacious rain shower and toilet. A luxury breakfast is served every morning.",
-      "capacity": 2,
+      "stayDetails": {
+        "guests": 8,
+        "bedrooms": 3,
+        "beds": 3,
+        "sharedBath": 1,
+        "allowPets": false
+    },
       "amenities": [
         "Beach access – Beachfront",
         "Wifi",
@@ -93,7 +99,7 @@ function getEmptyStay() {
       "host": {
         "_id": "u101",
         "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+        "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
       },
       "loc": {
         "country": "",
@@ -111,7 +117,7 @@ function getEmptyStay() {
           "by": {
             "_id": "u102",
             "fullname": "user2",
-            "imgUrl": "/img/img2.jpg"
+            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
           }
         }
       ],
@@ -139,7 +145,13 @@ function _createStays() {
               ],
               "price": 1205,
               "summary": "The luxurious spacious suite is furnished with a cozy seating area, flat-screen TV, minibar, double box spring, double sink, jacuzzi, hairdryer, bathroom with spacious rain shower and toilet. A luxury breakfast is served every morning.",
-              "capacity": 2,
+              "stayDetails": {
+            "guests": 8,
+            "bedrooms": 3,
+            "beds": 3,
+            "sharedBath": 1,
+            "allowPets": false
+        },
               "amenities": [
                 "Beach access – Beachfront",
                 "Wifi",
@@ -152,7 +164,7 @@ function _createStays() {
               "host": {
                 "_id": "u101",
                 "fullname": "Davit Pok",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -170,7 +182,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -192,7 +204,13 @@ function _createStays() {
               ],
               "price": 247,
               "summary": "Nature lodge Tureluur is located in a unique place in the middle of the nature of Drenthe and is suitable for 2 people. Ideal for a nice time with your partner or family/friends. The accommodation is located on Pieterpad and can also be booked for 1 night. After a delicious breakfast (to be booked on site) you continue your walk on this beautiful walking route.",
-              "capacity": 2,
+              "stayDetails": {
+            "guests": 8,
+            "bedrooms": 3,
+            "beds": 3,
+            "sharedBath": 1,
+            "allowPets": false
+        },
               "amenities": [
                 "Kitchen",
                 "Dedicated workspace",
@@ -205,7 +223,7 @@ function _createStays() {
               "host": {
                 "_id": "u102",
                 "fullname": "Charles Manson",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -223,7 +241,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -245,7 +263,13 @@ function _createStays() {
               ],
               "price": 10590,
               "summary": "Welcome to Invisible House. Re-launched in November 2022 as a joint venture with Fieldtrip Hospitality.",
-              "capacity": 8,
+              "stayDetails": {
+                "guests": 8,
+                "bedrooms": 3,
+                "beds": 3,
+                "sharedBath": 1,
+                "allowPets": false
+            },
               "amenities": [
                 "Pets allowed",
                 "Mountain view",
@@ -258,7 +282,7 @@ function _createStays() {
               "host": {
                 "_id": "u103",
                 "fullname": "Jeffrey Dahmer",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -276,7 +300,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -298,7 +322,13 @@ function _createStays() {
               ],
               "price": 1237,
               "summary": "Relax in this beautiful natural setting that Muskoka has to offer, while at the same time enjoying all comforts and conveniences in this unique and contemporary home.",
-              "capacity": 10,
+              "stayDetails": {
+                "guests": 8,
+                "bedrooms": 3,
+                "beds": 3,
+                "sharedBath": 1,
+                "allowPets": false
+            },
               "amenities": [
                 "River view",
                 "Waterfront",
@@ -311,7 +341,7 @@ function _createStays() {
               "host": {
                 "_id": "u103",
                 "fullname": "Jeffrey Dahmer",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -329,7 +359,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -351,7 +381,13 @@ function _createStays() {
               ],
               "price": 2626,
               "summary": "We can accommodate up to 24+ Persons. Accepts Weddings and Events",
-              "capacity": 16,
+              "stayDetails": {
+                "guests": 8,
+                "bedrooms": 3,
+                "beds": 3,
+                "sharedBath": 1,
+                "allowPets": false
+            },
               "amenities": [
                 "Bay view",
                 "Garden view",
@@ -364,7 +400,7 @@ function _createStays() {
               "host": {
                 "_id": "u104",
                 "fullname": "Ted Bundy",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -382,7 +418,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -404,7 +440,13 @@ function _createStays() {
               ],
               "price": 8985,
               "summary": "Exclusive living in a Private historical Tuscan Estate (family owned/managed) 3 km from Ponte Vecchio, private swimmingpool, wifi, parking. Outdoor kitchen area with barbecue and pizza oven.",
-              "capacity": 16,
+              "stayDetails": {
+                "guests": 8,
+                "bedrooms": 3,
+                "beds": 3,
+                "sharedBath": 1,
+                "allowPets": false
+            },
               "amenities": [
                 "Private outdoor pool - available seasonally, open 24 hours, rooftop",
                 "Garden view",
@@ -417,7 +459,7 @@ function _createStays() {
               "host": {
                 "_id": "u104",
                 "fullname": "Ted Bundy",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -435,7 +477,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],
@@ -457,7 +499,13 @@ function _createStays() {
               ],
               "price": 786,
               "summary": "The village has 5 Icelandic cottages. Each cottage comes with a patio with a seating set and barbecue. Cottages are fully equipped, including separate access to wifi, making it easy to connect with remote work.",
-              "capacity": 4,
+              "stayDetails": {
+                "guests": 8,
+                "bedrooms": 3,
+                "beds": 3,
+                "sharedBath": 1,
+                "allowPets": false
+            },
               "amenities": [
                 "Kitchen",
                 "TV",
@@ -470,7 +518,7 @@ function _createStays() {
               "host": {
                 "_id": "u105",
                 "fullname": "Samuel Little",
-                "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+                "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
               },
               "loc": {
                 "country": "Portugal",
@@ -488,7 +536,7 @@ function _createStays() {
                   "by": {
                     "_id": "u102",
                     "fullname": "user2",
-                    "imgUrl": "/img/img2.jpg"
+                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
                   }
                 }
               ],

@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useParams } from 'react-router'
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
@@ -9,6 +9,7 @@ import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator } from 'react-icons/tb';
 import { StayMap } from "../cmps/stay-map";
 import { StayDatePicker } from "../cmps/stay-date-picker";
+import { stayService } from "../services/stay.service.local";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -19,10 +20,16 @@ export function StayDetails() {
     const [datePickerModual, setDatePickerModual] = useState(false)
     const [guestsModual, setGuestsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
-
+    const { stayId } = useParams()
 
     useEffect(() => {
-        setStay(stays[0])
+        stayService.getById(stayId)
+            .then((currStay) => {
+                console.log(currStay);
+                setStay(currStay)
+            })
+
+        // setStay(stays[0])
 
     }, [])
 
@@ -319,75 +326,3 @@ export function StayDetails() {
         </section>
     )
 }
-
-const stays = [
-    {
-        "_id": "10006546",
-        "name": "Ribeira Charming Duplex",
-        "subTitle": "Ribeira Charming",
-        "type": "House",
-        "imgUrls": ["https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large", "https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large", "https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large", "https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large", "https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large",],
-        "price": 80.00,
-        "summary": "Fantastic duplex apartment with three bedrooms, located in the historic area of Porto",
-        "stayDetails": {
-            "guests": 8,
-            "bedrooms": 3,
-            "beds": 3,
-            "sharedBath": 1,
-            "allowPets": false
-        },
-        "amenities": [
-            "TV",
-            "Wifi",
-            "Kitchen",
-            "Smoking allowed",
-            "Pets allowed",
-            "Elevator"
-        ],
-        "labels": [
-            "Top of the world",
-            "Trending",
-            "Play",
-            "Tropical"
-        ],
-        "host": {
-            "_id": "u101",
-            "isSuperHost": true,
-            "fullname": "Davit Pok",
-            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg",
-        },
-        "loc": {
-            "country": "Portugal",
-            "countryCode": "PT",
-            "city": "Porto",
-            "address": "17 Kombo st",
-            "lat": 41.150223,
-            "lng": -8.629932
-        },
-        "reviews": [
-            {
-                "id": "madeId",
-                "txt": "Very helpful hosts. Cooked traditional Very helpful hosts. Cooked traditional...",
-                "rate": 4,
-                "createdAt": "Apr 2015",
-                "by": {
-                    "_id": "u102",
-                    "fullname": "user2",
-                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
-                }
-            },
-            {
-                "id": "madeI",
-                "txt": "Very helpful hosts. Cooked traditional...",
-                "rate": 1,
-                "createdAt": "Aug 2015",
-                "by": {
-                    "_id": "u102",
-                    "fullname": "user2",
-                    "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg"
-                }
-            }
-        ],
-        "likedByUsers": ['mini-user'] // for user-wishlist : use $in
-    }
-]

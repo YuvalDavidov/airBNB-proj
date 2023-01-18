@@ -22,26 +22,26 @@ export function getActionUpdateStay(stay) {
 }
 
 export function setFilterBy(filterBy) {
-    store.dispatch({ type: SET_FILTER, filterBy })
+  store.dispatch({ type: SET_FILTER, filterBy })
 }
 
 export function toggleExpand(boolean) {
-    store.dispatch({ type: SET_HEADER_EXPAND, toggle: boolean })
+  store.dispatch({ type: SET_HEADER_EXPAND, toggle: boolean })
 }
 
 export async function loadStays(filterBy) {
-    try {
-        const stays = await stayService.query(filterBy)
-        console.log('Stays from DB:', stays)
-        store.dispatch({
-            type: SET_STAYS,
-            stays
-        })
+  try {
+    const stays = await stayService.query(filterBy)
+    console.log('Stays from DB:', stays)
+    store.dispatch({
+      type: SET_STAYS,
+      stays
+    })
 
-    } catch (err) {
-        console.log('Cannot load stays', err)
-        throw err
-    }
+  } catch (err) {
+    console.log('Cannot load stays', err)
+    throw err
+  }
 
 }
 
