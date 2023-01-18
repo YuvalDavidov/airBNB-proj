@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export function StayMap({ stayLoc }) {
-    console.log(stayLoc);
+    // console.log(stayLoc);
     const [coordinates, serCoordinates] = useState({ lat: stayLoc.lat, lng: stayLoc.lng })
 
     const zoom = 11

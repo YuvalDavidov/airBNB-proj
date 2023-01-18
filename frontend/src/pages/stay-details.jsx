@@ -10,16 +10,43 @@ import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator } from 'react-icons/tb';
 import { BsDot } from 'react-icons/bs';
 import { StayMap } from "../cmps/stay-map";
+import { StayDatePicker } from "../cmps/stay-date-picker";
+
+const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export function StayDetails() {
 
     const [stay, setStay] = useState(null)
+    const [datePickerModual, setDatePickerModual] = useState(false)
+    const [pickedDate, setPickedDate] = useState({ startDate: new Date(), endDate: null })
+    const [guestsModual, setGuestsModual] = useState(false)
+    const [adultsAmount, setAdultsAmount] = useState(1)
 
-    console.log(stay);
+    console.log(pickedDate);
 
     useEffect(() => {
         setStay(stays[0])
+
     }, [])
+
+    useEffect(() => {
+        if (!stay) return
+        const reserve = document.querySelector('.reserve')
+        const modual = document.querySelector('.reserve-module')
+
+        const modualObserver = new IntersectionObserver(onModualObserver, {
+            margin: '10px'
+        })
+
+        modualObserver.observe(reserve)
+
+        function onModualObserver(entries) {
+            entries.forEach((entry) => {
+
+                modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
+            })
+        }
+    }, [stay])
 
     function getStayReviewRateAvg(stayReviews) {
         let sum = 0
@@ -42,11 +69,11 @@ export function StayDetails() {
                     <div>
                         <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
                         <span className="dote">.</span>
-                        <span><a href="#">{stay.reviews.length} reviews</a></span>
+                        <span><a href="#reviews">{stay.reviews.length} reviews</a></span>
                         <span className="dote">.</span>
-                        <a href="">{stay.loc.address}</a>,
-                        <a href="">{stay.loc.city}</a>,
-                        <a href="">{stay.loc.country}</a>
+                        <a href="#map">{stay.loc.address}</a>,
+                        <a href="#map"> {stay.loc.city}</a>,
+                        <a href="#map"> {stay.loc.country}</a>
 
 
                     </div>
@@ -159,11 +186,58 @@ export function StayDetails() {
 
                     </section>
 
-                    <article className="reserve-module">pipi</article>
+                    <section className="reserve">
+                        <article className="reserve-module">
+                            <div className="top">
+                                <div className="price">
+                                    {stay.price}
+                                    <span> night</span>
+                                </div>
+
+                                <div>
+                                    <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                    <span className="dote">.</span>
+                                    <span><a href="#">{stay.reviews.length} reviews</a></span>
+                                </div>
+                            </div>
+
+                            <div className="reserve-date-guests">
+                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
+                                    {pickedDate.startDate.getDate()},{month[pickedDate.startDate.getMonth()]}
+                                </div>
+                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
+                                    {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}
+                                </div>
+
+                                <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
+                                    {adultsAmount}
+                                </div>
+                            </div>
+                            <div className="date-picker">
+                                {datePickerModual && <StayDatePicker setPickedDate={setPickedDate} setDatePickerModual={setDatePickerModual} />}
+                            </div>
+                            <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
+                                <div>
+                                    Adults <span> <button onClick={() => { setAdultsAmount(adultsAmount - 1) }} >-</button> 1 <button onClick={() => { setAdultsAmount(adultsAmount + 1) }}>+</button></span>
+                                </div>
+                                <div>
+                                    Children <span> <button>-</button> 0 <button>+</button></span>
+                                </div>
+                                <div>
+                                    Infants <span> <button>-</button> 0 <button>+</button></span>
+                                </div>
+                                <div>
+                                    Pets <span> <button>-</button> 0 <button>+</button></span>
+                                </div>
+                            </section>
+                            <button className="reserve-btn">Check availabilty</button>
+                        </article>
+
+                    </section>
                 </article>
 
                 <hr />
-                <section className="reviews">
+                <section id="reviews" className="reviews">
                     <h2>
                         <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
                         <span className="dote">.</span>
@@ -187,7 +261,7 @@ export function StayDetails() {
 
                 <hr />
 
-                <div className="map">
+                <div id="map" className="map">
                     <h4>Where you'll be</h4>
                     <p>{stay.loc.city},{stay.loc.country},{stay.loc.address}</p>
 
