@@ -1,10 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+
 .stay-details {
     margin-top: 20px;
     // position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+
+    >* {
+        grid-column: 2;
+        width: 100%;
+
+        &.full {
+            grid-column: 1 /-1;
+        }
+    }
 
     & .stay-mini-title {
         display: flex;
         justify-content: space-between;
+    }
+
+    @include for-narrow-layout {
+        grid-template-columns:
+            40px 1fr 40px;
+    }
+
+    @include for-normal-layout {
+        grid-template-columns:
+            40px 1fr 40px;
+    }
+
+    @include for-wide-layout {
+        grid-template-columns:
+            80px 1fr 80px;
     }
 
 
@@ -23,7 +51,6 @@
     border-radius: 15px;
     overflow: auto;
     position: relative;
-    // background-color: red;
 
     & img {
         aspect-ratio: 1/1;
@@ -123,6 +150,11 @@
 
         & .date-picker {
             position: absolute;
+            z-index: 100;
+
+            &.close {
+                visibility: hidden;
+            }
         }
     }
 
@@ -132,10 +164,20 @@
     }
 
     &-btn {
-        padding: 15px;
-        border-radius: 10px;
-        width: 100%;
         margin: 10px 0;
+        --mouse-x: 50;
+        --mouse-y: 50;
+        padding: 20px 30px;
+        width: 100%;
+        background-size: 200% 200%;
+        background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+        background-image: radial-gradient(circle, rgb(207, 11, 98) 0%, rgba(348, 36, 76, 1) 100%);
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        // font-size: 36px;
+        font-family: 'Raleway', sans-serif;
+
     }
 
     &-date-guests {
@@ -163,21 +205,58 @@
     }
 
     & .guests-modual {
-        top: 200px;
+        top: 111px;
         background-color: white;
         border-radius: 15px;
         padding: 10px;
-        width: 230px;
+        width: 94%;
         position: absolute;
         box-shadow: #0000001f 0 6px 16px;
 
         & div {
             display: flex;
             justify-content: space-between;
+
+            & button {
+                aspect-ratio: 1/1;
+                background-color: white;
+                color: black;
+                border: 0.5px solid rgba(163, 163, 163, 0.685);
+                border-radius: 50%;
+            }
+
+            & button:hover {
+                background-color: rgba(163, 163, 163, 0.443);
+            }
+
+            & button.not {
+                cursor: not-allowed;
+                background-color: white;
+            }
+
         }
 
         &.close {
             visibility: hidden;
+        }
+    }
+}
+
+.special-preks {
+    & .preks {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 10px;
+
+        & .container {
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+
+            & span {
+                color: rgba(0, 0, 0, 0.548);
+            }
         }
     }
 }
