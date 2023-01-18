@@ -4,19 +4,16 @@ import { CarIndex } from './pages/car-index.jsx'
 import { ReviewIndex } from './pages/review-index.jsx'
 import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
+import { StayIndex } from './pages/stay-index.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
+
     {
         path: '/',
-        component: <HomePage />,
-        label: 'Home 🏠',
-    },
-    {
-        path: 'car',
-        component: <CarIndex />,
-        label: 'Cars'
+        component: <StayIndex />,
+        label: 'Stays'
     },
     {
         path: 'details',

@@ -1,4 +1,4 @@
-import { carService } from "../services/car.service.local.js";
+import { stayService } from "../services/stay.service.local";
 import { userService } from "../services/user.service.js";
 import { store } from '../store/store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
@@ -27,7 +27,7 @@ export function getActionUpdateCar(car) {
 
 export async function loadCars() {
     try {
-        const cars = await carService.query()
+        const cars = await stayService.query()
         console.log('Cars from DB:', cars)
         store.dispatch({
             type: SET_CARS,
@@ -43,7 +43,7 @@ export async function loadCars() {
 
 export async function removeCar(carId) {
     try {
-        await carService.remove(carId)
+        await stayService.remove(carId)
         store.dispatch(getActionRemoveCar(carId))
     } catch (err) {
         console.log('Cannot remove car', err)
@@ -53,7 +53,7 @@ export async function removeCar(carId) {
 
 export async function addCar(car) {
     try {
-        const savedCar = await carService.save(car)
+        const savedCar = await stayService.save(car)
         console.log('Added Car', savedCar)
         store.dispatch(getActionAddCar(savedCar))
         return savedCar
@@ -64,7 +64,7 @@ export async function addCar(car) {
 }
 
 export function updateCar(car) {
-    return carService.save(car)
+    return stayService.save(car)
         .then(savedCar => {
             console.log('Updated Car:', savedCar)
             store.dispatch(getActionUpdateCar(savedCar))
@@ -112,7 +112,7 @@ export function onRemoveCarOptimistic(carId) {
     })
     showSuccessMsg('Car removed')
 
-    carService.remove(carId)
+    stayService.remove(carId)
         .then(() => {
             console.log('Server Reported - Deleted Succesfully');
         })

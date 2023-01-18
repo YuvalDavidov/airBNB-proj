@@ -7,7 +7,7 @@ import { userService } from './user.service.js'
 
 const STORAGE_KEY = 'car'
 
-export const carService = {
+export const stayService = {
     query,
     getById,
     save,
@@ -15,7 +15,7 @@ export const carService = {
     getEmptyCar,
     addCarMsg
 }
-window.cs = carService
+// window.cs = carService
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -47,7 +47,7 @@ async function save(car) {
 }
 
 async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
+    const savedMsg = await httpService.post(`car/${carId}/msg`, { txt })
     return savedMsg
 }
 

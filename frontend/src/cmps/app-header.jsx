@@ -4,6 +4,7 @@ import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
+import { HeaderFilter } from './header-filter'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -33,9 +34,13 @@ export function AppHeader() {
         }
     }
 
+    function onSetFilter(filterBy) {
+        console.log(filterBy)
+    }
+
     return (
         <header className="app-header full">
-            {/* <nav>
+            <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
@@ -53,7 +58,8 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 }
-            </nav> */}
+                <HeaderFilter onSetFilter={onSetFilter} />
+            </nav>
             <h1 className='mail-layout'>LOGO</h1>
         </header>
     )
