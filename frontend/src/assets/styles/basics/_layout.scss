@@ -12,17 +12,17 @@
 
     @include for-narrow-layout {
         grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $mobile-breakpoint) minmax(20px, 1fr);
+            40px 1fr 40px;
     }
 
     @include for-normal-layout {
         grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $narrow-breakpoint) minmax(20px, 1fr);
+            40px 1fr 40px;
     }
 
     @include for-wide-layout {
         grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $normal-breakpoint) minmax(20px, 1fr);
+            80px 1fr 80px;
     }
 }
 

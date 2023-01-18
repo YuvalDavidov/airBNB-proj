@@ -20,12 +20,12 @@ export function StayIndex() {
         }
 
         function convertLocation(location) {
-            console.log(location)
-            
+            const latLng = {lat: location.coords.latitude, lng: location.coords.longitude}
+            setUserLocation(latLng)
         }
     }
 
     return <section className="stay-index">
-        < StayList stays={stays} />
+        < StayList stays={stays} userLocation={userLocation} />
     </section>
 }

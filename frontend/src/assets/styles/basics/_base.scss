@@ -4,7 +4,7 @@
 
 ::selection {
     background-color: $clr1;
-    color: $clr6;
+    // color: $clr6;
 }
 
 // html {
@@ -14,8 +14,10 @@
 // }
 
 body {
-    font-size: rem(18px);
+    font-size: rem(15px);
     margin: 0;
+    font-family: Cereal-Book;
+    color: $clr1;
     // max-width: 1024px;
     // margin: auto;
 }

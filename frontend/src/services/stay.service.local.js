@@ -112,8 +112,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -165,8 +165,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -218,8 +218,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -271,8 +271,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -324,8 +324,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -377,8 +377,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
@@ -430,8 +430,8 @@ function _createStays() {
                 "countryCode": "PT",
                 "city": "Porto",
                 "address": "17 Kombo st",
-                "lat": -8.61308,
-                "lng": 41.1413
+                "lat": 41.1413,
+                "lng": -8.61308
               },
               "reviews": [
                 {
