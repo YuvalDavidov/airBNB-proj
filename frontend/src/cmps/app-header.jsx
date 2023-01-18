@@ -34,9 +34,7 @@ export function AppHeader() {
         }
     }
 
-    function onSetFilter(filterBy) {
-        console.log(filterBy)
-    }
+
 
     return (
         <header className="app-header full">
@@ -58,7 +56,7 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 }
-                <HeaderFilter onSetFilter={onSetFilter} />
+                <HeaderFilter />
             </nav>
             <h1 className='mail-layout'>LOGO</h1>
         </header>

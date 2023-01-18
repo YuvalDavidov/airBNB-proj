@@ -1,6 +1,6 @@
 import { stayService } from "../services/stay.service.local"
 import { store } from "./store"
-import { SET_STAYS, ADD_STAY, REMOVE_STAY, UPDATE_STAY } from "./stay.reducer"
+import { SET_STAYS, ADD_STAY, REMOVE_STAY, UPDATE_STAY, SET_FILTER, SET_HEADER_EXPAND } from "./stay.reducer"
 
 export function getActionRemoveStay(stayId) {
     return {
@@ -21,9 +21,17 @@ export function getActionUpdateStay(stay) {
     }
 }
 
-export async function loadStays() {
+export function setFilterBy(filterBy) {
+    store.dispatch({ type: SET_FILTER, filterBy })
+}
+
+export function toggleExpand(boolean) {
+    store.dispatch({ type: SET_HEADER_EXPAND, toggle: boolean })
+}
+
+export async function loadStays(filterBy) {
     try {
-        const stays = await stayService.query()
+        const stays = await stayService.query(filterBy)
         console.log('Stays from DB:', stays)
         store.dispatch({
             type: SET_STAYS,

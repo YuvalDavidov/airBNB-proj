@@ -12,10 +12,10 @@ export const stayService = {
     remove,
     getEmptyStay,
     addStayMsg,
-    getFilterFromSearchParams,
-    getDefaultHeaderFilter,
-    getDefaultLabelsFilter,
-    getDefaultModalFilter
+    getFilterFromSearchParams
+    // getDefaultHeaderFilter,
+    // getDefaultLabelsFilter,
+    // getDefaultModalFilter
 }
 // window.cs = stayService
 
@@ -453,31 +453,7 @@ function _createStays() {
     }
 }
 
-function getDefaultModalFilter() {
-    return {
-        type: '',
-        minPrice: 0,
-        maxPrice: Infinity,
-        amenities: '',
-        capacity: Infinity
-    }
-}
 
-function getDefaultLabelsFilter() {
-    return {
-        labels: []
-    }
-}
-
-function getDefaultHeaderFilter() {
-    return {
-        locationCountry: '',
-        locationCity: '',
-        capacity: Infinity,
-        name: ''
-
-    }
-}
 
 function _getDefaultFilter() {
     return {
@@ -509,3 +485,72 @@ function getFilterFromSearchParams(searchParams) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function getDefaultModalFilter() {
+  //     return {
+  //         type: '',
+  //         minPrice: 0,
+  //         maxPrice: Infinity,
+  //         amenities: '',
+  //         capacity: Infinity
+  //     }
+  // }
+  
+  // function getDefaultLabelsFilter() {
+  //     return {
+  //         labels: []
+  //     }
+  // }
+  
+  // function getDefaultHeaderFilter() {
+  //     return {
+  //         locationCountry: '',
+  //         locationCity: '',
+  //         capacity: Infinity,
+  //         name: ''
+  
+  //     }
+  // }
