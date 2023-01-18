@@ -35,7 +35,7 @@ export function AppHeader() {
 
     return (
         <header className="app-header full">
-            <nav>
+            {/* <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
@@ -53,7 +53,7 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 }
-            </nav>
+            </nav> */}
             <h1 className='mail-layout'>LOGO</h1>
         </header>
     )
