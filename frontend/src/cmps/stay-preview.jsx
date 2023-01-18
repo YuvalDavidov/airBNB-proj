@@ -1,4 +1,6 @@
-export function StayPreview({ stay }) {
+import { ImageSlider } from "./image-slider"
+
+export function StayPreview({ stay, userLocation }) {
   
     function calcMeanRate(stayReviews) {
     if (!stayReviews || !stayReviews.length) return null
@@ -9,16 +11,16 @@ export function StayPreview({ stay }) {
     return sum / stayReviews.length
   }
 
-  function calcAirDistance(lat1, lon1, lat2, lon2) 
+  function calcAirDistance(lat1, lng1, lat2, lng2) 
     {
       var R = 6371; // km
       var dLat = toRad(lat2-lat1);
-      var dLon = toRad(lon2-lon1);
+      var dLng = toRad(lng2-lng1);
       var lat1 = toRad(lat1);
       var lat2 = toRad(lat2);
 
       var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+        Math.sin(dLng/2) * Math.sin(dLng/2) * Math.cos(lat1) * Math.cos(lat2); 
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c;
       return d;
@@ -32,7 +34,8 @@ export function StayPreview({ stay }) {
 
   return (
     <article className='stay-preview'>
-      <img src={stay.imgUrls[0]} alt='picture of stay' />
+      {/* <img src={stay.imgUrls[0]} alt='picture of stay' /> */}
+      <ImageSlider imgs={stay.imgUrls} />
       <div className='loc-rate'>
         <span className='loc'>
           {stay.loc.city}, {stay.loc.country}
@@ -51,9 +54,12 @@ export function StayPreview({ stay }) {
             fillRule='evenodd'
           ></path>
         </svg>
-        <span className="rate-num">{calcMeanRate(stay.reviews)}</span>
+        <span className="rate-num">{calcMeanRate(stay.reviews) % 1 != 0 ? calcMeanRate(stay.reviews).toFixed(2) : calcMeanRate(stay.reviews).toFixed(1)}</span>
         </span>
       </div>
+      <div className="distance">{parseInt(calcAirDistance(userLocation.lat, userLocation.lng, stay.loc.lat, stay.loc.lng)).toLocaleString('en-US')} kilometers away</div>
+      <div className="dates">Jan 17 – 22</div>
+      <div className="price"><span>₪{stay.price}</span> night</div>
     </article>
   )
 }

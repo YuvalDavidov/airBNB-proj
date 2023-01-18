@@ -1,0 +1,47 @@
+.stay-preview {
+  display: flex;
+  flex-direction: column;
+  img {
+    aspect-ratio: 1/0.95;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .loc-rate {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+    .loc {
+        font-family: Cereal-Medium;
+    }
+    .rate {
+        display: flex;
+        align-items: center;
+
+        svg {
+            position: relative;
+            transform: translateY(-2px);
+            transform: translate(-4px,-2px);
+
+        }
+        .rate-number {
+            margin-left: 12px;
+        }
+    }
+  }
+
+  .distance {
+    margin-bottom: 2px;
+    color: $clr2;
+  }
+  .dates {
+    margin-bottom: 8px;
+    color: $clr2;
+  }
+
+  .price {
+    span {
+        font-family: Cereal-Medium;
+    }
+  }
+}

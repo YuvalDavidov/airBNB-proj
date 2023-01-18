@@ -36,6 +36,6 @@ export function StayIndex() {
     }
 
     return <section className="stay-index">
-        < StayList stays={stays} />
+        < StayList stays={stays} userLocation={userLocation} />
     </section>
 }
