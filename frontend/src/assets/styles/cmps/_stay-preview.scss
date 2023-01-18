@@ -1,6 +1,12 @@
 .stay-preview {
   display: flex;
   flex-direction: column;
+
+  .image-slider {
+    border-radius: 10px;
+    overflow: auto;
+  }
+
   img {
     aspect-ratio: 1/0.95;
     object-fit: cover;

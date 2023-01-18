@@ -42,7 +42,7 @@ async function save(stay) {
         savedStay = await storageService.put(STORAGE_KEY, stay)
     } else {
         // Later, owner is set by the backend
-        stay.owner = userService.getLoggedinUser()
+        // stay.owner = userService.getLoggedinUser()
         savedStay = await storageService.post(STORAGE_KEY, stay)
     }
     return savedStay
@@ -66,8 +66,55 @@ async function addStayMsg(stayId, txt) {
 
 function getEmptyStay() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
+      "name": "Luxury suite overlooking the Wadden Sea, Harlingen",
+      "type": "House",
+      "imgUrls": [
+        "https://a0.muscache.com/im/pictures/be42241a-5346-4745-a2ef-8cf7576f88b8.jpg",
+        "https://a0.muscache.com/im/pictures/d0fa428d-b0f7-4e4a-93d9-f2e702133e48.jpg",
+        "https://a0.muscache.com/im/pictures/4119dad5-30be-4e72-844e-a7343046070c.jpg",
+        "https://a0.muscache.com/im/pictures/87ff9bf9-5dfb-4d80-90cd-6cc61a08773e.jpg",
+        "https://a0.muscache.com/im/pictures/b6b95b9b-5281-454d-adaa-af75044cacca.jpg"
+  
+  
+  
+      ],
+      "price": "",
+      "summary": "The luxurious spacious suite is furnished with a cozy seating area, flat-screen TV, minibar, double box spring, double sink, jacuzzi, hairdryer, bathroom with spacious rain shower and toilet. A luxury breakfast is served every morning.",
+      "capacity": 2,
+      "amenities": [
+        "Beach access – Beachfront",
+        "Wifi",
+        "Kitchen",
+        "Smoking allowed",
+        "Pets allowed",
+        "Cooking basics"
+      ],
+      "labels": ["Top of the world", "Trending", "Play", "Tropical"],
+      "host": {
+        "_id": "u101",
+        "fullname": "Davit Pok",
+        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "",
+        "countryCode": "PT",
+        "city": "",
+        "address": "17 Kombo st",
+        "lat": 41.1413,
+        "lng": -8.61308
+      },
+      "reviews": [
+        {
+          "id": "madeId",
+          "txt": "Very helpful hosts. Cooked traditional...",
+          "rate": 4,
+          "by": {
+            "_id": "u102",
+            "fullname": "user2",
+            "imgUrl": "/img/img2.jpg"
+          }
+        }
+      ],
     }
 }
 
