@@ -9,9 +9,6 @@
       "https://a0.muscache.com/im/pictures/4119dad5-30be-4e72-844e-a7343046070c.jpg",
       "https://a0.muscache.com/im/pictures/87ff9bf9-5dfb-4d80-90cd-6cc61a08773e.jpg",
       "https://a0.muscache.com/im/pictures/b6b95b9b-5281-454d-adaa-af75044cacca.jpg"
-
-
-
     ],
     "price": 1205,
     "summary": "The luxurious spacious suite is furnished with a cozy seating area, flat-screen TV, minibar, double box spring, double sink, jacuzzi, hairdryer, bathroom with spacious rain shower and toilet. A luxury breakfast is served every morning.",
@@ -24,7 +21,12 @@
       "Pets allowed",
       "Cooking basics"
     ],
-    "labels": ["Top of the world", "Trending", "Play", "Tropical"],
+    "labels": [
+      "Top of the world",
+      "Trending",
+      "Play",
+      "Tropical"
+    ],
     "host": {
       "_id": "u101",
       "fullname": "Davit Pok",
@@ -50,7 +52,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"] 
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006547",
@@ -62,9 +66,6 @@
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-656456202599059844/original/45cd1cb6-b036-42bc-93b1-b8f7488b6075.jpeg",
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-656456202599059844/original/901c6d30-92bb-4731-80ec-e8f5b637c98a.jpeg",
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-656456202599059844/original/d87ff1f5-a3e5-4717-b923-3c20d8208e49.jpeg"
-
-
-
     ],
     "price": 247,
     "summary": "Nature lodge Tureluur is located in a unique place in the middle of the nature of Drenthe and is suitable for 2 people. Ideal for a nice time with your partner or family/friends. The accommodation is located on Pieterpad and can also be booked for 1 night. After a delicious breakfast (to be booked on site) you continue your walk on this beautiful walking route.",
@@ -77,7 +78,12 @@
       "Pets allowed",
       "Cooking basics"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Tiny homes"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Tiny homes"
+    ],
     "host": {
       "_id": "u102",
       "fullname": "Charles Manson",
@@ -103,7 +109,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"] 
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006548",
@@ -115,9 +123,6 @@
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-755137040389728919/original/2d7658df-98fd-49f6-9d06-c9320bd8e7d4.jpeg",
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-755137040389728919/original/9bcfc1d9-8b2f-46ba-a540-79b1c1bf1a9a.jpeg",
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-755137040389728919/original/38dd3ce4-5dfb-414a-ac6a-5fc299ecae74.jpeg"
-
-
-
     ],
     "price": 10590,
     "summary": "Welcome to Invisible House. Re-launched in November 2022 as a joint venture with Fieldtrip Hospitality.",
@@ -130,7 +135,12 @@
       "Pets allowed",
       "Wifi"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Invisible"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Invisible"
+    ],
     "host": {
       "_id": "u103",
       "fullname": "Jeffrey Dahmer",
@@ -156,7 +166,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"]
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006549",
@@ -168,9 +180,6 @@
       "https://a0.muscache.com/im/pictures/miso/Hosting-723333875796658011/original/27c4ee8f-776d-49d6-9b4a-acdb6d2e16db.jpeg",
       "https://a0.muscache.com/im/pictures/miso/Hosting-723333875796658011/original/06529c2a-ae65-4888-a177-1efb387a9adb.jpeg",
       "https://a0.muscache.com/im/pictures/miso/Hosting-723333875796658011/original/52019795-8487-4143-8973-bc0e3f4b53a7.jpeg"
-
-
-
     ],
     "price": 1237,
     "summary": "Relax in this beautiful natural setting that Muskoka has to offer, while at the same time enjoying all comforts and conveniences in this unique and contemporary home.",
@@ -183,7 +192,12 @@
       "Dedicated workspace",
       "Wifi"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Invisible"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Invisible"
+    ],
     "host": {
       "_id": "u103",
       "fullname": "Jeffrey Dahmer",
@@ -209,7 +223,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"]
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006550",
@@ -221,9 +237,6 @@
       "https://a0.muscache.com/im/pictures/1b922648-4f72-4648-95d4-1568f7ed04f0.jpg",
       "https://a0.muscache.com/im/pictures/45f20fc7-9a56-4ef0-b482-79abfb2ddf7e.jpg",
       "https://a0.muscache.com/im/pictures/582ec202-2d72-4742-bdfe-38b56e50e0f6.jpg"
-
-
-
     ],
     "price": 2626,
     "summary": "We can accommodate up to 24+ Persons. Accepts Weddings and Events",
@@ -236,7 +249,12 @@
       "Dedicated workspace",
       "Wifi"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Island"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Island"
+    ],
     "host": {
       "_id": "u104",
       "fullname": "Ted Bundy",
@@ -262,7 +280,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"]
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006551",
@@ -274,9 +294,6 @@
       "https://a0.muscache.com/im/pictures/miso/Hosting-27270359/original/f60c06f0-7ae4-4e09-a6c6-a5c5b3a8f8dd.jpeg",
       "https://a0.muscache.com/im/pictures/miso/Hosting-27270359/original/820b7b76-2578-46ce-8b27-c6475ea39afd.jpeg",
       "https://a0.muscache.com/im/pictures/7c2b0d1c-01b6-4334-a03e-a61cf46adacb.jpg"
-
-
-
     ],
     "price": 8985,
     "summary": "Exclusive living in a Private historical Tuscan Estate (family owned/managed) 3 km from Ponte Vecchio, private swimmingpool, wifi, parking. Outdoor kitchen area with barbecue and pizza oven.",
@@ -289,7 +306,12 @@
       "Dedicated workspace",
       "Wifi"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Mansion"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Mansion"
+    ],
     "host": {
       "_id": "u104",
       "fullname": "Ted Bundy",
@@ -315,7 +337,9 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"]
+    "likedByUsers": [
+      "mini-user"
+    ]
   },
   {
     "_id": "10006552",
@@ -327,9 +351,6 @@
       "https://a0.muscache.com/im/pictures/miso/Hosting-51814051/original/8fcab95d-1b0e-4303-bcfb-d7b458550cc2.jpeg",
       "https://a0.muscache.com/im/pictures/miso/Hosting-27270359/original/820b7b76-2578-46ce-8b27-c6475ea39afd.jpeg",
       "https://a0.muscache.com/im/pictures/miso/Hosting-51814051/original/c0327a96-b8cf-4c88-b2f1-89704c485d09.jpeg"
-
-
-
     ],
     "price": 786,
     "summary": "The village has 5 Icelandic cottages. Each cottage comes with a patio with a seating set and barbecue. Cottages are fully equipped, including separate access to wifi, making it easy to connect with remote work.",
@@ -342,7 +363,12 @@
       "Hot tub",
       "Fire pit"
     ],
-    "labels": ["Cabins", "Trending", "Play", "Cottage"],
+    "labels": [
+      "Cabins",
+      "Trending",
+      "Play",
+      "Cottage"
+    ],
     "host": {
       "_id": "u105",
       "fullname": "Samuel Little",
@@ -368,6 +394,8 @@
         }
       }
     ],
-    "likedByUsers": ["mini-user"]
+    "likedByUsers": [
+      "mini-user"
+    ]
   }
 ]

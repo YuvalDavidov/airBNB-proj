@@ -11,7 +11,11 @@ export const stayService = {
     save,
     remove,
     getEmptyStay,
-    addStayMsg
+    addStayMsg,
+    getFilterFromSearchParams,
+    getDefaultHeaderFilter,
+    getDefaultLabelsFilter,
+    getDefaultModalFilter
 }
 // window.cs = stayService
 
@@ -66,6 +70,56 @@ function getEmptyStay() {
     }
 }
 
+
+function getDefaultModalFilter() {
+    return {
+        type: '',
+        minPrice: 0,
+        maxPrice: Infinity,
+        amenities: '',
+        capacity: Infinity
+    }
+}
+
+function getDefaultLabelsFilter() {
+    return {
+        labels: []
+    }
+}
+
+function getDefaultHeaderFilter() {
+    return {
+        locationCountry: '',
+        locationCity: '',
+        capacity: Infinity,
+        name: ''
+
+    }
+}
+
+function _getDefaultFilter() {
+    return {
+        locationCountry: '',
+        locationCity: '',
+        capacity: Infinity,
+        name: '',
+        labels: [],
+        type: '',
+        minPrice: 0,
+        maxPrice: Infinity,
+        amenities: '',
+        capacity: Infinity
+    }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const emptyFilter = _getDefaultFilter()
+    const filterBy = {}
+    for (const field in emptyFilter) {
+        filterBy[field] = searchParams.get(field) || ''
+    }
+    return filterBy
+}
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
