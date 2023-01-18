@@ -24,8 +24,8 @@ export function stayReducer(state = initialState, action) {
             stays = state.stays.filter(s => s._id !== action.stayId)
             return { ...state, stays }
         case ADD_STAY:
-            stays = [...state, action.stay]
-            return { ...state, stays }
+            stays = [...state.stays, action.stay]
+            return {...state, stays}
         case UPDATE_STAY:
             stays = state.stays.map(stay => stay._id === action.stay._id ? action.stay : stay)
             return { ...state, stays }

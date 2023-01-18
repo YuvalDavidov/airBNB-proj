@@ -14,20 +14,20 @@ export function StayDatePicker({ setPickedDate, setDatePickerModual }) {
         }
     ]);
 
+    // useEffect(() => {
+    //     setDate()
+    // }, [state[0]])
+
     if (state[0].endDate) {
         setDate()
-        console.log(state[0].endDate);
     }
 
     function setDate() {
         setPickedDate(state[0])
         if (state[0].endDate !== state[0].startDate) {
-
             setDatePickerModual(false)
         }
     }
-
-    console.log(state);
 
     return (
         <div>
