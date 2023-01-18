@@ -2,6 +2,12 @@
     display: grid;
     grid-template-columns: 20px 1fr 20px;
 
+    &.expanded {
+
+        background-color: rgba(0, 0, 0, 0.25);
+        opacity: black;
+    }
+
     >* {
         grid-column: 2;
 

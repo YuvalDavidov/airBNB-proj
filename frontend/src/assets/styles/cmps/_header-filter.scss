@@ -1,7 +1,38 @@
 .header-filter-btn {
+    font-family: Cereal-Bold;
     color: black;
     background-color: white;
     cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 4px;
+    font-size: 1rem;
+
+}
+
+
+.guests {
+    color: #717171;
+    font-family: Cereal-Book;
+
+}
+
+.splitter {
+    height: 32px;
+    width: 1px;
+    background-color: rgb(221, 221, 221);
+    flex: 0 0 1px;
+}
+
+.stay-header-filter {
+    // transition: transform 250ms ease, opacity 100ms ease, visibility 0ms 50ms;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 2px, rgba(0, 0, 0, 0.05) 0px 4px 12px;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 50px;
+    // flex-grow: 2222;
+    // justify-self: end;
+    // align-self: center;
+}
+
+.search-icon {
+    // padding: 10px;
+    margin: 5px 5px 5px 0px;
 }

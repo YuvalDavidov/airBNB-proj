@@ -1,13 +1,14 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
-import { LoginSignup } from './login-signup.jsx'
 import { HeaderFilter } from './header-filter'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
+
+    const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
+
 
     async function onLogin(credentials) {
         try {
@@ -37,28 +38,71 @@ export function AppHeader() {
 
 
     return (
-        <header className="app-header full">
-            <nav>
-                {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
-                {user &&
-                    <span className="user-info">
-                        <Link to={`user/${user._id}`}>
-                            {user.imgUrl && <img src={user.imgUrl} />}
-                            {user.fullname}
-                        </Link>
-                        <span className="score">{user.score?.toLocaleString()}</span>
-                        <button onClick={onLogout}>Logout</button>
-                    </span>
-                }
-                {!user &&
-                    <section className="user-info">
-                        <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-                    </section>
-                }
-                <HeaderFilter />
-            </nav>
+
+        <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
             <h1 className='mail-layout'>LOGO</h1>
+            <HeaderFilter />
+            <nav>
+
+                <NavLink>☢</NavLink>
+
+
+            </nav>
+
         </header>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import routes from '../routes'
+
+// {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
+// import { LoginSignup } from './login-signup.jsx'
+
+// {user &&
+//     <span className="user-info">
+//         <Link to={`user/${user._id}`}>
+//             {user.imgUrl && <img src={user.imgUrl} />}
+//             {user.fullname}
+//         </Link>
+//         <span className="score">{user.score?.toLocaleString()}</span>
+//         <button onClick={onLogout}>Logout</button>
+//     </span>
+// }
+// {!user &&
+//     <section className="user-info">
+//         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
+//     </section>
+// }

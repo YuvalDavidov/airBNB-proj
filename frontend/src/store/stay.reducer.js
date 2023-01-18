@@ -37,7 +37,7 @@ export function stayReducer(state = initialState, action) {
 
         // expanded
         case SET_HEADER_EXPAND:
-            return { ...state, isFilterExpanded: action.toggle }
+            return { ...state, isHeadFilterExpanded: action.toggle }
         default:
             return state
     }
