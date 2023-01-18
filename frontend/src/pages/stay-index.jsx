@@ -11,20 +11,29 @@ export function StayIndex() {
     const [userLocation, setUserLocation] = useState({lat: 32.078618, lng: 34.774071})
     const [ addModal, setAddModal] = useState(false)
     const [ stayToEdit, setStayToEdit ] = useState(stayService.getEmptyStay())
+    const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
 
     useEffect(() => {
-        loadStays()
+        onLoadStays(filterBy)
         getUserLocation()
     }, [])
 
+    async function onLoadStays(filterBy) {
+        try {
+            await loadStays(filterBy)
+            // showSuccessMsg('Stays loaded')
+        } catch (err) {
+            // showErrorMsg('Cannot load Stays')
+        }
+    }
     function getUserLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(convertLocation)
         }
 
         function convertLocation(location) {
-            const latLng = {lat: location.coords.latitude, lng: location.coords.longitude}
-            setUserLocation(latLng)
+            console.log(location)
+
         }
     }
 
