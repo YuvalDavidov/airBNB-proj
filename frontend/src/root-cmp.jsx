@@ -16,7 +16,7 @@ export function RootCmp() {
         toggleExpand(false)
     }
     function dontDoNothing() {
-        console.log(`hi`)
+        // console.log(`hi`)
     }
     return (
         <div>
