@@ -24,13 +24,7 @@ export function StayDetails() {
 
     useEffect(() => {
         stayService.getById(stayId)
-            .then((currStay) => {
-                console.log(currStay);
-                setStay(currStay)
-            })
-
-        // setStay(stays[0])
-
+            .then(setStay)
     }, [])
 
     useEffect(() => {
@@ -84,6 +78,14 @@ export function StayDetails() {
         setGuestsAmount(cloneState)
     }
 
+    function updateDate(dates) {
+        setPickedDate(dates)
+    }
+
+    function onCheckAvailabilty() {
+
+    }
+
     function handleModuls() {
         if (guestsModual) setGuestsModual(false)
         if (datePickerModual) setDatePickerModual(false)
@@ -94,7 +96,7 @@ export function StayDetails() {
     return (
         <section className="stay-details">
             <h2>{name}</h2>
-            <div className="stay-mini-title">
+            <div className="stay-mini-sumerry">
                 <div>
                     <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
                     <span className="dote">.</span>
@@ -110,6 +112,7 @@ export function StayDetails() {
                     <button>save</button>
                 </div>
             </div>
+
             <article className="imgs-grid">
                 <img className="first" src={imgUrls[0]} />
                 <img className="second" src={imgUrls[1]} />
@@ -247,11 +250,11 @@ export function StayDetails() {
                             </div>
 
                             <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
-                                {guestsAmount.total}
+                                guests {guestsAmount.total}
                             </div>
                         </div>
                         <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
-                            <StayDatePicker setPickedDate={setPickedDate} setDatePickerModual={setDatePickerModual} />
+                            <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
                         </div>
                         <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
                             <div>
@@ -283,7 +286,7 @@ export function StayDetails() {
                                 </span>
                             </div>
                         </section>
-                        <button className="reserve-btn">Check availabilty</button>
+                        <button onClick={() => { onCheckAvailabilty() }} className="reserve-btn">Check availabilty</button>
 
 
                     </article>

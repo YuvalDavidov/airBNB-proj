@@ -5,7 +5,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 
 
 
-export function StayDatePicker({ setPickedDate, setDatePickerModual }) {
+export function StayDatePicker({ updateDate, setDatePickerModual }) {
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -23,9 +23,16 @@ export function StayDatePicker({ setPickedDate, setDatePickerModual }) {
     }
 
     function setDate() {
-        setPickedDate(state[0])
+        updateDate(state[0])
         if (state[0].endDate !== state[0].startDate) {
             setDatePickerModual(false)
+            setState([
+                {
+                    startDate: new Date(),
+                    endDate: null,
+                    key: 'selection'
+                }
+            ])
         }
     }
 
