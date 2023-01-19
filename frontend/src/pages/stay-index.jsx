@@ -53,7 +53,8 @@ export function StayIndex() {
         setAddModal(false)
     }
 
-    function onUpdateStay(stay) {
+    function onUpdateStay(ev,stay) {
+        ev.stopPropagation()
         setStayToEdit({...stay})
         setAddModal(true)
     }

@@ -1,44 +1,61 @@
 .splide__arrows .splide__arrow {
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    opacity: 0%;
-    transition: 0.2s;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  opacity: 0%;
+  transition: 0.2s;
+  svg {
+    height: 10px;
+  }
+
+  &:hover {
+    width: 32px;
+    height: 32px;
+
     svg {
-        height: 10px;
+      fill: gray;
     }
+  }
 
+  &.splide__arrow--prev {
+    left: 10px;
     &:hover {
-        width: 32px;
-        height: 32px;
-        opacity: 100%;
-        
-        svg {
-            fill: gray;
-        }
+      left: 9px;
     }
+  }
 
-    &.splide__arrow--prev {
-        left: 10px;
-        &:hover {
-            left: 9px;
-        }
+  &.splide__arrow--next {
+    right: 10px;
+    &:hover {
+      right: 9px;
     }
-
-    &.splide__arrow--next {
-        right: 10px;
-        &:hover {
-            right: 9px;
-        }
-    }
+  }
 }
 .splide__arrows .splide__arrow:disabled {
-    display: none;
-    svg {
-        height: 10px;
-    }
+  display: none;
+  svg {
+    height: 10px;
+  }
 }
 
 .stay-preview:hover .splide__arrow {
-    opacity: 85%;
+  opacity: 85%;
+  &:hover {
+    opacity: 100%;
+  }
+}
+
+.splide__pagination {
+  bottom: 20px;
+  .splide__pagination__page {
+    opacity: 80%;
+    width: 6px;
+    height: 6px;
+    &.is-active {
+        opacity: 100%;
+        width: 6px;
+        height: 6px;
+        transform: translateY(0);
+    }
+  }
 }
