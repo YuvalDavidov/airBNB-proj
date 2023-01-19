@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
@@ -21,6 +21,7 @@ export function StayDetails() {
     const [guestsModual, setGuestsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const { stayId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         stayService.getById(stayId)
@@ -83,7 +84,9 @@ export function StayDetails() {
     }
 
     function onCheckAvailabilty() {
-
+        const { adults, children, infants, pets } = guestsAmount
+        const { startDate, endDate } = pickedDate
+        navigate(`/book/?stayId=${stayId}&adultsAmount=${adults}&childrenAmount=${children}&infantsAmount=${infants}&petsAmount=${pets}&startDate=${startDate}&endDate=${endDate}`)
     }
 
     function handleModuls() {
@@ -237,7 +240,7 @@ export function StayDetails() {
                             <div>
                                 <span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>
                                 <span className="dote">.</span>
-                                <span><a href="#">{reviews.length} reviews</a></span>
+                                <span><a href="#reviews">{reviews.length} reviews</a></span>
                             </div>
                         </div>
 
