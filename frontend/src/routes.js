@@ -6,6 +6,7 @@ import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
 import { StayIndex } from './pages/stay-index.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
+import { BookStay } from './pages/book-order.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -16,9 +17,14 @@ const routes = [
         label: 'Stays'
     },
     {
-        path: 'details',
+        path: 'details/:stayId',
         component: <StayDetails />,
         label: 'Details'
+    },
+    {
+        path: 'book/?',
+        component: <BookStay />,
+        label: 'Book'
     },
     {
         path: 'chat',
