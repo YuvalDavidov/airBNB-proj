@@ -1,10 +1,37 @@
 .stay-preview {
+  position: relative;
   display: flex;
   flex-direction: column;
-
+  cursor: pointer;
   .image-slider {
     border-radius: 10px;
     overflow: auto;
+  }
+
+  .stay-details {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+  }
+
+  .actions {
+    position: absolute;
+    display: none;
+    right: 0;
+    bottom: 0;
+    width: fit-content;
+
+    &>* {
+      margin-right: 0;
+      margin-left: 5px;
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover .actions {
+    display: block;
   }
 
   img {
@@ -26,8 +53,8 @@
 
         svg {
             position: relative;
-            transform: translateY(-2px);
-            transform: translate(-4px,-2px);
+            // transform: translateY(-2px);
+            transform: translate(-4px,-0.5px);
 
         }
         .rate-number {
