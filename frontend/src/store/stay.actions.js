@@ -1,6 +1,13 @@
-import { stayService } from "../services/stay.service.local"
-import { store } from "./store"
-import { SET_STAYS, ADD_STAY, REMOVE_STAY, UPDATE_STAY, SET_FILTER, SET_HEADER_EXPAND } from "./stay.reducer"
+import { stayService } from '../services/stay.service.local'
+import { store } from './store'
+import {
+  SET_STAYS,
+  ADD_STAY,
+  REMOVE_STAY,
+  UPDATE_STAY,
+  SET_FILTER,
+  SET_HEADER_EXPAND,
+} from './stay.reducer'
 
 export function getActionRemoveStay(stayId) {
   return {
@@ -35,14 +42,12 @@ export async function loadStays(filterBy) {
     console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_STAYS,
-      stays
+      stays,
     })
-
   } catch (err) {
     console.log('Cannot load stays', err)
     throw err
   }
-
 }
 
 export async function removeStay(stayId) {

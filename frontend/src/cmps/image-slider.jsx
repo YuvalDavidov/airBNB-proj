@@ -10,7 +10,12 @@ export function ImageSlider({ imgs, stayId }) {
         <SplideTrack>
           {imgs.map((img) => (
             <SplideSlide key={img}>
-              <img onClick={() => navigate(`/details/${stayId}`)} width='100%' src={img} alt='' />
+              <img
+                onClick={() => navigate(`/details/${stayId}`)}
+                width='100%'
+                src={img}
+                alt=''
+              />
             </SplideSlide>
           ))}
         </SplideTrack>

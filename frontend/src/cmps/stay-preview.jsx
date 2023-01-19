@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { TiHeartFullOutline } from 'react-icons/ti'
+import { IconContext } from 'react-icons'
 
 import { removeStay } from '../store/stay.actions'
 
@@ -6,6 +9,7 @@ import { ImageSlider } from './image-slider'
 
 export function StayPreview({ stay, userLocation, onUpdateStay }) {
   const navigate = useNavigate()
+  const [isHearted, setIsHearted] = useState(false)
 
   function calcMeanRate(stayReviews) {
     if (!stayReviews || !stayReviews.length) return null
@@ -36,16 +40,25 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
     return (Value * Math.PI) / 180
   }
 
-  function onRemoveStay(ev,stayId) {
+  function onRemoveStay(ev, stayId) {
     ev.stopPropagation()
     removeStay(stayId)
   }
 
   return (
     <article className='stay-preview'>
-      {/* <img src={stay.imgUrls[0]} alt='picture of stay' /> */}
       <ImageSlider imgs={stay.imgUrls} stayId={stay._id} />
-      <div onClick={() => navigate(`details/${stay._id}`)} className='stay-details'>
+      <IconContext.Provider
+        value={{ className: `heart-btn ${isHearted && 'is-active'}` }}
+      >
+        <div onClick={() => setIsHearted(!isHearted)}>
+          <TiHeartFullOutline />
+        </div>
+      </IconContext.Provider>
+      <div
+        onClick={() => navigate(`details/${stay._id}`)}
+        className='stay-details'
+      >
         <div className='loc-rate'>
           <span className='loc'>
             {stay.loc.city}, {stay.loc.country}
@@ -92,8 +105,8 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
           <span>₪{stay.price.toLocaleString('en-US')}</span> night
         </div>
         <div className='actions'>
-          <button onClick={(ev) => onUpdateStay(ev,stay)}>Edit</button>
-          <button onClick={(ev) => onRemoveStay(ev,stay._id)}>X</button>
+          <button onClick={(ev) => onUpdateStay(ev, stay)}>Edit</button>
+          <button onClick={(ev) => onRemoveStay(ev, stay._id)}>X</button>
         </div>
       </div>
     </article>

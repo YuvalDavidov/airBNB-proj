@@ -8,6 +8,20 @@
     overflow: auto;
   }
 
+  .heart-btn {
+    position: absolute;
+    height: 27px;
+    width: 27px;
+    top: 14px;
+    right: 14px;
+    fill: rgba(0, 0, 0, 0.5);
+    stroke: white;
+    stroke-width: 1.5px;
+    &.is-active {
+      fill: #ff385c;
+    }
+  }
+
   .stay-details {
     position: relative;
     width: 100%;
@@ -23,7 +37,7 @@
     bottom: 0;
     width: fit-content;
 
-    &>* {
+    & > * {
       margin-right: 0;
       margin-left: 5px;
       margin-bottom: 0;
@@ -45,21 +59,20 @@
     justify-content: space-between;
     margin-bottom: 2px;
     .loc {
-        font-family: Cereal-Medium;
+      font-family: Cereal-Medium;
     }
     .rate {
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
 
-        svg {
-            position: relative;
-            // transform: translateY(-2px);
-            transform: translate(-4px,-0.5px);
-
-        }
-        .rate-number {
-            margin-left: 12px;
-        }
+      svg {
+        position: relative;
+        // transform: translateY(-2px);
+        transform: translate(-4px, -0.5px);
+      }
+      .rate-number {
+        margin-left: 12px;
+      }
     }
   }
 
@@ -74,7 +87,7 @@
 
   .price {
     span {
-        font-family: Cereal-Medium;
+      font-family: Cereal-Medium;
     }
   }
 }

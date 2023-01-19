@@ -4,6 +4,7 @@
   background-color: white;
   opacity: 0%;
   transition: 0.2s;
+  top: 48%;
   svg {
     height: 10px;
   }
@@ -33,9 +34,6 @@
 }
 .splide__arrows .splide__arrow:disabled {
   display: none;
-  svg {
-    height: 10px;
-  }
 }
 
 .stay-preview:hover .splide__arrow {
@@ -46,16 +44,16 @@
 }
 
 .splide__pagination {
-  bottom: 20px;
+  bottom: 21px;
   .splide__pagination__page {
     opacity: 80%;
     width: 6px;
     height: 6px;
     &.is-active {
-        opacity: 100%;
-        width: 6px;
-        height: 6px;
-        transform: translateY(0);
+      opacity: 100%;
+      width: 6px;
+      height: 6px;
+      transform: translateY(0);
     }
   }
 }
