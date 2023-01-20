@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { HeaderFilter } from './header-filter'
+import { MainMenu } from './main-menu'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -43,13 +44,13 @@ export function AppHeader() {
         <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
             <h1 className='mail-layout' onClick={() => { navigate('/') }}>LOGO</h1>
             <HeaderFilter />
-            <nav>
+            {/* <nav>
 
                 <NavLink>☢</NavLink>
 
 
-            </nav>
-
+            </nav> */}
+            < MainMenu />
         </header>
     )
 }

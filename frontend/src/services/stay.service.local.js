@@ -12,6 +12,7 @@ export const stayService = {
   getEmptyStay,
   addStayMsg,
   getFilterFromSearchParams,
+  getStaysForWishlist
   // getDefaultHeaderFilter,
   // getDefaultLabelsFilter,
   // getDefaultModalFilter
@@ -44,6 +45,12 @@ async function save(stay) {
     savedStay = await storageService.post(STORAGE_KEY, stay)
   }
   return savedStay
+}
+
+async function getStaysForWishlist(staysIds) {
+  const stays = await query()
+  const filteredStays = stays.filter(stay => staysIds.includes(stay._id))
+  return filteredStays
 }
 
 async function addStayMsg(stayId, txt) {

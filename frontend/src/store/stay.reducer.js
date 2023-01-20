@@ -4,9 +4,11 @@ export const ADD_STAY = 'ADD_STAY'
 export const UPDATE_STAY = 'UPDATE_STAY'
 export const SET_FILTER = 'SET_FILTER'
 export const SET_HEADER_EXPAND = 'SET_HEADER_EXPAND'
+export const SET_WISHLIST_STAYS = 'SET_WISHLIST_STAYS'
 
 const initialState = {
   stays: [],
+  staysForWishlist: [],
   filterBy: null,
   isHeadFilterExpanded: false,
 }
@@ -29,6 +31,8 @@ export function stayReducer(state = initialState, action) {
         stay._id === action.stay._id ? action.stay : stay
       )
       return { ...state, stays }
+    case SET_WISHLIST_STAYS:
+        return {...state, staysForWishlist: action.wishlistStays}
 
     // filterBy
     case SET_FILTER:

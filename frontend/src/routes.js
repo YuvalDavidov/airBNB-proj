@@ -7,6 +7,7 @@ import { AdminApp } from './pages/admin-app.jsx'
 import { StayIndex } from './pages/stay-index.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
 import { BookStay } from './pages/book-order.jsx'
+import { Wishlist } from './pages/wishlist.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -22,9 +23,9 @@ const routes = [
         label: 'Details'
     },
     {
-        path: 'book/?',
-        component: <BookStay />,
-        label: 'Book'
+        path: 'wishlist',
+        component: <Wishlist />,
+        label: 'Wishlist'
     },
     {
         path: 'chat',
