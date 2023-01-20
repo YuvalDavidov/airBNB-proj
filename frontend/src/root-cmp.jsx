@@ -8,6 +8,10 @@ import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 import { useSelector } from 'react-redux'
 import { toggleExpand } from './store/stay.actions'
+import { Dashboard } from './pages/dashboard'
+import { StayEdit } from './cmps/stay-edit'
+import { Listings } from './cmps/listings'
+import { Reservations } from './cmps/Reservations'
 
 export function RootCmp() {
   const isHeadFilterExpanded = useSelector(
@@ -35,6 +39,13 @@ export function RootCmp() {
               path={route.path}
             />
           ))}
+          <Route element={<Dashboard />} path="/dashboard">
+            <Route element={<StayEdit />} path="/dashboard" />
+            <Route element={<Listings />} path="/dashboard/listings" />
+            <Route element={<Reservations />} path="/dashboard/reservations" />
+
+          </Route>
+
           <Route path='user/:id' element={<UserDetails />} />
         </Routes>
       </main>

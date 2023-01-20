@@ -5,9 +5,11 @@ export const UPDATE_STAY = 'UPDATE_STAY'
 export const SET_FILTER = 'SET_FILTER'
 export const SET_HEADER_EXPAND = 'SET_HEADER_EXPAND'
 export const SET_WISHLIST_STAYS = 'SET_WISHLIST_STAYS'
+export const SET_MY_STAYS = 'SET_MY_STAYS'
 
 const initialState = {
   stays: [],
+  myStays: [],
   staysForWishlist: [],
   filterBy: null,
   isHeadFilterExpanded: false,
@@ -15,6 +17,7 @@ const initialState = {
 
 export function stayReducer(state = initialState, action) {
   let stays
+  let mySortedStays
 
   // stays
   switch (action.type) {
@@ -41,7 +44,18 @@ export function stayReducer(state = initialState, action) {
     // expanded
     case SET_HEADER_EXPAND:
       return { ...state, isHeadFilterExpanded: action.toggle }
+
+    // dashboard stays
+    case SET_MY_STAYS:
+      return { ...state, myStays: action.stays }
+
+
     default:
       return state
   }
+}
+
+
+function _compareNumbers(a, b) {
+  return a - b;
 }

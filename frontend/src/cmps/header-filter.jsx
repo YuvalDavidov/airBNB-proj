@@ -16,19 +16,34 @@ import { IconContext } from "react-icons"
 
 export function HeaderFilter() {
 
-    const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
-
+    const [isLocationExpand, setIsLocationExpand] = useState(false)
+    const [isDateExpand, setIsDateExpand] = useState(false)
+    const [isGuestExpand, setIsGuestExpand] = useState(false)
     const [filterByToEdit, setFilterByToEdit, handleChange] = useForm()
 
     function onDateClick() {
         toggleExpand(true)
+        setIsDateExpand(true)
+        setIsGuestExpand(false)
+        setIsLocationExpand(false)
     }
     function onLocationClick() {
         toggleExpand(true)
+        setIsDateExpand(false)
+        setIsGuestExpand(false)
+        setIsLocationExpand(true)
     }
     function onGuestClick() {
         toggleExpand(true)
+        setIsDateExpand(false)
+        setIsGuestExpand(true)
+        setIsLocationExpand(false)
+    }
+
+    function onSubmitSearch(ev) {
+        ev.preventDefault()
+        console.log('submited')
     }
 
     // function onSubmitFilter(ev) {
@@ -37,36 +52,47 @@ export function HeaderFilter() {
     // }
     return (
         <Fragment>
-            <div className="flex">
-                {!isHeadFilterExpanded &&
-                    <section className="stay-header-filter flex">
-                        <button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
-                        <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
-                        <button onClick={onGuestClick} className="header-filter-btn guests flex"><div>Add guests</div></button>
-                        <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
-                            <div onClick={onLocationClick}>
-                                <IoSearchCircleSharp /></div>
-                        </IconContext.Provider>
 
-                    </section>
-                }
-                {isHeadFilterExpanded &&
+            {!isHeadFilterExpanded &&
+                <section className="stay-header-filter flex">
+                    <button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
+                    <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
+                    <button onClick={onGuestClick} className="header-filter-btn guests flex"><div>Add guests</div></button>
+                    <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
+                        <div onClick={onLocationClick}>
+                            <IoSearchCircleSharp /></div>
+                    </IconContext.Provider>
 
-                    <section className="stay-header-filter flex">
+                </section>
+            }
+            {isHeadFilterExpanded &&
 
-                        <button className="header-filter-btn flex"><div>Where</div></button> <span className="splitter"></span>
-                        <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
-                        <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
-                        <button className="header-filter-btn guests flex"><div>Add guests</div></button>
+                <section className="stay-header-filter-extanded">
+                    <form className="head-filter-form flex align-center" onSubmit={onSubmitSearch}>
+                        <div>
+                            <button onClick={onLocationClick} className="header-filter-btn flex"><div>Where</div></button> <span className="splitter"></span>
+                            {isLocationExpand && <PlaceFilter />}
+                        </div>
+                        <div className="flex">
+                            <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
+                            <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
+                            {isDateExpand && <DateFilter />}
+                        </div>
+
+                        <div>
+                            <button onClick={onGuestClick} className="header-filter-btn guests"><div>Add guests</div></button>
+                            {isGuestExpand && <GuestFilter />}
+                        </div>
                         <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
                             <div>
-                                <IoSearchCircleSharp /></div>
+                                <button>  <IoSearchCircleSharp /> </button>
+
+                            </div>
                         </IconContext.Provider>
+                    </form>
+                </section>}
 
 
-
-                    </section>}
-            </div>
 
         </Fragment>)
 
