@@ -15,13 +15,12 @@ const initialState = {
 
 export function stayReducer(state = initialState, action) {
   let stays
+  let mySortedStays
 
   // stays
   switch (action.type) {
     case SET_STAYS:
       return { ...state, stays: action.stays }
-    case SET_MY_STAYS:
-      return { ...state, myStays: action.stays }
     case REMOVE_STAY:
       stays = state.stays.filter((s) => s._id !== action.stayId)
       return { ...state, stays }
@@ -41,7 +40,18 @@ export function stayReducer(state = initialState, action) {
     // expanded
     case SET_HEADER_EXPAND:
       return { ...state, isHeadFilterExpanded: action.toggle }
+
+    // dashboard stays
+    case SET_MY_STAYS:
+      return { ...state, myStays: action.stays }
+
+
     default:
       return state
   }
+}
+
+
+function _compareNumbers(a, b) {
+  return a - b;
 }
