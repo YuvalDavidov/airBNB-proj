@@ -7,6 +7,7 @@ import {
   UPDATE_STAY,
   SET_FILTER,
   SET_HEADER_EXPAND,
+  SET_MY_STAYS,
 } from './stay.reducer'
 
 export function getActionRemoveStay(stayId) {
@@ -42,6 +43,20 @@ export async function loadStays(filterBy) {
     console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_STAYS,
+      stays,
+    })
+  } catch (err) {
+    console.log('Cannot load stays', err)
+    throw err
+  }
+}
+
+export async function loadMyStays(filterBy) {
+  try {
+    const stays = await stayService.query(filterBy)
+    console.log('Stays from DB:', stays)
+    store.dispatch({
+      type: SET_MY_STAYS,
       stays,
     })
   } catch (err) {

@@ -20,8 +20,14 @@ export const stayService = {
 
 _createStays()
 
-async function query() {
+async function query(filterBy) {
   var stays = await storageService.query(STORAGE_KEY)
+
+
+  if (filterBy?.hostId) {
+    stays = stays.filter(stay => stay.host._id === filterBy.hostId)
+  }
+
   return stays
 }
 

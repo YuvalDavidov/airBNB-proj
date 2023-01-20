@@ -4,9 +4,11 @@ export const ADD_STAY = 'ADD_STAY'
 export const UPDATE_STAY = 'UPDATE_STAY'
 export const SET_FILTER = 'SET_FILTER'
 export const SET_HEADER_EXPAND = 'SET_HEADER_EXPAND'
+export const SET_MY_STAYS = 'SET_MY_STAYS'
 
 const initialState = {
   stays: [],
+  myStays: [],
   filterBy: null,
   isHeadFilterExpanded: false,
 }
@@ -18,6 +20,8 @@ export function stayReducer(state = initialState, action) {
   switch (action.type) {
     case SET_STAYS:
       return { ...state, stays: action.stays }
+    case SET_MY_STAYS:
+      return { ...state, myStays: action.stays }
     case REMOVE_STAY:
       stays = state.stays.filter((s) => s._id !== action.stayId)
       return { ...state, stays }
