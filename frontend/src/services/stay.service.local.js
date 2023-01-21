@@ -12,6 +12,7 @@ export const stayService = {
   getEmptyStay,
   addStayMsg,
   getFilterFromSearchParams,
+  getDefaultFilter
   // getDefaultHeaderFilter,
   // getDefaultLabelsFilter,
   // getDefaultModalFilter
@@ -21,12 +22,16 @@ export const stayService = {
 _createStays()
 
 async function query(filterBy) {
-  var stays = await storageService.query(STORAGE_KEY)
+  let stays = await storageService.query(STORAGE_KEY)
 
 
   if (filterBy?.hostId) {
     stays = stays.filter(stay => stay.host._id === filterBy.hostId)
   }
+
+  if (filterBy.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
+  if (filterBy.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
+  if (filterBy.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
 
   return stays
 }
@@ -41,7 +46,7 @@ async function remove(stayId) {
 }
 
 async function save(stay) {
-  var savedStay
+  let savedStay
   if (stay._id) {
     savedStay = await storageService.put(STORAGE_KEY, stay)
   } else {
@@ -551,23 +556,24 @@ function _createStays() {
   }
 }
 
-function _getDefaultFilter() {
+function getDefaultFilter() {
   return {
     locationCountry: '',
     locationCity: '',
-    capacity: Infinity,
+    guests: 0,
     name: '',
     labels: [],
     type: '',
     minPrice: 0,
     maxPrice: Infinity,
     amenities: '',
-    capacity: Infinity,
+    startDate: Date.now(),
+    endDate: Date.now()
   }
 }
 
 function getFilterFromSearchParams(searchParams) {
-  const emptyFilter = _getDefaultFilter()
+  const emptyFilter = getDefaultFilter()
   const filterBy = {}
   for (const field in emptyFilter) {
     filterBy[field] = searchParams.get(field) || ''

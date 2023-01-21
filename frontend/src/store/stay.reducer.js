@@ -1,3 +1,4 @@
+import { stayService } from "../services/stay.service.local"
 export const SET_STAYS = 'SET_STAYS'
 export const REMOVE_STAY = 'REMOVE_STAY'
 export const ADD_STAY = 'ADD_STAY'
@@ -9,7 +10,7 @@ export const SET_MY_STAYS = 'SET_MY_STAYS'
 const initialState = {
   stays: [],
   myStays: [],
-  filterBy: null,
+  filterBy: stayService.getDefaultFilter(),
   isHeadFilterExpanded: false,
 }
 

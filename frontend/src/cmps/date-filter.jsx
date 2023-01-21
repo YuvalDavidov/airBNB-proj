@@ -1,21 +1,36 @@
-import { StayMap } from "../cmps/stay-map";
-import { StayDatePicker } from "../cmps/stay-date-picker";
+import { useEffect, useState } from "react"
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+export function DateFilter({ updateDate }) {
 
-export function DateFilter() {
+    const [state, setState] = useState([
+        {
+            startDate: new Date(),
+            endDate: null,
+            key: 'selection'
+        }
+    ]);
+
+    useEffect(() => {
+        if (!state[0].endDate) return
+        setDate()
+    }, [state[0]])
+
+    function setDate() {
+        updateDate(state[0])
+        if (state[0].endDate !== state[0].startDate) {
+        }
+    }
 
     return (
-        <section className="place-modal">
-            <ul>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-                <li>hello</li>
-            </ul>
-        </section>
+        <div className="date-modal">
+            <DateRange
+                editableDateInputs={true}
+                onChange={item => setState([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={state} />
+
+        </div>
     )
 }
