@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { HeaderFilter } from './header-filter'
 import { MainMenu } from './main-menu'
+import { LoginSignup } from './login-signup'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isSignup, setIsSignup] = useState(false)
 
     const navigate = useNavigate()
 
@@ -50,7 +54,9 @@ export function AppHeader() {
 
 
             </nav> */}
-            < MainMenu />
+            < MainMenu setIsModalOpen={setIsModalOpen} setIsSignup={setIsSignup} />
+            {isModalOpen &&< LoginSignup isSignup={isSignup} setIsSignup={setIsSignup} setIsModalOpen={setIsModalOpen} />}
+
         </header>
     )
 }

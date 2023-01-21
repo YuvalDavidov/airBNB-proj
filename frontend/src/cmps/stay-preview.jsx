@@ -60,7 +60,7 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
     <article className='stay-preview'>
       <ImageSlider imgs={stay.imgUrls} stayId={stay._id} />
       <IconContext.Provider
-        value={{ className: `heart-btn ${user.wishlist.includes(stay._id) && 'is-active'}` }}
+        value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
       >
         <div onClick={() => onToggleWishlist(stay._id)}>
           <TiHeartFullOutline />

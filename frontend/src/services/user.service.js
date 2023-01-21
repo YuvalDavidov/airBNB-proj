@@ -63,7 +63,7 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     userCred.wishlist = []
-    if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    if (!userCred.imgUrl) userCred.imgUrl = 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSgdMa3-zfBbsMOTEYwMDhWumoaLYOb4kbOBP9Mmwdt9AwdzYCaL0VS1zKzlKc5DnPoWUSfVA25uggiN0o'
     const user = await storageService.post(USER_KEY, userCred)
     // const user = await httpService.post('auth/signup', userCred)
     // socketService.login(user._id)
@@ -84,7 +84,7 @@ async function changeScore(by) {
 }
 
 async function addToWishlist(stayId) {
-    const user = getLoggedinUser()
+    const user = await getById(getLoggedinUser()._id) 
     if (!user) throw new Error('Not loggedin')
     user.wishlist.push(stayId)
     const savedUser = await storageService.put(USER_KEY, user)
@@ -93,7 +93,7 @@ async function addToWishlist(stayId) {
 }
 
 async function removeFromWishlist(stayId) {
-    const user = getLoggedinUser()
+    const user = await getById(getLoggedinUser()._id) 
     const updatedWishlist = user.wishlist.filter(id => id !== stayId)
     user.wishlist = updatedWishlist
     const savedUser = await storageService.put(USER_KEY, user)
@@ -112,11 +112,11 @@ function getLoggedinUser() {
 }
 
 
-;(async ()=>{
-    await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',wishlist: [], isAdmin: false})
-    await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123',wishlist: [], isAdmin: true})
-    await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', wishlist: []})
-})()
+// ;(async ()=>{
+//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',wishlist: [], isAdmin: false})
+//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123',wishlist: [], isAdmin: true})
+//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', wishlist: []})
+// })()
 
 
 

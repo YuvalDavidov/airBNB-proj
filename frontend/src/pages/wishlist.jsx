@@ -17,7 +17,7 @@ export function Wishlist() {
     <h1>Wishlist</h1>
     <div className="wishlist-container">
         {stays.map(stay => {
-            return <article className="wishlist-preview" onClick={() => navigate(`/details/${stay._id}`)} >
+            return <article key={stay._id} className="wishlist-preview" onClick={() => navigate(`/details/${stay._id}`)} >
                 <div className="img-grid">
                     <img className="img1" src={stay.imgUrls[0]} alt="" />
                     <img className="img2" src={stay.imgUrls[1]} alt="" />
