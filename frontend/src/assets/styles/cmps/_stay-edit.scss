@@ -1,0 +1,64 @@
+.edit-stay {
+    background-color: rgba(128, 128, 128, 0.326);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+
+    & .file {
+        margin: 10px auto;
+    }
+
+    & .address {
+        display: inherit;
+        justify-content: space-around;
+    }
+
+    &-details {
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+
+    & img {
+        width: 100px;
+        aspect-ratio: 1/1;
+        object-fit: scale-down;
+    }
+
+    & .edit-btn {
+        margin: 10px 0;
+        --mouse-x: 50;
+        --mouse-y: 50;
+        padding: 20px 30px;
+        width: 100%;
+        background-size: 200% 200%;
+        background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+        background-image: radial-gradient(circle, rgb(207, 11, 98) 0%, rgba(348, 36, 76, 1) 100%);
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        // font-size: 36px;
+        font-family: 'Raleway', sans-serif;
+    }
+}
+
+.imgUrl {
+    position: relative;
+    display: inline;
+
+    & button {
+        opacity: 0;
+        position: absolute;
+        background-color: red;
+        right: 0;
+        border-radius: 50%;
+    }
+}
+
+.imgUrl:hover {
+    & button {
+        opacity: 0.8;
+    }
+}

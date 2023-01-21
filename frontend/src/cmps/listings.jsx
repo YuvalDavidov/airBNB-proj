@@ -14,11 +14,6 @@ export function Listings() {
     const [stays, setStays] = useState(myStays)
     const [descending, setDescending] = useState(false)
     const navigate = useNavigate()
-    console.log(stays, myStays);
-
-    useEffect(() => {
-        loadMyStays({ hostId: user._id })
-    }, [])
 
     useEffectUpdate(() => {
         setStays(myStays)
@@ -62,7 +57,7 @@ export function Listings() {
                     {stays.map((stay) => {
                         return <tr key={stay._id} className="data">
                             <td className="listing-td" ><div><a href="#"><div onClick={() => { navigate(`/details/${stay._id}`) }} className="listing-prev"><img src={stay.imgUrls[0]} /><h3 className="-name">{stay.name}</h3></div></a></div>  </td>
-                            <td><button>update</button></td>
+                            <td><button onClick={() => { navigate(`/dashboard/${stay._id}`) }}>update</button></td>
                             <td>{stay.stayDetails.guests}</td>
                             <td>{stay.stayDetails.bedrooms}</td>
                             <td>{stay.price}</td>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux' 
+import { useSelector } from 'react-redux'
 
 import { TiHeartFullOutline } from 'react-icons/ti'
 import { IconContext } from 'react-icons'
@@ -94,9 +94,10 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
               ></path>
             </svg>
             <span className='rate-num'>
-              {calcMeanRate(stay.reviews) % 1 !== 0
+              {stay.reviews.length > 0 ? calcMeanRate(stay.reviews) % 1 !== 0
                 ? calcMeanRate(stay.reviews).toFixed(2)
-                : calcMeanRate(stay.reviews).toFixed(1)}
+                : calcMeanRate(stay.reviews).toFixed(1)
+                : ''}
             </span>
           </span>
         </div>

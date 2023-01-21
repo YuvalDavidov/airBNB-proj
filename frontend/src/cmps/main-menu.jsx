@@ -1,23 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
 
 export function MainMenu() {
-    const [ isOpen, setIsOpen] = useState(false)
-    const menuRef = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+  const menuRef = useRef()
 
-    useEffect(() => {
+  useEffect(() => {
 
-        const closeDropdown = e => {
+    const closeDropdown = e => {
 
-            if (!menuRef.current.contains(e.target)) {
-                setIsOpen(false)
-            }
-        }
+      if (!menuRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
 
-        document.body.addEventListener('click', closeDropdown)
+    document.body.addEventListener('click', closeDropdown)
 
-        return () => document.body.removeEventListener('click', closeDropdown)
+    return () => document.body.removeEventListener('click', closeDropdown)
 
-    },[])
+  }, [])
 
   return (
     <div ref={menuRef} className='main-menu'>
@@ -35,11 +35,11 @@ export function MainMenu() {
             height: '16px',
             width: '16px',
             stroke: 'currentcolor',
-            'stroke-width': '3',
+            strokeWidth: '3',
             overflow: 'visible',
           }}
         >
-          <g fill='none' fill-rule='nonzero'>
+          <g fill='none' fillRule='nonzero'>
             <path d='m2 16h28'></path>
             <path d='m2 24h28'></path>
             <path d='m2 8h28'></path>
@@ -65,7 +65,7 @@ export function MainMenu() {
       {isOpen && <div className="dropdown">
         <a href='#'>Log in</a>
         <a href='#'>Sign up</a>
-        <hr/>
+        <hr />
         <a href='#'>Airbnb your home</a>
         <a href='#'>help</a>
       </div>}
