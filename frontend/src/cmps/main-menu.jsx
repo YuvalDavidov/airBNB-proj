@@ -4,24 +4,24 @@ import { useSelector } from 'react-redux'
 import { logout } from '../store/user.actions'
 
 export function MainMenu({setIsSignup, setIsModalOpen}) {
-    const [ isOpen, setIsOpen] = useState(false)
-    const menuRef = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+  const menuRef = useRef()
     const user = useSelector((storeState) => storeState.userModule.user)
 
-    useEffect(() => {
+  useEffect(() => {
 
-        const closeDropdown = e => {
+    const closeDropdown = e => {
 
-            if (!menuRef.current.contains(e.target)) {
-                setIsOpen(false)
-            }
-        }
+      if (!menuRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
 
-        document.body.addEventListener('click', closeDropdown)
+    document.body.addEventListener('click', closeDropdown)
 
-        return () => document.body.removeEventListener('click', closeDropdown)
+    return () => document.body.removeEventListener('click', closeDropdown)
 
-    },[])
+  }, [])
 
     function onOpenModal(isSignup) {
         setIsSignup(isSignup)
@@ -74,12 +74,8 @@ export function MainMenu({setIsSignup, setIsModalOpen}) {
         {user && <img src={user.imgUrl} alt="user img" />}
       </button>
       {isOpen && <div className="dropdown">
-        {!user && <a href='#' onClick={() => onOpenModal(false)}>Log in</a>}
-        {!user && <a href='#' onClick={() => onOpenModal(true)}>Sign up</a>}
-        {user && <a href='#'>Trips</a>}
-        {user && <a href='/wishlist'>Wishlist</a>}
-        {user && <hr/>}
-        {user && <a href='#'>Manage listings</a>}
+        <a href='#'>Log in</a>
+        <a href='#'>Sign up</a>
         <hr/>
         <a href='#'>Airbnb your home</a>
         <a href='#'>Help</a>

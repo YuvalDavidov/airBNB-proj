@@ -26,9 +26,9 @@ const routes = [
         label: 'Wishlist'
     },
     {
-        path: 'chat',
-        component: <ChatApp />,
-        label: 'Chat'
+        path: 'book/?',
+        component: <BookStay />,
+        label: 'BookStay'
     },
     {
         path: 'about',

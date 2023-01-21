@@ -7,9 +7,9 @@ import { loadMyStays } from "../store/stay.actions";
 export function Dashboard() {
 
 
-    // useEffect(() => {
-    //     loadMyStays({ hostId: user._id })
-    // }, [])
+    useEffect(() => {
+        loadMyStays({ hostId: user._id })
+    }, [])
 
 
     return (
