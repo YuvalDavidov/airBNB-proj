@@ -1,0 +1,44 @@
+.wishlist {
+    h1 {
+        font-family: Cereal-Medium;
+        font-size: em(32px);
+        letter-spacing: 1px;
+        margin-top: 55px;
+        margin-bottom: 48px;
+    }
+}
+
+.wishlist-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(317.5px, 1fr));
+    gap:20px
+}
+
+.wishlist-preview {
+    margin-bottom: 40px;
+    cursor: pointer;
+    h2 {
+        font-family: Cereal-Book;
+        font-size: em(22px);
+    }
+}
+
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+
+    img {
+        aspect-ratio: 1 / 0.77;
+        object-fit: cover;
+    }
+
+    .img1 {
+        grid-column: 1/3;
+        grid-row: 1/3;
+    }
+}

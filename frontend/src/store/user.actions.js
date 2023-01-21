@@ -26,6 +26,26 @@ export async function removeUser(userId) {
     }
 }
 
+export async function addToWishlist(stayId) {
+    try {
+        const user = await userService.addToWishlist(stayId)
+        store.dispatch({ type: SET_USER, user})
+        return user
+    } catch (err) {
+        throw err
+    }
+}
+
+export async function removeFromWishlist(stayId) {
+    try {
+        const user = await userService.removeFromWishlist(stayId)
+        store.dispatch({ type: SET_USER, user})
+        return user
+    } catch (err) {
+        throw err
+    }
+}
+
 export async function login(credentials) {
     try {
         const user = await userService.login(credentials)

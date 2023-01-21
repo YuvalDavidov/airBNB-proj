@@ -11,7 +11,7 @@ import { toggleExpand } from './store/stay.actions'
 import { Dashboard } from './pages/dashboard'
 import { StayEdit } from './cmps/stay-edit'
 import { Listings } from './cmps/listings'
-import { Reservations } from './cmps/Reservations'
+import { Reservations } from './cmps/reservations'
 
 export function RootCmp() {
   const isHeadFilterExpanded = useSelector(
@@ -41,6 +41,7 @@ export function RootCmp() {
           ))}
           <Route element={<Dashboard />} path="/dashboard">
             <Route element={<StayEdit />} path="/dashboard" />
+            <Route element={<StayEdit />} path="/dashboard/:stayId" />
             <Route element={<Listings />} path="/dashboard/listings" />
             <Route element={<Reservations />} path="/dashboard/reservations" />
 

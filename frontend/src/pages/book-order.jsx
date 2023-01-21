@@ -4,17 +4,36 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { SlDiamond } from 'react-icons/sl';
 import { stayService } from "../services/stay.service.local";
 import { AiFillStar } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { orderService } from "../services/order.service";
+import { showSuccessMsg } from "../services/event-bus.service";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
 
 export function BookStay() {
+    const { user } = useSelector((storeState) => storeState.userModule)
     const [order, setOrder] = useState(null)
+    const [isOrderDone, setIsOrderDone] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
+    console.log(order);
+
     useEffect(() => {
         getOrderPickes()
+
+        if (!order) return
+
+        const button = document.querySelector('.reserve-btn')
+        button.addEventListener('mousemove', e => {
+            const rect = button.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * 100 / button.clientWidth
+            const y = (e.clientY - rect.top) * 100 / button.clientHeight
+            button.style.setProperty('--mouse-x', x);
+            button.style.setProperty('--mouse-y', y);
+        })
+
     }, [])
 
     function getOrderPickes() {
@@ -67,6 +86,15 @@ export function BookStay() {
         return diffInDays
     }
 
+    function onOrder() {
+        let orderToSave = orderService.getEmptyOrder()
+        orderToSave.aboutOrder = order
+        orderToSave.aboutUser = { id: user._id, fullname: user.fullname }
+        orderService.save(orderToSave)
+        showSuccessMsg('Order has been made')
+        setIsOrderDone(true)
+    }
+
     if (!order) return <div>Somthing whent wrong with the order</div>
 
     const { stay, startDate, endDate, stayId } = order
@@ -108,6 +136,9 @@ export function BookStay() {
                     </div>
                     <hr />
 
+                    {user ?
+                        (!isOrderDone ? <button onClick={() => { onOrder() }} className="reserve-btn">Confirm</button> : <button className="reserve-btn">Tnx for ordring!</button>)
+                        : <button onClick={() => { }} className="reserve-btn">Login</button>}
                 </section>
 
                 <section className="stay-price-details">

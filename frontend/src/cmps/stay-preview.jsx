@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 import { TiHeartFullOutline } from 'react-icons/ti'
 import { IconContext } from 'react-icons'
 
 import { removeStay } from '../store/stay.actions'
+import { addToWishlist, removeFromWishlist } from '../store/user.actions'
 
 import { ImageSlider } from './image-slider'
 
 export function StayPreview({ stay, userLocation, onUpdateStay }) {
   const navigate = useNavigate()
-  const [isHearted, setIsHearted] = useState(false)
+  const user = useSelector((storeState) => storeState.userModule.user)
 
   function calcMeanRate(stayReviews) {
     if (!stayReviews || !stayReviews.length) return null
@@ -45,13 +48,21 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
     removeStay(stayId)
   }
 
+  function onToggleWishlist(stayId) {
+    if (user.wishlist.includes(stayId)) {
+      removeFromWishlist(stayId)
+    } else {
+      addToWishlist(stayId)
+    }
+  }
+
   return (
     <article className='stay-preview'>
       <ImageSlider imgs={stay.imgUrls} stayId={stay._id} />
       <IconContext.Provider
-        value={{ className: `heart-btn ${isHearted && 'is-active'}` }}
+        value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
       >
-        <div onClick={() => setIsHearted(!isHearted)}>
+        <div onClick={() => onToggleWishlist(stay._id)}>
           <TiHeartFullOutline />
         </div>
       </IconContext.Provider>
@@ -83,9 +94,10 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
               ></path>
             </svg>
             <span className='rate-num'>
-              {calcMeanRate(stay.reviews) % 1 !== 0
+              {stay.reviews.length > 0 ? calcMeanRate(stay.reviews) % 1 !== 0
                 ? calcMeanRate(stay.reviews).toFixed(2)
-                : calcMeanRate(stay.reviews).toFixed(1)}
+                : calcMeanRate(stay.reviews).toFixed(1)
+                : ''}
             </span>
           </span>
         </div>

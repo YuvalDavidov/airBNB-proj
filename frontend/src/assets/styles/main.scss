@@ -21,6 +21,7 @@
 @import "views/stay-details";
 @import "views/stay-index";
 @import "views/book";
+@import "views/wishlist";
 @import "views/dashboard";
 
 // Components
@@ -33,4 +34,8 @@
 @import "cmps/stay-preview";
 @import "cmps/image-slider";
 @import "cmps/shopping-cart";
+@import "cmps/main-menu";
 @import "cmps/listing-table";
+@import "cmps/login-signup";
+@import "cmps/stay-edit";
+@import "cmps/reservations";

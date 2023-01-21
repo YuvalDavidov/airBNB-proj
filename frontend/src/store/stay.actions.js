@@ -7,8 +7,12 @@ import {
   UPDATE_STAY,
   SET_FILTER,
   SET_HEADER_EXPAND,
+  SET_WISHLIST_STAYS,
   SET_MY_STAYS,
+
 } from './stay.reducer'
+
+
 
 export function getActionRemoveStay(stayId) {
   return {
@@ -109,6 +113,17 @@ export async function saveStay(stay) {
     return savedStay
   } catch (err) {
     console.log('Cannot save stay', err)
+    throw err
+  }
+}
+
+export async function getStaysForWishlist(staysIds) {
+  try {
+    const wishlistStays = await stayService.getStaysForWishlist(staysIds)
+    store.dispatch({ type: SET_WISHLIST_STAYS, wishlistStays })
+    return wishlistStays
+  } catch (err) {
+    console.log('cannot set wishlist stays')
     throw err
   }
 }

@@ -1,11 +1,12 @@
 .main-aria {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
+    display: flex;
+    justify-content: space-around;
 
 }
 
 .order-details {
+    min-width: 400px;
+    padding: 20px;
 
     & .rare-find {
         display: flex;
@@ -27,8 +28,8 @@
     border: 1px solid rgb(221, 221, 221);
     padding: 20px;
     border-radius: 15px;
-    margin-left: 30px;
     height: max-content;
+    min-width: 400px;
 
     & .stay {
         display: flex;

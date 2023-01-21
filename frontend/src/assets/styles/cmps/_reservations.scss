@@ -1,0 +1,17 @@
+.reservations {
+
+
+    & .charts {
+        display: flex;
+        justify-content: space-around;
+
+        & .listing {
+            box-shadow: #0000001f 0 6px 16px;
+
+            border-radius: 15px;
+            max-width: 500px;
+            padding: 10px;
+
+        }
+    }
+}
