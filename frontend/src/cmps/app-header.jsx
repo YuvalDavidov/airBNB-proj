@@ -43,8 +43,6 @@ export function AppHeader() {
 
 
     return (
-
-
         <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
             <h1 className='mail-layout' onClick={() => { navigate('/') }}>LOGO</h1>
             <HeaderFilter />
@@ -55,7 +53,7 @@ export function AppHeader() {
 
             </nav> */}
             < MainMenu setIsModalOpen={setIsModalOpen} setIsSignup={setIsSignup} />
-            {isModalOpen &&< LoginSignup isSignup={isSignup} setIsSignup={setIsSignup} setIsModalOpen={setIsModalOpen} />}
+            {isModalOpen && < LoginSignup isSignup={isSignup} setIsSignup={setIsSignup} setIsModalOpen={setIsModalOpen} />}
 
         </header>
     )

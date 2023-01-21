@@ -26,6 +26,7 @@ async function query(filterBy) {
 
 
   if (filterBy?.hostId) {
+    console.log(filterBy.hostId);
     stays = stays.filter(stay => stay.host._id === filterBy.hostId)
   }
 
@@ -48,7 +49,7 @@ async function save(stay) {
     savedStay = await storageService.put(STORAGE_KEY, stay)
   } else {
     // Later, owner is set by the backend
-    // stay.owner = userService.getLoggedinUser()
+    stay.host = userService.getLoggedinUser()
     savedStay = await storageService.post(STORAGE_KEY, stay)
   }
   return savedStay

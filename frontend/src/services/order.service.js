@@ -19,6 +19,10 @@ export const orderService = {
 
 async function query(filterBy) {
     var orders = await storageService.query(STORAGE_KEY)
+
+    if (filterBy?.hostId) {
+        orders = orders.filter(order => order.aboutOrder.stay.host._id === filterBy.hostId)
+    }
     return orders
 }
 
