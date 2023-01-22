@@ -10,8 +10,7 @@ import { LoginSignup } from './login-signup'
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isSignup, setIsSignup] = useState(false)
+    const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
 
     const navigate = useNavigate()
 
@@ -54,8 +53,8 @@ export function AppHeader() {
 
 
             </nav> */}
-            < MainMenu setIsModalOpen={setIsModalOpen} setIsSignup={setIsSignup} />
-            {isModalOpen &&< LoginSignup isSignup={isSignup} setIsSignup={setIsSignup} setIsModalOpen={setIsModalOpen} />}
+            < MainMenu />
+            {isModalOpen &&< LoginSignup />}
 
         </header>
     )

@@ -68,9 +68,9 @@ export function StayIndex() {
 
   return (
     <section className='stay-index'>
-      <button className='add-btn' onClick={() => setAddModal(true)}>
+      {/* <button className='add-btn' onClick={() => setAddModal(true)}>
         Add Stay
-      </button>
+      </button> */}
       <StayList
         stays={stays}
         userLocation={userLocation}

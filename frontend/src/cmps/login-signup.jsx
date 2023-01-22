@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { login , signup } from '../store/user.actions'
+import { login , signup, setIsSignup, setIsModalOpen } from '../store/user.actions'
 
-export function LoginSignup({ isSignup, setIsSignup, setIsModalOpen }) {
+export function LoginSignup() {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
     fullname: '',
   })
+
+  const isSignup = useSelector((storeState) => storeState.userModule.isSignup)
 
   function handleChange({ target }) {
     const { value, name: field } = target

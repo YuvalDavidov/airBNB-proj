@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
-import { logout } from '../store/user.actions'
+import { logout, setIsSignup, setIsModalOpen } from '../store/user.actions'
 
-export function MainMenu({ setIsSignup, setIsModalOpen }) {
+export function MainMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef()
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -29,7 +29,7 @@ export function MainMenu({ setIsSignup, setIsModalOpen }) {
   return (
     <div ref={menuRef} className='main-menu'>
       <button
-        className='main-menu-btn'
+        className={`main-menu-btn ${isOpen && 'is-open'}`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <svg
@@ -82,7 +82,7 @@ export function MainMenu({ setIsSignup, setIsModalOpen }) {
           {user && <a href='#'>Trips</a>}
           {user && <a href='/wishlist'>Wishlist</a>}
           <hr />
-          {user && <a href='#'>Manage listings</a>}
+          {user && <a href='/dashboard'>Manage listings</a>}
           {user && <hr/>}
           <a href='#'>Airbnb your home</a>
           <a href='#'>Help</a>

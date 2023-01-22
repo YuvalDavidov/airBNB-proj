@@ -6,7 +6,7 @@ import { TiHeartFullOutline } from 'react-icons/ti'
 import { IconContext } from 'react-icons'
 
 import { removeStay } from '../store/stay.actions'
-import { addToWishlist, removeFromWishlist } from '../store/user.actions'
+import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
 
 import { ImageSlider } from './image-slider'
 
@@ -49,6 +49,10 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
   }
 
   function onToggleWishlist(stayId) {
+    if (!user) {
+      setIsSignup(false)
+      setIsModalOpen(true)
+    }
     if (user.wishlist.includes(stayId)) {
       removeFromWishlist(stayId)
     } else {
@@ -116,10 +120,10 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
         <div className='price'>
           <span>₪{stay.price.toLocaleString('en-US')}</span> night
         </div>
-        <div className='actions'>
+        {/* <div className='actions'>
           <button onClick={(ev) => onUpdateStay(ev, stay)}>Edit</button>
           <button onClick={(ev) => onRemoveStay(ev, stay._id)}>X</button>
-        </div>
+        </div> */}
       </div>
     </article>
   )
