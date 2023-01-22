@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { NavLink, Outlet, Route, Router } from "react-router-dom";
 import { StayEdit } from "../cmps/stay-edit";
+import { userService } from "../services/user.service";
 import { loadMyStays } from "../store/stay.actions";
 
 
@@ -8,8 +9,9 @@ export function Dashboard() {
 
 
     useEffect(() => {
-        loadMyStays({ hostId: user._id })
+        loadMyStays({ hostId: userService.getLoggedinUser()._id })
     }, [])
+
 
 
     return (

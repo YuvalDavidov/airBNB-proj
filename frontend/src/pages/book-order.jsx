@@ -6,6 +6,7 @@ import { stayService } from "../services/stay.service.local";
 import { AiFillStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { orderService } from "../services/order.service";
+import { showSuccessMsg } from "../services/event-bus.service";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -90,6 +91,8 @@ export function BookStay() {
         orderToSave.aboutOrder = order
         orderToSave.aboutUser = { id: user._id, fullname: user.fullname }
         orderService.save(orderToSave)
+        showSuccessMsg('Order has been made')
+        setIsOrderDone(true)
     }
 
     if (!order) return <div>Somthing whent wrong with the order</div>
@@ -133,7 +136,9 @@ export function BookStay() {
                     </div>
                     <hr />
 
-                    {user ? <button onClick={() => { onOrder() }} className="reserve-btn">Confirm</button> : ''}
+                    {user ?
+                        (!isOrderDone ? <button onClick={() => { onOrder() }} className="reserve-btn">Confirm</button> : <button className="reserve-btn">Tnx for ordring!</button>)
+                        : <button onClick={() => { }} className="reserve-btn">Login</button>}
                 </section>
 
                 <section className="stay-price-details">

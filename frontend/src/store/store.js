@@ -5,6 +5,7 @@ import { userReducer } from './user.reducer.js'
 import { reviewReducer } from './review.reducer'
 import { systemReducer } from './system.reducer'
 import { stayReducer } from './stay.reducer.js'
+import { orderReducer } from './order.reducer.js'
 
 const rootReducer = combineReducers({
     carModule: carReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     systemModule: systemReducer,
     reviewModule: reviewReducer,
     stayModule: stayReducer,
+    orderModule: orderReducer
 
 })
 

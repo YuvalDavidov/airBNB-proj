@@ -42,8 +42,6 @@ export function AppHeader() {
 
 
     return (
-
-
         <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
             <h1 className='mail-layout' onClick={() => { navigate('/') }}>LOGO</h1>
             <HeaderFilter />

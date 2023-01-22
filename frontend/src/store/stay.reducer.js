@@ -1,3 +1,4 @@
+import { stayService } from "../services/stay.service.local"
 export const SET_STAYS = 'SET_STAYS'
 export const REMOVE_STAY = 'REMOVE_STAY'
 export const ADD_STAY = 'ADD_STAY'
@@ -10,8 +11,7 @@ export const SET_MY_STAYS = 'SET_MY_STAYS'
 const initialState = {
   stays: [],
   myStays: [],
-  staysForWishlist: [],
-  filterBy: null,
+  filterBy: stayService.getDefaultFilter(),
   isHeadFilterExpanded: false,
 }
 
@@ -35,7 +35,7 @@ export function stayReducer(state = initialState, action) {
       )
       return { ...state, stays }
     case SET_WISHLIST_STAYS:
-        return {...state, staysForWishlist: action.wishlistStays}
+      return { ...state, staysForWishlist: action.wishlistStays }
 
     // filterBy
     case SET_FILTER:
