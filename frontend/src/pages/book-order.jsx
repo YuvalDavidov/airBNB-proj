@@ -89,6 +89,7 @@ export function BookStay() {
     function onOrder() {
         let orderToSave = orderService.getEmptyOrder()
         orderToSave.aboutOrder = order
+        orderToSave.aboutOrder.totalPrice = stay.price * getDaysCalculate()
         orderToSave.aboutUser = { id: user._id, fullname: user.fullname }
         orderService.save(orderToSave)
         showSuccessMsg('Order has been made')
@@ -161,17 +162,17 @@ export function BookStay() {
 
                         <h3>Price details</h3>
                         <div className="price-details">
-                            <div>  {stay.price} x {getDaysCalculate()}</div>
-                            <div>{stay.price * getDaysCalculate()}</div>
+                            <div> ₪ {stay.price} x {getDaysCalculate()}</div>
+                            <div>₪ {stay.price * getDaysCalculate()}</div>
                         </div>
                         <div className="service-fee">
                             <div>Service fee</div>
-                            <div>{serviceFee}</div>
+                            <div>₪ {serviceFee}</div>
                         </div>
                         <hr />
                         <div className="total">
                             <div>Total</div>
-                            <div>{serviceFee + (stay.price * getDaysCalculate())}</div>
+                            <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
                         </div>
                     </div>
                 </section>

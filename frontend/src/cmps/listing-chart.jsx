@@ -12,7 +12,6 @@ export function ListingChart({ orders }) {
         return acc
     }, {})
 
-    console.log(orders, ordersCount);
 
     const labelDatas = []
     const labelsValues = []

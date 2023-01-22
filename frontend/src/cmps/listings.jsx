@@ -3,13 +3,10 @@ import { useState } from "react"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
-import { stayService } from "../services/stay.service.local"
-import { loadMyStays, sortMyStays } from "../store/stay.actions";
-
 
 
 export function Listings() {
-    // 
+
     const { myStays } = useSelector((storeState) => storeState.stayModule)
     const [stays, setStays] = useState(myStays)
     const [descending, setDescending] = useState(false)

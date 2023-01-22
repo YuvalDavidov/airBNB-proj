@@ -43,7 +43,7 @@ export function AppHeader() {
 
     return (
         <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
-            <h1 className='mail-layout' onClick={() => { navigate('/') }}>LOGO</h1>
+            <h1 className='mail-layout' onClick={() => { navigate('/') }}>airTNT</h1>
             <HeaderFilter />
             {/* <nav>
 
@@ -52,7 +52,7 @@ export function AppHeader() {
 
             </nav> */}
             < MainMenu />
-            {isModalOpen &&< LoginSignup />}
+            {isModalOpen && < LoginSignup />}
 
         </header>
     )
