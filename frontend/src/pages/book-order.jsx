@@ -76,7 +76,7 @@ export function BookStay() {
         let diffInTime = end - start
         const diffInDays = diffInTime / (1000 * 3600 * 24)
 
-        return diffInDays
+        return diffInDays + 1
     }
 
     function onOrder() {

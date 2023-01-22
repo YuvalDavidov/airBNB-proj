@@ -14,6 +14,7 @@ import { showErrorMsg } from "../services/event-bus.service";
 import { GradientButton } from "../cmps/gradient-button";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const serviceFee = 18
 
 
 export function StayDetails() {
@@ -86,6 +87,16 @@ export function StayDetails() {
         navigate(`/book/?stayId=${stayId}&adultsAmount=${adults}&childrenAmount=${children}&infantsAmount=${infants}&petsAmount=${pets}&startDate=${startDate}&endDate=${endDate}`)
     }
 
+    function getDaysCalculate() {
+        const { startDate, endDate } = pickedDate
+        let start = new Date(startDate).getTime()
+        let end = new Date(endDate).getTime()
+        let diffInTime = end - start
+        const diffInDays = diffInTime / (1000 * 3600 * 24)
+
+        return diffInDays + 1
+    }
+
     function handleModuls() {
         if (guestsModual) setGuestsModual(false)
         if (datePickerModual) setDatePickerModual(false)
@@ -114,11 +125,11 @@ export function StayDetails() {
             </div>
 
             <article className="imgs-grid">
-                <div className="first"> <img src={imgUrls[0]} /></div>
-                <div> <img src={imgUrls[1]} /></div>
-                <div> <img src={imgUrls[2]} /></div>
-                <div> <img src={imgUrls[3]} /></div>
-                <div> <img src={imgUrls[4]} /></div>
+                <img className="first" src={imgUrls[0]} />
+                <img src={imgUrls[1]} />
+                <img src={imgUrls[2]} />
+                <img src={imgUrls[3]} />
+                <img src={imgUrls[4]} />
 
                 <button>show all photos</button>
             </article>
@@ -230,13 +241,13 @@ export function StayDetails() {
                 <section className="reserve">
                     <article className="reserve-module">
                         <div className="top">
-                            <div className="price">
-                                ₪ {price}
+                            <div className="price flex">
+                                <h3> ₪ {price} </h3>
                                 <span> night</span>
                             </div>
 
-                            <div>
-                                <span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>
+                            <div className="flex">
+                                <h3> <AiFillStar /> {getStayReviewRateAvg(reviews)}</h3>
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                             </div>
@@ -301,6 +312,23 @@ export function StayDetails() {
                         </section>
                         <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
 
+                        {pickedDate.endDate ? (<div className="stay-price">
+
+                            <h3>Price details</h3>
+                            <div className="price-details">
+                                <div> ₪ {stay.price} x {getDaysCalculate()}</div>
+                                <div>₪ {stay.price * getDaysCalculate()}</div>
+                            </div>
+                            <div className="service-fee">
+                                <div>Service fee</div>
+                                <div>₪ {serviceFee}</div>
+                            </div>
+                            <hr />
+                            <div className="total">
+                                <div>Total</div>
+                                <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                            </div>
+                        </div>) : ''}
 
                     </article>
 
@@ -335,7 +363,7 @@ export function StayDetails() {
 
             <div id="map" className="map">
                 <h4>Where you'll be</h4>
-                <p>{loc.city},{loc.country},{loc.address}</p>
+                <p>{loc.city}, {loc.country}, {loc.address}</p>
 
                 <StayMap stayLoc={loc} />
             </div>
