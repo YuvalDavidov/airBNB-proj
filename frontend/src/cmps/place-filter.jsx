@@ -6,7 +6,7 @@ export function PlaceFilter({ locations, onSetLocation, onMoveToDateFilter }) {
     return (
         <section className="place-modal">
             <ul>
-                {locations.map((location) => <li onClick={() => {
+                {locations && locations.map((location) => <li onClick={() => {
                     onSetLocation(location)
                     onMoveToDateFilter()
                 }} className="flex location-list" key={location.city}>
