@@ -1,12 +1,34 @@
 .app-header {
     padding: 10px;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1px solid rgba(155, 155, 155, 0.372);
-    margin-bottom: 10px;
 
     &.expanded {
         height: 160px;
 
+    }
+
+    @include for-narrow-layout {
+        grid-template-columns:
+            40px repeat(3, 1fr) 40px;
+    }
+
+    @include for-normal-layout {
+        grid-template-columns:
+            40px repeat(3, 1fr) 40px;
+    }
+
+    @include for-wide-layout {
+        grid-template-columns:
+            80px repeat(3, 1fr) 80px;
+    }
+
+    .logo {
+        grid-column: 2/3;
+    }
+
+    .stay-header-filter {
+        justify-self: center;
+        align-self: center;
     }
 
     .user-info {

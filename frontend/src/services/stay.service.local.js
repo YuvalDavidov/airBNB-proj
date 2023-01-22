@@ -31,9 +31,9 @@ async function query(filterBy) {
     stays = stays.filter(stay => stay.host._id === filterBy.hostId)
   }
 
-  if (filterBy.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
-  if (filterBy.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
-  if (filterBy.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
+  if (filterBy?.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
+  if (filterBy?.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
+  if (filterBy?.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
 
   return stays
 }

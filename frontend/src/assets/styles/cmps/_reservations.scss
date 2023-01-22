@@ -1,6 +1,77 @@
 .reservations {
+    .reservation-table{
+        width: 100%;
+        border-collapse: collapse;
+        th {
+            text-align: left;
+            border-bottom: solid 1px black;
+            padding: 0;
+        }
+        tr {
+            border-bottom: solid 1px black;
+        }
+        td {
+            padding: 5px 0;
+            width: max-content;
+        }
 
-
+        .todo-td {
+            width: 230px;
+        }
+        .approve-btn {
+            margin-right: 12px;
+            margin-left: 0;
+            width: 100px;
+            height: 32px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #67c23a;
+            background-color: #f0f9eb;
+            border: 1px solid #b3e19d;
+            &:hover {
+                color: white;
+                background-color: #67c23a;
+                border-color: #67c23a;
+            }
+            &.is-active {
+                color: white;
+                background-color: #67c23a;
+                border-color: #67c23a;
+            }
+        }
+        .reject-btn {
+            width: 100px;
+            height: 32px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #f56c6c;
+            background-color: #fef0f0;
+            border: 1px solid #fab6b6;
+            &:hover {
+                color: white;
+                background-color: #f56c6c;
+                border-color: #f56c6c;
+            }
+            &.is-active {
+                color: white;
+                background-color: #f56c6c;
+                border-color: #f56c6c;
+            }
+        }
+    }
+    .guest-td {
+        display: flex;
+        align-items: center;
+        // height: 100%;
+    }
+    .mini-img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        padding: 0;
+        margin-right: 10px;
+    }
     & .charts {
         display: flex;
         justify-content: space-around;

@@ -2,7 +2,7 @@
     position: relative;
     align-self: center;
     justify-self: end;
-    margin-right: 20px;
+    margin: 0;
 }
 
 .main-menu-btn {
@@ -15,7 +15,11 @@
     padding-left: 12px;
     border: 1px solid #dddddd;
     transition: box-shadow 0.2s;
+    margin: 0;
     &:hover {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    }
+    &.is-open {
         box-shadow: 0 2px 4px rgba(0,0,0,0.18);
     }
     .hamburger-icon {
@@ -46,6 +50,7 @@
     border-radius: 15px;
     padding: 10px 0;
     overflow: hidden;
+    z-index: 2;
     a {
         padding: 12px 15px;
         color: rgb(34,34,34);

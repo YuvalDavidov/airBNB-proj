@@ -3,7 +3,7 @@ import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from "./user.reducer.js";
+import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, SET_IS_MODAL_OPEN, SET_IS_SIGNUP } from "./user.reducer.js";
 
 export async function loadUsers() {
     try {
@@ -85,6 +85,14 @@ export async function logout() {
         console.log('Cannot logout', err)
         throw err
     }
+}
+
+export function setIsModalOpen(isModalOpen) {
+    store.dispatch({type: SET_IS_MODAL_OPEN, isModalOpen})
+}
+
+export function setIsSignup(isSignup) {
+    store.dispatch({type: SET_IS_SIGNUP, isSignup})
 }
 
 export async function loadUser(userId) {

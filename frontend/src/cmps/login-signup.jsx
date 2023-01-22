@@ -1,13 +1,17 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { login , signup } from '../store/user.actions'
+import { login , signup, setIsSignup, setIsModalOpen } from '../store/user.actions'
+import { GradientButton } from './gradient-button'
 
-export function LoginSignup({ isSignup, setIsSignup, setIsModalOpen }) {
+export function LoginSignup() {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
     fullname: '',
   })
+
+  const isSignup = useSelector((storeState) => storeState.userModule.isSignup)
 
   function handleChange({ target }) {
     const { value, name: field } = target
@@ -83,20 +87,17 @@ export function LoginSignup({ isSignup, setIsSignup, setIsModalOpen }) {
               onChange={handleChange}
             />
           </div>
-
-          <button className='signin-btn'>
-            {isSignup ? 'Sign up' : 'Log in'}
-          </button>
+          < GradientButton className="signin-btn" label={isSignup ? 'Sign up' : 'Log in'} />
         </form>
         <div className='or-line'>
           <hr />
           <span>or</span>
           <hr />
         </div>
-        <button className='signin-btn'>Continue as a guest</button>
+        < GradientButton className="signin-btn" label="Continue as a guest" />
         <button
           className='toggle-signup'
-          onClick={() => setIsSignup((prev) => !prev)}
+          onClick={() => setIsSignup(!isSignup)}
         >
           {isSignup
             ? 'Already signed up?'

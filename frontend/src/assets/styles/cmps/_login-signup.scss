@@ -7,11 +7,11 @@
     background-color: black;
     opacity: 50%;
     cursor: pointer;
-    z-index: 1;
+    z-index: 10;
 }
 
 .login-signup-modal {
-    z-index: 2;
+    z-index: 11;
     position: fixed;
     display: grid;
     grid-template-columns: 25px 1fr 25px;
@@ -105,7 +105,6 @@
         }
     }
     .signin-btn {
-        background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
         width: 100%;
         padding: 14px;
         font-family: Cereal-Bold;

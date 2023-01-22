@@ -10,8 +10,11 @@ import { TbElevator } from 'react-icons/tb';
 import { StayMap } from "../cmps/stay-map";
 import { StayDatePicker } from "../cmps/stay-date-picker";
 import { stayService } from "../services/stay.service.local";
+import { showErrorMsg } from "../services/event-bus.service";
+import { GradientButton } from "../cmps/gradient-button";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const serviceFee = 18
 
 
 export function StayDetails() {
@@ -23,6 +26,8 @@ export function StayDetails() {
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const { stayId } = useParams()
     const navigate = useNavigate()
+
+
 
     useEffect(() => {
         stayService.getById(stayId)
@@ -46,15 +51,6 @@ export function StayDetails() {
                 modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
             })
         }
-
-        const button = document.querySelector('.reserve-btn')
-        button.addEventListener('mousemove', e => {
-            const rect = button.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / button.clientWidth
-            const y = (e.clientY - rect.top) * 100 / button.clientHeight
-            button.style.setProperty('--mouse-x', x);
-            button.style.setProperty('--mouse-y', y);
-        })
 
     }, [stay])
 
@@ -87,7 +83,18 @@ export function StayDetails() {
     function onCheckAvailabilty() {
         const { adults, children, infants, pets } = guestsAmount
         const { startDate, endDate } = pickedDate
+        if (endDate === null) return showErrorMsg('you need to pick a cheack out date')
         navigate(`/book/?stayId=${stayId}&adultsAmount=${adults}&childrenAmount=${children}&infantsAmount=${infants}&petsAmount=${pets}&startDate=${startDate}&endDate=${endDate}`)
+    }
+
+    function getDaysCalculate() {
+        const { startDate, endDate } = pickedDate
+        let start = new Date(startDate).getTime()
+        let end = new Date(endDate).getTime()
+        let diffInTime = end - start
+        const diffInDays = diffInTime / (1000 * 3600 * 24)
+
+        return diffInDays + 1
     }
 
     function handleModuls() {
@@ -103,9 +110,9 @@ export function StayDetails() {
             <div className="stay-mini-sumerry">
                 <div>
                     <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
-                    <span className="dote">.</span>
+                    <span className="dote">•</span>
                     <span><a href="#reviews">{reviews.length} reviews</a></span>
-                    <span className="dote">.</span>
+                    <span className="dote">•</span>
                     <a href="#map">{loc.address}</a>,
                     <a href="#map"> {loc.city}</a>,
                     <a href="#map"> {loc.country}</a>
@@ -119,10 +126,11 @@ export function StayDetails() {
 
             <article className="imgs-grid">
                 <img className="first" src={imgUrls[0]} />
-                <img className="second" src={imgUrls[1]} />
-                <img className="third" src={imgUrls[2]} />
-                <img className="fourth" src={imgUrls[3]} />
-                <img className="fifth" src={imgUrls[4]} />
+                <img src={imgUrls[1]} />
+                <img src={imgUrls[2]} />
+                <img src={imgUrls[3]} />
+                <img src={imgUrls[4]} />
+
                 <button>show all photos</button>
             </article>
 
@@ -134,11 +142,11 @@ export function StayDetails() {
                             <h4>{subTitle}  hosted by {host.fullname}</h4>
                             <p>
                                 <span>{stayDetails.guests} Guests</span>
-                                <span className="dote">.</span>
+                                <span className="dote">•</span>
                                 <span>{stayDetails.bedrooms} Bedrooms</span>
-                                <span className="dote">.</span>
+                                <span className="dote">•</span>
                                 <span>{stayDetails.beds} Beds</span>
-                                <span className="dote">.</span>
+                                <span className="dote">•</span>
                                 <span>{stayDetails.sharedBath} Shared bath</span>
                             </p>
                         </div>
@@ -233,24 +241,24 @@ export function StayDetails() {
                 <section className="reserve">
                     <article className="reserve-module">
                         <div className="top">
-                            <div className="price">
-                                {price}
+                            <div className="price flex">
+                                <h3> ₪ {price} </h3>
                                 <span> night</span>
                             </div>
 
-                            <div>
-                                <span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>
-                                <span className="dote">.</span>
+                            <div className="flex">
+                                <h3> <AiFillStar /> {getStayReviewRateAvg(reviews)}</h3>
+                                <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                             </div>
                         </div>
 
                         <div className="reserve-date-guests">
                             <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
-                                {pickedDate.startDate.getDate()},{month[pickedDate.startDate.getMonth()]}
+                                <span>check in</span> <span>{pickedDate.startDate.getDate()},{month[pickedDate.startDate.getMonth()]}</span>
                             </div>
                             <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
-                                {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}
+                                <span>check out</span> <span>{!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}</span>
                             </div>
 
                             <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
@@ -261,37 +269,66 @@ export function StayDetails() {
                             <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
                         </div>
                         <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
-                            <div>
-                                Adults <span>
-                                    <button onClick={() => { handleGuestsAmount('adults', - 1) }} >-</button>
+                            <div className="flex guest-line-filter">
+                                <div className="flex column">
+                                    <span className="guest-main-text">Adults</span>
+                                    <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
+                                </div>
+                                <span className="flex align-center">
+                                    <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
                                     {guestsAmount.adults}
                                     <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
                                 </span>
                             </div>
-                            <div>
-                                Children <span>
+                            <div className="flex guest-line-filter">
+                                <div className="flex column">
+                                    <span className="guest-main-text">Children</span>
+                                    <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
+                                </div>
+                                <span className="flex align-center">
                                     <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
                                     {guestsAmount.children}
                                     <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
                                 </span>
                             </div>
-                            <div>
-                                Infants <span>
+                            <div className="flex guest-line-filter">
+                                <div className="flex column">
+                                    <span className="guest-main-text">Infants</span>
+                                    <span className="ff-cereal-book fs14 light-color">Under 2</span>
+                                </div>
+                                <span className="flex align-center">
                                     <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
                                     {guestsAmount.infants}
                                     <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
                                 </span>
                             </div>
-                            <div>
-                                Pets <span>
+                            <div className="flex guest-line-filter">
+                                <span className="guest-main-text">Pets</span> <span className="flex align-center">
                                     <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
                                     {guestsAmount.pets}
                                     <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
                                 </span>
                             </div>
                         </section>
-                        <button onClick={() => { onCheckAvailabilty() }} className="reserve-btn">Check availabilty</button>
+                        <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
 
+                        {pickedDate.endDate ? (<div className="stay-price">
+
+                            <h3>Price details</h3>
+                            <div className="price-details">
+                                <div> ₪ {stay.price} x {getDaysCalculate()}</div>
+                                <div>₪ {stay.price * getDaysCalculate()}</div>
+                            </div>
+                            <div className="service-fee">
+                                <div>Service fee</div>
+                                <div>₪ {serviceFee}</div>
+                            </div>
+                            <hr />
+                            <div className="total">
+                                <div>Total</div>
+                                <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                            </div>
+                        </div>) : ''}
 
                     </article>
 
@@ -302,14 +339,15 @@ export function StayDetails() {
             <section id="reviews" className="reviews">
                 <h2>
                     <span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>
-                    <span className="dote">.</span>
+                    <span className="dote">•</span>
                     <span>{reviews.length} reviews</span>
                 </h2>
                 <div className="reviews-list">
                     {reviews.map(review => {
                         return <li key={review.id}>
-                            <div>
+                            <div className="review-user">
                                 <img src={review.by.imgUrl} />
+                                <h4>{review.by.fullname}</h4>
                                 <p>{review.createdAt}</p>
                             </div>
                             <div className="txt">
@@ -325,7 +363,7 @@ export function StayDetails() {
 
             <div id="map" className="map">
                 <h4>Where you'll be</h4>
-                <p>{loc.city},{loc.country},{loc.address}</p>
+                <p>{loc.city}, {loc.country}, {loc.address}</p>
 
                 <StayMap stayLoc={loc} />
             </div>

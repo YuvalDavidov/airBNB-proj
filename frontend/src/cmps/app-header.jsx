@@ -10,8 +10,7 @@ import { LoginSignup } from './login-signup'
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isSignup, setIsSignup] = useState(false)
+    const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
 
     const navigate = useNavigate()
 
@@ -43,8 +42,8 @@ export function AppHeader() {
 
 
     return (
-        <header className={`app-header full grid ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
-            <h1 className='mail-layout' onClick={() => { navigate('/') }}>LOGO</h1>
+        <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
+            <h1 className='logo' onClick={() => { navigate('/') }}>LOGO</h1>
             <HeaderFilter />
             {/* <nav>
 
@@ -52,8 +51,8 @@ export function AppHeader() {
 
 
             </nav> */}
-            < MainMenu setIsModalOpen={setIsModalOpen} setIsSignup={setIsSignup} />
-            {isModalOpen && < LoginSignup isSignup={isSignup} setIsSignup={setIsSignup} setIsModalOpen={setIsModalOpen} />}
+            < MainMenu />
+            {isModalOpen && < LoginSignup />}
 
         </header>
     )

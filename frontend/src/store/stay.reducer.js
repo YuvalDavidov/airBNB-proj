@@ -11,6 +11,7 @@ export const SET_MY_STAYS = 'SET_MY_STAYS'
 const initialState = {
   stays: [],
   myStays: [],
+  staysForWishlist: [],
   filterBy: stayService.getDefaultFilter(),
   isHeadFilterExpanded: false,
 }
