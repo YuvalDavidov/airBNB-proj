@@ -6,12 +6,13 @@ import { GoLocation } from 'react-icons/go';
 import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets } from 'react-icons/md';
 import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
-import { TbElevator } from 'react-icons/tb';
+import { TbElevator, TbGridDots } from 'react-icons/tb';
 import { StayMap } from "../cmps/stay-map";
 import { StayDatePicker } from "../cmps/stay-date-picker";
 import { stayService } from "../services/stay.service.local";
 import { showErrorMsg } from "../services/event-bus.service";
 import { GradientButton } from "../cmps/gradient-button";
+import { IconContext } from "react-icons";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -131,7 +132,7 @@ export function StayDetails() {
                 <img src={imgUrls[3]} />
                 <img src={imgUrls[4]} />
 
-                <button>show all photos</button>
+                <button className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
             </article>
 
             <article className="stay-ditails-full">
@@ -152,7 +153,7 @@ export function StayDetails() {
                         </div>
                         <img src={host.imgUrl} />
                     </div>
-                    <hr />
+
                     <div className="special-preks">
                         {host.isSuperHost ?
                             <div className="preks">
@@ -167,7 +168,11 @@ export function StayDetails() {
                             </div> : ''}
                         <br />
                         <div className="preks">
-                            <VscKey />
+                            <IconContext.Provider
+                                value={{ className: "my-icons" }}>
+
+                                <VscKey />
+                            </IconContext.Provider>
                             <div className="container">
                                 <h4>Great check-in experience</h4>
                                 <span>
@@ -177,7 +182,11 @@ export function StayDetails() {
                         </div>
                         <br />
                         <div className="preks">
-                            <GoLocation />
+                            <IconContext.Provider
+                                value={{ className: "my-icons" }}>
+
+                                <GoLocation />
+                            </IconContext.Provider>
                             <div className="container">
                                 <h4>Great location</h4>
                                 <span>
@@ -187,7 +196,11 @@ export function StayDetails() {
                         </div>
                         <br />
                         <div className="preks">
-                            <MdOutlineMarkChatUnread />
+                            <IconContext.Provider
+                                value={{ className: "my-icons" }}>
+
+                                <MdOutlineMarkChatUnread />
+                            </IconContext.Provider>
                             <div className="container">
                                 <h4>Great communication</h4>
                                 <span>
@@ -196,40 +209,61 @@ export function StayDetails() {
                             </div>
                         </div>
                     </div>
-                    <hr />
+
                     <div className="summery">{stay.summary}</div>
-                    <hr />
+
 
                     <article className="stay-amenities">
                         <h4>What this place offers</h4>
                         <div className="amenities-container">
                             <section className="wifi">
-                                <AiOutlineWifi />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+                                    <AiOutlineWifi />
+                                </IconContext.Provider>
                                 <span>Wifi</span>
                             </section>
 
                             <section className="TV">
-                                <CgScreen />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+                                    <CgScreen />
+                                </IconContext.Provider>
                                 <span>TV</span>
                             </section>
 
                             <section className="Kitchen">
-                                <GiForkKnifeSpoon />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+
+                                    <GiForkKnifeSpoon />
+                                </IconContext.Provider>
                                 <span>Kitchen</span>
                             </section>
 
                             <section className="Smoking">
-                                <MdSmokingRooms />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+
+                                    <MdSmokingRooms />
+                                </IconContext.Provider>
                                 <span>Smoking Allowed</span>
                             </section>
 
                             <section className="Peting">
-                                <MdPets />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+
+                                    <MdPets />
+                                </IconContext.Provider>
                                 <span>Peting Allowed</span>
                             </section>
 
                             <section className="Elevator">
-                                <TbElevator />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+                                    <TbElevator />
+                                </IconContext.Provider>
                                 <span>Elevator</span>
                             </section>
 
@@ -242,12 +276,12 @@ export function StayDetails() {
                     <article className="reserve-module">
                         <div className="top">
                             <div className="price flex">
-                                <h3> ₪ {price} </h3>
+                                <h3> $ {price} </h3>
                                 <span> night</span>
                             </div>
 
-                            <div className="flex">
-                                <h3> <AiFillStar /> {getStayReviewRateAvg(reviews)}</h3>
+                            <div className="flex align-center">
+                                <AiFillStar /> {getStayReviewRateAvg(reviews)}
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                             </div>
@@ -258,11 +292,11 @@ export function StayDetails() {
                                 <span>check in</span> <span>{pickedDate.startDate.getDate()},{month[pickedDate.startDate.getMonth()]}</span>
                             </div>
                             <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
-                                <span>check out</span> <span>{!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}</span>
+                                <span>check out</span> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}
                             </div>
 
                             <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
-                                guests {guestsAmount.total}
+                                <span> guests</span>   <span>{guestsAmount.total} guest</span>
                             </div>
                         </div>
                         <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
@@ -276,7 +310,7 @@ export function StayDetails() {
                                 </div>
                                 <span className="flex align-center">
                                     <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
-                                    {guestsAmount.adults}
+                                    <span className="counter">{guestsAmount.adults}</span>
                                     <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
                                 </span>
                             </div>
@@ -287,7 +321,7 @@ export function StayDetails() {
                                 </div>
                                 <span className="flex align-center">
                                     <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
-                                    {guestsAmount.children}
+                                    <span className="counter">{guestsAmount.children}</span>
                                     <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
                                 </span>
                             </div>
@@ -298,14 +332,14 @@ export function StayDetails() {
                                 </div>
                                 <span className="flex align-center">
                                     <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
-                                    {guestsAmount.infants}
+                                    <span className="counter">{guestsAmount.infants}</span>
                                     <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
                                 </span>
                             </div>
                             <div className="flex guest-line-filter">
                                 <span className="guest-main-text">Pets</span> <span className="flex align-center">
                                     <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
-                                    {guestsAmount.pets}
+                                    <span className="counter">{guestsAmount.pets}</span>
                                     <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
                                 </span>
                             </div>
@@ -314,19 +348,19 @@ export function StayDetails() {
 
                         {pickedDate.endDate ? (<div className="stay-price">
 
-                            <h3>Price details</h3>
-                            <div className="price-details">
-                                <div> ₪ {stay.price} x {getDaysCalculate()}</div>
-                                <div>₪ {stay.price * getDaysCalculate()}</div>
+
+                            <div className="price-details flex justify-between">
+                                <div> $ {stay.price} x {getDaysCalculate()}</div>
+                                <div>$ {stay.price * getDaysCalculate()}</div>
                             </div>
-                            <div className="service-fee">
+                            <div className="service-fee flex justify-between">
                                 <div>Service fee</div>
-                                <div>₪ {serviceFee}</div>
+                                <div>$ {serviceFee}</div>
                             </div>
-                            <hr />
-                            <div className="total">
+
+                            <div className="total flex justify-between">
                                 <div>Total</div>
-                                <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                                <div> $ {serviceFee + (stay.price * getDaysCalculate())}</div>
                             </div>
                         </div>) : ''}
 
@@ -335,10 +369,10 @@ export function StayDetails() {
                 </section>
             </article>
 
-            <hr />
+
             <section id="reviews" className="reviews">
-                <h2>
-                    <span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>
+                <h2 className="flex">
+                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
                     <span className="dote">•</span>
                     <span>{reviews.length} reviews</span>
                 </h2>
@@ -359,7 +393,7 @@ export function StayDetails() {
 
             </section>
 
-            <hr />
+
 
             <div id="map" className="map">
                 <h4>Where you'll be</h4>
