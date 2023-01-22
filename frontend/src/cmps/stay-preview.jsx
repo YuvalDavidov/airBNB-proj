@@ -72,7 +72,7 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
       </IconContext.Provider>
       <div
         onClick={() => navigate(`details/${stay._id}`)}
-        className='stay-details'
+        className='stay-info'
       >
         <div className='loc-rate'>
           <span className='loc'>
