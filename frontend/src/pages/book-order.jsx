@@ -7,6 +7,8 @@ import { AiFillStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { orderService } from "../services/order.service";
 import { showSuccessMsg } from "../services/event-bus.service";
+import { GradientButton } from "../cmps/gradient-button";
+import { setIsModalOpen } from "../store/user.actions";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -24,15 +26,6 @@ export function BookStay() {
         getOrderPickes()
 
         if (!order) return
-
-        const button = document.querySelector('.reserve-btn')
-        button.addEventListener('mousemove', e => {
-            const rect = button.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / button.clientWidth
-            const y = (e.clientY - rect.top) * 100 / button.clientHeight
-            button.style.setProperty('--mouse-x', x);
-            button.style.setProperty('--mouse-y', y);
-        })
 
     }, [])
 
@@ -137,9 +130,10 @@ export function BookStay() {
                     </div>
                     <hr />
 
+
                     {user ?
-                        (!isOrderDone ? <button onClick={() => { onOrder() }} className="reserve-btn">Confirm</button> : <button className="reserve-btn">Tnx for ordring!</button>)
-                        : <button onClick={() => { }} className="reserve-btn">Login</button>}
+                        (!isOrderDone ? <GradientButton onClickBtn={() => { onOrder() }} label={'Confirm'} className={"reserve-btn"} /> : <GradientButton label={'Tnx for ordering!'} className={"reserve-btn"} />)
+                        : <GradientButton onClickBtn={() => { setIsModalOpen(true) }} label={'Login'} className={"reserve-btn"} />}
                 </section>
 
                 <section className="stay-price-details">

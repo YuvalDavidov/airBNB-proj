@@ -11,6 +11,7 @@ import { StayMap } from "../cmps/stay-map";
 import { StayDatePicker } from "../cmps/stay-date-picker";
 import { stayService } from "../services/stay.service.local";
 import { showErrorMsg } from "../services/event-bus.service";
+import { GradientButton } from "../cmps/gradient-button";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -49,15 +50,6 @@ export function StayDetails() {
                 modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
             })
         }
-
-        const button = document.querySelector('.reserve-btn')
-        button.addEventListener('mousemove', e => {
-            const rect = button.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * 100 / button.clientWidth
-            const y = (e.clientY - rect.top) * 100 / button.clientHeight
-            button.style.setProperty('--mouse-x', x);
-            button.style.setProperty('--mouse-y', y);
-        })
 
     }, [stay])
 
@@ -307,7 +299,7 @@ export function StayDetails() {
                                 </span>
                             </div>
                         </section>
-                        <button onClick={() => { onCheckAvailabilty() }} className="reserve-btn">Check availabilty</button>
+                        <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
 
 
                     </article>
