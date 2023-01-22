@@ -83,7 +83,9 @@ export function BookStay() {
         let orderToSave = orderService.getEmptyOrder()
         orderToSave.aboutOrder = order
         orderToSave.aboutOrder.totalPrice = stay.price * getDaysCalculate()
-        orderToSave.aboutUser = { id: user._id, fullname: user.fullname }
+        orderToSave.aboutOrder.bookDate = Date.now()
+        orderToSave.aboutOrder.status = 'Pending'
+        orderToSave.aboutUser = { id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
         orderService.save(orderToSave)
         showSuccessMsg('Order has been made')
         setIsOrderDone(true)
