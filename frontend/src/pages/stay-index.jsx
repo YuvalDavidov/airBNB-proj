@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react'
 import { loadStays, saveStay } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service.local'
-import { GradientButton } from '../cmps/gradient-button'
 
 export function StayIndex() {
+
+  const [searchParams] = useSearchParams()
+  const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
+
   const stays = useSelector((storeState) => storeState.stayModule.stays)
   const [userLocation, setUserLocation] = useState({
     lat: 32.078618,
@@ -17,7 +20,10 @@ export function StayIndex() {
   const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
 
   useEffect(() => {
-    onLoadStays(filterBy)
+    onLoadStays(queryFilterBy)
+  }, [filterBy])
+
+  useEffect(() => {
     getUserLocation()
   }, [])
 
