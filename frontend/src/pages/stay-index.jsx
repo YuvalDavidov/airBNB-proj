@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { loadStays, saveStay } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service.local'
+import { GradientButton } from '../cmps/gradient-button'
 
 export function StayIndex() {
   const stays = useSelector((storeState) => storeState.stayModule.stays)
