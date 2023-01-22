@@ -1,6 +1,9 @@
 .app-header {
+    display: grid;
     padding: 10px;
     grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgba(155, 155, 155, 0.372);
+    margin-bottom: 15px;
 
     &.expanded {
         height: 160px;

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { loadStays, saveStay } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service.local'
+import { useSearchParams } from 'react-router-dom'
 
 export function StayIndex() {
 
