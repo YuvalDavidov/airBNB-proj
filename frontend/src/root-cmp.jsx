@@ -1,9 +1,10 @@
 import React from 'react'
-import { Routes, Route, useParams } from 'react-router'
+import { Routes, Route } from 'react-router'
 
 import routes from './routes'
 
 import { AppHeader } from './cmps/app-header'
+import { LabelsFilter } from './cmps/labels-filter.jsx'
 import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 import { useSelector } from 'react-redux'
@@ -30,6 +31,8 @@ export function RootCmp() {
         onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing}
         className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''}`}
       >
+        <LabelsFilter />
+
         <Routes>
           {routes.map((route) => (
             <Route

@@ -45,12 +45,7 @@ export function AppHeader() {
         <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
             <h1 className='logo' onClick={() => { navigate('/') }}>LOGO</h1>
             <HeaderFilter />
-            {/* <nav>
 
-                <NavLink>☢</NavLink>
-
-
-            </nav> */}
             < MainMenu />
             {isModalOpen && < LoginSignup />}
 

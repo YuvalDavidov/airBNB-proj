@@ -1,0 +1,17 @@
+.lables-filter-main-nav {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    position: sticky;
+    height: 90px;
+    top: 80px;
+    z-index: 15;
+    background-color: #fff;
+
+    margin-bottom: 20px;
+
+    // top: 200px;
+    &.hidden {
+        height: 0px;
+        visibility: hidden;
+    }
+}
