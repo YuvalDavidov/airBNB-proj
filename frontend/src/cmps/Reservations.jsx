@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { userService } from "../services/user.service";
-import { loadOrders } from "../store/order.actions";
+import { loadOrders, setOrderStatus } from "../store/order.actions";
 import { ListingChart } from "./listing-chart";
-
+import { range } from 'lodash'
+import { ReservBarChart } from "./reservations-bar-chart";
 
 
 
@@ -29,14 +30,63 @@ export function Reservations() {
 
     if (orders.length <= 0) return <div>you have no order's</div>
 
+    function getStatusColor(status) {
+        switch (status) {
+            case 'Approved':
+                return 'green'
+            case 'Rejected':
+                return 'red'
+            default: 
+                return 'rgb(34,34,34)'
+        }
+    }
+
+    function calcMonthsBack() {
+        const currMonth = new Date().getMonth()
+        if (currMonth - 4 >= 0) {
+            return range(currMonth - 4, currMonth+1)
+        } else {
+            return [...range(12 + (currMonth - 4),12), ...range(0, currMonth + 1)]
+        }
+    }
+
+    console.log(calcMonthsBack())
+
     return (
         <section className="reservations">
-            reservations
             <section className="charts">
 
+                
                 <div className="listing">
-                    <h1>Reservations / listing</h1>
+                    <h2>Revenue / month</h2>
+                    <div className="bar-chart">
+                    <ReservBarChart orders={orders} />
+                    </div>
+                </div>
+
+                <div className="listing">
+                    <h2>Reservations status</h2>
+                    <div className="reservations-status">
+                        <div className="status-info">
+                            <span className="status-name">Pending</span>
+                            <span className="status-count pending">{orders.filter(order => order.aboutOrder.status === 'Pending').length}</span>
+                        </div>
+                        <div className="status-info">
+                            <span className="status-name">Approved</span>
+                            <span className="status-count approved">{orders.filter(order => order.aboutOrder.status === 'Approved').length}</span>
+                        </div>
+                        <div className="status-info">
+                            <span className="status-name">Rejected</span>
+                            <span className="status-count rejected">{orders.filter(order => order.aboutOrder.status === 'Rejected').length}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="listing">
+                    <h2>Reservations / listing</h2>
+                    <div className="dougnut-chart">
                     <ListingChart orders={orders} />
+                    </div>
                 </div>
 
 
@@ -52,7 +102,7 @@ export function Reservations() {
                         <th>Booked</th>
                         <th>Listing</th>
                         <th>Total Payout</th>
-                        <th>Status</th>
+                        <th className="status-td">Status</th>
                         <th className="todo-td">To do</th>
 
                     </tr>
@@ -64,10 +114,10 @@ export function Reservations() {
                             <td>{getFullDate(order.aboutOrder.bookDate)}</td>
                             <td>{order.aboutOrder.stay.name}</td>
                             <td>₪{order.aboutOrder.totalPrice}</td>
-                            <td>{order.aboutOrder.status}</td>
+                            <td style={{fontFamily: 'Cereal-Medium', color: getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</td>
                             <td>
-                                <button className="approve-btn">Approve</button>
-                                <button className="reject-btn">Reject</button>
+                                <button className={order.aboutOrder.status === 'Approved' ? 'approve-btn is-active' : 'approve-btn'} onClick={() => setOrderStatus(order, 'Approved')}>Approve</button>
+                                <button className={order.aboutOrder.status === 'Rejected' ? 'reject-btn is-active' : 'reject-btn'} onClick={() => setOrderStatus(order, 'Rejected')}>Reject</button>
                             </td>
                         </tr>
                     })}
