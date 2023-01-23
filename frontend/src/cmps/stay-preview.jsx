@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { TiHeartFullOutline } from 'react-icons/ti'
 import { IconContext } from 'react-icons'
 
-import { removeStay } from '../store/stay.actions'
+import { removeStay, toggleInDetails } from '../store/stay.actions'
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
 
 import { ImageSlider } from './image-slider'
@@ -60,6 +60,12 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
     }
   }
 
+  function goTodetails(stayId) {
+
+    navigate(`details/${stayId}`)
+
+  }
+
   return (
     <article className='stay-preview'>
       <ImageSlider imgs={stay.imgUrls} stayId={stay._id} />
@@ -71,7 +77,7 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
         </div>
       </IconContext.Provider>
       <div
-        onClick={() => navigate(`details/${stay._id}`)}
+        onClick={() => goTodetails(stay._id)}
         className='stay-info'
       >
         <div className='loc-rate'>

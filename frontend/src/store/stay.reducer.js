@@ -7,6 +7,7 @@ export const SET_FILTER = 'SET_FILTER'
 export const SET_HEADER_EXPAND = 'SET_HEADER_EXPAND'
 export const SET_WISHLIST_STAYS = 'SET_WISHLIST_STAYS'
 export const SET_MY_STAYS = 'SET_MY_STAYS'
+export const SET_HEADER_IN_DETAILS = 'SET_HEADER_IN_DETAILS'
 
 const initialState = {
   stays: [],
@@ -14,6 +15,7 @@ const initialState = {
   staysForWishlist: [],
   filterBy: stayService.getDefaultFilter(),
   isHeadFilterExpanded: false,
+  isStayDetails: false
 }
 
 export function stayReducer(state = initialState, action) {
@@ -45,6 +47,11 @@ export function stayReducer(state = initialState, action) {
     // expanded
     case SET_HEADER_EXPAND:
       return { ...state, isHeadFilterExpanded: action.toggle }
+
+    // in details
+    case SET_HEADER_IN_DETAILS:
+
+      return { ...state, isStayDetails: action.toggle }
 
     // dashboard stays
     case SET_MY_STAYS:
