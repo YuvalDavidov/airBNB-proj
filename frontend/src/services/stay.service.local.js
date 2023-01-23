@@ -27,7 +27,6 @@ async function query(filterBy) {
 
 
   if (filterBy?.hostId) {
-    console.log(filterBy.hostId);
     stays = stays.filter(stay => stay.host._id === filterBy.hostId)
   }
 

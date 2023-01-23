@@ -11,6 +11,19 @@ import axios from "axios"
 
 export function StayEdit() {
 
+    const [errs, setErrs] = useState({
+        nameErr: '',
+        cityErr: '',
+        countryErr: '',
+        addressErr: '',
+        summaryErr: '',
+        imgUrlsErr: '',
+        priceErr: '',
+        guestsErr: '',
+        bedsErr: '',
+        labelsErr: '',
+        amenitesErr: '',
+    })
     const [stayToEdit, setStayToEdit] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
     const { stayId } = useParams()
@@ -41,10 +54,13 @@ export function StayEdit() {
             case 'number':
             case 'range':
                 value = +value
+                if (value < 0) return
                 break;
             case 'checkbox':
                 value = checked
 
+            case 'text':
+                value = value.charAt(0).toUpperCase() + value.slice(1)
             default:
                 break;
         }
@@ -59,7 +75,6 @@ export function StayEdit() {
 
         setStayToEdit((prevStay) => ({ ...prevStay, [field]: value }))
     }
-
 
     function handleLablesSelectChange(ev) {
         let labelsToEdit = ev.map(l => l.value)
@@ -96,29 +111,36 @@ export function StayEdit() {
     }
 
     async function onSubmit() {
-        if (stayToEdit.name.length < 5) return showErrorMsg('stay Name is too short. need at least 5 letters')
-        else if (stayToEdit.loc.city.length < 5) return showErrorMsg('stay City address is too short. need at least 5 letters')
-        else if (stayToEdit.loc.country.length < 5) return showErrorMsg('stay Country address is too short. need at least 5 letters')
-        else if (stayToEdit.loc.address.length < 5) return showErrorMsg('stay Address is too short. need at least 5 letters')
-        else if (stayToEdit.loc.address.length < 5) return showErrorMsg('stay Country address is too short. need at least 5 letters')
-        else if (stayToEdit.summary.length < 15) return showErrorMsg('stay Summary is too short. need at least 15 letters')
+        let currErrs = {
+            nameErr: stayToEdit.name.length < 5 ? 'Stay name is to short. need at least 5 letters' : '',
+            cityErr: stayToEdit.loc.city.length < 3 ? 'stay City name is too short. need at least 3 letters' : '',
+            countryErr: stayToEdit.loc.country.length < 5 ? 'stay Country address is too short. need at least 5 letters' : '',
+            addressErr: stayToEdit.loc.address.length < 5 ? 'stay Address is too short. need at least 5 letters' : '',
+            summaryErr: stayToEdit.summary.length < 15 ? 'stay Summary is too short. need at least 15 letters' : '',
+            imgUrlsErr: stayToEdit.imgUrls.length <= 4 ? 'stay Images is too short. need at least 5 images' : '',
+            priceErr: stayToEdit.price <= 10 ? 'stay Price is too Low.' : '',
+            guestsErr: stayToEdit.stayDetails.guests <= 0 ? 'stay Guests amount is too low. need at 1 guest' : '',
+            bedsErr: stayToEdit.stayDetails.beds <= 0 ? 'stay Beds amount is too low. need at 1 bed' : '',
+            labelsErr: stayToEdit.labels <= 0 ? 'stay Lables amount is too low. need at 1 lable' : '',
+            amenitesErr: stayToEdit.amenities <= 0 ? 'stay Amenites amount is too low. need at 1 amenite' : '',
+        }
+        setErrs(currErrs)
+        let arr = Object.values(currErrs)
 
-        if (stayToEdit.imgUrls.length <= 4) return showErrorMsg('stay Images is too short. need at least 5 images')
+        let isCopmleted = arr.some(err => !err)
 
-        if (stayToEdit.price <= 5) return showErrorMsg('stay Price is too Low.')
-        else if (stayToEdit.stayDetails.guests <= 0) return showErrorMsg('stay Guests amount is too low. need at 1 guests')
-        else if (stayToEdit.stayDetails.beds <= 0) return showErrorMsg('stay Beds amount is too low. need at 1 bed')
+        if (!isCopmleted) return
 
         const loc = await onGetLoc(stayToEdit.loc.address, stayToEdit.loc.country, stayToEdit.loc.city)
         let stayToSave = { ...stayToEdit }
         stayToSave.loc.lat = loc.lat
         stayToSave.loc.lng = loc.lng
 
-        console.log('submit', loc);
         stayService.save(stayToSave)
             .then(() => navigate('/'))
     }
-    console.log(stayToEdit);
+
+    // console.log(stayToEdit);
 
     return (
         <section className="edit-stay">
@@ -129,6 +151,7 @@ export function StayEdit() {
                 value={stayToEdit.name}
                 placeholder="Name"
                 onChange={handleChange} />
+            <p>{errs.nameErr}</p>
 
             <label htmlFor="">Address</label>
             <div className="address">
@@ -138,26 +161,32 @@ export function StayEdit() {
                         name="city"
                         value={stayToEdit.loc.city}
                         placeholder="City"
-                        onChange={handleChange} /></label>
-
+                        onChange={handleChange} />
+                    <p>{errs.cityErr}</p>
+                </label>
                 <label htmlFor="">Country
                     <input type="text"
                         id="country"
                         name="country"
                         value={stayToEdit.loc.country}
                         placeholder="Country"
-                        onChange={handleChange} /></label>
-
+                        onChange={handleChange} />
+                    <p>{errs.countryErr}</p>
+                </label>
                 <label htmlFor="">Address
                     <input type="text"
                         id="address"
                         name="address"
                         value={stayToEdit.loc.address}
                         placeholder="Address"
-                        onChange={handleChange} /></label>
+                        onChange={handleChange} />
+                    <p>{errs.addressErr}</p>
+                </label>
             </div>
 
             <input type="file" className="file" onChange={(event) => { onUploadImg(event) }} />
+
+
 
             <div className="img-container">
                 {stayToEdit.imgUrls.length > 0 ?
@@ -165,76 +194,89 @@ export function StayEdit() {
                         return <div className="imgUrl" key={url}><img src={url} /> <button onClick={() => { onRemoveImg(url) }}>x</button> </div>
                     }) : ''}
             </div>
+            <p>{errs.imgUrlsErr}</p>
 
-            <label htmlFor="">Stay details
-                <div className="edit-stay-details">
-                    <label htmlFor="">Guests
-                        <input type="number"
-                            id="guests"
-                            name="guests"
-                            value={stayToEdit.stayDetails.guests}
-                            placeholder="Guests"
-                            onChange={handleChange} /></label>
+            <label htmlFor="">Stay details </label>
+            <div className="edit-stay-details">
+                <label htmlFor="">Guests
+                    <input type="number"
+                        id="guests"
+                        name="guests"
+                        value={stayToEdit.stayDetails.guests}
+                        placeholder="Guests"
+                        onChange={handleChange} />
+                    <p>{errs.guestsErr}</p>
+                </label>
 
-                    <label htmlFor="">Bedrooms
-                        <input type="number"
-                            id="bedrooms"
-                            name="bedrooms"
-                            value={stayToEdit.stayDetails.bedrooms}
-                            placeholder="Bedrooms"
-                            onChange={handleChange} /></label>
+                <label htmlFor="">Bedrooms
+                    <input type="number"
+                        id="bedrooms"
+                        name="bedrooms"
+                        value={stayToEdit.stayDetails.bedrooms}
+                        placeholder="Bedrooms"
+                        onChange={handleChange} /></label>
 
-                    <label htmlFor="">Beds
-                        <input type="number"
-                            id="beds"
-                            name="beds"
-                            value={stayToEdit.stayDetails.beds}
-                            placeholder="Beds"
-                            onChange={handleChange} /></label>
+                <label htmlFor="">Beds
+                    <input type="number"
+                        id="beds"
+                        name="beds"
+                        value={stayToEdit.stayDetails.beds}
+                        placeholder="Beds"
+                        onChange={handleChange} />
+                    <p>{errs.bedsErr}</p>
+                </label>
 
-                    <label htmlFor="">Shared bath
-                        <input type="number"
-                            id="sharedBath"
-                            name="sharedBath"
-                            value={stayToEdit.stayDetails.sharedBath}
-                            placeholder="Shared bath"
-                            onChange={handleChange} /></label>
+                <label htmlFor="">Shared bath
+                    <input type="number"
+                        id="sharedBath"
+                        name="sharedBath"
+                        value={stayToEdit.stayDetails.sharedBath}
+                        placeholder="Shared bath"
+                        onChange={handleChange} /></label>
 
-                    <label htmlFor="">Price
-                        <input type="number"
-                            id="price"
-                            name="price"
-                            value={stayToEdit.price}
-                            placeholder="Price"
-                            onChange={handleChange} /></label>
+                <label htmlFor="">Price
+                    <input type="number"
+                        id="price"
+                        name="price"
+                        value={stayToEdit.price}
+                        placeholder="Price"
+                        onChange={handleChange} />
+                    <p>{errs.priceErr}</p>
+                </label>
 
-                    <label htmlFor="propertyType">Property type
-                        <select name="type" id="propertyType" onChange={handleChange}>
-                            <option value="House">House</option>
-                            <option value="Private room">Private room</option>
-                            <option value="Entire home/apt">Entire home/apt</option>
-                        </select>
-                    </label>
+                <label htmlFor="propertyType">Property type
+                    <select name="type" id="propertyType" onChange={handleChange}>
+                        <option value="House">House</option>
+                        <option value="Private room">Private room</option>
+                        <option value="Entire home/apt">Entire home/apt</option>
+                    </select>
+                </label>
 
-                    <label htmlFor="">Allow pets?
-                        <input type="checkbox"
-                            name="allowPets"
-                            id="allowPets"
-                            onChange={handleChange}
-                            value={stayToEdit.stayDetails.allowPets} /></label>
-                </div>
+                <label htmlFor="">Allow pets?
+                    <input type="checkbox"
+                        name="allowPets"
+                        id="allowPets"
+                        onChange={handleChange}
+                        value={stayToEdit.stayDetails.allowPets} /></label>
+            </div>
+
+
+            <label htmlFor="">Labels
+
+                <MultiLabelsSelect handleSelectChange={handleLablesSelectChange} />
+                <p>{errs.labelsErr}</p>
             </label>
 
-            <label htmlFor="">Labels</label>
+            <label htmlFor="">Amenites
 
-            <MultiLabelsSelect handleSelectChange={handleLablesSelectChange} />
+                <MultiAmenitiesSelect handleSelectChange={handleAmenitiesSelectChange} />
+                <p>{errs.labelsErr}</p>
 
-            <label htmlFor="">Amenites</label>
-
-            <MultiAmenitiesSelect handleSelectChange={handleAmenitiesSelectChange} />
-
+            </label>
             <label htmlFor="">Summary</label>
             <textarea value={stayToEdit.summary} placeholder="Write somthing on your stay" name="summary" id="summary" onChange={handleChange} cols="30" rows="4"></textarea>
+
+            <p>{errs.summaryErr}</p>
 
             <button onClick={() => { onSubmit() }} className="edit-btn">{stayToEdit._id ? 'Save' : 'Add'}</button>
 

@@ -52,7 +52,9 @@
             80px repeat(3, 1fr) 80px;
     }
 
-    .logo {
+    h1.logo {
+        align-self: center;
+        margin: 0;
         grid-column: 2/3;
     }
 
