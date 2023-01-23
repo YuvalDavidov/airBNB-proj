@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { LabelsFilter } from '../cmps/labels-filter'
 
 import { loadStays, saveStay } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
@@ -79,6 +80,7 @@ export function StayIndex() {
       {/* <button className='add-btn' onClick={() => setAddModal(true)}>
         Add Stay
       </button> */}
+      <LabelsFilter />
       <StayList
         stays={stays}
         userLocation={userLocation}
