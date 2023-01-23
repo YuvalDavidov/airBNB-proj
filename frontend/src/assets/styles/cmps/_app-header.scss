@@ -1,6 +1,15 @@
 .header-container {
     border-bottom: 1px solid rgba(155, 155, 155, 0.372);
     margin-bottom: 10px;
+    background-color: white;
+    z-index: 50;
+    height: 100%;
+
+    position: relative;
+
+    &.expanded {
+        height: 160px;
+    }
 }
 
 .app-header {
@@ -8,13 +17,19 @@
     position: relative;
     padding: 10px;
     grid-template-columns: repeat(3, 1fr);
+    height: 100%;
 
 
 
-    &.expanded {
-        height: 160px;
 
-    }
+
+
+    // &.expanded {
+    //     height: 160px;
+    //     // transition: height 0.6s;
+
+
+    // }
 
     &.in-details {
         margin: 0 auto;

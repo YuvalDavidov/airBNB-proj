@@ -5,7 +5,8 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-const labels = ['National-parks', 'Campers', 'Surfing', 'Amazing-views', 'Beach', 'Castles', 'Islands', 'Caves', 'Beach', 'Lake', 'Cavins']
+const labels = ['New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
+    'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms']
 
 const options = labels.map((label) => ({ value: label, label }))
 

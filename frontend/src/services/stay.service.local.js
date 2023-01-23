@@ -34,6 +34,8 @@ async function query(filterBy) {
   if (filterBy?.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
   if (filterBy?.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
   if (filterBy?.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
+  if (filterBy?.label) stays = stays.filter(stay => stay.labels.includes(filterBy.label))
+
 
   return stays
 }
@@ -1022,8 +1024,7 @@ function getDefaultFilter() {
     locationCountry: '',
     locationCity: '',
     guests: 0,
-    name: '',
-    labels: [],
+    label: '',
     type: '',
     minPrice: 0,
     maxPrice: Infinity,

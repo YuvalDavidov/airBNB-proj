@@ -27,8 +27,9 @@ export function RootCmp() {
   return (
     <div>
       <AppHeader />
+      <div onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing} className={(isHeadFilterExpanded) ? 'back-screen' : ''}></div>
+
       <main
-        onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing}
         className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''} `}
       >
 

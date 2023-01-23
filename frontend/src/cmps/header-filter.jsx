@@ -18,7 +18,6 @@ import { useSearchParams } from "react-router-dom"
 export function HeaderFilter() {
 
     const [searchParams, setSearchParams] = useSearchParams()
-    const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
     const [isLocationExpand, setIsLocationExpand] = useState(false)
     const [isDateExpand, setIsDateExpand] = useState(false)
@@ -120,8 +119,11 @@ export function HeaderFilter() {
 
     function onSubmitSearch(ev) {
         ev.preventDefault()
-        console.log('filterByToEdit------>', filterByToEdit)
-        setSearchParams(filterByToEdit)
+        console.log('filterBy------>', filterBy)
+        setSearchParams({
+            ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
+            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests
+        })
         setFilterBy({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
             startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests

@@ -22,8 +22,10 @@
     border-radius: 50px;
     position: relative;
     width: max-content;
+    height: 100%;
 
-    transition: height 0.3s;
+
+
 
     .header-filter-btn {
         font-family: Cereal-Bold;
@@ -49,8 +51,8 @@
 
     &.extanded {
         top: 25px;
+
         height: 66px;
-        width: max-content;
         position: relative;
         background-clip: padding-box;
         margin: 0px;
