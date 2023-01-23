@@ -5,6 +5,7 @@ import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
 import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets } from 'react-icons/md';
 import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
+import { RiArrowRightSLine } from 'react-icons/ri';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator, TbGridDots } from 'react-icons/tb';
 import { StayMap } from "../cmps/stay-map";
@@ -29,6 +30,7 @@ export function StayDetails() {
     const [pickedDate, setPickedDate] = useState({ startDate: new Date(), endDate: null })
     const [datePickerModual, setDatePickerModual] = useState(false)
     const [guestsModual, setGuestsModual] = useState(false)
+    const [imgsModual, serImgsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const user = useSelector((storeState) => storeState.userModule.user)
     const { stayId } = useParams()
@@ -145,6 +147,12 @@ export function StayDetails() {
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (
         <section className="stay-details">
+            <article className={`imgs-modual full ${imgsModual ? 'open' : ''}`}>
+                <button onClick={() => { serImgsModual(false) }} >back</button>
+                {stay.imgUrls.map((img, idx) => {
+                    return <img key={idx} src={imgUrls[idx]} />
+                })}
+            </article>
             <h2>{name}</h2>
             <div className="stay-mini-sumerry align-center">
                 <div className="flex align-center">
@@ -175,7 +183,7 @@ export function StayDetails() {
                 <img src={imgUrls[3]} />
                 <img src={imgUrls[4]} />
 
-                <button className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
+                <button onClick={() => { serImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
             </article>
 
             <article className="stay-details-full">
@@ -201,7 +209,7 @@ export function StayDetails() {
                         {host.isSuperHost ?
                             <div className="preks">
                                 <IconContext.Provider
-                                    value={{ className: "my-icons" }}>
+                                    value={{ className: "my-icons-loc" }}>
                                     <CgAwards />
                                 </IconContext.Provider>
                                 <div className="container">
@@ -416,77 +424,85 @@ export function StayDetails() {
             </article>
 
 
-            <section id="reviews" className="reviews">
-
-                <h2 className="flex">
-                    <AiFillStar />
-                    <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
-                    <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
-                    <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
-                </h2>
-                <div className="reviews-bar">
-                    <div className="cleanliness">
-                        <p>Cleanliness</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                            <span> {getReviewsRateByType('cleanliness')}</span>
-                        </div>
-                    </div>
-                    <div className="communication">
-                        <p>Communication</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                            <span> {getReviewsRateByType('communication')}</span>
-                        </div>
-                    </div>
-                    <div className="check-in">
-                        <p>Check-in</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                            <span> {getReviewsRateByType('checkIn')}</span>
-                        </div>
-                    </div>
-                    <div className="accuracy">
-                        <p>Accuracy</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                            <span> {getReviewsRateByType('accuracy')}</span>
-                        </div>
-                    </div>
-                    <div className="location">
-                        <p>Location</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                            <span> {getReviewsRateByType('location')}</span>
-                        </div>
-                    </div>
-                    <div className="value">
-                        <p>Value</p>
-                        <div className="progress">
-                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                            <span> {getReviewsRateByType('value')}</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="reviews-list">
-                    {reviews.map(review => {
-                        return <li key={review.id}>
-                            <div className="review-user">
-                                <img src={review.by.imgUrl} />
-                                <div>
-                                    <h4>{review.by.fullname}</h4>
-                                    <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+            <section id="reviews" >
+                {reviews.length > 0 ?
+                    (<section className="reviews">
+                        <h2 className="flex">
+                            <AiFillStar />
+                            <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                            <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
+                            <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
+                        </h2>
+                        <div className="reviews-bar">
+                            <div className="cleanliness">
+                                <p>Cleanliness</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                                    <span> {getReviewsRateByType('cleanliness')}</span>
                                 </div>
                             </div>
-                            <div className="txt">
-                                {review.txt}
+                            <div className="accuracy">
+                                <p>Accuracy</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                                    <span> {getReviewsRateByType('accuracy')}</span>
+                                </div>
                             </div>
-                            {/* <a href="">show more</a> */}
-                        </li>
-                    })}
-                </div>
+
+
+                            <div className="communication">
+                                <p>Communication</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                                    <span> {getReviewsRateByType('communication')}</span>
+                                </div>
+                            </div>
+                            <div className="location">
+                                <p>Location</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                                    <span> {getReviewsRateByType('location')}</span>
+                                </div>
+                            </div>
+                            <div className="check-in">
+                                <p>Check-in</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                                    <span> {getReviewsRateByType('checkIn')}</span>
+                                </div>
+                            </div>
+
+                            <div className="value">
+                                <p>Value</p>
+                                <div className="progress">
+                                    <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                                    <span> {getReviewsRateByType('value')}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div className="reviews-list">
+                            {reviews.map(review => {
+                                return <li key={review.id}>
+                                    <div className="review-user">
+                                        <img src={review.by.imgUrl} />
+                                        <div>
+                                            <h4>{review.by.fullname}</h4>
+                                            <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                        </div>
+                                    </div>
+                                    <div className="txt">
+                                        {review.txt}
+                                    </div>
+                                    {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                                </li>
+                            })}
+                        </div>
+
+                    </section>) :
+                    (<div>you have no reviews</div>)}
+
 
             </section>
 

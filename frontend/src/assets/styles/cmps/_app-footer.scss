@@ -1,7 +1,18 @@
 .app-footer {
-    background-color: #111;
+    border-top: 1px solid rgba(155, 155, 155, 0.372);
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     // color: $clr4;
-    padding: 20px;
+    padding: 20px 0;
     // margin: 10px;
-    text-align: center;
+    // text-align: center;
+
+
+    & .container {
+        >div {
+            width: max-content;
+        }
+    }
 }

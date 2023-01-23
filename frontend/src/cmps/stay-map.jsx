@@ -1,6 +1,8 @@
 
 import React, { useState } from "react";
 import GoogleMapReact from 'google-map-react';
+import { GoLocation } from "react-icons/go";
+import { IconContext } from "react-icons";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -31,7 +33,10 @@ export function StayMap({ stayLoc }) {
                 <AnyReactComponent
                     lat={coordinates.lat}
                     lng={coordinates.lng}
-                    text="🚩"
+                    text={<IconContext.Provider
+                        value={{ className: "my-icons" }}>
+                        <GoLocation />
+                    </IconContext.Provider>}
                 />
 
             </GoogleMapReact>

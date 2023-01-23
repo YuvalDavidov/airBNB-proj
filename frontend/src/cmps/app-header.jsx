@@ -7,12 +7,12 @@ import { HeaderFilter } from './header-filter'
 import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
 import { toggleInDetails } from '../store/stay.actions'
+import { SiAirbnb } from "react-icons/si";
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
-    console.log(isStayDetails);
     const navigate = useNavigate()
 
     async function onLogin(credentials) {
@@ -51,7 +51,7 @@ export function AppHeader() {
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 
-                <h1 className='logo' onClick={() => { getBack() }}>LOGO</h1>
+                <h1 className='logo' onClick={() => { getBack() }}> <span><SiAirbnb /></span> AirTNT</h1>
                 <HeaderFilter />
                 {/* <nav>
 
