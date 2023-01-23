@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -8,12 +8,18 @@ import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
 import { toggleInDetails } from '../store/stay.actions'
 import { SiAirbnb } from "react-icons/si";
+import { setIsMobile } from '../store/system.actions'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
     const navigate = useNavigate()
+
+
+    useEffect(() => {
+        if (window.innerWidth < 700) setIsMobile()
+    }, [])
 
     async function onLogin(credentials) {
         try {
