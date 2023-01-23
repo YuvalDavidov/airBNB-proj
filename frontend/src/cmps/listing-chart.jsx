@@ -20,12 +20,20 @@ export function ListingChart({ orders }) {
         labelDatas.push(stayName)
         labelsValues.push(ordersCount[stayName])
     }
-
+    const options = {
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'left',
+                // maxWidth: '180'
+            }
+        }
+    }
     const data = {
         labels: labelDatas,
         datasets: [
             {
-                label: '# of Votes',
+                label: 'Number of orders',
                 data: labelsValues,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -49,5 +57,5 @@ export function ListingChart({ orders }) {
             },
         ],
     };
-    return <Doughnut data={data} />;
+    return <Doughnut options={options} data={data} />;
 }
