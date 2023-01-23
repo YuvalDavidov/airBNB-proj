@@ -161,12 +161,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -220,12 +289,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -279,12 +417,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -338,12 +545,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -397,12 +673,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -456,12 +801,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },
@@ -515,12 +929,81 @@ function _createStays() {
         },
         reviews: [
           {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
             rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
             by: {
               _id: 'u102',
-              fullname: 'user2',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            rate: 4,
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4,
+              communication: 5,
+              location: 5,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'didnt like the place',
+            rate: 2,
+            moreRate: {
+              cleanliness: 2,
+              accuracy: 5,
+              communication: 3,
+              location: 3,
+              checkIn: 1,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
+              imgUrl:
+                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            rate: 4,
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 2,
+              location: 4,
+              checkIn: 3,
+              value: 2
+            },
+            createdAt: new Date(),
+            by: {
+              _id: 'u102',
+              fullname: 'yuval davidov',
               imgUrl:
                 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
             },

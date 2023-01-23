@@ -14,8 +14,8 @@ import { Listings } from './cmps/listings'
 import { Reservations } from './cmps/reservations'
 
 export function RootCmp() {
-  const isHeadFilterExpanded = useSelector(
-    (storeState) => storeState.stayModule.isHeadFilterExpanded
+  const { isHeadFilterExpanded } = useSelector(
+    (storeState) => storeState.stayModule
   )
   function onToggleExpand() {
     toggleExpand(false)
@@ -23,12 +23,13 @@ export function RootCmp() {
   function dontDoNothing() {
     // console.log(`hi`)
   }
+
   return (
     <div>
       <AppHeader />
       <main
         onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing}
-        className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''}`}
+        className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''} `}
       >
         <Routes>
           {routes.map((route) => (

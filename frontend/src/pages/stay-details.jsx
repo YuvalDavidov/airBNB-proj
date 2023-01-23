@@ -13,6 +13,11 @@ import { stayService } from "../services/stay.service.local";
 import { showErrorMsg } from "../services/event-bus.service";
 import { GradientButton } from "../cmps/gradient-button";
 import { IconContext } from "react-icons";
+import { TiHeartFullOutline } from "react-icons/ti";
+import { useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
+import { toggleInDetails } from "../store/stay.actions";
+
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -25,12 +30,14 @@ export function StayDetails() {
     const [datePickerModual, setDatePickerModual] = useState(false)
     const [guestsModual, setGuestsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
+    const user = useSelector((storeState) => storeState.userModule.user)
     const { stayId } = useParams()
     const navigate = useNavigate()
 
-
+    console.log(stay);
 
     useEffect(() => {
+        toggleInDetails(true)
         stayService.getById(stayId)
             .then(setStay)
     }, [])
@@ -56,14 +63,22 @@ export function StayDetails() {
     }, [stay])
 
     function getStayReviewRateAvg(stayReviews) {
+        let rate = 0
+        let rateCount = 0
         let sum = 0
         let count = 0
 
         stayReviews.forEach(review => {
-            sum += review.rate
-            count++
+
+            for (const key in review.moreRate) {
+                sum += review.moreRate[key]
+                count++
+            }
+            rate += sum / count
+            rateCount++
         })
-        const avg = sum / count
+
+        const avg = parseFloat(rate / rateCount).toFixed(2)
         return avg
     }
 
@@ -103,13 +118,36 @@ export function StayDetails() {
         if (datePickerModual) setDatePickerModual(false)
     }
 
+    function onToggleWishlist(stayId) {
+        if (!user) {
+            setIsSignup(false)
+            setIsModalOpen(true)
+        }
+        if (user.wishlist.includes(stayId)) {
+            removeFromWishlist(stayId)
+        } else {
+            addToWishlist(stayId)
+        }
+    }
+
+    function getReviewsRateByType(type) {
+        let sum = 0
+        let count = 0
+        stay.reviews.forEach((review) => {
+            sum += review.moreRate[type]
+            count++
+        })
+        const avg = parseFloat(sum / count).toFixed(1)
+        return avg
+    }
+
     if (!stay) return <div>Loading...</div>
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (
         <section className="stay-details">
             <h2>{name}</h2>
-            <div className="stay-mini-sumerry">
-                <div>
+            <div className="stay-mini-sumerry align-center">
+                <div className="flex align-center">
                     <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
                     <span className="dote">•</span>
                     <span><a href="#reviews">{reviews.length} reviews</a></span>
@@ -120,8 +158,13 @@ export function StayDetails() {
 
                 </div>
                 <div className="share-save-btns">
-                    <button>share</button>
-                    <button>save</button>
+                    <IconContext.Provider
+                        value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
+                    >
+                        <div className="save-btn flex align-center" onClick={() => onToggleWishlist(stay._id)}>
+                            <TiHeartFullOutline />  save
+                        </div>
+                    </IconContext.Provider>
                 </div>
             </div>
 
@@ -135,9 +178,9 @@ export function StayDetails() {
                 <button className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
             </article>
 
-            <article className="stay-ditails-full">
-                <section className="ditails">
-                    <div className="ditails-header">
+            <article className="stay-details-full">
+                <section className="details">
+                    <div className="details-header">
                         <div>
 
                             <h4>{subTitle}  hosted by {host.fullname}</h4>
@@ -157,7 +200,10 @@ export function StayDetails() {
                     <div className="special-preks">
                         {host.isSuperHost ?
                             <div className="preks">
-                                <CgAwards />
+                                <IconContext.Provider
+                                    value={{ className: "my-icons" }}>
+                                    <CgAwards />
+                                </IconContext.Provider>
                                 <div className="container">
 
                                     <h4>{host.fullname} is a SupreHost</h4>
@@ -276,7 +322,7 @@ export function StayDetails() {
                     <article className="reserve-module">
                         <div className="top">
                             <div className="price flex">
-                                <h3> $ {price} </h3>
+                                <h3> $ {price.toLocaleString('en-US')} </h3>
                                 <span> night</span>
                             </div>
 
@@ -289,14 +335,14 @@ export function StayDetails() {
 
                         <div className="reserve-date-guests">
                             <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
-                                <span>check in</span> <span>{pickedDate.startDate.getDate()},{month[pickedDate.startDate.getMonth()]}</span>
+                                <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
                             </div>
                             <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
-                                <span>check out</span> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()},{month[pickedDate.endDate.getMonth()]}</span>}
+                                <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
                             </div>
 
                             <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
-                                <span> guests</span>   <span>{guestsAmount.total} guest</span>
+                                <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
                             </div>
                         </div>
                         <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
@@ -350,8 +396,8 @@ export function StayDetails() {
 
 
                             <div className="price-details flex justify-between">
-                                <div> $ {stay.price} x {getDaysCalculate()}</div>
-                                <div>$ {stay.price * getDaysCalculate()}</div>
+                                <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
+                                <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
                             </div>
                             <div className="service-fee flex justify-between">
                                 <div>Service fee</div>
@@ -360,7 +406,7 @@ export function StayDetails() {
 
                             <div className="total flex justify-between">
                                 <div>Total</div>
-                                <div> $ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                                <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
                             </div>
                         </div>) : ''}
 
@@ -371,22 +417,73 @@ export function StayDetails() {
 
 
             <section id="reviews" className="reviews">
+
                 <h2 className="flex">
-                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
-                    <span className="dote">•</span>
-                    <span>{reviews.length} reviews</span>
+                    <AiFillStar />
+                    <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                    <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
+                    <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                 </h2>
+                <div className="reviews-bar">
+                    <div className="cleanliness">
+                        <p>Cleanliness</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                            <span> {getReviewsRateByType('cleanliness')}</span>
+                        </div>
+                    </div>
+                    <div className="communication">
+                        <p>Communication</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                            <span> {getReviewsRateByType('communication')}</span>
+                        </div>
+                    </div>
+                    <div className="check-in">
+                        <p>Check-in</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                            <span> {getReviewsRateByType('checkIn')}</span>
+                        </div>
+                    </div>
+                    <div className="accuracy">
+                        <p>Accuracy</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                            <span> {getReviewsRateByType('accuracy')}</span>
+                        </div>
+                    </div>
+                    <div className="location">
+                        <p>Location</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                            <span> {getReviewsRateByType('location')}</span>
+                        </div>
+                    </div>
+                    <div className="value">
+                        <p>Value</p>
+                        <div className="progress">
+                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                            <span> {getReviewsRateByType('value')}</span>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div className="reviews-list">
                     {reviews.map(review => {
                         return <li key={review.id}>
                             <div className="review-user">
                                 <img src={review.by.imgUrl} />
-                                <h4>{review.by.fullname}</h4>
-                                <p>{review.createdAt}</p>
+                                <div>
+                                    <h4>{review.by.fullname}</h4>
+                                    <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                </div>
                             </div>
                             <div className="txt">
                                 {review.txt}
                             </div>
+                            {/* <a href="">show more</a> */}
                         </li>
                     })}
                 </div>
