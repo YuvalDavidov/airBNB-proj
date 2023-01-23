@@ -9,6 +9,7 @@ import {
   SET_HEADER_EXPAND,
   SET_WISHLIST_STAYS,
   SET_MY_STAYS,
+  SET_HEADER_IN_DETAILS,
 
 } from './stay.reducer'
 
@@ -39,6 +40,10 @@ export function setFilterBy(filterBy) {
 
 export function toggleExpand(boolean) {
   store.dispatch({ type: SET_HEADER_EXPAND, toggle: boolean })
+}
+
+export function toggleInDetails(boolean) {
+  store.dispatch({ type: SET_HEADER_IN_DETAILS, toggle: boolean })
 }
 
 export async function loadStays(filterBy) {

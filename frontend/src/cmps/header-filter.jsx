@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react"
+import { Fragment, useState } from "react"
 import { useSelector } from "react-redux"
 
 import { PlaceFilter } from './place-filter.jsx'
@@ -7,22 +7,25 @@ import { GuestFilter } from './guest-filter.jsx'
 
 import { stayService } from "../services/stay.service.local"
 import { utilService } from "../services/util.service.js"
-import { loadStays, setFilterBy, toggleExpand } from "../store/stay.actions.js"
+import { setFilterBy, toggleExpand } from "../store/stay.actions.js"
 
 import { IoSearchCircleSharp } from 'react-icons/io5'
 import { IconContext } from "react-icons"
 import { useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
 
 
 export function HeaderFilter() {
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
     const [isLocationExpand, setIsLocationExpand] = useState(false)
     const [isDateExpand, setIsDateExpand] = useState(false)
     const [isGuestExpand, setIsGuestExpand] = useState(false)
     const [date, setDate] = useState(false)
     const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
-    const [filterByToEdit, setFilterByToEdit] = useState({ city: '', country: '', startDate: Date.now(), endDate: Date.now(), guests: 0 })
+    const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: Date.now(), endDate: Date.now(), guests: 0 })
     const stays = useSelector((storeState) => storeState.stayModule.stays)
     const [locations, setLocations] = useState([])
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -30,11 +33,10 @@ export function HeaderFilter() {
 
     useEffect(() => {
         loadLocations()
-    }, [isHeadFilterExpanded, filterByToEdit])
+    }, [filterByToEdit.locationCity])
 
     useEffect(() => {
-        loadStays(filterBy)
-        setFilterBy(stayService.getDefaultFilter())
+        setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: Date.now(), endDate: Date.now(), guests: 0 })
     }, [isHeadFilterExpanded])
 
     function handleLocationChange({ target }) {
@@ -46,7 +48,7 @@ export function HeaderFilter() {
         let city = location.city
         let country = location.country.loc.country
 
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, city: city, country }))
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, locationCity: city, locationCountry: country }))
 
     }
 
@@ -62,23 +64,32 @@ export function HeaderFilter() {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
     }
 
-    function loadLocations() {
-        const regex = new RegExp(filterByToEdit.city, 'i')
-        let uniqueCities = [...new Set(stays.map(stay => { return stay.loc.city }))]
-        let uniqueLocations = uniqueCities.map(city => {
-            return {
-                city, country: stays.find(stay => {
-                    if (stay.loc.city === city) return stay.loc.country
-                })
-            }
-        })
+    async function loadLocations() {
+        let uniqueLocations
+        try {
+            const listOfStays = await stayService.query(stayService.getDefaultFilter())
+            let uniqueCities = [...new Set(listOfStays.map(stay => { return stay.loc.city }))]
+            uniqueLocations = uniqueCities.map(city => {
+                return {
+                    city, country: listOfStays.find(stay => {
+                        if (stay.loc.city === city) return stay.loc.country
+                    })
+                }
+            })
+        } catch (err) {
+            console.error('couldnt load locations')
+        }
+        const regex = new RegExp(filterByToEdit.locationCity, 'i')
+
         let filteredBy
-        if (filterByToEdit.city) {
+        if (filterByToEdit.locationCity) {
             filteredBy = uniqueLocations.filter(location => regex.test(location.city))
             if (!filteredBy.length) filteredBy = uniqueLocations.filter(location => regex.test(location.country.loc.country))
             setLocations(filteredBy)
         } else setLocations(uniqueLocations)
     }
+
+
     function onLocationClick() {
         toggleExpand(true)
         setIsDateExpand(false)
@@ -110,8 +121,9 @@ export function HeaderFilter() {
     function onSubmitSearch(ev) {
         ev.preventDefault()
         console.log('filterByToEdit------>', filterByToEdit)
+        setSearchParams(filterByToEdit)
         setFilterBy({
-            ...filterBy, locationCountry: filterByToEdit.country, locationCity: filterByToEdit.city,
+            ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
             startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests
         })
 
@@ -123,50 +135,60 @@ export function HeaderFilter() {
 
     return (
         <Fragment>
-
-            {!isHeadFilterExpanded &&
-                <section className="stay-header-filter flex">
-                    <button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
+            <section className={`stay-header-filter ${(isHeadFilterExpanded) ? 'extanded' : ''}`}>
+                {!isHeadFilterExpanded && <div className="flex"><button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
                     <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
                     <button onClick={onGuestClick} className="header-filter-btn guests flex"><div>Add guests</div></button>
                     <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
-                    </IconContext.Provider>
-
-                </section>
-            }
-            {isHeadFilterExpanded &&
-
-                <section className="stay-header-filter-extanded">
-                    <div className="head-filter-form flex align-center" >
-                        <div className="flex column">
-                            <button onClick={onLocationClick} className="header-filter-btn flex"><div className="where">Where</div></button>
-                            <input className="search-filter-input" type="text"
-                                name="city"
-                                value={filterByToEdit.city}
-                                onChange={handleLocationChange}
-                            />
-                            {isLocationExpand && <PlaceFilter locations={locations} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
-                        </div>
-                        <div className="flex">
-                            <button onClick={onDateClick} className="header-filter-btn flex"><div>{(!date.startDate) ? 'Add dates' : months[(date.startDate).getMonth()] + ' ' + (date.startDate).getDate()}</div></button>
-                            <button onClick={onDateClick} className="header-filter-btn flex"><div>{(!date.endDate) ? 'Add dates' : months[(date.endDate).getMonth()] + ' ' + (date.endDate).getDate()}</div></button>
-                            {isDateExpand && <DateFilter updateDate={updateDate} />}
-                        </div>
-
-                        <div>
-                            <button onClick={onGuestClick} className="header-filter-btn guests"><div>Add guests</div></button>
-                            {isGuestExpand && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
-                        </div>
-                        <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
-                            <div>
-                                <button onClick={onSubmitSearch}>  <IoSearchCircleSharp /> </button>
-
-                            </div>
-                        </IconContext.Provider>
+                    </IconContext.Provider></div>}
+                {isHeadFilterExpanded && <div className="head-filter-form flex align-center" >
+                    <div className="flex column">
+                        <button onClick={onLocationClick} className="header-filter-btn flex">
+                            <span className="filter-main-text">Where</span></button>
+                        <input placeholder="Search destenations" className="search-filter-input" type="text"
+                            name="locationCity"
+                            value={filterByToEdit.locationCity}
+                            onChange={handleLocationChange}
+                        />
+                        {isLocationExpand && <PlaceFilter locations={locations} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
                     </div>
-                </section>}
+                    <div className="flex date-container">
+                        <button onClick={onDateClick} className="flex column">
+                            <span className="filter-main-text">Check in</span>
+                            <div className="header-filter-btn">{(!date.startDate) ? 'Add dates' : months[(date.startDate).getMonth()] + ' ' + (date.startDate).getDate()}</div>
+                        </button>
+
+                        <button onClick={onDateClick} className="flex column">
+                            <span className="filter-main-text">Check out</span>
+                            <div className="header-filter-btn">{(!date.endDate) ? 'Add dates' : months[(date.endDate).getMonth()] + ' ' + (date.endDate).getDate()}</div>
+                        </button>
+
+                        {isDateExpand && <DateFilter updateDate={updateDate} />}
+                    </div>
+
+                    <div className="flex">
+                        <button onClick={onGuestClick} className="header-filter-btn guests flex column">
+                            <span className="filter-main-text">Who?</span>
+                            <span className="filter-sub-text">Add guests</span>
+                        </button>
+                        {isGuestExpand && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
+                    </div>
+                    <IconContext.Provider value={{ color: "red", className: "search-icon-expand", size: '60px' }}>
+                        <div className="icon-search-container">
+                            <button onClick={onSubmitSearch}>  <IoSearchCircleSharp /> </button>
+
+                        </div>
+                    </IconContext.Provider>
+                </div>}
+
+            </section>
+
+
+
+
+
 
 
 

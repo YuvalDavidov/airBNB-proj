@@ -1,12 +1,17 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { LabelsFilter } from '../cmps/labels-filter'
 
 import { loadStays, saveStay } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service.local'
-import { GradientButton } from '../cmps/gradient-button'
+import { useSearchParams } from 'react-router-dom'
 
 export function StayIndex() {
+
+  const [searchParams] = useSearchParams()
+  const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
+
   const stays = useSelector((storeState) => storeState.stayModule.stays)
   const [userLocation, setUserLocation] = useState({
     lat: 32.078618,
@@ -17,7 +22,10 @@ export function StayIndex() {
   const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
 
   useEffect(() => {
-    onLoadStays(filterBy)
+    onLoadStays(queryFilterBy)
+  }, [filterBy])
+
+  useEffect(() => {
     getUserLocation()
   }, [])
 
@@ -72,6 +80,7 @@ export function StayIndex() {
       {/* <button className='add-btn' onClick={() => setAddModal(true)}>
         Add Stay
       </button> */}
+      <LabelsFilter />
       <StayList
         stays={stays}
         userLocation={userLocation}

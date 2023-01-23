@@ -1,11 +1,40 @@
+.header-container {
+    border-bottom: 1px solid rgba(155, 155, 155, 0.372);
+    margin-bottom: 10px;
+}
+
 .app-header {
-    // padding: 10px;
     display: grid;
-    grid-template-columns: 20px repeat(3, 1fr) 20px;
+    position: relative;
+    padding: 10px;
+    grid-template-columns: repeat(3, 1fr);
+
+
 
     &.expanded {
         height: 160px;
 
+    }
+
+    &.in-details {
+        margin: 0 auto;
+        max-width: 1127px;
+
+        @include for-narrow-layout {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include for-narrow-layout {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include for-wide-layout {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        & .logo {
+            grid-column: 1/2;
+        }
     }
 
     @include for-narrow-layout {

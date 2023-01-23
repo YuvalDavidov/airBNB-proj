@@ -6,12 +6,13 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { HeaderFilter } from './header-filter'
 import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
+import { toggleInDetails } from '../store/stay.actions'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
-    const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
+    const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
-
+    console.log(isStayDetails);
     const navigate = useNavigate()
 
     async function onLogin(credentials) {
@@ -39,22 +40,30 @@ export function AppHeader() {
         }
     }
 
+    function getBack() {
+        toggleInDetails(false)
+        navigate('/')
+    }
 
 
     return (
-        <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
-            <h1 className='logo' onClick={() => { navigate('/') }}>LOGO</h1>
-            <HeaderFilter />
-            {/* <nav>
+        <div className="header-container full">
+
+            <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
+
+                <h1 className='logo' onClick={() => { getBack() }}>LOGO</h1>
+                <HeaderFilter />
+                {/* <nav>
 
                 <NavLink>☢</NavLink>
 
 
             </nav> */}
-            < MainMenu />
-            {isModalOpen && < LoginSignup />}
+                < MainMenu />
+                {isModalOpen && < LoginSignup />}
 
-        </header>
+            </header>
+        </div>
     )
 }
 
