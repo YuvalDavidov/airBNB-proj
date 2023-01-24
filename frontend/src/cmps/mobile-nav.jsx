@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
 export function MobileNav() {
@@ -15,6 +15,12 @@ export function MobileNav() {
     setCurrPage('wishlist')
     navigate('/wishlist')
   }
+
+  useEffect(() => {
+    return () => {
+      window.onscroll = () => {return}
+    }
+  },[])
 
   var prevScrollpos = window.pageYOffset
   window.onscroll = function () {
