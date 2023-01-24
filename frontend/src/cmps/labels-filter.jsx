@@ -33,7 +33,7 @@ export function LabelsFilter() {
 
 
     return (
-        <section className="flex justify-center labels-crusal-main">
+        <section className="labels-crusal-main">
             <nav className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}>
                 {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={'flex align-center label-item'} key={label}>
                     <span>{icons[idx]}</span>
