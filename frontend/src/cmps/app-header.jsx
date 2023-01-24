@@ -8,18 +8,20 @@ import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
 import { toggleInDetails } from '../store/stay.actions'
 import { SiAirbnb } from "react-icons/si";
-import { setIsMobile } from '../store/system.actions'
+import { setIsDesktop, setIsMobile } from '../store/system.actions'
+import { useWindowSize } from '../customHooks/useWindowSize'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
     const navigate = useNavigate()
-
+    const windowSize = useWindowSize()
 
     useEffect(() => {
-        if (window.innerWidth < 700) setIsMobile()
-    }, [])
+        if (windowSize.innerWidth < 700) setIsMobile()
+        else setIsDesktop()
+    }, [windowSize])
 
     async function onLogin(credentials) {
         try {
