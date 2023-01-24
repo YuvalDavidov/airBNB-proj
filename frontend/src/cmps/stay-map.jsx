@@ -20,7 +20,7 @@ export function StayMap({ stayLoc }) {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '400px', width: 'auto', margin: 'auto', marginBottom: '50px' }}>
+        <div style={{ height: '400px', width: 'auto', margin: 'auto' }}>
             <GoogleMapReact
                 onClick={handleClick}
                 bootstrapURLKeys={{ key: "AIzaSyDi7GMy6lxgjHiG_Uiom82iOxAwhazf7Ro" }}

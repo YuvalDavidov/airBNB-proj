@@ -47,26 +47,40 @@ export function StayDetails() {
 
     useEffect(() => {
         if (!stay) return
+        if (isMobile) return
 
-        if (!isMobile) {
-            const reserve = document.querySelector('.reserve')
-            const modual = document.querySelector('.reserve-module')
 
-            const modualObserver = new IntersectionObserver(onModualObserver, {
-                margin: '10px'
+        const imgGrid = document.querySelector('.imgs-grid')
+        const reserveBtn = document.getElementById('reserve-btn')
+
+        const header = document.querySelector('.details-header-bar')
+        const headerBtn = document.querySelector('.reserve-btn-header')
+
+        const galleryObserver = new IntersectionObserver(headerUpdate)
+
+        const reserveObserver = new IntersectionObserver(reserveUpdate, { rootMargin: '-80px 0px 0px' })
+
+        galleryObserver.observe(imgGrid)
+        reserveObserver.observe(reserveBtn)
+
+        function reserveUpdate(entries) {
+            entries.forEach((entry) => {
+
+                headerBtn.style.display = entry.isIntersecting ? 'none' : 'flex'
+
             })
+        }
 
-            modualObserver.observe(reserve)
-
-            function onModualObserver(entries) {
-                entries.forEach((entry) => {
-                    modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
-                })
-            }
+        function headerUpdate(entries) {
+            entries.forEach((entry) => {
+                header.style.display = entry.isIntersecting ? 'none' : 'grid'
+            })
         }
 
 
-    }, [stay])
+
+
+    }, [stay, isMobile])
 
     function getStayReviewRateAvg(stayReviews) {
         let rate = 0
@@ -149,40 +163,84 @@ export function StayDetails() {
 
     if (!stay) return <div>Loading...</div>
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
-    return (
+    return (<>
+
+        <article className="details-header-bar">
+
+            <div className="details-header-bar-container">
+
+                <div className="details-header-bar-container-a-links">
+
+                    <a href="#imgs-grid">Photos</a>
+                    <a href="#amenities">Amenities</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#map">Location</a>
+                </div>
+
+
+                <div className="reserve-btn-header">
+                    <div className="reserve-btn-header-details">
+                        <div>
+                            <span> $ {price.toLocaleString('en-US')}</span>  night
+
+                        </div>
+
+                        <div className="header-review flex align-center">
+                            <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                            <span className="dote">•</span>
+                            <span><a href="#reviews">{reviews.length} reviews</a></span>
+
+                        </div>
+                    </div>
+
+                    <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Reserve'} className={"reserve-btn"} />
+                </div>
+
+            </div>
+        </article>
+
+
         <section className="stay-details">
-            <article className={`imgs-modual full ${imgsModual ? 'open' : ''}`}>
+
+            <article className={`imgs-modual ${imgsModual ? 'open' : ''}`}>
                 <button onClick={() => { serImgsModual(false) }} >back</button>
                 {stay.imgUrls.map((img, idx) => {
                     return <img key={idx} src={imgUrls[idx]} />
                 })}
             </article>
-            <h2>{name}</h2>
-            <div className="stay-mini-sumerry align-center">
-                <div className="flex align-center">
-                    <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
-                    <span className="dote">•</span>
-                    <span><a href="#reviews">{reviews.length} reviews</a></span>
-                    <span className="dote">•</span>
-                    <a href="#map">{loc.address}</a>,
-                    <a href="#map"> {loc.city}</a>,
-                    <a href="#map"> {loc.country}</a>
 
+            {isMobile ? ('') : (<>
+                <h2>{name}</h2>
+                <div className="stay-mini-sumerry align-center">
+                    <div className="flex align-center">
+                        <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                        <span className="dote">•</span>
+                        <span><a href="#reviews">{reviews.length} reviews</a></span>
+                        <span className="dote">•</span>
+                        <a href="#map">{loc.address}</a>,
+                        <a href="#map"> {loc.city}</a>,
+                        <a href="#map"> {loc.country}</a>
+
+                    </div>
+                    <div className="share-save-btns">
+                        <IconContext.Provider
+                            value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
+                        >
+                            <div className="save-btn flex align-center" onClick={() => onToggleWishlist(stay._id)}>
+                                <TiHeartFullOutline />  save
+                            </div>
+                        </IconContext.Provider>
+                    </div>
                 </div>
-                <div className="share-save-btns">
-                    <IconContext.Provider
-                        value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
-                    >
-                        <div className="save-btn flex align-center" onClick={() => onToggleWishlist(stay._id)}>
-                            <TiHeartFullOutline />  save
-                        </div>
-                    </IconContext.Provider>
-                </div>
-            </div>
+
+            </>)}
+
+
+
 
             {isMobile ?
                 (<ImageSlider imgs={stay.imgUrls} />)
-                : (<article className="imgs-grid">
+                : (<article id="imgs-grid" className="imgs-grid">
                     <img className="first" src={imgUrls[0]} />
                     <img src={imgUrls[1]} />
                     <img src={imgUrls[2]} />
@@ -197,6 +255,35 @@ export function StayDetails() {
 
             <article className="stay-details-full">
                 <section className="details">
+
+
+                    {isMobile ? (<div>
+
+                        <h2>{name}</h2>
+                        <div className="stay-mini-sumerry align-center">
+                            <div className="flex align-center">
+                                <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                <span className="dote">•</span>
+                                <span><a href="#reviews">{reviews.length} reviews</a></span>
+                                <span className="dote">•</span>
+                                <a href="#map">{loc.address}</a>,
+                                <a href="#map"> {loc.city}</a>,
+                                <a href="#map"> {loc.country}</a>
+
+                            </div>
+                            {/* <div className="share-save-btns">
+                                <IconContext.Provider
+                                    value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
+                                >
+                                    <div className="save-btn flex align-center" onClick={() => onToggleWishlist(stay._id)}>
+                                        <TiHeartFullOutline />  save
+                                    </div>
+                                </IconContext.Provider>
+                            </div> */}
+                        </div>
+
+                    </div>) : ('')}
+
                     <div className="details-header">
                         <div>
 
@@ -273,7 +360,7 @@ export function StayDetails() {
                         </div>
                     </div>
 
-                    <div className="summery">{stay.summary}</div>
+                    <div id="amenities" className="summery">{stay.summary}</div>
 
 
                     <article className="stay-amenities">
@@ -340,7 +427,10 @@ export function StayDetails() {
                         (
                             <article className="reserve-mobile">
                                 <div className="price flex mobile-details">
-                                    <h3> $ {price.toLocaleString('en-US')}<span> night</span> </h3>
+                                    <div className="flex justify-between price-night">
+                                        <h4>${price.toLocaleString('en-US')} </h4>
+                                        <span> night</span>
+                                    </div>
 
                                     <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="dates">
                                         <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}</span>
@@ -427,7 +517,10 @@ export function StayDetails() {
                                     </span>
                                 </div>
                             </section>
-                            <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
+                            <div id="reserve-btn" >
+
+                                <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
+                            </div>
 
                             {pickedDate.endDate ? (<div className="stay-price">
 
@@ -454,97 +547,197 @@ export function StayDetails() {
             </article>
 
 
-            <section id="reviews" >
-                {reviews.length > 0 ?
-                    (<section className="reviews">
-                        <h2 className="flex">
-                            <AiFillStar />
-                            <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
-                            <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
-                            <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
-                        </h2>
-                        <div className="reviews-bar">
-                            <div className="cleanliness">
-                                <p>Cleanliness</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                                    <span> {getReviewsRateByType('cleanliness')}</span>
-                                </div>
-                            </div>
-                            <div className="accuracy">
-                                <p>Accuracy</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                                    <span> {getReviewsRateByType('accuracy')}</span>
-                                </div>
-                            </div>
+            {isMobile ?
+                (<div id="map" className="map">
+                    <h4>Where you'll be</h4>
+                    <p>{loc.city}, {loc.country}, {loc.address}</p>
 
+                    <StayMap stayLoc={loc} />
 
-                            <div className="communication">
-                                <p>Communication</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                                    <span> {getReviewsRateByType('communication')}</span>
-                                </div>
-                            </div>
-                            <div className="location">
-                                <p>Location</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                                    <span> {getReviewsRateByType('location')}</span>
-                                </div>
-                            </div>
-                            <div className="check-in">
-                                <p>Check-in</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                                    <span> {getReviewsRateByType('checkIn')}</span>
-                                </div>
-                            </div>
+                    <div className="map-summary">{stay.summary}</div>
+                </div>)
+                : (<section id="reviews" >
+                    {reviews.length > 0 ?
+                        (<section className="reviews">
+                            <h2 className="flex">
+                                <AiFillStar />
+                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
+                            </h2>
 
-                            <div className="value">
-                                <p>Value</p>
-                                <div className="progress">
-                                    <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                                    <span> {getReviewsRateByType('value')}</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="reviews-list">
-                            {reviews.map(review => {
-                                return <li key={review.id}>
-                                    <div className="review-user">
-                                        <img src={review.by.imgUrl} />
-                                        <div>
-                                            <h4>{review.by.fullname}</h4>
-                                            <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                            {isMobile ?
+                                ('')
+                                : (<div className="reviews-bar">
+                                    <div className="cleanliness">
+                                        <p>Cleanliness</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                                            <span> {getReviewsRateByType('cleanliness')}</span>
                                         </div>
                                     </div>
-                                    <div className="txt">
-                                        {review.txt}
+                                    <div className="accuracy">
+                                        <p>Accuracy</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                                            <span> {getReviewsRateByType('accuracy')}</span>
+                                        </div>
                                     </div>
-                                    {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
-                                </li>
-                            })}
-                        </div>
-
-                    </section>) :
-                    (<div>you have no reviews</div>)}
 
 
-            </section>
+                                    <div className="communication">
+                                        <p>Communication</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                                            <span> {getReviewsRateByType('communication')}</span>
+                                        </div>
+                                    </div>
+                                    <div className="location">
+                                        <p>Location</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                                            <span> {getReviewsRateByType('location')}</span>
+                                        </div>
+                                    </div>
+                                    <div className="check-in">
+                                        <p>Check-in</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                                            <span> {getReviewsRateByType('checkIn')}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="value">
+                                        <p>Value</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                                            <span> {getReviewsRateByType('value')}</span>
+                                        </div>
+                                    </div>
+
+                                </div>)}
+
+                            <div className="reviews-list">
+                                {reviews.map(review => {
+                                    return <li key={review.id} className='review'>
+                                        <div className="review-user">
+                                            <img src={review.by.imgUrl} />
+                                            <div>
+                                                <h4>{review.by.fullname}</h4>
+                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                            </div>
+                                        </div>
+                                        <div className="txt">
+                                            {review.txt}
+                                        </div>
+                                        {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                                    </li>
+                                })}
+                            </div>
+
+                        </section>) :
+                        (<div>you have no reviews</div>)}
 
 
+                </section>)
+            }
 
-            <div id="map" className="map">
-                <h4>Where you'll be</h4>
-                <p>{loc.city}, {loc.country}, {loc.address}</p>
+            {isMobile ?
+                (<section id="reviews" >
+                    {reviews.length > 0 ?
+                        (<section className="reviews">
+                            <h2 className="flex">
+                                <AiFillStar />
+                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
+                            </h2>
 
-                <StayMap stayLoc={loc} />
-            </div>
+                            {isMobile ?
+                                ('')
+                                : (<div className="reviews-bar">
+                                    <div className="cleanliness">
+                                        <p>Cleanliness</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                                            <span> {getReviewsRateByType('cleanliness')}</span>
+                                        </div>
+                                    </div>
+                                    <div className="accuracy">
+                                        <p>Accuracy</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                                            <span> {getReviewsRateByType('accuracy')}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="communication">
+                                        <p>Communication</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                                            <span> {getReviewsRateByType('communication')}</span>
+                                        </div>
+                                    </div>
+                                    <div className="location">
+                                        <p>Location</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                                            <span> {getReviewsRateByType('location')}</span>
+                                        </div>
+                                    </div>
+                                    <div className="check-in">
+                                        <p>Check-in</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                                            <span> {getReviewsRateByType('checkIn')}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="value">
+                                        <p>Value</p>
+                                        <div className="progress">
+                                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                                            <span> {getReviewsRateByType('value')}</span>
+                                        </div>
+                                    </div>
+
+                                </div>)}
+
+                            <div className="reviews-list">
+                                {reviews.map(review => {
+                                    return <li key={review.id} className='review'>
+                                        <div className="review-user">
+                                            <img src={review.by.imgUrl} />
+                                            <div>
+                                                <h4>{review.by.fullname}</h4>
+                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                            </div>
+                                        </div>
+                                        <div className="txt">
+                                            {review.txt}
+                                        </div>
+                                        {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                                    </li>
+                                })}
+                            </div>
+
+                        </section>) :
+                        (<div>you have no reviews</div>)}
+
+
+                </section>)
+                : (
+                    <div id="map" className="map">
+                        <h4>Where you'll be</h4>
+                        <p>{loc.city}, {loc.country}, {loc.address}</p>
+
+                        <StayMap stayLoc={loc} />
+
+                        <p>{stay.summary}</p>
+                    </div>)
+            }
 
         </section>
-    )
+    </>)
 }
