@@ -27,14 +27,14 @@ table.listing-table {
 
         & .listing-td {
             max-width: 200px;
-            min-width: 250px;
+            // min-width: 250px;
         }
 
         & td {
             padding: 10px 0;
             text-align: left;
             margin-bottom: 10px;
-            margin: 0 auto;
+            // margin: 0 auto;
 
             & .listing-prev {
                 display: flex;
@@ -59,7 +59,17 @@ table.listing-table {
     }
 
     & img {
-        width: 100px;
+        width: 80px;
         border-radius: 10px;
     }
+}
+
+@media (max-width: 700px) {
+
+    table.listing-table {
+        & th {
+            font-size: 12px;
+        }
+    }
+
 }

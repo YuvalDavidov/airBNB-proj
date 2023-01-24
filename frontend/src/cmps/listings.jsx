@@ -43,7 +43,7 @@ export function Listings() {
                 <tbody>
 
                     <tr>
-                        <th>Listing</th>
+                        <th>LISTING</th>
                         <th>TODO</th>
                         <th>CAPACITY</th>
                         <th>BEDROOMS</th>
@@ -59,7 +59,7 @@ export function Listings() {
                             <td>{stay.stayDetails.bedrooms}</td>
                             <td>{stay.price}</td>
                             <td>{stay.loc.country}, {stay.loc.city}</td>
-                            <td>sometime</td>
+                            <td>{new Date(stay.createdAt).getDate()}/{new Date(stay.createdAt).getMonth() + 1}</td>
                         </tr>
                     })}
 

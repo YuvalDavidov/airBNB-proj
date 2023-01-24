@@ -645,6 +645,10 @@
                 display: flex;
                 overflow: auto clip;
 
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
                 & .review {
                     margin-right: 12px;
                     padding: 16px;
@@ -729,8 +733,11 @@
         flex-direction: column;
 
         & .price-night {
-            // padding-top: 10px;
-            width: 92px;
+            width: max-content;
+
+            & span {
+                margin-left: 5px;
+            }
         }
     }
 
