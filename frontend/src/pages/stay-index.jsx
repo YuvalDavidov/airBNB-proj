@@ -87,48 +87,6 @@ export function StayIndex() {
         userLocation={userLocation}
         onUpdateStay={onUpdateStay}
       />
-      {addModal && (
-        <>
-          <div className='main-screen' onClick={() => setAddModal(false)}></div>
-          <div className='edit-stay-modal'>
-            <h2>Add stay:</h2>
-            <form onSubmit={onSaveStay}>
-              <label>
-                City:
-                <input
-                  type='text'
-                  name='city'
-                  placeholder='Enter city'
-                  value={stayToEdit.loc.city}
-                  onChange={handleChangeLoc}
-                />
-              </label>
-              <label>
-                Country:
-                <input
-                  type='text'
-                  name='country'
-                  placeholder='Enter country'
-                  value={stayToEdit.loc.country}
-                  onChange={handleChangeLoc}
-                />
-              </label>
-              <label>
-                Price:
-                <input
-                  type='number'
-                  name='price'
-                  placeholder='Enter price'
-                  value={stayToEdit.price}
-                  onChange={handleChangePrice}
-                />
-              </label>
-
-              <button>Save stay</button>
-            </form>
-          </div>
-        </>
-      )}
     </section>
   )
 }

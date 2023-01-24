@@ -1,9 +1,28 @@
-.labels-crusal-main {}
+.labels-crusal-main {
+    position: relative;
+
+    & button {
+        cursor: pointer;
+        background-color: transparent;
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: hidden;
+    }
+}
+
+.arrow-icon {
+    // position: absolute;
+    top: 25px;
+
+
+}
 
 .lables-filter-nav {
     display: flex;
     overflow: hidden;
-    gap: 40px;
+    width: 100%;
+    gap: 80px;
     height: 80px;
     z-index: 5;
     background-color: #fff;
