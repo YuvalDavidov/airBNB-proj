@@ -1,5 +1,4 @@
 .labels-crusal-main {
-    position: relative;
 
     & button {
         cursor: pointer;
@@ -12,8 +11,8 @@
 }
 
 .arrow-icon {
-    // position: absolute;
-    top: 25px;
+    position: absolute;
+    bottom: 46px;
 
 
 }
@@ -38,5 +37,17 @@
 
 .label-item {
     flex-direction: column;
+    color: grey;
     cursor: pointer;
+
+    &:hover {
+        color: black;
+        padding-bottom: 10px;
+        border-bottom: rgb(206, 201, 201) solid 3px;
+    }
+}
+
+.label-icon:hover {
+    color: black;
+
 }

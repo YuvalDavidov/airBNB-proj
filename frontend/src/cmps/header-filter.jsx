@@ -138,7 +138,7 @@ export function HeaderFilter() {
     return (
         <Fragment>
             <section className={`stay-header-filter ${(isHeadFilterExpanded) ? 'extanded' : ''}`}>
-                {!isHeadFilterExpanded && <div className="flex"><button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
+                {!isHeadFilterExpanded && <div className="flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
                     <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
                     <button onClick={onGuestClick} className="header-filter-btn guests flex"><div>Add guests</div></button>
                     <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>

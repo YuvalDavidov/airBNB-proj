@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { setFilterBy } from "../store/stay.actions.js"
-
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 import { IconContext } from "react-icons"
 // List of icons for labels filter! 
@@ -11,9 +12,10 @@ import { GiWoodCabin, GiPineTree, GiCastle, GiIsland, GiCircleForest, GiStoneTow
 import { FaCampground } from 'react-icons/fa'
 import { BsSnow } from 'react-icons/bs'
 import { HiHomeModern } from 'react-icons/hi2'
-
+import { WiStars } from 'react-icons/wi'
 import { IoIosArrowDropright } from 'react-icons/io'
 import { IoIosArrowDropleft } from 'react-icons/io'
+import { useState, useEffect } from "react"
 
 
 
@@ -22,11 +24,15 @@ export function LabelsFilter() {
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
     const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
     const [searchParams, setSearchParams] = useSearchParams()
+    const [shownLabels, setShownLabels] = useState(6)
 
-    const labels = ['New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
+    useEffect(() => {
+        labels = labels.slice(0, shownLabels)
+    }, [])
+    let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
         'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
 
-    const icons = [<VscKey />, <MdOutlineBeachAccess />, <GiWoodCabin />, <GiPineTree />, <FaCampground />, <GiCastle />, <GiIsland />,
+    const icons = [<WiStars />, <VscKey />, <MdOutlineBeachAccess />, <GiWoodCabin />, <GiPineTree />, <FaCampground />, <GiCastle />, <GiIsland />,
     <MdOutlineDirectionsBoatFilled />, <HiHomeModern />, <GiCircleForest />, <GiStoneTower />, <GiWindmill />, <GiFarmTractor />, <GiUndergroundCave />, <BsSnow />
 
     ]
@@ -35,23 +41,132 @@ export function LabelsFilter() {
         setFilterBy({ ...filterBy, label })
         console.log('label----->', label)
     }
+    // labels = labels.slice(0, shownLabels)
+
+    function onScrollLabels(num) {
+
+    }
+    {/* <section className="flex justify-center labels-crusal-main"></section> */ }
 
 
-    return (
-        <section className="flex justify-center labels-crusal-main">
-            <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
-                <button><IoIosArrowDropleft /></button>
+    return <Carousel
+        additionalTransfrom={0}
+        arrows
+        autoPlaySpeed={3000}
+        centerMode={false}
+        className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}
+        containerClass="container"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite={false}
+        itemClass=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+            desktop: {
+                breakpoint: {
+                    max: 3000,
+                    min: 1024
+                },
+                items: 12,
+                partialVisibilityGutter: 40
+            },
+            mobile: {
+                breakpoint: {
+                    max: 464,
+                    min: 0
+                },
+                items: 3,
+                partialVisibilityGutter: 30
+            },
+            tablet: {
+                breakpoint: {
+                    max: 1024,
+                    min: 464
+                },
+                items: 6,
+                partialVisibilityGutter: 30
+            }
+        }}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
+    >
+
+
+
+        {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item label-${idx}`} key={label}>
+            <IconContext.Provider value={{ className: "label-icon", size: '20px' }}>
+                <span>{icons[idx]}</span>
             </IconContext.Provider>
+            <span>{label}</span>
 
-            <nav className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}>
-                {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={'flex align-center label-item'} key={label}>
-                    <span>{icons[idx]}</span>
-                    <span>{label}</span>
-                </div>)}
-            </nav>
-            <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
-                <button><IoIosArrowDropright /></button>
-            </IconContext.Provider>
-        </section>
-    )
-} 
+        </div>)}
+
+
+
+    </Carousel>
+    // </section>
+
+}
+
+
+
+// const SCROLL_IDX = 8
+// const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
+// const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
+// const [searchParams, setSearchParams] = useSearchParams()
+// const [shownLabels, setShownLabels] = useState(6)
+
+// useEffect(() => {
+//     labels = labels.slice(0, shownLabels)
+// }, [])
+// let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
+//     'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
+
+// const icons = [<WiStars />, <VscKey />, <MdOutlineBeachAccess />, <GiWoodCabin />, <GiPineTree />, <FaCampground />, <GiCastle />, <GiIsland />,
+// <MdOutlineDirectionsBoatFilled />, <HiHomeModern />, <GiCircleForest />, <GiStoneTower />, <GiWindmill />, <GiFarmTractor />, <GiUndergroundCave />, <BsSnow />
+
+// ]
+// function onSetLabel(label) {
+//     setSearchParams({ ...filterBy, label })
+//     setFilterBy({ ...filterBy, label })
+//     console.log('label----->', label)
+// }
+// // labels = labels.slice(0, shownLabels)
+
+// function onScrollLabels(num) {
+
+// }
+// return (
+    // <section className="flex justify-center labels-crusal-main">
+
+
+    //     <nav className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}>
+    //         <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
+    //             <button onClick={() => { onScrollLabels(-1) }}><IoIosArrowDropleft /></button>
+    //         </IconContext.Provider>
+    //         {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item label-${idx}`} key={label}>
+    //             <IconContext.Provider value={{ className: "label-icon", size: '20px' }}>
+    //                 <span>{icons[idx]}</span>
+    //             </IconContext.Provider>
+    //             <span>{label}</span>
+
+    //         </div>)}
+
+    //     </nav>
+    //     <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
+    //         <button onClick={() => { onScrollLabels(1) }}><IoIosArrowDropright /></button>
+    //     </IconContext.Provider>
+    // </section>
+// )

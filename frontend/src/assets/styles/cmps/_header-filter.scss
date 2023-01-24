@@ -50,10 +50,9 @@
     }
 
     &.extanded {
-        top: 25px;
-
+        top: 100px;
         height: 66px;
-        position: relative;
+        position: absolute;
         background-clip: padding-box;
         margin: 0px;
         border-width: 1px;

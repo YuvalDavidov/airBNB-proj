@@ -33,6 +33,7 @@ async function query(filterBy) {
   if (filterBy?.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
   if (filterBy?.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
   if (filterBy?.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
+  if (filterBy?.label === 'Trending') return stays
   if (filterBy?.label) stays = stays.filter(stay => stay.labels.includes(filterBy.label))
 
 
