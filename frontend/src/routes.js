@@ -6,6 +6,7 @@ import { StayIndex } from './pages/stay-index.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
 import { BookStay } from './pages/book-order.jsx'
 import { Wishlist } from './pages/wishlist.jsx'
+import { UserTrips } from './cmps/user-trips.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
         path: 'wishlist',
         component: <Wishlist />,
         label: 'Wishlist'
+    },
+    {
+        path: 'trips',
+        component: <UserTrips />,
+        label: 'UserTrips'
     },
     {
         path: 'book/?',
