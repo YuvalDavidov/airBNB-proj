@@ -12,6 +12,7 @@ import { Dashboard } from './pages/dashboard'
 import { StayEdit } from './cmps/stay-edit'
 import { Listings } from './cmps/listings'
 import { Reservations } from './cmps/reservations'
+import { MobileNav } from './cmps/mobile-nav'
 
 export function RootCmp() {
   const { isHeadFilterExpanded } = useSelector(
@@ -32,6 +33,7 @@ export function RootCmp() {
       <div onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing} className={(isHeadFilterExpanded) ? 'back-screen' : ''}></div>
 
       <main
+        // className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''} `}
         className={`${isMobile ? '' : 'main-layout'} ${isHeadFilterExpanded ? 'expanded' : ''} `}
       >
 
@@ -56,7 +58,8 @@ export function RootCmp() {
           <Route path='user/:id' element={<UserDetails />} />
         </Routes>
       </main>
-      <AppFooter />
+      {!isMobile && <AppFooter />}
+      {isMobile && <MobileNav />}
     </div>
   )
 }
