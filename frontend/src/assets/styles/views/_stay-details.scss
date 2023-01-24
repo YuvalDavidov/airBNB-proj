@@ -1,5 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 
+
+.details-header-bar {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 5rem;
+    top: 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(155, 155, 155, 0.372);
+
+    &-container {
+        display: flex;
+        align-items: center;
+        min-width: 1127px;
+        margin: auto;
+        justify-content: space-between;
+
+
+        &-a-links {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 297px;
+
+            >* {
+                font-size: 14px;
+                font-weight: 600;
+                color: #000000;
+            }
+        }
+
+        & .reserve-btn-header {
+
+            height: 50px;
+
+            &-details {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                width: 120px;
+
+                >* {
+                    height: 19px;
+                }
+
+                & span {
+                    font-weight: bold;
+                }
+
+                & .header-review {
+                    font-size: 14px;
+
+                }
+
+            }
+
+            & .reserve-btn {
+                width: 115px;
+            }
+        }
+    }
+}
+
 .stay-details {
     padding: 13px 0;
     max-width: 1127px;
@@ -15,6 +79,7 @@
         width: 100%;
 
         &.full {
+
             grid-column: 1 /-1;
         }
     }
@@ -311,10 +376,10 @@
     padding: 20px 0;
 
     &-module {
+        position: sticky;
         padding: 24px;
-        border-radius: 15px;
-        position: relative;
-        top: 20px;
+        border-radius: 10px;
+        top: 128px;
         width: 80%;
         max-width: unset;
         // min-width: 250px;
@@ -374,11 +439,17 @@
             & .total {
                 padding-top: 24px;
                 font-weight: bold;
+
+
             }
         }
     }
 
     & .top {
+        >:last-child {
+            margin-bottom: 13px;
+        }
+
         margin: 5px 0;
         display: flex;
         justify-content: space-between;
@@ -387,8 +458,10 @@
 
     &-date-guests {
         border: 1px solid rgb(155, 155, 155);
-        border-radius: 15px;
+        margin-top: 8px;
+        border-radius: 7px;
         display: grid;
+        min-height: 115px;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
         text-align: left;
@@ -546,9 +619,11 @@
     background-color: #7171711a;
 }
 
+
 @media (max-width: 700px) {
     .stay-details {
         max-width: 700px;
+        padding-top: 0;
 
         & .image-slider {
             width: 100%;
@@ -559,14 +634,77 @@
             }
         }
 
-        & .reviews-bar {
-            grid-template-columns: 1fr;
+        & .reviews {
+            padding: 42px 0 42px 24px;
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+
+            & .reviews-list {
+                // position: absolute;
+                display: flex;
+                overflow: auto clip;
+
+                & .review {
+                    margin-right: 12px;
+                    padding: 16px;
+                    border: 0.5px solid rgba(163, 163, 163, 0.685);
+                    border-radius: 10px;
+                    margin-bottom: 0;
+                    height: 236px;
+                    min-width: 540px;
+
+                    & .txt {
+                        margin: 0;
+                    }
+                }
+            }
+
+
+        }
+
+        & .map {
+            padding: 48px 24px 0 24px;
+
+
+            & .map-summary {
+                margin-top: 10px;
+            }
         }
     }
 
 
     .stay-details-full {
         display: block;
+
+        & .reserve {
+            padding: 0;
+        }
+
+
+        & .details {
+            padding: 20px 0 0;
+
+            & .details-header {
+                padding-top: 24px;
+            }
+
+            & .summery {
+                padding: 42px 24px;
+            }
+
+            & .stay-amenities {
+                padding: 30px 24px;
+
+                & .amenities-container {
+                    display: block;
+                }
+            }
+
+            >* {
+                padding: 0 24px;
+            }
+        }
     }
 
     .reserve-module {
@@ -576,7 +714,7 @@
 
 .reserve-mobile {
     border-top: 0.5px solid rgba(163, 163, 163, 0.685);
-    padding: 15px;
+    padding: 9px 15px;
     display: flex;
     justify-content: space-between;
     z-index: 1000;
@@ -586,8 +724,14 @@
     bottom: 0;
 
     & .mobile-details {
+        padding: 10px 0;
         display: flex;
         flex-direction: column;
+
+        & .price-night {
+            // padding-top: 10px;
+            width: 92px;
+        }
     }
 
     & .date-picker {
@@ -605,6 +749,8 @@
     }
 
     & button {
+        margin: auto 0;
+        height: 50px;
         width: max-content;
     }
 }

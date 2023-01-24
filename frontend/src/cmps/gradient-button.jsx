@@ -1,6 +1,6 @@
-import { useEffect ,useRef } from "react"
+import { useEffect, useRef } from "react"
 
-export function GradientButton({onClickBtn, label, className}) {
+export function GradientButton({ onClickBtn, label, className }) {
     const elBtn = useRef()
 
     useEffect(() => {
@@ -11,11 +11,11 @@ export function GradientButton({onClickBtn, label, className}) {
             elBtn.current.style.setProperty('--mouse-x', x)
             elBtn.current.style.setProperty('--mouse-y', y)
         })
-    } ,[])
+    }, [])
 
     return <>
-    {onClickBtn && <button ref={elBtn} onClick={onClickBtn} className={'gradient-button ' + className}>{label}</button>}
-    {!onClickBtn && <button ref={elBtn} className={'gradient-button ' + className}>{label}</button>}
+        {onClickBtn && <button ref={elBtn} onClick={onClickBtn} className={'gradient-button ' + className}>{label}</button>}
+        {!onClickBtn && <button ref={elBtn} className={'gradient-button ' + className}>{label}</button>}
     </>
-    
+
 }
