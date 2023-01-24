@@ -17,6 +17,8 @@ export function RootCmp() {
   const { isHeadFilterExpanded } = useSelector(
     (storeState) => storeState.stayModule
   )
+  const { isMobile } = useSelector((storeState) => storeState.systemModule)
+
   function onToggleExpand() {
     toggleExpand(false)
   }
@@ -30,7 +32,7 @@ export function RootCmp() {
       <div onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing} className={(isHeadFilterExpanded) ? 'back-screen' : ''}></div>
 
       <main
-        className={`main-layout ${isHeadFilterExpanded ? 'expanded' : ''} `}
+        className={`${isMobile ? '' : 'main-layout'} ${isHeadFilterExpanded ? 'expanded' : ''} `}
       >
 
 

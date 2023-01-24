@@ -18,6 +18,7 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
 import { toggleInDetails } from "../store/stay.actions";
+import { ImageSlider } from "../cmps/image-slider";
 
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -33,10 +34,10 @@ export function StayDetails() {
     const [imgsModual, serImgsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const user = useSelector((storeState) => storeState.userModule.user)
+    const { isMobile } = useSelector((storeState) => storeState.systemModule)
     const { stayId } = useParams()
     const navigate = useNavigate()
 
-    console.log(stay);
 
     useEffect(() => {
         toggleInDetails(true)
@@ -46,21 +47,24 @@ export function StayDetails() {
 
     useEffect(() => {
         if (!stay) return
-        const reserve = document.querySelector('.reserve')
-        const modual = document.querySelector('.reserve-module')
 
-        const modualObserver = new IntersectionObserver(onModualObserver, {
-            margin: '10px'
-        })
+        if (!isMobile) {
+            const reserve = document.querySelector('.reserve')
+            const modual = document.querySelector('.reserve-module')
 
-        modualObserver.observe(reserve)
-
-        function onModualObserver(entries) {
-            entries.forEach((entry) => {
-
-                modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
+            const modualObserver = new IntersectionObserver(onModualObserver, {
+                margin: '10px'
             })
+
+            modualObserver.observe(reserve)
+
+            function onModualObserver(entries) {
+                entries.forEach((entry) => {
+                    modual.style.position = entry.isIntersecting ? 'sticky' : 'absulote'
+                })
+            }
         }
+
 
     }, [stay])
 
@@ -176,15 +180,20 @@ export function StayDetails() {
                 </div>
             </div>
 
-            <article className="imgs-grid">
-                <img className="first" src={imgUrls[0]} />
-                <img src={imgUrls[1]} />
-                <img src={imgUrls[2]} />
-                <img src={imgUrls[3]} />
-                <img src={imgUrls[4]} />
+            {isMobile ?
+                (<ImageSlider imgs={stay.imgUrls} />)
+                : (<article className="imgs-grid">
+                    <img className="first" src={imgUrls[0]} />
+                    <img src={imgUrls[1]} />
+                    <img src={imgUrls[2]} />
+                    <img src={imgUrls[3]} />
+                    <img src={imgUrls[4]} />
 
-                <button onClick={() => { serImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
-            </article>
+                    <button onClick={() => { serImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
+                </article>)
+            }
+
+
 
             <article className="stay-details-full">
                 <section className="details">
@@ -327,98 +336,119 @@ export function StayDetails() {
                 </section>
 
                 <section className="reserve">
-                    <article className="reserve-module">
-                        <div className="top">
-                            <div className="price flex">
-                                <h3> $ {price.toLocaleString('en-US')} </h3>
-                                <span> night</span>
-                            </div>
+                    {isMobile ?
+                        (
+                            <article className="reserve-mobile">
+                                <div className="price flex mobile-details">
+                                    <h3> $ {price.toLocaleString('en-US')}<span> night</span> </h3>
 
-                            <div className="flex align-center">
-                                <AiFillStar /> {getStayReviewRateAvg(reviews)}
-                                <span className="dote">•</span>
-                                <span><a href="#reviews">{reviews.length} reviews</a></span>
-                            </div>
-                        </div>
+                                    <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="dates">
+                                        <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}</span>
 
-                        <div className="reserve-date-guests">
-                            <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
-                                <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
-                            </div>
-                            <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
-                                <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
-                            </div>
+                                        {!pickedDate.endDate ? '' : <span> -{pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}</span>}
+                                    </div>
 
-                            <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
-                                <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
-                            </div>
-                        </div>
-                        <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
-                            <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
-                        </div>
-                        <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
-                            <div className="flex guest-line-filter">
-                                <div className="flex column">
-                                    <span className="guest-main-text">Adults</span>
-                                    <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
                                 </div>
-                                <span className="flex align-center">
-                                    <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
-                                    <span className="counter">{guestsAmount.adults}</span>
-                                    <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
-                                </span>
-                            </div>
-                            <div className="flex guest-line-filter">
-                                <div className="flex column">
-                                    <span className="guest-main-text">Children</span>
-                                    <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
+                                <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
+                                    <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
                                 </div>
-                                <span className="flex align-center">
-                                    <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
-                                    <span className="counter">{guestsAmount.children}</span>
-                                    <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
-                                </span>
-                            </div>
-                            <div className="flex guest-line-filter">
-                                <div className="flex column">
-                                    <span className="guest-main-text">Infants</span>
-                                    <span className="ff-cereal-book fs14 light-color">Under 2</span>
+
+                                <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
+                            </article>
+                        )
+                        : (<article className="reserve-module">
+                            <div className="top">
+                                <div className="price flex">
+                                    <h3> $ {price.toLocaleString('en-US')} </h3>
+                                    <span> night</span>
                                 </div>
-                                <span className="flex align-center">
-                                    <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
-                                    <span className="counter">{guestsAmount.infants}</span>
-                                    <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
-                                </span>
-                            </div>
-                            <div className="flex guest-line-filter">
-                                <span className="guest-main-text">Pets</span> <span className="flex align-center">
-                                    <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
-                                    <span className="counter">{guestsAmount.pets}</span>
-                                    <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
-                                </span>
-                            </div>
-                        </section>
-                        <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
 
-                        {pickedDate.endDate ? (<div className="stay-price">
-
-
-                            <div className="price-details flex justify-between">
-                                <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
-                                <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
-                            </div>
-                            <div className="service-fee flex justify-between">
-                                <div>Service fee</div>
-                                <div>$ {serviceFee}</div>
+                                <div className="flex align-center">
+                                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                                    <span className="dote">•</span>
+                                    <span><a href="#reviews">{reviews.length} reviews</a></span>
+                                </div>
                             </div>
 
-                            <div className="total flex justify-between">
-                                <div>Total</div>
-                                <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
-                            </div>
-                        </div>) : ''}
+                            <div className="reserve-date-guests">
+                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
+                                    <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
+                                </div>
+                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
+                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
+                                </div>
 
-                    </article>
+                                <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
+                                    <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
+                                </div>
+                            </div>
+                            <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
+                                <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
+                            </div>
+                            <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
+                                <div className="flex guest-line-filter">
+                                    <div className="flex column">
+                                        <span className="guest-main-text">Adults</span>
+                                        <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
+                                    </div>
+                                    <span className="flex align-center">
+                                        <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
+                                        <span className="counter">{guestsAmount.adults}</span>
+                                        <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
+                                    </span>
+                                </div>
+                                <div className="flex guest-line-filter">
+                                    <div className="flex column">
+                                        <span className="guest-main-text">Children</span>
+                                        <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
+                                    </div>
+                                    <span className="flex align-center">
+                                        <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
+                                        <span className="counter">{guestsAmount.children}</span>
+                                        <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
+                                    </span>
+                                </div>
+                                <div className="flex guest-line-filter">
+                                    <div className="flex column">
+                                        <span className="guest-main-text">Infants</span>
+                                        <span className="ff-cereal-book fs14 light-color">Under 2</span>
+                                    </div>
+                                    <span className="flex align-center">
+                                        <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
+                                        <span className="counter">{guestsAmount.infants}</span>
+                                        <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
+                                    </span>
+                                </div>
+                                <div className="flex guest-line-filter">
+                                    <span className="guest-main-text">Pets</span> <span className="flex align-center">
+                                        <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
+                                        <span className="counter">{guestsAmount.pets}</span>
+                                        <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
+                                    </span>
+                                </div>
+                            </section>
+                            <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
+
+                            {pickedDate.endDate ? (<div className="stay-price">
+
+
+                                <div className="price-details flex justify-between">
+                                    <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
+                                    <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
+                                </div>
+                                <div className="service-fee flex justify-between">
+                                    <div>Service fee</div>
+                                    <div>$ {serviceFee}</div>
+                                </div>
+
+                                <div className="total flex justify-between">
+                                    <div>Total</div>
+                                    <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
+                                </div>
+                            </div>) : ''}
+
+                        </article>)}
+
 
                 </section>
             </article>

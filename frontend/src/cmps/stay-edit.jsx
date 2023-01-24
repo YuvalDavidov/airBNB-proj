@@ -118,7 +118,7 @@ export function StayEdit() {
             addressErr: stayToEdit.loc.address.length < 5 ? 'stay Address is too short. need at least 5 letters' : '',
             summaryErr: stayToEdit.summary.length < 15 ? 'stay Summary is too short. need at least 15 letters' : '',
             imgUrlsErr: stayToEdit.imgUrls.length <= 4 ? 'stay Images is too short. need at least 5 images' : '',
-            priceErr: stayToEdit.price <= 10 ? 'stay Price is too Low.' : '',
+            priceErr: stayToEdit.price < 100 ? 'stay Price is too Low.' : '',
             guestsErr: stayToEdit.stayDetails.guests <= 0 ? 'stay Guests amount is too low. need at 1 guest' : '',
             bedsErr: stayToEdit.stayDetails.beds <= 0 ? 'stay Beds amount is too low. need at 1 bed' : '',
             labelsErr: stayToEdit.labels <= 0 ? 'stay Lables amount is too low. need at 1 lable' : '',
@@ -127,8 +127,8 @@ export function StayEdit() {
         setErrs(currErrs)
         let arr = Object.values(currErrs)
 
+        console.log(arr);
         let isCopmleted = arr.some(err => !err)
-
         if (!isCopmleted) return
 
         const loc = await onGetLoc(stayToEdit.loc.address, stayToEdit.loc.country, stayToEdit.loc.city)

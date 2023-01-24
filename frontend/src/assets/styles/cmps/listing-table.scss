@@ -8,10 +8,6 @@ table.listing-table {
     border-collapse: collapse;
     // border-spacing: 8px;
 
-    & tbody {
-        height: 300px;
-    }
-
 
     & tr {
         border-bottom: solid 1px black;
@@ -35,7 +31,7 @@ table.listing-table {
         }
 
         & td {
-            height: 200px;
+            padding: 10px 0;
             text-align: left;
             margin-bottom: 10px;
             margin: 0 auto;
@@ -63,7 +59,7 @@ table.listing-table {
     }
 
     & img {
-        width: 150px;
+        width: 100px;
         border-radius: 10px;
     }
 }

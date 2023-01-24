@@ -11,7 +11,7 @@ export function ImageSlider({ imgs, stayId }) {
           {imgs.map((img) => (
             <SplideSlide key={img}>
               <img
-                onClick={() => navigate(`/details/${stayId}`)}
+                onClick={stayId ? (() => navigate(`/details/${stayId}`)) : (() => { return })}
                 width='100%'
                 src={img}
                 alt=''

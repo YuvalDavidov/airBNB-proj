@@ -546,21 +546,24 @@
     background-color: #7171711a;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 700px) {
     .stay-details {
-        max-width: 580px;
-    }
+        max-width: 700px;
 
-    .imgs-grid {
-        display: block;
-        width: 580px;
-        height: 500px;
+        & .image-slider {
+            width: 100%;
+            margin: 0 auto;
 
-        & img {
-            aspect-ratio: 1/0.89;
-            object-fit: cover;
+            & img {
+                aspect-ratio: 1/0.8;
+            }
+        }
+
+        & .reviews-bar {
+            grid-template-columns: 1fr;
         }
     }
+
 
     .stay-details-full {
         display: block;
@@ -568,5 +571,40 @@
 
     .reserve-module {
         margin: 0 auto;
+    }
+}
+
+.reserve-mobile {
+    border-top: 0.5px solid rgba(163, 163, 163, 0.685);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    bottom: 0;
+
+    & .mobile-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .date-picker {
+        position: absolute;
+        bottom: 100px;
+        max-height: max-content;
+
+        &.close {
+            display: none;
+        }
+
+        & button {
+            padding: 22px;
+        }
+    }
+
+    & button {
+        width: max-content;
     }
 }
