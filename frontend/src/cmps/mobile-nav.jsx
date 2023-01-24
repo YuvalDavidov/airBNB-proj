@@ -20,9 +20,9 @@ export function MobileNav() {
   window.onscroll = function () {
     var currentScrollPos = window.pageYOffset
     if (prevScrollpos > currentScrollPos) {
-        mobileNavRef.current.style.bottom = '0'
+      mobileNavRef.current.style.bottom = '0'
     } else {
-        mobileNavRef.current.style.bottom = '-62px'
+      mobileNavRef.current.style.bottom = '-62px'
     }
     prevScrollpos = currentScrollPos
   }

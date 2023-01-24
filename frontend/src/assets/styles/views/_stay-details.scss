@@ -70,6 +70,8 @@
     margin: 0 auto;
     position: relative;
 
+    min-width: 200px;
+
     & h2 {
         margin-bottom: 5px;
     }
@@ -125,7 +127,7 @@
 
 .imgs-grid {
     // height: 430px;
-    width: 1120px;
+    max-width: 1120px;
     margin-bottom: 25px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -166,29 +168,76 @@
 
 .imgs-modual {
     display: none;
+    background-color: #fefefe;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+
+    &.close {
+        animation: mymove2 1s 1;
+    }
 
     &.open {
-
-        z-index: 1000;
-        background-color: #fffafa;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        animation: all-img-grid-open 1s 1;
 
         & button {
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            background-color: #ffffff00;
+            top: 18px;
+            left: 14px;
             position: absolute;
         }
 
         & img {
             margin: 0 auto;
-            width: 70%;
+            width: 40%;
         }
     }
 
 
 }
+
+
+@keyframes all-img-grid-open {
+    from {
+        top: 100px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0px;
+        opacity: 1;
+    }
+
+}
+
+@keyframes mymove2 {
+    from {
+        top: 0px;
+        opacity: 1;
+    }
+
+    50% {
+        top: 100px;
+        opacity: 0;
+    }
+
+    100% {
+        display: none;
+    }
+
+}
+
 
 .stay-details-full {
 
@@ -620,6 +669,62 @@
 }
 
 
+.reserve-mobile {
+    border-top: 0.5px solid rgba(163, 163, 163, 0.685);
+    padding: 9px 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    bottom: 0;
+
+    & .mobile-details {
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+
+        & .price-night {
+            width: max-content;
+
+            & span {
+                margin-left: 5px;
+            }
+        }
+    }
+
+    & .date-picker {
+        position: absolute;
+        bottom: 100px;
+        max-height: max-content;
+
+        &.close {
+            display: none;
+        }
+
+        & button {
+            padding: 22px;
+        }
+    }
+
+    & button {
+        margin: auto 0;
+        height: 50px;
+        width: max-content;
+    }
+}
+
+// responsiv
+
+@media (max-width: 1220px) {
+    .stay-details {
+        margin: 0 auto;
+    }
+}
+
+// mobile only
+
 @media (max-width: 700px) {
     .stay-details {
         max-width: 700px;
@@ -644,6 +749,10 @@
                 // position: absolute;
                 display: flex;
                 overflow: auto clip;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 & .review {
                     margin-right: 12px;
@@ -709,48 +818,5 @@
 
     .reserve-module {
         margin: 0 auto;
-    }
-}
-
-.reserve-mobile {
-    border-top: 0.5px solid rgba(163, 163, 163, 0.685);
-    padding: 9px 15px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
-    width: 100%;
-    position: fixed;
-    background-color: white;
-    bottom: 0;
-
-    & .mobile-details {
-        padding: 10px 0;
-        display: flex;
-        flex-direction: column;
-
-        & .price-night {
-            // padding-top: 10px;
-            width: 92px;
-        }
-    }
-
-    & .date-picker {
-        position: absolute;
-        bottom: 100px;
-        max-height: max-content;
-
-        &.close {
-            display: none;
-        }
-
-        & button {
-            padding: 22px;
-        }
-    }
-
-    & button {
-        margin: auto 0;
-        height: 50px;
-        width: max-content;
     }
 }

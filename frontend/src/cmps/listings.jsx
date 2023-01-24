@@ -3,11 +3,13 @@ import { useState } from "react"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
+import { InfoTr } from "./info-tr";
 
 
 export function Listings() {
 
     const { myStays } = useSelector((storeState) => storeState.stayModule)
+    const { isMobile } = useSelector((storeState) => storeState.systemModule)
     const [stays, setStays] = useState(myStays)
     const [descending, setDescending] = useState(false)
     const navigate = useNavigate()
@@ -35,38 +37,56 @@ export function Listings() {
 
     if (!myStays) return <div>You dont have stays!!!!!!!</div>
 
-    return (
+
+    return (<>
+
         <section className="listing">
             <h1>listings {stays.length}</h1>
 
-            <table className="listing-table">
+            {isMobile ? (<table className="listing-table">
                 <tbody>
 
                     <tr>
-                        <th>Listing</th>
-                        <th>TODO</th>
-                        <th>CAPACITY</th>
-                        <th>BEDROOMS</th>
-                        <th onClick={() => { onSortByPrice() }}>PRICE</th>
+                        <th>LISTING</th>
                         <th>LOCATION</th>
                         <th>DATE ADDED</th>
                     </tr>
-                    {stays.map((stay) => {
-                        return <tr key={stay._id} className="data">
-                            <td className="listing-td" ><div><a href="#"><div onClick={() => { navigate(`/details/${stay._id}`) }} className="listing-prev"><img src={stay.imgUrls[0]} /><h3 className="-name">{stay.name}</h3></div></a></div>  </td>
-                            <td><button onClick={() => { navigate(`/dashboard/${stay._id}`) }}>update</button></td>
-                            <td>{stay.stayDetails.guests}</td>
-                            <td>{stay.stayDetails.bedrooms}</td>
-                            <td>{stay.price}</td>
-                            <td>{stay.loc.country}, {stay.loc.city}</td>
-                            <td>sometime</td>
-                        </tr>
-                    })}
+
+                    {stays.map(stay => <InfoTr key={stay._id} stay={stay} />)}
+
 
                 </tbody>
-            </table>
+            </table>)
+                : (<table className="listing-table">
+                    <tbody>
+
+                        <tr>
+                            <th>LISTING</th>
+                            <th>TODO</th>
+                            <th>CAPACITY</th>
+                            <th>BEDROOMS</th>
+                            <th onClick={() => { onSortByPrice() }}>PRICE</th>
+                            <th>LOCATION</th>
+                            <th>DATE ADDED</th>
+                        </tr>
+                        {stays.map((stay) => {
+                            return <tr key={stay._id} className="data">
+                                <td className="listing-td" ><div><a href="#"><div onClick={() => { navigate(`/details/${stay._id}`) }} className="listing-prev"><img src={stay.imgUrls[0]} /><h3 className="-name">{stay.name}</h3></div></a></div>  </td>
+                                <td><button onClick={() => { navigate(`/dashboard/${stay._id}`) }}>update</button></td>
+                                <td>{stay.stayDetails.guests}</td>
+                                <td>{stay.stayDetails.bedrooms}</td>
+                                <td>{stay.price}</td>
+                                <td>{stay.loc.country}, {stay.loc.city}</td>
+                                <td>{new Date(stay.createdAt).getDate()}/{new Date(stay.createdAt).getMonth() + 1}</td>
+                            </tr>
+                        })}
+
+                    </tbody>
+                </table>)}
+
+
         </section>
-    )
+    </>)
 }
 
 const user = {

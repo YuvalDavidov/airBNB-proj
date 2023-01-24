@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router'
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
-import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets } from 'react-icons/md';
+import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets, MdOutlineArrowBackIosNew } from 'react-icons/md';
 import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
@@ -31,7 +31,7 @@ export function StayDetails() {
     const [pickedDate, setPickedDate] = useState({ startDate: new Date(), endDate: null })
     const [datePickerModual, setDatePickerModual] = useState(false)
     const [guestsModual, setGuestsModual] = useState(false)
-    const [imgsModual, serImgsModual] = useState(false)
+    const [imgsModual, setImgsModual] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const user = useSelector((storeState) => storeState.userModule.user)
     const { isMobile } = useSelector((storeState) => storeState.systemModule)
@@ -165,7 +165,7 @@ export function StayDetails() {
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (<>
 
-        <article className="details-header-bar">
+        {isMobile ? ('') : (<article className="details-header-bar">
 
             <div className="details-header-bar-container">
 
@@ -198,15 +198,21 @@ export function StayDetails() {
 
             </div>
         </article>
+        )}
 
 
         <section className="stay-details">
 
-            <article className={`imgs-modual ${imgsModual ? 'open' : ''}`}>
-                <button onClick={() => { serImgsModual(false) }} >back</button>
+            <article className={`imgs-modual ${imgsModual ? 'open' : 'close'}`}>
+                <button onClick={() => { setImgsModual(false) }} >
+                    <MdOutlineArrowBackIosNew />
+                </button>
                 {stay.imgUrls.map((img, idx) => {
                     return <img key={idx} src={imgUrls[idx]} />
                 })}
+                {/* {stay.imgUrls.map((img, idx) => {
+                    return <img key={idx} src={imgUrls[idx]} />
+                })} */}
             </article>
 
             {isMobile ? ('') : (<>
@@ -247,7 +253,7 @@ export function StayDetails() {
                     <img src={imgUrls[3]} />
                     <img src={imgUrls[4]} />
 
-                    <button onClick={() => { serImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
+                    <button onClick={() => { setImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
                 </article>)
             }
 
