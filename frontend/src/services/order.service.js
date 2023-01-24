@@ -23,6 +23,9 @@ async function query(filterBy) {
     if (filterBy?.hostId) {
         orders = orders.filter(order => order.aboutOrder.stay.host._id === filterBy.hostId)
     }
+    if (filterBy?.userId) {
+        orders = orders.filter(order => order.aboutUser.id === filterBy.userId)
+    }
     return orders
 }
 

@@ -5,7 +5,9 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    getFullDate,
+    getStatusColor
 }
 
 function makeId(length = 6) {
@@ -60,4 +62,25 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+function getFullDate(date) {
+    let day = new Date(date).getDate()
+    let month = new Date(date).getMonth() +1
+    let year = new Date(date).getFullYear()
+
+    return `${month}/${day}/${year}`
+}
+
+function getStatusColor(status) {
+    switch (status) {
+        case 'Approved':
+            return 'green'
+        case 'Rejected':
+            return 'red'
+        case 'Pending':
+            return 'orange'
+        default: 
+            return 'rgb(34,34,34)'
+    }
 }

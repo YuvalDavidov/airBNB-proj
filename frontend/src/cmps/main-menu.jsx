@@ -79,7 +79,7 @@ export function MainMenu() {
         <div className='dropdown'>
           {!user && <a href='#' onClick={() => onOpenModal(false)}>Log in</a>}
           {!user && <a href='#' onClick={() => onOpenModal(true)}>Sign up</a>}
-          {user && <a href='#'>Trips</a>}
+          {user && <a href='/trips'>Trips</a>}
           {user && <a href='/wishlist'>Wishlist</a>}
           <hr />
           {user && <a href='/dashboard'>Manage listings</a>}

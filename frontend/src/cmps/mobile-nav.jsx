@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
 export function MobileNav() {
@@ -16,13 +16,19 @@ export function MobileNav() {
     navigate('/wishlist')
   }
 
+  useEffect(() => {
+    return () => {
+      window.onscroll = () => {return}
+    }
+  },[])
+
   var prevScrollpos = window.pageYOffset
   window.onscroll = function () {
     var currentScrollPos = window.pageYOffset
     if (prevScrollpos > currentScrollPos) {
-        mobileNavRef.current.style.bottom = '0'
+      mobileNavRef.current.style.bottom = '0'
     } else {
-        mobileNavRef.current.style.bottom = '-62px'
+      mobileNavRef.current.style.bottom = '-62px'
     }
     prevScrollpos = currentScrollPos
   }

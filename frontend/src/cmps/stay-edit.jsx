@@ -7,6 +7,8 @@ import { MultiAmenitiesSelect } from "./multi-amenities-select"
 import { MultiLabelsSelect } from "./multi-select-lables"
 import { showErrorMsg } from "../services/event-bus.service"
 import axios from "axios"
+import { IconContext } from "react-icons"
+import { ImCloudUpload } from "react-icons/im"
 
 
 export function StayEdit() {
@@ -87,9 +89,10 @@ export function StayEdit() {
     }
 
     function onUploadImg(ev) {
-        uploadService.uploadImg(ev)
-            .then((imgUrl) => {
-                setStayToEdit((prevStay) => ({ ...prevStay, imgUrls: [...prevStay.imgUrls, imgUrl.url] }))
+        uploadService.uploadMany(ev)
+            .then((imgsUrl) => {
+                let imgsArr = imgsUrl.map(img => img.url)
+                setStayToEdit((prevStay) => ({ ...prevStay, imgUrls: [...prevStay.imgUrls, ...imgsArr] }))
             })
     }
 
@@ -127,20 +130,18 @@ export function StayEdit() {
         setErrs(currErrs)
         let arr = Object.values(currErrs)
 
-        console.log(arr);
-        let isCopmleted = arr.some(err => !err)
-        if (!isCopmleted) return
+        let isNotCopmleted = arr.some(err => err)
+        if (isNotCopmleted) return
 
         const loc = await onGetLoc(stayToEdit.loc.address, stayToEdit.loc.country, stayToEdit.loc.city)
         let stayToSave = { ...stayToEdit }
         stayToSave.loc.lat = loc.lat
         stayToSave.loc.lng = loc.lng
+        stayToSave.createdAt = new Date()
 
         stayService.save(stayToSave)
             .then(() => navigate('/'))
     }
-
-    // console.log(stayToEdit);
 
     return (
         <section className="edit-stay">
@@ -155,36 +156,48 @@ export function StayEdit() {
 
             <label htmlFor="">Address</label>
             <div className="address">
-                <label htmlFor="">City
-                    <input type="text"
-                        id="city"
-                        name="city"
-                        value={stayToEdit.loc.city}
-                        placeholder="City"
-                        onChange={handleChange} />
-                    <p>{errs.cityErr}</p>
-                </label>
-                <label htmlFor="">Country
-                    <input type="text"
-                        id="country"
-                        name="country"
-                        value={stayToEdit.loc.country}
-                        placeholder="Country"
-                        onChange={handleChange} />
-                    <p>{errs.countryErr}</p>
-                </label>
-                <label htmlFor="">Address
-                    <input type="text"
-                        id="address"
-                        name="address"
-                        value={stayToEdit.loc.address}
-                        placeholder="Address"
-                        onChange={handleChange} />
-                    <p>{errs.addressErr}</p>
-                </label>
+
+                <input type="text"
+                    id="city"
+                    name="city"
+                    value={stayToEdit.loc.city}
+                    placeholder="City"
+                    onChange={handleChange} />
+                <p>{errs.cityErr}</p>
+
+
+                <input type="text"
+                    id="country"
+                    name="country"
+                    value={stayToEdit.loc.country}
+                    placeholder="Country"
+                    onChange={handleChange} />
+                <p>{errs.countryErr}</p>
+
+
+                <input type="text"
+                    id="address"
+                    name="address"
+                    value={stayToEdit.loc.address}
+                    placeholder="Street"
+                    onChange={handleChange} />
+                <p>{errs.addressErr}</p>
+
             </div>
 
-            <input type="file" className="file" onChange={(event) => { onUploadImg(event) }} />
+
+            <div className="uploader">
+                <IconContext.Provider
+                    value={{ className: "my-icons" }}>
+                    <ImCloudUpload />
+                </IconContext.Provider>
+                <div className="grid">
+                    <a href="">click to upload</a>
+                    <small>you can choose many images</small>
+                </div>
+
+                <input type="file" className="file" multiple accept="true" onChange={(event) => { onUploadImg(event) }} />
+            </div>
 
 
 
@@ -252,13 +265,13 @@ export function StayEdit() {
                     </select>
                 </label>
 
-                <label htmlFor="">Allow pets?
-                    <input type="checkbox"
-                        name="allowPets"
-                        id="allowPets"
-                        onChange={handleChange}
-                        value={stayToEdit.stayDetails.allowPets} /></label>
             </div>
+            <label htmlFor="">Allow pets?
+                <input type="checkbox"
+                    name="allowPets"
+                    id="allowPets"
+                    onChange={handleChange}
+                    value={stayToEdit.stayDetails.allowPets} /></label>
 
 
             <label htmlFor="">Labels
