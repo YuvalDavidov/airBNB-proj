@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from 'react-router'
+import { useSelector } from "react-redux";
+
+import { StayMap } from "../cmps/stay-map";
+import { StayDatePicker } from "../cmps/stay-date-picker";
+import { GradientButton } from "../cmps/gradient-button";
+import { ImageSlider } from "../cmps/image-slider";
+
+import { stayService } from "../services/stay.service.local";
+import { showErrorMsg } from "../services/event-bus.service";
+
+import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
+import { toggleInDetails } from "../store/stay.actions";
+
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
@@ -8,22 +21,11 @@ import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator, TbGridDots } from 'react-icons/tb';
-import { StayMap } from "../cmps/stay-map";
-import { StayDatePicker } from "../cmps/stay-date-picker";
-import { stayService } from "../services/stay.service.local";
-import { showErrorMsg } from "../services/event-bus.service";
-import { GradientButton } from "../cmps/gradient-button";
 import { IconContext } from "react-icons";
 import { TiHeartFullOutline } from "react-icons/ti";
-import { useSelector } from "react-redux";
-import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
-import { toggleInDetails } from "../store/stay.actions";
-import { ImageSlider } from "../cmps/image-slider";
-
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
-
 
 export function StayDetails() {
 
@@ -41,14 +43,14 @@ export function StayDetails() {
 
     useEffect(() => {
         toggleInDetails(true)
-        stayService.getById(stayId)
-            .then(setStay)
+        loadStay()
+        // stayService.getById(stayId)
+        //     .then(setStay)
     }, [])
 
     useEffect(() => {
         if (!stay) return
         if (isMobile) return
-
 
         const imgGrid = document.querySelector('.imgs-grid')
         const reserveBtn = document.getElementById('reserve-btn')
@@ -65,7 +67,6 @@ export function StayDetails() {
 
         function reserveUpdate(entries) {
             entries.forEach((entry) => {
-
                 headerBtn.style.display = entry.isIntersecting ? 'none' : 'flex'
 
             })
@@ -78,9 +79,17 @@ export function StayDetails() {
         }
 
 
-
-
     }, [stay, isMobile])
+
+    async function loadStay() {
+        try {
+            const stay = await stayService.getById(stayId)
+            setStay(stay)
+        } catch (error) {
+
+        }
+
+    }
 
     function getStayReviewRateAvg(stayReviews) {
         let rate = 0
@@ -161,6 +170,28 @@ export function StayDetails() {
         return avg
     }
 
+    function get6Reviews() {
+        let stayReviews = reviews.map(review => {
+            return <li key={review.id} className="review">
+                <div className="review-user">
+                    <img src={review.by.imgUrl} />
+                    <div>
+                        <h4>{review.by.fullname}</h4>
+                        <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                    </div>
+                </div>
+                <div className="txt">
+                    {review.txt}
+                </div>
+                {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+            </li>
+        })
+
+        console.log(stayReviews.splice(0, 5));
+
+        //    return stayReviews.splice(0,5)
+    }
+
     if (!stay) return <div>Loading...</div>
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (<>
@@ -186,7 +217,7 @@ export function StayDetails() {
                         </div>
 
                         <div className="header-review flex align-center">
-                            <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                            <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                             <span className="dote">•</span>
                             <span><a href="#reviews">{reviews.length} reviews</a></span>
 
@@ -234,7 +265,7 @@ export function StayDetails() {
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
-                        <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                        <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                         <span className="dote">•</span>
                         <span><a href="#reviews">{reviews.length} reviews</a></span>
                         <span className="dote">•</span>
@@ -278,7 +309,7 @@ export function StayDetails() {
                         <h2>{name}</h2>
                         <div className="stay-mini-sumerry align-center">
                             <div className="flex align-center">
-                                <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 <span className="dote">•</span>
@@ -470,7 +501,7 @@ export function StayDetails() {
                                 </div>
 
                                 <div className="flex align-center">
-                                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                                    <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                                     <span className="dote">•</span>
                                     <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 </div>
@@ -577,7 +608,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -633,7 +664,7 @@ export function StayDetails() {
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
-                                    return <li key={review.id} className='review'>
+                                    return <li key={review.id} className="review">
                                         <div className="review-user">
                                             <img src={review.by.imgUrl} />
                                             <div>
@@ -650,7 +681,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)
@@ -662,7 +693,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -718,12 +749,12 @@ export function StayDetails() {
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
-                                    return <li key={review.id} className='review'>
+                                    return <li key={review.id} className="review">
                                         <div className="review-user">
                                             <img src={review.by.imgUrl} />
                                             <div>
                                                 <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                                <p>{new Date(review.createdAt).getFullYear() + 1}/{month[new Date(review.createdAt).getMonth()]}</p>
                                             </div>
                                         </div>
                                         <div className="txt">
@@ -735,7 +766,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)

@@ -1,5 +1,4 @@
 .mobile-nav {
-    // height: 125px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -7,16 +6,15 @@
     border-top: 1px solid #ebebeb;
     display: grid;
     grid-template-columns: 20px 1fr 20px;
-    // background-color: red;
     padding-bottom: 8px;
     padding-top: 12px;
-    z-index: 100;
+    z-index: 40;
     transition: 0.2s;
 
     .nav-container {
         grid-column: 2;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
         .nav-item {
             display: flex;

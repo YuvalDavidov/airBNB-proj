@@ -1,12 +1,11 @@
-import { HomePage } from './pages/home-page.jsx'
 import { AboutUs } from './pages/about-us.jsx'
-import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
 import { StayIndex } from './pages/stay-index.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
 import { BookStay } from './pages/book-order.jsx'
 import { Wishlist } from './pages/wishlist.jsx'
 import { UserTrips } from './cmps/user-trips.jsx'
+import { LoginPage } from './pages/login-page.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -15,6 +14,11 @@ const routes = [
         path: '/',
         component: <StayIndex />,
         label: 'Stays'
+    },
+    {
+        path: 'login',
+        component: <LoginPage />,
+        label: 'Login'
     },
     {
         path: 'details/:stayId',

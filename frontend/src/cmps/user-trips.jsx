@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { loadOrders } from '../store/order.actions'
 import { userService } from '../services/user.service'
 import { utilService } from '../services/util.service'
+import { UserTripsTr } from './user-trips-tr'
 
 export function UserTrips() {
   const { orders } = useSelector((storeState) => storeState.orderModule)
@@ -55,13 +56,12 @@ export function UserTrips() {
       {isMobile && <table className="mobile-trips-table">
         <thead>
             <tr>
-                <td>Destination</td>
-                <td>Dates</td>
-                <td>Status</td>
+                <th className='destination-th'>Destination</th>
+                <th>Dates</th>
             </tr>
         </thead>
         <tbody>
-            {orders.map(order => {})}
+            {orders.map(order => <UserTripsTr key={order._id} order={order} />)}
         </tbody>
         </table>}
     </section>

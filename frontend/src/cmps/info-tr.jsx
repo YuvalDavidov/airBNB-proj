@@ -22,7 +22,7 @@ export function InfoTr({ stay }) {
                 <div><span>bedrooms amount:</span> {stay.stayDetails.bedrooms}</div>
                 <div><span>price:</span> ${stay.price}</div>
             </div>
-            <GradientButton onClick={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} />
+            <GradientButton onClickBtn={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} />
 
         </td></tr>}
     </>)

@@ -29,7 +29,7 @@ export function StayEdit() {
     const [stayToEdit, setStayToEdit] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
     const { stayId } = useParams()
-
+    console.log(stayToEdit);
     useEffect(() => {
         const button = document.querySelector('.edit-btn')
         button.addEventListener('mousemove', e => {
@@ -139,8 +139,8 @@ export function StayEdit() {
         stayToSave.loc.lng = loc.lng
         stayToSave.createdAt = new Date()
 
-        stayService.save(stayToSave)
-            .then(() => navigate('/'))
+        const savedStay = await stayService.save(stayToSave)
+        navigate('/')
     }
 
     return (

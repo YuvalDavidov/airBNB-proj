@@ -1,8 +1,10 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 
 const STORAGE_KEY = 'stayDB'
+const BASE_URL = 'stay/'
 
 export const stayService = {
   query,
@@ -23,41 +25,29 @@ export const stayService = {
 _createStays()
 
 async function query(filterBy) {
-  let stays = await storageService.query(STORAGE_KEY)
-
-
-  if (filterBy?.hostId) {
-    stays = stays.filter(stay => stay.host._id === filterBy.hostId)
-  }
-
-  if (filterBy?.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
-  if (filterBy?.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
-  if (filterBy?.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
-  if (filterBy?.label === 'Trending') return stays
-  if (filterBy?.label) stays = stays.filter(stay => stay.labels.includes(filterBy.label))
-
-
-  return stays
+  const queryPatams = ``
+  return httpService.get(BASE_URL + queryPatams)
 }
 
 function getById(stayId) {
-  return storageService.get(STORAGE_KEY, stayId)
+  console.log('hi');
+  return httpService.get(BASE_URL + stayId)
 }
 
 async function remove(stayId) {
   // throw new Error('Nope')
-  await storageService.remove(STORAGE_KEY, stayId)
+  await httpService.delete(BASE_URL, stayId)
 }
 
 async function save(stay) {
   let savedStay
   console.log(stay);
   if (stay._id) {
-    savedStay = await storageService.put(STORAGE_KEY, stay)
+    savedStay = await httpService.put(BASE_URL + stay._id, stay)
   } else {
     // Later, owner is set by the backend
     stay.host = userService.getLoggedinUser()
-    savedStay = await storageService.post(STORAGE_KEY, stay)
+    savedStay = await httpService.post(BASE_URL, stay)
   }
   return savedStay
 }

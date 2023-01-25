@@ -1,0 +1,104 @@
+.login-page {
+  header {
+    min-height: 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    h5 {
+      justify-self: center;
+      align-self: center;
+      grid-column: 2;
+      margin: 0;
+      font-size: 1em;
+      font-family: Cereal-Medium;
+    }
+  }
+  hr {
+    width: 100%;
+    grid-column: 1/-1;
+    border: 0;
+    border-top: 1px solid rgb(234, 234, 234);
+    margin: 0;
+    height: 5px;
+  }
+
+  h4 {
+    font-family: Cereal-Book;
+    font-size: em(22px);
+    margin-top: em(20px);
+    margin-bottom: em(20px);
+  }
+
+  .login-form {
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 12px;
+    overflow: hidden;
+    hr {
+      background-color: transparent;
+      border: 0;
+      height: 1px;
+      margin: 1px 0;
+      border-top: 1px solid rgb(175, 175, 175);
+    }
+    input {
+      padding: 16px 10px;
+      border: 0;
+      font-size: em(17px);
+      width: 100%;
+      border-radius: 12px;
+    }
+  }
+  .or-line {
+    display: flex;
+    align-items: center;
+    font-size: em(12px);
+    span {
+      margin: 0 15px;
+    }
+    hr {
+      width: 100%;
+      // height: 0.5px;
+      border: 0;
+      border-top: 1px solid rgb(221, 221, 221);
+      // background-color: gray;
+    }
+  }
+  .signin-btn {
+    width: 100%;
+    padding: 14px;
+    font-family: Cereal-Bold;
+    font-size: 1em;
+    color: white;
+    border-radius: 8px;
+    margin: 25px 0;
+  }
+  .toggle-signup {
+    background-color: transparent;
+    border: 0;
+    font-size: 1em;
+    text-decoration: underline;
+    margin-bottom: 20px;
+  }
+  
+
+  input {
+    padding: 16px 10px;
+    border: 0;
+    font-size: em(17px);
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .login-page {
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+    & > * {
+      grid-column: 2;
+      min-width: 0;
+      max-width: 100%;
+    }
+  }
+}

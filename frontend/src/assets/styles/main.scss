@@ -23,6 +23,7 @@
 @import "views/book";
 @import "views/wishlist";
 @import "views/dashboard";
+@import "views/login-page";
 
 // Components
 @import "cmps/app-header";
@@ -43,3 +44,5 @@
 @import "cmps/gradient-button";
 @import "cmps/mobile-nav";
 @import "cmps/user-trips";
+@import "cmps/user-trips-tr";
+@import "cmps/reservations-tr";
