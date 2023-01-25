@@ -7,7 +7,7 @@ import { StayDatePicker } from "../cmps/stay-date-picker";
 import { GradientButton } from "../cmps/gradient-button";
 import { ImageSlider } from "../cmps/image-slider";
 
-import { stayService } from "../services/stay.service";
+import { stayService } from "../services/stay.service.local";
 import { showErrorMsg } from "../services/event-bus.service";
 
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
@@ -171,7 +171,7 @@ export function StayDetails() {
     }
 
     function get6Reviews() {
-        let reviewsToShow = reviews.map(review => {
+        let stayReviews = reviews.map(review => {
             return <li key={review.id} className="review">
                 <div className="review-user">
                     <img src={review.by.imgUrl} />
@@ -187,9 +187,9 @@ export function StayDetails() {
             </li>
         })
 
-        console.log(reviewsToShow.splice(0, 6));
+        console.log(stayReviews.splice(0, 5));
 
-        return reviewsToShow.splice(0, 6)
+        //    return stayReviews.splice(0,5)
     }
 
     if (!stay) return <div>Loading...</div>
@@ -663,7 +663,21 @@ export function StayDetails() {
                             </div>)}
 
                             <div className="reviews-list">
-                                {get6Reviews()}
+                                {reviews.map(review => {
+                                    return <li key={review.id} className="review">
+                                        <div className="review-user">
+                                            <img src={review.by.imgUrl} />
+                                            <div>
+                                                <h4>{review.by.fullname}</h4>
+                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                            </div>
+                                        </div>
+                                        <div className="txt">
+                                            {review.txt}
+                                        </div>
+                                        {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
+                                    </li>
+                                })}
                             </div>
 
                         </section>) :
@@ -740,7 +754,7 @@ export function StayDetails() {
                                             <img src={review.by.imgUrl} />
                                             <div>
                                                 <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                                <p>{new Date(review.createdAt).getFullYear() + 1}/{month[new Date(review.createdAt).getMonth()]}</p>
                                             </div>
                                         </div>
                                         <div className="txt">
