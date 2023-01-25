@@ -1,10 +1,14 @@
 .wishlist {
     h1 {
-        font-family: Cereal-Medium;
+        font-family: Cereal-Book;
         font-size: em(32px);
         letter-spacing: 1px;
         margin-top: 55px;
         margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+        font-family: Cereal-Medium;
     }
 }
 
@@ -53,5 +57,18 @@
         min-width: 0;
         max-width: 100%;
       }
+    }
+  }
+
+  .logged-out-wishlist {
+    h2 {
+        font-size: rem(22px);
+    }
+    p {
+        font-size: rem(14px);
+        color: rgb(113,113,113);
+    }
+    .open-login-modal-btn {
+        width: 93px;
     }
   }

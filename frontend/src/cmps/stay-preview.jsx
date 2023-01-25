@@ -14,14 +14,34 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
   const navigate = useNavigate()
   const user = useSelector((storeState) => storeState.userModule.user)
 
-  function calcMeanRate(stayReviews) {
-    if (!stayReviews || !stayReviews.length) return null
-    const sum = stayReviews.reduce((acc, review) => {
-      acc += review.rate
-      return acc
-    }, 0)
-    return sum / stayReviews.length
-  }
+  // function calcMeanRate(stayReviews) {
+  //   if (!stayReviews || !stayReviews.length) return null
+  //   const sum = stayReviews.reduce((acc, review) => {
+  //     acc += review.rate
+  //     return acc
+  //   }, 0)
+  //   return sum / stayReviews.length
+  // }
+
+  function getStayReviewRateAvg(stayReviews) {
+    let rate = 0
+    let rateCount = 0
+    let sum = 0
+    let count = 0
+
+    stayReviews.forEach(review => {
+
+        for (const key in review.moreRate) {
+            sum += review.moreRate[key]
+            count++
+        }
+        rate += sum / count
+        rateCount++
+    })
+
+    const avg = rate / rateCount
+    return avg
+}
 
   function calcAirDistance(lat1, lng1, lat2, lng2) {
     var R = 6371 // km
@@ -104,9 +124,9 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
               ></path>
             </svg>
             <span className='rate-num'>
-              {stay.reviews.length > 0 ? calcMeanRate(stay.reviews) % 1 !== 0
-                ? calcMeanRate(stay.reviews).toFixed(2)
-                : calcMeanRate(stay.reviews).toFixed(1)
+              {stay.reviews.length > 0 ? getStayReviewRateAvg(stay.reviews) % 1 !== 0
+                ? getStayReviewRateAvg(stay.reviews).toFixed(2)
+                : getStayReviewRateAvg(stay.reviews).toFixed(1)
                 : ''}
             </span>
           </span>
