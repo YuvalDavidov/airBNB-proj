@@ -144,7 +144,7 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
         </div>
         <div className='dates'>Jan 17 – 22</div>
         <div className='price'>
-          <span>₪{stay.price.toLocaleString('en-US')}</span> night
+          <span>${stay.price.toLocaleString('en-US')}</span> night
         </div>
         {/* <div className='actions'>
           <button onClick={(ev) => onUpdateStay(ev, stay)}>Edit</button>
