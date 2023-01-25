@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from 'react-router'
+import { useSelector } from "react-redux";
+
+import { StayMap } from "../cmps/stay-map";
+import { StayDatePicker } from "../cmps/stay-date-picker";
+import { GradientButton } from "../cmps/gradient-button";
+import { ImageSlider } from "../cmps/image-slider";
+
+import { stayService } from "../services/stay.service.local";
+import { showErrorMsg } from "../services/event-bus.service";
+
+import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
+import { toggleInDetails } from "../store/stay.actions";
+
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
@@ -8,22 +21,11 @@ import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator, TbGridDots } from 'react-icons/tb';
-import { StayMap } from "../cmps/stay-map";
-import { StayDatePicker } from "../cmps/stay-date-picker";
-import { stayService } from "../services/stay.service.local";
-import { showErrorMsg } from "../services/event-bus.service";
-import { GradientButton } from "../cmps/gradient-button";
 import { IconContext } from "react-icons";
 import { TiHeartFullOutline } from "react-icons/ti";
-import { useSelector } from "react-redux";
-import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
-import { toggleInDetails } from "../store/stay.actions";
-import { ImageSlider } from "../cmps/image-slider";
-
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
-
 
 export function StayDetails() {
 
@@ -49,7 +51,6 @@ export function StayDetails() {
         if (!stay) return
         if (isMobile) return
 
-
         const imgGrid = document.querySelector('.imgs-grid')
         const reserveBtn = document.getElementById('reserve-btn')
 
@@ -65,7 +66,6 @@ export function StayDetails() {
 
         function reserveUpdate(entries) {
             entries.forEach((entry) => {
-
                 headerBtn.style.display = entry.isIntersecting ? 'none' : 'flex'
 
             })
@@ -76,8 +76,6 @@ export function StayDetails() {
                 header.style.display = entry.isIntersecting ? 'none' : 'grid'
             })
         }
-
-
 
 
     }, [stay, isMobile])
@@ -633,7 +631,7 @@ export function StayDetails() {
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
-                                    return <li key={review.id} className='review'>
+                                    return <li key={review.id} className="review">
                                         <div className="review-user">
                                             <img src={review.by.imgUrl} />
                                             <div>
@@ -718,7 +716,7 @@ export function StayDetails() {
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
-                                    return <li key={review.id} className='review'>
+                                    return <li key={review.id} className="review">
                                         <div className="review-user">
                                             <img src={review.by.imgUrl} />
                                             <div>

@@ -1,14 +1,14 @@
-const carService = require('./car.service.js')
+const stayService = require('./stay.service.js')
 
 const logger = require('../../services/logger.service')
 
-async function getCars(req, res) {
+async function getStays(req, res) {
   try {
     logger.debug('Getting Cars')
     const filterBy = {
       txt: req.query.txt || ''
     }
-    const cars = await carService.query(filterBy)
+    const cars = await stayService.query(filterBy)
     res.json(cars)
   } catch (err) {
     logger.error('Failed to get cars', err)
@@ -16,10 +16,10 @@ async function getCars(req, res) {
   }
 }
 
-async function getCarById(req, res) {
+async function getStayById(req, res) {
   try {
     const carId = req.params.id
-    const car = await carService.getById(carId)
+    const car = await stayService.getById(carId)
     res.json(car)
   } catch (err) {
     logger.error('Failed to get car', err)
@@ -27,13 +27,13 @@ async function getCarById(req, res) {
   }
 }
 
-async function addCar(req, res) {
-  const {loggedinUser} = req
+async function addStay(req, res) {
+  const { loggedinUser } = req
 
   try {
     const car = req.body
     car.owner = loggedinUser
-    const addedCar = await carService.add(car)
+    const addedCar = await stayService.add(car)
     res.json(addedCar)
   } catch (err) {
     logger.error('Failed to add car', err)
@@ -41,11 +41,10 @@ async function addCar(req, res) {
   }
 }
 
-
-async function updateCar(req, res) {
+async function updateStay(req, res) {
   try {
     const car = req.body
-    const updatedCar = await carService.update(car)
+    const updatedCar = await stayService.update(car)
     res.json(updatedCar)
   } catch (err) {
     logger.error('Failed to update car', err)
@@ -54,10 +53,10 @@ async function updateCar(req, res) {
   }
 }
 
-async function removeCar(req, res) {
+async function removeStay(req, res) {
   try {
     const carId = req.params.id
-    const removedId = await carService.remove(carId)
+    const removedId = await stayService.remove(carId)
     res.send(removedId)
   } catch (err) {
     logger.error('Failed to remove car', err)
@@ -65,15 +64,15 @@ async function removeCar(req, res) {
   }
 }
 
-async function addCarMsg(req, res) {
-  const {loggedinUser} = req
+async function addStayMsg(req, res) {
+  const { loggedinUser } = req
   try {
     const carId = req.params.id
     const msg = {
       txt: req.body.txt,
       by: loggedinUser
     }
-    const savedMsg = await carService.addCarMsg(carId, msg)
+    const savedMsg = await stayService.addCarMsg(carId, msg)
     res.json(savedMsg)
   } catch (err) {
     logger.error('Failed to update car', err)
@@ -82,13 +81,13 @@ async function addCarMsg(req, res) {
   }
 }
 
-async function removeCarMsg(req, res) {
-  const {loggedinUser} = req
+async function removeStayMsg(req, res) {
+  const { loggedinUser } = req
   try {
     const carId = req.params.id
-    const {msgId} = req.params
+    const { msgId } = req.params
 
-    const removedId = await carService.removeCarMsg(carId, msgId)
+    const removedId = await stayService.removeCarMsg(carId, msgId)
     res.send(removedId)
   } catch (err) {
     logger.error('Failed to remove car msg', err)
@@ -98,11 +97,11 @@ async function removeCarMsg(req, res) {
 }
 
 module.exports = {
-  getCars,
-  getCarById,
-  addCar,
-  updateCar,
-  removeCar,
-  addCarMsg,
-  removeCarMsg
+  getStays,
+  getStayById,
+  addStay,
+  updateStay,
+  removeStay,
+  addStayMsg,
+  removeStayMsg
 }

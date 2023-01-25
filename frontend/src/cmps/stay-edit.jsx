@@ -29,7 +29,7 @@ export function StayEdit() {
     const [stayToEdit, setStayToEdit] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
     const { stayId } = useParams()
-
+    console.log(stayToEdit);
     useEffect(() => {
         const button = document.querySelector('.edit-btn')
         button.addEventListener('mousemove', e => {
