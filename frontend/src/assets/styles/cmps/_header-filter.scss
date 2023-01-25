@@ -22,7 +22,7 @@
     border-radius: 50px;
     position: relative;
     width: max-content;
-    height: 100%;
+
 
 
 
@@ -43,6 +43,10 @@
         &.add-guests {
             color: #717171;
             font-family: Cereal-Book;
+
+            &.bold {
+                font-family: Cereal-Bold;
+            }
         }
 
     }
@@ -199,7 +203,29 @@
     max-width: 100px;
 }
 
-// .filter-date-text {
-//     padding: 10px 5px 3px 8px;
-//     margin: 1px 1px 1px 1px;
-// }
+// responsive part! 
+
+@media (max-width: 950px) {
+    .stay-header-filter {
+        position: absolute;
+        left: 200px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .logo {
+        display: none;
+    }
+
+    .main-menu {
+        display: none;
+    }
+
+    .stay-header-filter {
+        position: relative;
+        left: 0px;
+        right: 0px;
+        grid-column: 3/4;
+    }
+}

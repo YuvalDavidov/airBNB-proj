@@ -6,10 +6,11 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { HeaderFilter } from './header-filter'
 import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
-import { toggleInDetails } from '../store/stay.actions'
+import { setFilterBy, toggleExpand, toggleInDetails } from '../store/stay.actions'
 import { SiAirbnb } from "react-icons/si";
 import { setIsDesktop, setIsMobile } from '../store/system.actions'
 import { useWindowSize } from '../customHooks/useWindowSize'
+import { stayService } from '../services/stay.service.local'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -49,6 +50,8 @@ export function AppHeader() {
     }
 
     function getBack() {
+        setFilterBy(stayService.getDefaultFilter())
+        toggleExpand(false)
         toggleInDetails(false)
         navigate('/')
     }

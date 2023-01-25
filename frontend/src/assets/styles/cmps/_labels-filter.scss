@@ -79,6 +79,9 @@
     }
 }
 
+
+
+
 .react-multi-carousel-list::before {
 
     content: "";
@@ -95,6 +98,8 @@
     height: 100%;
 }
 
+
+
 .react-multi-carousel-list::after {
 
     content: "";
@@ -109,4 +114,12 @@
 
     width: 4em;
     height: 100%;
+}
+
+.react-multiple-carousel__arrow--right {
+    right: calc(4% + -37px);
+}
+
+.react-multiple-carousel__arrow--left {
+    left: calc(4% + -40px);
 }
