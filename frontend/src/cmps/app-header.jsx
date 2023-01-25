@@ -20,7 +20,7 @@ export function AppHeader() {
     const windowSize = useWindowSize()
 
     useEffect(() => {
-        if (windowSize.innerWidth < 700) setIsMobile()
+        if (windowSize.innerWidth < 780) setIsMobile()
         else setIsDesktop()
     }, [windowSize])
 
@@ -62,7 +62,7 @@ export function AppHeader() {
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 
-                <h1 className='logo' onClick={() => { getBack() }}> <span><SiAirbnb /></span> AirTNT</h1>
+                <h1 className='logo' onClick={() => { getBack() }}> <span><SiAirbnb /></span>irTNT</h1>
                 <HeaderFilter />
                 {/* <nav>
 

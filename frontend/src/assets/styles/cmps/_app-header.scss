@@ -10,6 +10,11 @@
     &.expanded {
         padding-bottom: 130px;
     }
+
+    @media (max-width: 780px) {
+        margin-bottom: 0;
+    }
+
 }
 
 .app-header {
@@ -73,6 +78,7 @@
         align-self: center;
         margin: 0;
         grid-column: 2/3;
+        color: #ff5171;
     }
 
     .stay-header-filter {
