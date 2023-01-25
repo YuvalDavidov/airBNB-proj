@@ -1,27 +1,16 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { TiHeartFullOutline } from 'react-icons/ti'
 import { IconContext } from 'react-icons'
 
-import { removeStay, toggleInDetails } from '../store/stay.actions'
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
 
 import { ImageSlider } from './image-slider'
 
-export function StayPreview({ stay, userLocation, onUpdateStay }) {
+export function StayPreview({ stay, userLocation }) {
   const navigate = useNavigate()
   const user = useSelector((storeState) => storeState.userModule.user)
-
-  // function calcMeanRate(stayReviews) {
-  //   if (!stayReviews || !stayReviews.length) return null
-  //   const sum = stayReviews.reduce((acc, review) => {
-  //     acc += review.rate
-  //     return acc
-  //   }, 0)
-  //   return sum / stayReviews.length
-  // }
 
   function getStayReviewRateAvg(stayReviews) {
     let rate = 0
@@ -63,17 +52,13 @@ export function StayPreview({ stay, userLocation, onUpdateStay }) {
     return (Value * Math.PI) / 180
   }
 
-  function onRemoveStay(ev, stayId) {
-    ev.stopPropagation()
-    removeStay(stayId)
-  }
-
   function onToggleWishlist(stayId) {
     if (!user) {
       setIsSignup(false)
       setIsModalOpen(true)
+      return
     }
-    if (user.wishlist.includes(stayId)) {
+    if (user?.wishlist.includes(stayId)) {
       removeFromWishlist(stayId)
     } else {
       addToWishlist(stayId)

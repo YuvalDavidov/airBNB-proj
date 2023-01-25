@@ -18,11 +18,10 @@
 }
 
 .app-header {
+    height: 64px;
     display: grid;
     position: relative;
-    padding: 10px 0;
     grid-template-columns: repeat(3, 1fr);
-    height: 100%;
 
     @media (max-width: 750px) {
         grid-template-columns: 40px repeat(5, 1fr) 40px;
