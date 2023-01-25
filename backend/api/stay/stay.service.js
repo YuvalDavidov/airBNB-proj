@@ -11,7 +11,6 @@ async function query(filterBy = { txt: '' }) {
         }
         const collection = await dbService.getCollection('stay')
         var stays = await collection.find().toArray()
-        console.log(stays);
         return stays
     } catch (err) {
         logger.error('cannot find stays', err)
@@ -23,6 +22,7 @@ async function getById(stayId) {
     try {
         const collection = await dbService.getCollection('stay')
         const stay = collection.findOne({ _id: ObjectId(stayId) })
+        console.log(stay);
         return stay
     } catch (err) {
         logger.error(`while finding stay ${stayId}`, err)

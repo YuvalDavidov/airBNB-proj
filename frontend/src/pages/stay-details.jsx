@@ -7,7 +7,7 @@ import { StayDatePicker } from "../cmps/stay-date-picker";
 import { GradientButton } from "../cmps/gradient-button";
 import { ImageSlider } from "../cmps/image-slider";
 
-import { stayService } from "../services/stay.service.local";
+import { stayService } from "../services/stay.service";
 import { showErrorMsg } from "../services/event-bus.service";
 
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
@@ -43,8 +43,9 @@ export function StayDetails() {
 
     useEffect(() => {
         toggleInDetails(true)
-        stayService.getById(stayId)
-            .then(setStay)
+        loadStay()
+        // stayService.getById(stayId)
+        //     .then(setStay)
     }, [])
 
     useEffect(() => {
@@ -79,6 +80,16 @@ export function StayDetails() {
 
 
     }, [stay, isMobile])
+
+    async function loadStay() {
+        try {
+            const stay = await stayService.getById(stayId)
+            setStay(stay)
+        } catch (error) {
+
+        }
+
+    }
 
     function getStayReviewRateAvg(stayReviews) {
         let rate = 0
@@ -184,7 +195,7 @@ export function StayDetails() {
                         </div>
 
                         <div className="header-review flex align-center">
-                            <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                            <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                             <span className="dote">•</span>
                             <span><a href="#reviews">{reviews.length} reviews</a></span>
 
@@ -232,7 +243,7 @@ export function StayDetails() {
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
-                        <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                        <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                         <span className="dote">•</span>
                         <span><a href="#reviews">{reviews.length} reviews</a></span>
                         <span className="dote">•</span>
@@ -276,7 +287,7 @@ export function StayDetails() {
                         <h2>{name}</h2>
                         <div className="stay-mini-sumerry align-center">
                             <div className="flex align-center">
-                                <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 <span className="dote">•</span>
@@ -468,7 +479,7 @@ export function StayDetails() {
                                 </div>
 
                                 <div className="flex align-center">
-                                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                                    <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                                     <span className="dote">•</span>
                                     <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 </div>
@@ -575,7 +586,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -648,7 +659,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)
@@ -660,7 +671,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -733,7 +744,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)
