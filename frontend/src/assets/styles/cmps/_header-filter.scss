@@ -1,17 +1,57 @@
 .head-filter-form {
     height: 100%;
-    justify-content: space-between;
+    // justify-content: space-between;
 }
 
 .location-container {
     padding-inline-start: 1.5rem;
+    width: 33.3%;
+
+    &.filter-active {
+        background-color: white;
+        padding-inline-start: 1.5rem;
+        height: 100%;
+        border-radius: 50px;
+        width: 33.3%;
+        justify-content: center;
+        box-shadow: 0 6px 20px #0003;
+    }
+
+    &:hover:not(.filter-active) {
+        background-color: #ddd;
+        border-radius: 50px;
+        height: 100%;
+        justify-content: center;
+    }
+}
+
+.date-container {
+    gap: 20px;
+    width: 33.3%;
+    justify-content: center;
+
+    &.filter-active {
+        background-color: white;
+        padding-inline-start: 0px;
+        height: 100%;
+        border-radius: 50px;
+        width: 33.3%;
+        justify-content: center;
+        box-shadow: 0 6px 20px #0003;
+    }
+
+    &:hover:not(.filter-active) {
+        background-color: #ddd;
+        border-radius: 50px;
+        height: 100%;
+    }
 }
 
 .guest-container {
     padding-inline-start: 1.5rem;
     height: 100%;
     border-radius: 50px;
-    width: 33%;
+    width: 33.3%;
     justify-content: start;
 
     &.filter-active {
@@ -19,11 +59,17 @@
         padding-inline-start: 1.5rem;
         height: 100%;
         border-radius: 50px;
-        width: 33%;
+        width: 33.3%;
         justify-content: start;
+        box-shadow: 0 6px 20px #0003;
 
 
+    }
 
+    &:hover:not(.filter-active) {
+        background-color: #ddd;
+        border-radius: 50px;
+        height: 100%;
     }
 
     & div.icon-search-container {
@@ -35,14 +81,7 @@
 
 }
 
-.filter-active {
-    background-color: white;
-    padding-inline-start: 1.5rem;
-    height: 100%;
-    border-radius: 50px;
-    width: 39%;
-    justify-content: center;
-}
+
 
 
 
@@ -71,7 +110,7 @@
         color: black;
         background-color: white;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 0.875rem;
 
         border: 0;
         padding: 5px 10px;
@@ -187,18 +226,7 @@
     }
 }
 
-.date-container {
-    gap: 35px;
 
-    &.filter-active {
-        background-color: white;
-        padding-inline-start: 0px;
-        height: 100%;
-        border-radius: 50px;
-        width: 39%;
-        justify-content: center;
-    }
-}
 
 
 // .search-icon-expand {
@@ -262,9 +290,11 @@
 @media (max-width: 950px) {
     .stay-header-filter {
         position: absolute;
-        left: 200px;
+        left: 180px;
+
     }
 }
+
 
 @media (max-width: 750px) {
 
@@ -281,5 +311,23 @@
         left: 0px;
         right: 0px;
         grid-column: 3/4;
+
+        & .form-header {
+            max-width: calc(100vw - 90px) !important;
+            min-width: 230px;
+        }
+    }
+}
+
+
+@media (max-width: 500px) {
+    .stay-header-filter {
+        & .header-filter-btn {
+            min-width: unset;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+        }
     }
 }
