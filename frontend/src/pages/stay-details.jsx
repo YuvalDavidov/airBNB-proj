@@ -170,6 +170,28 @@ export function StayDetails() {
         return avg
     }
 
+    function get6Reviews() {
+        let reviewsToShow = reviews.map(review => {
+            return <li key={review.id} className="review">
+                <div className="review-user">
+                    <img src={review.by.imgUrl} />
+                    <div>
+                        <h4>{review.by.fullname}</h4>
+                        <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                    </div>
+                </div>
+                <div className="txt">
+                    {review.txt}
+                </div>
+                {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+            </li>
+        })
+
+        console.log(reviewsToShow.splice(0, 6));
+
+        return reviewsToShow.splice(0, 6)
+    }
+
     if (!stay) return <div>Loading...</div>
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (<>
@@ -641,21 +663,7 @@ export function StayDetails() {
                             </div>)}
 
                             <div className="reviews-list">
-                                {reviews.map(review => {
-                                    return <li key={review.id} className="review">
-                                        <div className="review-user">
-                                            <img src={review.by.imgUrl} />
-                                            <div>
-                                                <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
-                                            </div>
-                                        </div>
-                                        <div className="txt">
-                                            {review.txt}
-                                        </div>
-                                        {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
-                                    </li>
-                                })}
+                                {get6Reviews()}
                             </div>
 
                         </section>) :
