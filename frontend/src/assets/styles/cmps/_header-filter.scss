@@ -1,9 +1,48 @@
 .head-filter-form {
-    height: 95%;
-    margin-left: 20px;
+    height: 100%;
     justify-content: space-between;
 }
 
+.location-container {
+    padding-inline-start: 1.5rem;
+}
+
+.guest-container {
+    padding-inline-start: 1.5rem;
+    height: 100%;
+    border-radius: 50px;
+    width: 33%;
+    justify-content: start;
+
+    &.filter-active {
+        background-color: white;
+        padding-inline-start: 1.5rem;
+        height: 100%;
+        border-radius: 50px;
+        width: 33%;
+        justify-content: start;
+
+
+
+    }
+
+    & div.icon-search-container {
+        position: absolute;
+        right: -3px;
+        bottom: -3px;
+    }
+
+
+}
+
+.filter-active {
+    background-color: white;
+    padding-inline-start: 1.5rem;
+    height: 100%;
+    border-radius: 50px;
+    width: 39%;
+    justify-content: center;
+}
 
 
 
@@ -52,6 +91,7 @@
     }
 
     &.extanded {
+        background-color: #ebebeb;
         top: 100px;
         height: 66px;
         position: absolute;
@@ -139,6 +179,8 @@
     border-right-style: hidden;
     border-left-style: hidden;
     border-bottom-style: hidden;
+    background-color: transparent;
+
 
     &:focus {
         outline: none;
@@ -147,12 +189,24 @@
 
 .date-container {
     gap: 35px;
+
+    &.filter-active {
+        background-color: white;
+        padding-inline-start: 0px;
+        height: 100%;
+        border-radius: 50px;
+        width: 39%;
+        justify-content: center;
+    }
 }
 
 
-.search-icon-expand {
-    margin: 13px -10px 7px 0px;
-}
+// .search-icon-expand {
+//     margin: 13px -10px 7px 0px;
+// }
+
+
+
 
 
 .icon-wrapper {
