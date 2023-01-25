@@ -1,0 +1,52 @@
+.mobile-trips-table {
+    .top-tr {
+        td {
+          padding: 10px 0;
+        }
+        .destination-td {
+          font-family: Cereal-Bold;
+          color: rgb(34, 34, 34);
+          text-overflow: ellipsis;
+        }
+      }
+      
+      .bottom-tr {
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(0, 0, 0, 0.05) 100%
+        );
+        td {
+          padding: 10px 0;
+        }
+        .host-info {
+          font-family: Cereal-Bold;
+          color: #909399;
+          margin-bottom: 10px;
+          span {
+              color: rgb(34, 34, 34);
+          }
+        }
+        .price-info {
+          font-family: Cereal-Bold;
+          color: #909399;
+          margin-bottom: 10px;
+          span {
+              color: rgb(34, 34, 34);
+          }
+        }
+        .location-info {
+          font-family: Cereal-Bold;
+          color: #909399;
+          width: max-content;
+          span {
+              color: rgb(34, 34, 34);
+          }
+        }
+        .status-info {
+          font-family: Cereal-Bold;
+          color: #909399;
+        }
+      }
+      
+}

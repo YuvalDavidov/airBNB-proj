@@ -1,20 +1,22 @@
 import { useState, useRef, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 export function MobileNav() {
-  const [currPage, setCurrPage] = useState('explore')
+  // const [currPage, setCurrPage] = useState('explore')
+  const location = useLocation()
   const navigate = useNavigate()
   const mobileNavRef = useRef()
+  // console.log(location)
 
-  function moveToExplore() {
-    setCurrPage('explore')
-    navigate('/')
-  }
+  // function moveToExplore() {
+  //   setCurrPage('explore')
+  //   navigate('/')
+  // }
 
-  function moveToWishlist() {
-    setCurrPage('wishlist')
-    navigate('/wishlist')
-  }
+  // function moveToWishlist() {
+  //   setCurrPage('wishlist')
+  //   navigate('/wishlist')
+  // }
 
   useEffect(() => {
     return () => {
@@ -37,8 +39,8 @@ export function MobileNav() {
     <nav ref={mobileNavRef} className='mobile-nav'>
       <div className='nav-container'>
         <div
-          onClick={moveToExplore}
-          className={`nav-item ${currPage === 'explore' && 'is-active'}`}
+          onClick={() => navigate('/')}
+          className={`nav-item ${location.pathname === '/' && 'is-active'}`}
         >
           <svg
             viewBox='0 0 32 32'
@@ -63,8 +65,8 @@ export function MobileNav() {
           <span>Explore</span>
         </div>
         <div
-          onClick={moveToWishlist}
-          className={`nav-item ${currPage === 'wishlist' && 'is-active'}`}
+          onClick={() => navigate('/wishlist')}
+          className={`nav-item ${location.pathname === '/wishlist' && 'is-active'}`}
         >
           <svg
             viewBox='0 0 32 32'
@@ -86,7 +88,9 @@ export function MobileNav() {
           </svg>
           <span>Wishlist</span>
         </div>
-        <div className={`nav-item ${currPage === 'trips' && 'is-active'}`}>
+        <div 
+        onClick={() => navigate('/trips')}
+        className={`nav-item ${location.pathname === '/trips' && 'is-active'}`}>
           <svg
             viewBox='0 0 32 32'
             xmlns='http://www.w3.org/2000/svg'
@@ -104,25 +108,30 @@ export function MobileNav() {
           </svg>
           <span>Trips</span>
         </div>
-        <div className={`nav-item ${currPage === 'inbox' && 'is-active'}`}>
-          <svg
+        <div 
+        onClick={() => navigate('/dashboard/reservations')}
+        className={`nav-item ${location.pathname === '/dashboard/reservations' && 'is-active'}`}>
+        <svg
+            width='24px'
+            height='24px'
             viewBox='0 0 32 32'
+            id='svg5'
+            version='1.1'
             xmlns='http://www.w3.org/2000/svg'
-            aria-hidden='true'
-            role='presentation'
-            focusable='false'
-            style={{
-              display: 'block',
-              height: '24px',
-              width: '24px',
-              fill: 'currentcolor',
-            }}
           >
-            <path d='m26 2c2.6887547 0 4.8818181 2.12230671 4.9953805 4.78311038l.0046195.21688962v14c0 2.6887547-2.1223067 4.8818181-4.7831104 4.9953805l-.2168896.0046195h-5.845l-4.1548949 5.0792674-4.1561051-5.0792674h-5.844c-2.61406707 0-4.75959878-2.0060384-4.98113724-4.5626572l-.01424325-.2204532-.00461951-.2168896v-14c0-2.6887547 2.12230671-4.88181811 4.78311038-4.99538049l.21688962-.00461951zm0 2h-20c-1.59768088 0-2.90366088 1.24891996-2.99490731 2.82372721l-.00509269.17627279v14c0 1.5976809 1.24891996 2.9036609 2.82372721 2.9949073l.17627279.0050927h6.7918643l3.2071357 3.92 3.2080542-3.92h6.7929458c1.5976809 0 2.9036609-1.24892 2.9949073-2.8237272l.0050927-.1762728v-14c0-1.59768088-1.24892-2.90366088-2.8237272-2.99490731z'></path>
+            <defs id='defs2' />
+
+            <g id='layer1' transform='translate(-156,-148)'>
+              <path
+                d='m 163,150.00586 a 1.0001,1.0001 0 0 0 -1,1 v 1 h -2 c -1.09273,0 -2,0.90727 -2,2 v 22 c 0,1.09273 0.90727,2 2,2 h 12 12 c 1.09273,0 2,-0.90727 2,-2 v -22 c 0,-1.09273 -0.90727,-2 -2,-2 h -2 v -1 a 1.0001,1.0001 0 0 0 -1,-1 h -5 c -1.63382,0 -3.08609,0.79779 -4,2.01953 -0.91391,-1.22174 -2.36618,-2.01953 -4,-2.01953 z m 1,2 h 4 c 1.6687,0 3,1.3313 3,3 v 18.10937 c -0.84542,-0.65402 -1.85499,-1.10937 -3,-1.10937 h -4 v -19 z m 12,0 h 4 v 1 19 h -4 c -1.14501,0 -2.15458,0.45535 -3,1.10937 v -18.10937 c 0,-1.6687 1.3313,-3 3,-3 z m -16,2 h 2 v 19 a 1.0001,1.0001 0 0 0 1,1 h 5 c 1.31666,0 2.41981,0.83058 2.82812,2 H 160 Z m 22,0 h 2 v 22 h -10.82812 c 0.40831,-1.16942 1.51146,-2 2.82812,-2 h 5 a 1.0001,1.0001 0 0 0 1,-1 z'
+                id='path21118'
+                style={{color:'currentColor',fill:'currentColor',fillRule:'evenodd',strokeLinecap:'round',strokeLinejoin:'round',strokeMiterlimit:'4.1',inkscapeStroke:'none'}}
+              />
+            </g>
           </svg>
-          <span>Inbox</span>
+          <span>Reservations</span>
         </div>
-        <div className={`nav-item ${currPage === 'profile' && 'is-active'}`}>
+        <div className={`nav-item ${location.pathname === 'profile' && 'is-active'}`}>
           <svg
             viewBox='0 0 32 32'
             xmlns='http://www.w3.org/2000/svg'
