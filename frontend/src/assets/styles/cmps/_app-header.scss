@@ -43,7 +43,9 @@
     grid-template-columns: repeat(3, 1fr);
     height: 100%;
 
-
+    @media (max-width: 750px) {
+        grid-template-columns: 40px repeat(5, 1fr) 40px;
+    }
 
 
 

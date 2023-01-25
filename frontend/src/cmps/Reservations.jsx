@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { userService } from "../services/user.service";
-import { loadOrders, setOrderStatus } from "../store/order.actions";
-import { ListingChart } from "./listing-chart";
-import { range } from 'lodash'
-import { ReservBarChart } from "./reservations-bar-chart";
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
+import { userService } from "../services/user.service"
+import { utilService } from "../services/util.service"
+import { loadOrders, setOrderStatus } from "../store/order.actions"
+
+import { ListingChart } from "./listing-chart"
+import { ReservBarChart } from "./reservations-bar-chart"
 
 
 export function Reservations() {
@@ -14,43 +14,10 @@ export function Reservations() {
     const { user } = useSelector((storeState) => storeState.userModule)
     const { orders } = useSelector((storeState) => storeState.orderModule)
 
-    console.log(orders);
-
     useEffect(() => {
         loadOrders({ hostId: userService.getLoggedinUser()._id })
     }, [])
 
-    function getFullDate(date) {
-        let day = new Date(date).getDate()
-        let month = new Date(date).getMonth() +1
-        let year = new Date(date).getFullYear()
-
-        return `${month}/${day}/${year}`
-    }
-
-    if (orders.length <= 0) return <div>you have no order's</div>
-
-    function getStatusColor(status) {
-        switch (status) {
-            case 'Approved':
-                return 'green'
-            case 'Rejected':
-                return 'red'
-            default: 
-                return 'rgb(34,34,34)'
-        }
-    }
-
-    function calcMonthsBack() {
-        const currMonth = new Date().getMonth()
-        if (currMonth - 4 >= 0) {
-            return range(currMonth - 4, currMonth+1)
-        } else {
-            return [...range(12 + (currMonth - 4),12), ...range(0, currMonth + 1)]
-        }
-    }
-
-    console.log(calcMonthsBack())
 
     return (
         <section className="reservations">
@@ -109,12 +76,12 @@ export function Reservations() {
                     {orders.map((order) => {
                         return <tr key={order._id} className="data">
                             <td className="guest-td"><img src={order.aboutUser.imgUrl} className="mini-img" alt=""/> {order.aboutUser.fullname}</td>
-                            <td>{getFullDate(order.aboutOrder.startDate)}</td>
-                            <td>{getFullDate(order.aboutOrder.endDate)}</td>
-                            <td>{getFullDate(order.aboutOrder.bookDate)}</td>
+                            <td>{utilService.getFullDate(order.aboutOrder.startDate)}</td>
+                            <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
+                            <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
                             <td>{order.aboutOrder.stay.name}</td>
                             <td>₪{order.aboutOrder.totalPrice}</td>
-                            <td style={{fontFamily: 'Cereal-Medium', color: getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</td>
+                            <td style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</td>
                             <td>
                                 <button className={order.aboutOrder.status === 'Approved' ? 'approve-btn is-active' : 'approve-btn'} onClick={() => setOrderStatus(order, 'Approved')}>Approve</button>
                                 <button className={order.aboutOrder.status === 'Rejected' ? 'reject-btn is-active' : 'reject-btn'} onClick={() => setOrderStatus(order, 'Rejected')}>Reject</button>

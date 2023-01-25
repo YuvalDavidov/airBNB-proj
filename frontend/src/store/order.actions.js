@@ -7,7 +7,7 @@ import { SET_ORDERS, UPDATE_ORDER } from './order.reducer'
 export async function loadOrders(filterBy) {
     try {
         const orders = await orderService.query(filterBy)
-        console.log('Stays from DB:', orders)
+        console.log('Orders from DB:', orders)
         store.dispatch({
             type: SET_ORDERS,
             orders,
