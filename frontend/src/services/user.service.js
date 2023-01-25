@@ -84,10 +84,11 @@ async function changeScore(by) {
 }
 
 async function addToWishlist(stayId) {
-    const user = await getById(getLoggedinUser()._id) 
+    const user = await getById(getLoggedinUser()?._id) 
     if (!user) throw new Error('Not loggedin')
     user.wishlist.push(stayId)
     const savedUser = await storageService.put(USER_KEY, user)
+    // const savedUser = await httpService.put(`user/${user._id}`, user)
     saveLocalUser(savedUser)
     return savedUser
 }
@@ -96,6 +97,7 @@ async function removeFromWishlist(stayId) {
     const user = await getById(getLoggedinUser()._id) 
     const updatedWishlist = user.wishlist.filter(id => id !== stayId)
     user.wishlist = updatedWishlist
+    // const savedUser = await httpService.put(`user/${user._id}`, user)
     const savedUser = await storageService.put(USER_KEY, user)
     saveLocalUser(savedUser)
     return savedUser

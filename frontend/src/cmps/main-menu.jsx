@@ -65,8 +65,8 @@ export function MainMenu() {
             focusable='false'
             style={{
               display: 'block',
-              height: '30px',
-              width: '30px',
+              height: '32px',
+              width: '32px',
               fill: 'currentcolor',
             }}
           >

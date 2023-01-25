@@ -21,6 +21,16 @@ function makeId(length = 6) {
     return txt
 }
 
+randomLabels()
+
+function randomLabels() {
+    let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'Parks', 'Campers', 'Castles', 'Islands',
+        'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
+    let fourLabels = [labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)]]
+    console.log(fourLabels)
+    return fourLabels
+}
+
 function makeLorem(size = 100) {
     var words = ['The sky', 'above', 'the port', 'was', 'the color of television', 'tuned', 'to', 'a dead channel', '.', 'All', 'this happened', 'more or less', '.', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'a different story', '.', 'It', 'was', 'a pleasure', 'to', 'burn']
     var txt = ''
@@ -47,11 +57,11 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
 
@@ -66,7 +76,7 @@ function loadFromStorage(key) {
 
 function getFullDate(date) {
     let day = new Date(date).getDate()
-    let month = new Date(date).getMonth() +1
+    let month = new Date(date).getMonth() + 1
     let year = new Date(date).getFullYear()
 
     return `${month}/${day}/${year}`
@@ -80,7 +90,7 @@ function getStatusColor(status) {
             return 'red'
         case 'Pending':
             return 'orange'
-        default: 
+        default:
             return 'rgb(34,34,34)'
     }
 }
