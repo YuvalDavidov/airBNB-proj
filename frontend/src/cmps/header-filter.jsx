@@ -152,7 +152,7 @@ export function HeaderFilter() {
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
                 {isHeadFilterExpanded && <div className="head-filter-form flex align-center" >
-                    <div className="flex column">
+                    <div className={`flex column location-container ${(isLocationExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onLocationClick} className="header-filter-btn flex">
                             <span className="filter-main-text">Where</span></button>
                         <input placeholder="Search destenations" className="search-filter-input" type="text"
@@ -162,7 +162,7 @@ export function HeaderFilter() {
                         />
                         {isLocationExpand && <PlaceFilter locations={locations} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
                     </div>
-                    <div className="flex date-container">
+                    <div className={`flex align-center date-container ${(isDateExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onDateClick} className="flex column">
                             <span className="filter-main-text">Check in</span>
                             <div className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
@@ -176,7 +176,7 @@ export function HeaderFilter() {
                         {isDateExpand && <DateFilter updateDate={updateDate} />}
                     </div>
 
-                    <div className="flex">
+                    <div className={`flex align-center guest-container ${(isGuestExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onGuestClick} className="flex column">
                             <span className="filter-main-text">Who?</span>
                             <span className="filter-sub-text">{(filterByToEdit.guests.total) ? ((filterByToEdit.guests.adults +
@@ -185,14 +185,15 @@ export function HeaderFilter() {
                                 (((filterByToEdit.guests.pets) ? ', ' + filterByToEdit.guests.pets + ' Pets' : '')))
                                 : 'Add guests'}</span>
                         </button>
+                        <IconContext.Provider value={{ color: "red", className: "search-icon-expand", size: '60px' }}>
+                            <div className="icon-search-container">
+                                <button onClick={onSubmitSearch}>  <IoSearchCircleSharp /> </button>
+
+                            </div>
+                        </IconContext.Provider>
                         {isGuestExpand && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
                     </div>
-                    <IconContext.Provider value={{ color: "red", className: "search-icon-expand", size: '60px' }}>
-                        <div className="icon-search-container">
-                            <button onClick={onSubmitSearch}>  <IoSearchCircleSharp /> </button>
 
-                        </div>
-                    </IconContext.Provider>
                 </div>}
 
             </section>
