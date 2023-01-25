@@ -50,6 +50,7 @@
     }
 
     &.extanded {
+        animation: mymove4 1s 1;
         top: 100px;
         height: 66px;
         position: absolute;
@@ -77,6 +78,19 @@
 }
 
 
+
+@keyframes mymove4 {
+    from {
+        top: 0px;
+        width: 600px;
+    }
+
+    to {
+        top: 100px;
+        width: 800px;
+    }
+
+}
 
 
 .place-modal,

@@ -499,6 +499,7 @@
             margin-bottom: 13px;
         }
 
+        min-width: max-content;
         margin: 5px 0;
         display: flex;
         justify-content: space-between;
@@ -690,6 +691,7 @@
 
             & span {
                 margin-left: 5px;
+                margin-right: 26px;
             }
         }
     }
@@ -715,19 +717,11 @@
     }
 }
 
-// responsiv
-
-@media (max-width: 1220px) {
-    .stay-details {
-        margin: 0 auto;
-    }
-}
-
 // mobile only
 
-@media (max-width: 700px) {
+@media (max-width: 780px) {
     .stay-details {
-        max-width: 700px;
+        max-width: 780px;
         padding-top: 0;
 
         & .image-slider {

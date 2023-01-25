@@ -4,12 +4,36 @@
     background-color: white;
     z-index: 50;
     height: 100%;
-
     position: relative;
 
     &.expanded {
+        animation: mymove3 1s 1;
         padding-bottom: 130px;
     }
+}
+
+
+
+@keyframes mymove5 {
+    from {
+        padding-bottom: 130px;
+    }
+
+    to {
+        padding-bottom: 10px;
+    }
+
+}
+
+@keyframes mymove3 {
+    from {
+        padding-bottom: 10px;
+    }
+
+    to {
+        padding-bottom: 130px;
+    }
+
 }
 
 .app-header {
@@ -68,7 +92,9 @@
     }
 
     h1.logo {
-        align-self: center;
+        color: #ff5171;
+        display: flex;
+        align-items: center;
         margin: 0;
         grid-column: 2/3;
     }
