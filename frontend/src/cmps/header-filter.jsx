@@ -151,7 +151,7 @@ export function HeaderFilter() {
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
-                {isHeadFilterExpanded && <div className="head-filter-form flex align-center" >
+                {isHeadFilterExpanded && <div className="head-filter-form flex" >
                     <div className={`flex column location-container ${(isLocationExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onLocationClick} className="header-filter-btn flex">
                             <span className="filter-main-text">Where</span></button>
