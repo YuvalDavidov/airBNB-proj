@@ -4,63 +4,61 @@ const logger = require('../../services/logger.service')
 
 async function getStays(req, res) {
   try {
-    logger.debug('Getting Cars')
+    logger.debug('Getting Stays')
     const filterBy = {
       txt: req.query.txt || ''
     }
-    const cars = await stayService.query(filterBy)
-    res.json(cars)
+    const stays = await stayService.query(filterBy)
+    res.json(stays)
   } catch (err) {
-    logger.error('Failed to get cars', err)
-    res.status(500).send({ err: 'Failed to get cars' })
+    logger.error('Failed to get stays', err)
+    res.status(500).send({ err: 'Failed to get stays' })
   }
 }
 
 async function getStayById(req, res) {
   try {
-    const carId = req.params.id
-    const car = await stayService.getById(carId)
-    res.json(car)
+    logger.debug('Getting Stay')
+    const stayId = req.params.id
+    const stay = await stayService.getById(stayId)
+    res.json(stay)
   } catch (err) {
-    logger.error('Failed to get car', err)
-    res.status(500).send({ err: 'Failed to get car' })
+    logger.error('Failed to get stay', err)
+    res.status(500).send({ err: 'Failed to get stay' })
   }
 }
 
 async function addStay(req, res) {
-  const { loggedinUser } = req
-
   try {
-    const car = req.body
-    car.owner = loggedinUser
-    const addedCar = await stayService.add(car)
-    res.json(addedCar)
+    const stay = req.body
+    const addedStay = await stayService.add(stay)
+    res.json(addedStay)
   } catch (err) {
-    logger.error('Failed to add car', err)
-    res.status(500).send({ err: 'Failed to add car' })
+    logger.error('Failed to add stay', err)
+    res.status(500).send({ err: 'Failed to add stay' })
   }
 }
 
 async function updateStay(req, res) {
   try {
-    const car = req.body
-    const updatedCar = await stayService.update(car)
-    res.json(updatedCar)
+    const stay = req.body
+    const updatedStay = await stayService.update(stay)
+    res.json(updatedStay)
   } catch (err) {
-    logger.error('Failed to update car', err)
-    res.status(500).send({ err: 'Failed to update car' })
+    logger.error('Failed to update stay', err)
+    res.status(500).send({ err: 'Failed to update stay' })
 
   }
 }
 
 async function removeStay(req, res) {
   try {
-    const carId = req.params.id
-    const removedId = await stayService.remove(carId)
+    const stayId = req.params.id
+    const removedId = await stayService.remove(stayId)
     res.send(removedId)
   } catch (err) {
-    logger.error('Failed to remove car', err)
-    res.status(500).send({ err: 'Failed to remove car' })
+    logger.error('Failed to remove stay', err)
+    res.status(500).send({ err: 'Failed to remove stay' })
   }
 }
 

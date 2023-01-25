@@ -43,8 +43,9 @@ export function StayDetails() {
 
     useEffect(() => {
         toggleInDetails(true)
-        stayService.getById(stayId)
-            .then(setStay)
+        loadStay()
+        // stayService.getById(stayId)
+        //     .then(setStay)
     }, [])
 
     useEffect(() => {
@@ -79,6 +80,16 @@ export function StayDetails() {
 
 
     }, [stay, isMobile])
+
+    async function loadStay() {
+        try {
+            const stay = await stayService.getById(stayId)
+            setStay(stay)
+        } catch (error) {
+
+        }
+
+    }
 
     function getStayReviewRateAvg(stayReviews) {
         let rate = 0
@@ -159,6 +170,28 @@ export function StayDetails() {
         return avg
     }
 
+    function get6Reviews() {
+        let stayReviews = reviews.map(review => {
+            return <li key={review.id} className="review">
+                <div className="review-user">
+                    <img src={review.by.imgUrl} />
+                    <div>
+                        <h4>{review.by.fullname}</h4>
+                        <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                    </div>
+                </div>
+                <div className="txt">
+                    {review.txt}
+                </div>
+                {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+            </li>
+        })
+
+        console.log(stayReviews.splice(0, 5));
+
+        //    return stayReviews.splice(0,5)
+    }
+
     if (!stay) return <div>Loading...</div>
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (<>
@@ -184,7 +217,7 @@ export function StayDetails() {
                         </div>
 
                         <div className="header-review flex align-center">
-                            <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                            <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                             <span className="dote">•</span>
                             <span><a href="#reviews">{reviews.length} reviews</a></span>
 
@@ -232,7 +265,7 @@ export function StayDetails() {
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
-                        <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                        <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                         <span className="dote">•</span>
                         <span><a href="#reviews">{reviews.length} reviews</a></span>
                         <span className="dote">•</span>
@@ -276,7 +309,7 @@ export function StayDetails() {
                         <h2>{name}</h2>
                         <div className="stay-mini-sumerry align-center">
                             <div className="flex align-center">
-                                <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 <span className="dote">•</span>
@@ -468,7 +501,7 @@ export function StayDetails() {
                                 </div>
 
                                 <div className="flex align-center">
-                                    <AiFillStar /> {getStayReviewRateAvg(reviews)}
+                                    <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
                                     <span className="dote">•</span>
                                     <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 </div>
@@ -575,7 +608,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -648,7 +681,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)
@@ -660,7 +693,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{getStayReviewRateAvg(reviews)}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -721,7 +754,7 @@ export function StayDetails() {
                                             <img src={review.by.imgUrl} />
                                             <div>
                                                 <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
+                                                <p>{new Date(review.createdAt).getFullYear() + 1}/{month[new Date(review.createdAt).getMonth()]}</p>
                                             </div>
                                         </div>
                                         <div className="txt">
@@ -733,7 +766,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>you have no reviews</div>)}
+                        (<div>This Stay dont have any reviews yet</div>)}
 
 
                 </section>)

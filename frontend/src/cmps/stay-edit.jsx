@@ -139,8 +139,8 @@ export function StayEdit() {
         stayToSave.loc.lng = loc.lng
         stayToSave.createdAt = new Date()
 
-        stayService.save(stayToSave)
-            .then(() => navigate('/'))
+        const savedStay = await stayService.save(stayToSave)
+        navigate('/')
     }
 
     return (
