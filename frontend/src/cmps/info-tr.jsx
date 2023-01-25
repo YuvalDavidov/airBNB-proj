@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
+import { GradientButton } from "./gradient-button";
 
 
 
@@ -16,10 +17,14 @@ export function InfoTr({ stay }) {
         </tr>
 
         {isOpen && <tr><td colSpan={3} className="listing-stay-details">
-            <button onClick={() => { navigate(`/dashboard/${stay._id}`) }}>update</button>
-            <div><span>guests amount:</span>  {stay.stayDetails.guests}</div>
-            <div><span>bedrooms amount:</span> {stay.stayDetails.bedrooms}</div>
-            <div><span>price:</span> ${stay.price}</div>
+            <div>
+                <div><span>guests amount:</span>  {stay.stayDetails.guests}</div>
+                <div><span>bedrooms amount:</span> {stay.stayDetails.bedrooms}</div>
+                <div><span>price:</span> ${stay.price}</div>
+            </div>
+            <GradientButton onClick={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} />
+
         </td></tr>}
     </>)
 }
+

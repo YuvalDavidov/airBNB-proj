@@ -13,8 +13,7 @@ import { FaCampground } from 'react-icons/fa'
 import { BsSnow } from 'react-icons/bs'
 import { HiHomeModern } from 'react-icons/hi2'
 import { WiStars } from 'react-icons/wi'
-import { IoIosArrowDropright } from 'react-icons/io'
-import { IoIosArrowDropleft } from 'react-icons/io'
+
 import { useState, useEffect } from "react"
 
 
@@ -29,7 +28,7 @@ export function LabelsFilter() {
     useEffect(() => {
         labels = labels.slice(0, shownLabels)
     }, [])
-    let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
+    let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'Parks', 'Campers', 'Castles', 'Islands',
         'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
 
     const icons = [<WiStars />, <VscKey />, <MdOutlineBeachAccess />, <GiWoodCabin />, <GiPineTree />, <FaCampground />, <GiCastle />, <GiIsland />,

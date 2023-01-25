@@ -8,6 +8,11 @@ table.listing-table {
     border-collapse: collapse;
     // border-spacing: 8px;
 
+    & .update-btn {
+        height: 30px;
+        width: 80px;
+        padding: 0;
+    }
 
     & tr {
         border-bottom: solid 1px black;
@@ -68,10 +73,10 @@ table.listing-table {
 }
 
 .listing-stay-details {
-    & button {
-        border: 1px solid black;
-        border-radius: 10px;
-    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     & div {
         & span {

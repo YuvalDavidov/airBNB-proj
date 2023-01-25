@@ -1029,8 +1029,8 @@ function getDefaultFilter() {
     minPrice: 0,
     maxPrice: Infinity,
     amenities: '',
-    startDate: Date.now(),
-    endDate: Date.now()
+    startDate: false,
+    endDate: false
   }
 }
 

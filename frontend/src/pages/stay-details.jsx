@@ -165,7 +165,7 @@ export function StayDetails() {
     const { name, reviews, loc, imgUrls, subTitle, host, stayDetails, price } = stay
     return (<>
 
-        {isMobile ? ('') : (<article className="details-header-bar">
+        {!isMobile && (<article className="details-header-bar">
 
             <div className="details-header-bar-container">
 
@@ -200,6 +200,23 @@ export function StayDetails() {
         </article>
         )}
 
+        {isMobile && (<article className="details-header-mobile">
+            <div className="home" onClick={() => { navigate('/') }} >
+                <button>
+                    <MdOutlineArrowBackIosNew />
+                </button>
+                <span>Homes</span>
+            </div>
+            <div className="share-save-btns">
+                <IconContext.Provider
+                    value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
+                >
+                    <div className="save-btn flex align-center" onClick={() => onToggleWishlist(stay._id)}>
+                        <TiHeartFullOutline />
+                    </div>
+                </IconContext.Provider>
+            </div>
+        </article>)}
 
         <section className="stay-details">
 
@@ -210,12 +227,10 @@ export function StayDetails() {
                 {stay.imgUrls.map((img, idx) => {
                     return <img key={idx} src={imgUrls[idx]} />
                 })}
-                {/* {stay.imgUrls.map((img, idx) => {
-                    return <img key={idx} src={imgUrls[idx]} />
-                })} */}
+
             </article>
 
-            {isMobile ? ('') : (<>
+            {!isMobile && (<>
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
@@ -241,29 +256,24 @@ export function StayDetails() {
 
             </>)}
 
-
-
-
             {isMobile ?
-                (<ImageSlider imgs={stay.imgUrls} />)
+                (<div onClick={() => { setImgsModual(true) }}  ><ImageSlider imgs={stay.imgUrls} /></div>)
                 : (<article id="imgs-grid" className="imgs-grid">
-                    <img className="first" src={imgUrls[0]} />
-                    <img src={imgUrls[1]} />
-                    <img src={imgUrls[2]} />
-                    <img src={imgUrls[3]} />
-                    <img src={imgUrls[4]} />
+                    <img onClick={() => { setImgsModual(true) }} className="first" src={imgUrls[0]} />
+                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[1]} />
+                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[2]} />
+                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[3]} />
+                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[4]} />
 
                     <button onClick={() => { setImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
                 </article>)
             }
 
-
-
             <article className="stay-details-full">
                 <section className="details">
 
 
-                    {isMobile ? (<div>
+                    {isMobile && (<div>
 
                         <h2>{name}</h2>
                         <div className="stay-mini-sumerry align-center">
@@ -288,7 +298,7 @@ export function StayDetails() {
                             </div> */}
                         </div>
 
-                    </div>) : ('')}
+                    </div>)}
 
                     <div className="details-header">
                         <div>
@@ -572,56 +582,54 @@ export function StayDetails() {
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
 
-                            {isMobile ?
-                                ('')
-                                : (<div className="reviews-bar">
-                                    <div className="cleanliness">
-                                        <p>Cleanliness</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                                            <span> {getReviewsRateByType('cleanliness')}</span>
-                                        </div>
+                            {!isMobile && (<div className="reviews-bar">
+                                <div className="cleanliness">
+                                    <p>Cleanliness</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                                        <span> {getReviewsRateByType('cleanliness')}</span>
                                     </div>
-                                    <div className="accuracy">
-                                        <p>Accuracy</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                                            <span> {getReviewsRateByType('accuracy')}</span>
-                                        </div>
+                                </div>
+                                <div className="accuracy">
+                                    <p>Accuracy</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                                        <span> {getReviewsRateByType('accuracy')}</span>
                                     </div>
+                                </div>
 
 
-                                    <div className="communication">
-                                        <p>Communication</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                                            <span> {getReviewsRateByType('communication')}</span>
-                                        </div>
+                                <div className="communication">
+                                    <p>Communication</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                                        <span> {getReviewsRateByType('communication')}</span>
                                     </div>
-                                    <div className="location">
-                                        <p>Location</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                                            <span> {getReviewsRateByType('location')}</span>
-                                        </div>
+                                </div>
+                                <div className="location">
+                                    <p>Location</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                                        <span> {getReviewsRateByType('location')}</span>
                                     </div>
-                                    <div className="check-in">
-                                        <p>Check-in</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                                            <span> {getReviewsRateByType('checkIn')}</span>
-                                        </div>
+                                </div>
+                                <div className="check-in">
+                                    <p>Check-in</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                                        <span> {getReviewsRateByType('checkIn')}</span>
                                     </div>
+                                </div>
 
-                                    <div className="value">
-                                        <p>Value</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                                            <span> {getReviewsRateByType('value')}</span>
-                                        </div>
+                                <div className="value">
+                                    <p>Value</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                                        <span> {getReviewsRateByType('value')}</span>
                                     </div>
+                                </div>
 
-                                </div>)}
+                            </div>)}
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
@@ -636,7 +644,7 @@ export function StayDetails() {
                                         <div className="txt">
                                             {review.txt}
                                         </div>
-                                        {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                                        {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
                                     </li>
                                 })}
                             </div>
@@ -659,56 +667,54 @@ export function StayDetails() {
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
 
-                            {isMobile ?
-                                ('')
-                                : (<div className="reviews-bar">
-                                    <div className="cleanliness">
-                                        <p>Cleanliness</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                                            <span> {getReviewsRateByType('cleanliness')}</span>
-                                        </div>
+                            {!isMobile && (<div className="reviews-bar">
+                                <div className="cleanliness">
+                                    <p>Cleanliness</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
+                                        <span> {getReviewsRateByType('cleanliness')}</span>
                                     </div>
-                                    <div className="accuracy">
-                                        <p>Accuracy</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                                            <span> {getReviewsRateByType('accuracy')}</span>
-                                        </div>
+                                </div>
+                                <div className="accuracy">
+                                    <p>Accuracy</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
+                                        <span> {getReviewsRateByType('accuracy')}</span>
                                     </div>
+                                </div>
 
 
-                                    <div className="communication">
-                                        <p>Communication</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                                            <span> {getReviewsRateByType('communication')}</span>
-                                        </div>
+                                <div className="communication">
+                                    <p>Communication</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
+                                        <span> {getReviewsRateByType('communication')}</span>
                                     </div>
-                                    <div className="location">
-                                        <p>Location</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                                            <span> {getReviewsRateByType('location')}</span>
-                                        </div>
+                                </div>
+                                <div className="location">
+                                    <p>Location</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
+                                        <span> {getReviewsRateByType('location')}</span>
                                     </div>
-                                    <div className="check-in">
-                                        <p>Check-in</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                                            <span> {getReviewsRateByType('checkIn')}</span>
-                                        </div>
+                                </div>
+                                <div className="check-in">
+                                    <p>Check-in</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
+                                        <span> {getReviewsRateByType('checkIn')}</span>
                                     </div>
+                                </div>
 
-                                    <div className="value">
-                                        <p>Value</p>
-                                        <div className="progress">
-                                            <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                                            <span> {getReviewsRateByType('value')}</span>
-                                        </div>
+                                <div className="value">
+                                    <p>Value</p>
+                                    <div className="progress">
+                                        <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
+                                        <span> {getReviewsRateByType('value')}</span>
                                     </div>
+                                </div>
 
-                                </div>)}
+                            </div>)}
 
                             <div className="reviews-list">
                                 {reviews.map(review => {

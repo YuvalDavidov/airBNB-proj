@@ -10,6 +10,11 @@
     &.expanded {
         padding-bottom: 130px;
     }
+
+    @media (max-width: 780px) {
+        margin-bottom: 0;
+    }
+
 }
 
 .app-header {
@@ -19,7 +24,9 @@
     grid-template-columns: repeat(3, 1fr);
     height: 100%;
 
-
+    @media (max-width: 750px) {
+        grid-template-columns: 40px repeat(5, 1fr) 40px;
+    }
 
 
 
@@ -71,6 +78,7 @@
         align-self: center;
         margin: 0;
         grid-column: 2/3;
+        color: #ff5171;
     }
 
     .stay-header-filter {

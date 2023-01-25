@@ -13,33 +13,35 @@ import { IoSearchCircleSharp } from 'react-icons/io5'
 import { IconContext } from "react-icons"
 import { useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
+import { CgUnsplash } from "react-icons/cg"
 
 
 export function HeaderFilter() {
 
     const [searchParams, setSearchParams] = useSearchParams()
+
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
     const [isLocationExpand, setIsLocationExpand] = useState(false)
     const [isDateExpand, setIsDateExpand] = useState(false)
     const [isGuestExpand, setIsGuestExpand] = useState(false)
-    const [date, setDate] = useState(false)
     const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
-    const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: Date.now(), endDate: Date.now(), guests: 0 })
-    const stays = useSelector((storeState) => storeState.stayModule.stays)
+    const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
     const [locations, setLocations] = useState([])
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 
     useEffect(() => {
         loadLocations()
+
     }, [filterByToEdit.locationCity])
 
     useEffect(() => {
-        setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: Date.now(), endDate: Date.now(), guests: 0 })
+        setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
+
     }, [isHeadFilterExpanded])
 
     function handleLocationChange({ target }) {
-        let { value, name: field, type } = target
+        let { value, name: field } = target
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -53,13 +55,12 @@ export function HeaderFilter() {
 
     function onSetGuestFilter(numOfGuests) {
         console.log(numOfGuests)
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: numOfGuests.total }))
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: numOfGuests }))
     }
 
 
     function updateDate(date) {
-        // console.log(date)
-        setDate(date)
+        console.log(date)
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
     }
 
@@ -119,14 +120,14 @@ export function HeaderFilter() {
 
     function onSubmitSearch(ev) {
         ev.preventDefault()
-        console.log('filterBy------>', filterBy)
+        console.log('filterByToEdit------>', filterByToEdit)
         setSearchParams({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
-            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests
+            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests.total
         })
         setFilterBy({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
-            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests
+            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests.total
         })
 
         toggleExpand(false)
@@ -138,9 +139,14 @@ export function HeaderFilter() {
     return (
         <Fragment>
             <section className={`stay-header-filter ${(isHeadFilterExpanded) ? 'extanded' : ''}`}>
-                {!isHeadFilterExpanded && <div className="flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>Anywhere</div></button> <span className="splitter"></span>
-                    <button onClick={onDateClick} className="header-filter-btn flex"><div>Any week</div></button> <span className="splitter"></span>
-                    <button onClick={onGuestClick} className="header-filter-btn guests flex"><div>Add guests</div></button>
+                {!isHeadFilterExpanded && <div className="flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>
+                    {(filterBy.locationCity) ? filterBy.locationCity : 'Anywhere'}</div></button> <span className="splitter"></span>
+                    <button onClick={onDateClick} className="header-filter-btn flex"><div>
+                        {(filterBy.startDate) ? (months[(filterBy.startDate).getMonth()] + ' ' + (filterBy.startDate).getDate()) + ' ' +
+                            months[(filterBy.endDate).getMonth()] + ' ' + (filterBy.endDate).getDate() : 'Any week'}</div>
+                    </button> <span className="splitter"></span>
+                    <button onClick={onGuestClick} className={`header-filter-btn add-guests flex ${(filterBy.guests > 0) ? `bold` : ``}`}><div>
+                        {(filterBy.guests > 0) ? filterBy.guests + ' Guests' : 'Add guests'}</div></button>
                     <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
@@ -159,21 +165,25 @@ export function HeaderFilter() {
                     <div className="flex date-container">
                         <button onClick={onDateClick} className="flex column">
                             <span className="filter-main-text">Check in</span>
-                            <div className="header-filter-btn">{(!date.startDate) ? 'Add dates' : months[(date.startDate).getMonth()] + ' ' + (date.startDate).getDate()}</div>
+                            <div className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
                         </button>
 
                         <button onClick={onDateClick} className="flex column">
                             <span className="filter-main-text">Check out</span>
-                            <div className="header-filter-btn">{(!date.endDate) ? 'Add dates' : months[(date.endDate).getMonth()] + ' ' + (date.endDate).getDate()}</div>
+                            <div className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
                         </button>
 
                         {isDateExpand && <DateFilter updateDate={updateDate} />}
                     </div>
 
                     <div className="flex">
-                        <button onClick={onGuestClick} className="header-filter-btn guests flex column">
+                        <button onClick={onGuestClick} className="flex column">
                             <span className="filter-main-text">Who?</span>
-                            <span className="filter-sub-text">Add guests</span>
+                            <span className="filter-sub-text">{(filterByToEdit.guests.total) ? ((filterByToEdit.guests.adults +
+                                filterByToEdit.guests.children) + ' Adults' +
+                                ((filterByToEdit.guests.infants) ? ', ' + filterByToEdit.guests.infants + ' Infants' : '') +
+                                (((filterByToEdit.guests.pets) ? ', ' + filterByToEdit.guests.pets + ' Pets' : '')))
+                                : 'Add guests'}</span>
                         </button>
                         {isGuestExpand && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
                     </div>

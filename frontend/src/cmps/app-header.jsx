@@ -6,10 +6,11 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { HeaderFilter } from './header-filter'
 import { MainMenu } from './main-menu'
 import { LoginSignup } from './login-signup'
-import { toggleInDetails } from '../store/stay.actions'
+import { setFilterBy, toggleExpand, toggleInDetails } from '../store/stay.actions'
 import { SiAirbnb } from "react-icons/si";
 import { setIsDesktop, setIsMobile } from '../store/system.actions'
 import { useWindowSize } from '../customHooks/useWindowSize'
+import { stayService } from '../services/stay.service.local'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -19,7 +20,7 @@ export function AppHeader() {
     const windowSize = useWindowSize()
 
     useEffect(() => {
-        if (windowSize.innerWidth < 700) setIsMobile()
+        if (windowSize.innerWidth < 780) setIsMobile()
         else setIsDesktop()
     }, [windowSize])
 
@@ -49,6 +50,8 @@ export function AppHeader() {
     }
 
     function getBack() {
+        setFilterBy(stayService.getDefaultFilter())
+        toggleExpand(false)
         toggleInDetails(false)
         navigate('/')
     }
@@ -59,7 +62,7 @@ export function AppHeader() {
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 
-                <h1 className='logo' onClick={() => { getBack() }}> <span><SiAirbnb /></span> AirTNT</h1>
+                <h1 className='logo' onClick={() => { getBack() }}> <span><SiAirbnb /></span>irTNT</h1>
                 <HeaderFilter />
                 {/* <nav>
 

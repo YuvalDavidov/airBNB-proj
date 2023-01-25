@@ -22,7 +22,7 @@
     border-radius: 50px;
     position: relative;
     width: max-content;
-    height: 100%;
+
 
 
 
@@ -40,11 +40,13 @@
         cursor: pointer;
         background-color: transparent;
 
-
-        &.guests {
+        &.add-guests {
             color: #717171;
             font-family: Cereal-Book;
 
+            &.bold {
+                font-family: Cereal-Bold;
+            }
         }
 
     }
@@ -129,7 +131,10 @@
 
 
 .search-filter-input {
-    margin-left: 3px;
+    position: relative;
+    left: -3px;
+    font-size: 0.875rem;
+    font-family: cereal-book;
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
@@ -185,10 +190,42 @@
 
 .filter-main-text {
     font-family: Cereal-Bold;
+    font-size: 0.75rem;
     margin-bottom: 0.375rem;
 }
 
-// .filter-date-text {
-//     padding: 10px 5px 3px 8px;
-//     margin: 1px 1px 1px 1px;
-// }
+.filter-sub-text {
+    font-size: 0.875rem;
+    font-family: cereal-book;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+// responsive part! 
+
+@media (max-width: 950px) {
+    .stay-header-filter {
+        position: absolute;
+        left: 200px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .logo {
+        display: none;
+    }
+
+    .main-menu {
+        display: none;
+    }
+
+    .stay-header-filter {
+        position: relative;
+        left: 0px;
+        right: 0px;
+        grid-column: 3/4;
+    }
+}

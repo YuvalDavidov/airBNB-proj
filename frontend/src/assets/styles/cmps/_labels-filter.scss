@@ -10,25 +10,15 @@
     }
 }
 
-.arrow-icon {
-    position: absolute;
-    bottom: 46px;
 
-
-}
 
 .lables-filter-nav {
-    display: flex;
-    overflow: hidden;
     width: 100%;
-    gap: 80px;
     height: 80px;
     z-index: 5;
     background-color: #fff;
-
     margin-bottom: 20px;
 
-    // top: 200px;
     &.hidden {
         height: 0px;
         visibility: hidden;
@@ -50,4 +40,86 @@
 .label-icon:hover {
     color: black;
 
+}
+
+
+
+.react-multiple-carousel__arrow {
+    position: absolute;
+    color: black;
+    outline: 0;
+    transition: all .5s;
+    border-radius: 50%;
+    z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, .3);
+    background: #fff;
+    min-width: 25px;
+    min-height: 25px;
+    opacity: 1;
+    cursor: pointer;
+
+
+    &::before {
+        font-size: 10px;
+        font-weight: bolder;
+        color: black;
+        display: block;
+        font-family: revicons;
+        text-align: center;
+        z-index: 2;
+        top: 6px;
+        right: 9px;
+        position: absolute;
+    }
+
+    &:hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 8px 0px black;
+
+    }
+}
+
+
+
+
+.react-multi-carousel-list::before {
+
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to right,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 1) 100%);
+
+    width: 4em;
+    height: 100%;
+}
+
+
+
+.react-multi-carousel-list::after {
+
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to left,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 1) 100%);
+
+    width: 4em;
+    height: 100%;
+}
+
+.react-multiple-carousel__arrow--right {
+    right: calc(4% + -37px);
+}
+
+.react-multiple-carousel__arrow--left {
+    left: calc(4% + -40px);
 }

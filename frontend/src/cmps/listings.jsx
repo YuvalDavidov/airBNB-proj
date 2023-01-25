@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate";
+import { GradientButton } from "./gradient-button";
 import { InfoTr } from "./info-tr";
 
 
@@ -72,7 +73,7 @@ export function Listings() {
                         {stays.map((stay) => {
                             return <tr key={stay._id} className="data">
                                 <td className="listing-td" ><div><a href="#"><div onClick={() => { navigate(`/details/${stay._id}`) }} className="listing-prev"><img src={stay.imgUrls[0]} /><h3 className="-name">{stay.name}</h3></div></a></div>  </td>
-                                <td><button onClick={() => { navigate(`/dashboard/${stay._id}`) }}>update</button></td>
+                                <td><GradientButton onClick={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} /></td>
                                 <td>{stay.stayDetails.guests}</td>
                                 <td>{stay.stayDetails.bedrooms}</td>
                                 <td>{stay.price}</td>

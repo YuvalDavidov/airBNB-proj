@@ -83,8 +83,8 @@ export function MainMenu() {
           {user && <a href='/wishlist'>Wishlist</a>}
           <hr />
           {user && <a href='/dashboard'>Manage listings</a>}
-          {user && <hr/>}
-          <a href='#'>Airbnb your home</a>
+          {user && <hr />}
+          <a href='/dashboard'>Airbnb your home</a>
           <a href='#'>Help</a>
           {user && (
             <a href='#' onClick={logout}>
