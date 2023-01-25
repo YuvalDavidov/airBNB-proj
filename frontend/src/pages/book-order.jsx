@@ -15,6 +15,7 @@ const serviceFee = 18
 
 export function BookStay() {
     const { user } = useSelector((storeState) => storeState.userModule)
+    const { isMobile } = useSelector((storeState) => storeState.systemModule)
     const [order, setOrder] = useState(null)
     const [isOrderDone, setIsOrderDone] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
@@ -59,14 +60,24 @@ export function BookStay() {
     }
 
     function getStayReviewRateAvg(stayReviews) {
+        let rate = 0
+        let rateCount = 0
         let sum = 0
         let count = 0
 
+        if (stayReviews.length < 1) return '0'
+
         stayReviews.forEach(review => {
-            sum += review.rate
-            count++
+
+            for (const key in review.moreRate) {
+                sum += review.moreRate[key]
+                count++
+            }
+            rate += sum / count
+            rateCount++
         })
-        const avg = sum / count
+
+        const avg = parseFloat(rate / rateCount).toFixed(2)
         return avg
     }
 
@@ -95,86 +106,155 @@ export function BookStay() {
 
     const { stay, startDate, endDate, stayId } = order
 
-    return (
-        <section className="book main-layout">
-            <header>
-                <button onClick={() => navigate(`/details/${stayId}`)}> <FaArrowLeft /> </button>
-                <h1>Requset to book</h1>
-            </header>
+    return (<>
+        {isMobile ? (
+            <section className="book">
+                <header>
+                    <button onClick={() => navigate(`/details/${stayId}`)}> <FaArrowLeft /> </button>
+                    <h3>Confirm and pay</h3>
+                </header>
 
-            <section className="main-aria">
+                <div className="stay">
+                    <img src={stay.imgUrls[0]} />
 
-                <section className="order-details">
-                    <div className="rare-find">
-                        <div>
-                            <h4>this is a rare find</h4>
-                            <div>{stay.host.fullname} place is usually booked.</div>
-                        </div>
-                        <div><SlDiamond /></div>
-                    </div>
-
-                    <div className="trip">
-                        <h1>Your trip</h1>
-
-                        <div className="dates">
-                            <span>Dates</span>
-                            <div>
-                                {new Date(startDate).getDate()},{month[new Date(startDate).getMonth()]}
-                                -
-                                {new Date(endDate).getDate()},{month[new Date(endDate).getMonth()]}
-                            </div>
-                        </div>
-
-                        <div className="guests">
-                            <span>Guests</span>
-                            <div>{getGuestsAmount()} guests</div>
-                        </div>
-                    </div>
-                    <hr />
-
-
-                    {user ?
-                        (!isOrderDone ? <GradientButton onClickBtn={() => { onOrder() }} label={'Confirm'} className={"reserve-btn"} /> : <GradientButton label={'Tnx for ordering!'} className={"reserve-btn"} />)
-                        : <GradientButton onClickBtn={() => { setIsModalOpen(true) }} label={'Login'} className={"reserve-btn"} />}
-                </section>
-
-                <section className="stay-price-details">
-                    <div className="stay">
-                        <img src={stay.imgUrls[0]} />
-
-                        <div className="stay-details">
+                    <div className="stay-details">
+                        <div className="flex column">
+                            <small>{stay.type}</small>
                             <span>{stay.name}</span>
-                            <div>
-                                <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
-                                <span className="dote">.</span>
-                                <span>{stay.reviews.length} reviews</span>
-                            </div>
                         </div>
-
-                    </div>
-                    <hr />
-
-                    <div className="stay-price">
-
-                        <h3>Price details</h3>
-                        <div className="price-details">
-                            <div> ₪ {stay.price} x {getDaysCalculate()}</div>
-                            <div>₪ {stay.price * getDaysCalculate()}</div>
-                        </div>
-                        <div className="service-fee">
-                            <div>Service fee</div>
-                            <div>₪ {serviceFee}</div>
-                        </div>
-                        <hr />
-                        <div className="total">
-                            <div>Total</div>
-                            <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                        <div>
+                            <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                            <span className="dote">.</span>
+                            <span>({stay.reviews.length}) </span>
                         </div>
                     </div>
-                </section>
+
+                </div>
+
+                <div className="trip">
+                    <h1>Your trip</h1>
+
+                    <div className="dates">
+                        <span>Dates</span>
+                        <div>
+                            {new Date(startDate).getDate()},{month[new Date(startDate).getMonth()]}
+                            -
+                            {new Date(endDate).getDate()},{month[new Date(endDate).getMonth()]}
+                        </div>
+                    </div>
+
+                    <div className="guests">
+                        <span>Guests</span>
+                        <div>{getGuestsAmount()} guests</div>
+                    </div>
+                </div>
+
+                <div className="stay-price">
+
+                    <h3>Price details</h3>
+                    <div className="price-details">
+                        <div> ₪ {stay.price} x {getDaysCalculate()}</div>
+                        <div>₪ {stay.price * getDaysCalculate()}</div>
+                    </div>
+                    <div className="service-fee">
+                        <div>Service fee</div>
+                        <div>₪ {serviceFee}</div>
+                    </div>
+                    <div className="total">
+                        <div>Total</div>
+                        <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                    </div>
+                </div>
+
+                {user ?
+                    (!isOrderDone ? <GradientButton onClickBtn={() => { onOrder() }} label={'Confirm'} className={"reserve-btn"} /> : <GradientButton label={'Tnx for ordering!'} className={"reserve-btn"} />)
+                    : <GradientButton onClickBtn={() => { setIsModalOpen(true) }} label={'Login'} className={"reserve-btn"} />}
 
             </section>
+        )
+            : (<section className="book main-layout">
+                <header>
+                    <button onClick={() => navigate(`/details/${stayId}`)}> <FaArrowLeft /> </button>
+                    <h1>Requset to book</h1>
 
-        </section>
-    )
+                </header>
+
+                <section className="main-area">
+
+                    <section className="order-details">
+                        <div className="rare-find">
+                            <div>
+                                <h4>this is a rare find</h4>
+                                <div>{stay.host.fullname} place is usually booked.</div>
+                            </div>
+                            <div><SlDiamond /></div>
+                        </div>
+
+                        <div className="trip">
+                            <h1>Your trip</h1>
+
+                            <div className="dates">
+                                <span>Dates</span>
+                                <div>
+                                    {new Date(startDate).getDate()},{month[new Date(startDate).getMonth()]}
+                                    -
+                                    {new Date(endDate).getDate()},{month[new Date(endDate).getMonth()]}
+                                </div>
+                            </div>
+
+                            <div className="guests">
+                                <span>Guests</span>
+                                <div>{getGuestsAmount()} guests</div>
+                            </div>
+                        </div>
+                        <hr />
+
+
+                        {user ?
+                            (!isOrderDone ? <GradientButton onClickBtn={() => { onOrder() }} label={'Confirm'} className={"reserve-btn"} /> : <GradientButton label={'Tnx for ordering!'} className={"reserve-btn"} />)
+                            : <GradientButton onClickBtn={() => { setIsModalOpen(true) }} label={'Login'} className={"reserve-btn"} />}
+                    </section>
+
+                    <section className="stay-price-details">
+                        <div className="stay">
+                            <img src={stay.imgUrls[0]} />
+
+                            <div className="stay-details">
+                                <span>{stay.name}</span>
+                                <div>
+                                    <span> <AiFillStar /> {getStayReviewRateAvg(stay.reviews)}</span>
+                                    <span className="dote">.</span>
+                                    <span>{stay.reviews.length} reviews</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr />
+
+                        <div className="stay-price">
+
+                            <h3>Price details</h3>
+                            <div className="price-details">
+                                <div> ₪ {stay.price} x {getDaysCalculate()}</div>
+                                <div>₪ {stay.price * getDaysCalculate()}</div>
+                            </div>
+                            <div className="service-fee">
+                                <div>Service fee</div>
+                                <div>₪ {serviceFee}</div>
+                            </div>
+                            <hr />
+                            <div className="total">
+                                <div>Total</div>
+                                <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                            </div>
+                        </div>
+                    </section>
+
+                </section>
+
+            </section>)}
+
+
+
+    </>)
 }
