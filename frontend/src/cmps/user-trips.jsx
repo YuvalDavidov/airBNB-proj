@@ -57,7 +57,7 @@ export function UserTrips() {
         <thead>
             <tr>
                 <th className='destination-th'>Destination</th>
-                <th>Dates</th>
+                <th className='dates-th'>Dates</th>
             </tr>
         </thead>
         <tbody>

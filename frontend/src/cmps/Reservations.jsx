@@ -141,7 +141,7 @@ export function Reservations() {
         <thead>
             <tr>
                 <th className='listing-th'>Listing</th>
-                <th>Dates</th>
+                <th className='dates-th'>Dates</th>
             </tr>
         </thead>
         <tbody>

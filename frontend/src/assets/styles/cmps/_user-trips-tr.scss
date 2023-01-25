@@ -8,6 +8,9 @@
           color: rgb(34, 34, 34);
           text-overflow: ellipsis;
         }
+        .dates-td {
+          text-align: center;
+        }
       }
       
       .bottom-tr {
@@ -18,6 +21,9 @@
         );
         td {
           padding: 10px 0;
+        }
+        .right-td {
+          text-align: center;
         }
         .host-info {
           font-family: Cereal-Bold;

@@ -9,7 +9,7 @@ export function UserTripsTr({ order }) {
     <>
       <tr className='top-tr' onClick={() => setIsOpen(!isOpen)}>
         <td className='destination-td'>{order.aboutOrder.stay.name}</td>
-        <td>
+        <td className='dates-td'>
           {utilService.getFullDate(order.aboutOrder.startDate) +
             ' - ' +
             utilService.getFullDate(order.aboutOrder.endDate)}
@@ -25,7 +25,7 @@ export function UserTripsTr({ order }) {
                 Location: <span>{order.aboutOrder.stay.loc.city}, {order.aboutOrder.stay.loc.country}</span>
             </div>
           </td>
-          <td>
+          <td className='right-td'>
           <div className="price-info">
                 Total price: <span>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</span>
             </div>
