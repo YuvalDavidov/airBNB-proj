@@ -29,10 +29,11 @@
     flex-direction: column;
     color: grey;
     cursor: pointer;
+    padding-bottom: 10px;
+    border-bottom: rgba(206, 201, 201, 0) solid 3px;
 
     &:hover {
         color: black;
-        padding-bottom: 10px;
         border-bottom: rgb(206, 201, 201) solid 3px;
     }
 }
@@ -117,9 +118,11 @@
 }
 
 .react-multiple-carousel__arrow--right {
+    top: 20px;
     right: 5px;
 }
 
 .react-multiple-carousel__arrow--left {
+    top: 20px;
     left: 5px;
 }

@@ -139,7 +139,7 @@ export function HeaderFilter() {
     return (
         <Fragment>
             <section className={`stay-header-filter ${(isHeadFilterExpanded) ? 'extanded' : ''}`}>
-                {!isHeadFilterExpanded && <div className="flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>
+                {!isHeadFilterExpanded && <div className="form-header flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>
                     {(filterBy.locationCity) ? filterBy.locationCity : 'Anywhere'}</div></button> <span className="splitter"></span>
                     <button onClick={onDateClick} className="header-filter-btn flex"><div>
                         {(filterBy.startDate) ? (months[(filterBy.startDate).getMonth()] + ' ' + (filterBy.startDate).getDate()) + ' ' +
@@ -151,7 +151,7 @@ export function HeaderFilter() {
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
-                {isHeadFilterExpanded && <div className="head-filter-form flex align-center" >
+                {isHeadFilterExpanded && <div className="head-filter-form flex" >
                     <div className={`flex column location-container ${(isLocationExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onLocationClick} className="header-filter-btn flex">
                             <span className="filter-main-text">Where</span></button>

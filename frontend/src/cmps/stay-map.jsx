@@ -34,7 +34,7 @@ export function StayMap({ stayLoc }) {
                     lat={coordinates.lat}
                     lng={coordinates.lng}
                     text={<IconContext.Provider
-                        value={{ className: "my-icons" }}>
+                        value={{ className: "my-icons-loc" }}>
                         <GoLocation />
                     </IconContext.Provider>}
                 />

@@ -44,8 +44,6 @@ export function StayDetails() {
     useEffect(() => {
         toggleInDetails(true)
         loadStay()
-        // stayService.getById(stayId)
-        //     .then(setStay)
     }, [])
 
     useEffect(() => {
@@ -170,7 +168,7 @@ export function StayDetails() {
         return avg
     }
 
-    function get6Reviews() {
+    function getSixReviews() {
         let stayReviews = reviews.map(review => {
             return <li key={review.id} className="review">
                 <div className="review-user">
@@ -187,9 +185,7 @@ export function StayDetails() {
             </li>
         })
 
-        console.log(stayReviews.splice(0, 5));
-
-        //    return stayReviews.splice(0,5)
+        return stayReviews.splice(0, 5)
     }
 
     if (!stay) return <div>Loading...</div>
@@ -342,7 +338,7 @@ export function StayDetails() {
                                 <span className="dote">•</span>
                                 <span>{stayDetails.beds} Beds</span>
                                 <span className="dote">•</span>
-                                <span>{stayDetails.sharedBath} Shared bath</span>
+                                <span>{stayDetails.sharedBath} Bath</span>
                             </p>
                         </div>
                         <img src={host.imgUrl} />
@@ -681,7 +677,7 @@ export function StayDetails() {
                             </div>
 
                         </section>) :
-                        (<div>This Stay dont have any reviews yet</div>)}
+                        (<div className="no-reviews">No reviews (yet)</div>)}
 
 
                 </section>)
