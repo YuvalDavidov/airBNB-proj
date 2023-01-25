@@ -143,15 +143,14 @@ function _createStays() {
           'Wifi',
           'Kitchen',
           'Smoking allowed',
-          'Pets allowed',
           'Cooking basics',
         ],
-        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        labels: ['New', 'Trending', 'Towers', 'Tropical'],
         host: {
           _id: 'u101',
           fullname: 'Davit Pok',
           imgUrl:
-            'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/euxou0azal9iw7vp17vh.jpg',
         },
         loc: {
           country: 'Portugal',
@@ -165,81 +164,77 @@ function _createStays() {
           {
             id: 'madeId1',
             txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
             moreRate: {
               cleanliness: 4,
-              accuracy: 4,
-              communication: 5,
+              accuracy: 4.1,
+              communication: 5.8,
               location: 5,
               checkIn: 5,
-              value: 4
+              value: 4.9
             },
-            createdAt: new Date(),
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Melanie',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
             },
           },
           {
             id: 'madeId2',
-            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
             moreRate: {
-              cleanliness: 4,
-              accuracy: 4,
+              cleanliness: 4.2,
+              accuracy: 4.1,
               communication: 5,
-              location: 5,
+              location: 4.2,
               checkIn: 5,
               value: 4
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Demetri',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
             },
           },
           {
             id: 'madeId3',
-            txt: 'didnt like the place',
-            rate: 2,
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
             moreRate: {
-              cleanliness: 2,
+              cleanliness: 3.5,
               accuracy: 5,
-              communication: 3,
-              location: 3,
-              checkIn: 1,
-              value: 2
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Luke',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
             },
           },
           {
             id: 'madeId4',
             txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
-            rate: 4,
             moreRate: {
               cleanliness: 5,
               accuracy: 5,
-              communication: 2,
-              location: 4,
-              checkIn: 3,
-              value: 2
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
             },
-            createdAt: new Date(),
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Sally',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
             },
           },
         ],
@@ -264,7 +259,7 @@ function _createStays() {
           bedrooms: 3,
           beds: 3,
           sharedBath: 1,
-          allowPets: false,
+          allowPets: true,
         },
         amenities: [
           'Kitchen',
@@ -274,100 +269,324 @@ function _createStays() {
           'Pets allowed',
           'Cooking basics',
         ],
-        labels: ['Cabins', 'Trending', 'Play', 'Tiny homes'],
+        labels: ['Home', 'Trending', 'Farms', 'New'],
         host: {
           _id: 'u102',
           fullname: 'Charles Manson',
           imgUrl:
-            'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/kbhy03cfl8qzll7kiu3r.webp',
         },
         loc: {
-          country: 'Portugal',
+          country: 'Turkey',
           countryCode: 'PT',
-          city: 'Porto',
-          address: '17 Kombo st',
-          lat: 41.1413,
-          lng: -8.61308,
+          city: 'Sapanca',
+          address: 'Sakarya',
+          lat: 40.692070,
+          lng: 30.268080,
         },
         reviews: [
           {
             id: 'madeId1',
             txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
             moreRate: {
               cleanliness: 4,
-              accuracy: 4,
-              communication: 5,
+              accuracy: 4.1,
+              communication: 5.8,
               location: 5,
               checkIn: 5,
-              value: 4
+              value: 4.9
             },
-            createdAt: new Date(),
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Melanie',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
             },
           },
           {
             id: 'madeId2',
-            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
             moreRate: {
-              cleanliness: 4,
-              accuracy: 4,
+              cleanliness: 4.2,
+              accuracy: 4.1,
               communication: 5,
-              location: 5,
+              location: 4.2,
               checkIn: 5,
               value: 4
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Demetri',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
             },
           },
           {
             id: 'madeId3',
-            txt: 'didnt like the place',
-            rate: 2,
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
             moreRate: {
-              cleanliness: 2,
+              cleanliness: 3.5,
               accuracy: 5,
-              communication: 3,
-              location: 3,
-              checkIn: 1,
-              value: 2
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Luke',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
             },
           },
           {
             id: 'madeId4',
             txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
-            rate: 4,
             moreRate: {
               cleanliness: 5,
               accuracy: 5,
-              communication: 2,
-              location: 4,
-              checkIn: 3,
-              value: 2
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
             },
-            createdAt: new Date(),
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Sally',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
             },
           },
         ],
@@ -375,7 +594,7 @@ function _createStays() {
       },
       {
         _id: '10006548',
-        name: 'Unique nature lodge with amazing views',
+        name: 'Amazing view of fjord & mountains glamping Birdbox',
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/prohost-api/Hosting-755137040389728919/original/f0e6a6ed-4acb-4efa-bd29-9de320df368e.jpeg',
@@ -421,81 +640,77 @@ function _createStays() {
           {
             id: 'madeId1',
             txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
             moreRate: {
               cleanliness: 4,
-              accuracy: 4,
-              communication: 5,
+              accuracy: 4.1,
+              communication: 5.8,
               location: 5,
               checkIn: 5,
-              value: 4
+              value: 4.9
             },
-            createdAt: new Date(),
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Melanie',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
             },
           },
           {
             id: 'madeId2',
-            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
             moreRate: {
-              cleanliness: 4,
-              accuracy: 4,
+              cleanliness: 4.2,
+              accuracy: 4.1,
               communication: 5,
-              location: 5,
+              location: 4.2,
               checkIn: 5,
               value: 4
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Demetri',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
             },
           },
           {
             id: 'madeId3',
-            txt: 'didnt like the place',
-            rate: 2,
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
             moreRate: {
-              cleanliness: 2,
+              cleanliness: 3.5,
               accuracy: 5,
-              communication: 3,
-              location: 3,
-              checkIn: 1,
-              value: 2
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Luke',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
             },
           },
           {
             id: 'madeId4',
             txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
-            rate: 4,
             moreRate: {
               cleanliness: 5,
               accuracy: 5,
-              communication: 2,
-              location: 4,
-              checkIn: 3,
-              value: 2
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
             },
-            createdAt: new Date(),
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Sally',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
             },
           },
         ],
@@ -648,7 +863,7 @@ function _createStays() {
           bedrooms: 3,
           beds: 3,
           sharedBath: 1,
-          allowPets: false,
+          allowPets: true,
         },
         amenities: [
           'Bay view',
@@ -658,20 +873,20 @@ function _createStays() {
           'Dedicated workspace',
           'Wifi',
         ],
-        labels: ['Cabins', 'Trending', 'Play', 'Island'],
+        labels: ['Cabins', 'Trending'],
         host: {
           _id: 'u104',
           fullname: 'Ted Bundy',
           imgUrl:
-            'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+            'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ykdkmw4dzdbd9llcx8kn.jpg',
         },
         loc: {
           country: 'Portugal',
           countryCode: 'PT',
           city: 'Porto',
           address: '17 Kombo st',
-          lat: 41.1413,
-          lng: -8.61308,
+          lat: 11.157200,
+          lng: 119.437680,
         },
         reviews: [
           {
@@ -794,10 +1009,10 @@ function _createStays() {
             'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
         },
         loc: {
-          country: 'Portugal',
+          country: 'Philippines',
           countryCode: 'PT',
-          city: 'Porto',
-          address: '17 Kombo st',
+          city: 'El Nido',
+          address: 'MIMAROPA',
           lat: 41.1413,
           lng: -8.61308,
         },
@@ -805,81 +1020,305 @@ function _createStays() {
           {
             id: 'madeId1',
             txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
             moreRate: {
               cleanliness: 4,
-              accuracy: 4,
-              communication: 5,
+              accuracy: 4.1,
+              communication: 5.8,
               location: 5,
               checkIn: 5,
-              value: 4
+              value: 4.9
             },
-            createdAt: new Date(),
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Melanie',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
             },
           },
           {
             id: 'madeId2',
-            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
-            rate: 4,
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
             moreRate: {
-              cleanliness: 4,
-              accuracy: 4,
+              cleanliness: 4.2,
+              accuracy: 4.1,
               communication: 5,
-              location: 5,
+              location: 4.2,
               checkIn: 5,
               value: 4
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Demetri',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
             },
           },
           {
             id: 'madeId3',
-            txt: 'didnt like the place',
-            rate: 2,
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
             moreRate: {
-              cleanliness: 2,
+              cleanliness: 3.5,
               accuracy: 5,
-              communication: 3,
-              location: 3,
-              checkIn: 1,
-              value: 2
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
             },
-            createdAt: new Date(),
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Luke',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
             },
           },
           {
             id: 'madeId4',
             txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
-            rate: 4,
             moreRate: {
               cleanliness: 5,
               accuracy: 5,
-              communication: 2,
-              location: 4,
-              checkIn: 3,
-              value: 2
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
             },
-            createdAt: new Date(),
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
             by: {
               _id: 'u102',
-              fullname: 'yuval davidov',
+              fullname: 'Sally',
               imgUrl:
-                'https://res.cloudinary.com/dp32ucj0y/image/upload/v1673813926/lglgsenxgbub2dwtangi.jpg',
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+            },
+          },
+          {
+            id: 'madeId1',
+            txt: 'This location had breathtaking views. I cant say enough about the staff Mary and Tim. They were very accommodating throughout the entire trip They delivered breakfast every morning in a crate and it was a perfect way to start our day.The location was perfect and the views of the caldera were amazing. Will definitely book here again',
+            moreRate: {
+              cleanliness: 4,
+              accuracy: 4.1,
+              communication: 5.8,
+              location: 5,
+              checkIn: 5,
+              value: 4.9
+            },
+            createdAt: 'Sat Mar 25 2023 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Melanie',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+            },
+          },
+          {
+            id: 'madeId2',
+            txt: 'An amazing apartment with spectacular views. We couldnt fault anything, Marios was always available to answer any questions.We would definitely recommend this as great place to rest and relax and soak in the beautiful view',
+            moreRate: {
+              cleanliness: 4.2,
+              accuracy: 4.1,
+              communication: 5,
+              location: 4.2,
+              checkIn: 5,
+              value: 4
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Demetri',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+            },
+          },
+          {
+            id: 'madeId3',
+            txt: 'lovely apartment with beautiful views very clean and nicely decorated Good facilities',
+            moreRate: {
+              cleanliness: 3.5,
+              accuracy: 5,
+              communication: 3.9,
+              location: 4.2,
+              checkIn: 5,
+              value: 4.8
+            },
+            createdAt: 'Fri Feb 25 2022 02:00:00 GMT+0200 (שעון ישראל (חורף))',
+            by: {
+              _id: 'u102',
+              fullname: 'Luke',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+            },
+          },
+          {
+            id: 'madeId4',
+            txt: 'We had a great time at Marble Sun. The view from the plunge pool and balcony are absolutely breathtaking. The location is quite convenient in Oia and there are plenty of good restaurants around. We also appreciated the assistance in booking activities around the island. The breakfasts delivered every morning were fantastic',
+            moreRate: {
+              cleanliness: 5,
+              accuracy: 5,
+              communication: 4.2,
+              location: 4.8,
+              checkIn: 4.1,
+              value: 5
+            },
+            createdAt: 'Sun Sep 25 2022 03:00:00 GMT+0300 (שעון ישראל (קיץ))',
+            by: {
+              _id: 'u102',
+              fullname: 'Sally',
+              imgUrl:
+                'http://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
             },
           },
         ],
