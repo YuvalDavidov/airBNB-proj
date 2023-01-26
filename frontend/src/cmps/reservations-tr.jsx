@@ -10,7 +10,7 @@ export function ReservationsTr({ order }) {
     <>
       <tr className='top-tr' onClick={() => setIsOpen(!isOpen)}>
         <td className='destination-td'>{order.aboutOrder.stay.name}</td>
-        <td>
+        <td className='dates-td'>
           {utilService.getFullDate(order.aboutOrder.startDate) +
             ' - ' +
             utilService.getFullDate(order.aboutOrder.endDate)}
