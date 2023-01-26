@@ -131,6 +131,7 @@
     }
 
     &.extanded {
+        animation: mymove4 .5s 1;
         background-color: #ebebeb;
         top: 100px;
         height: 66px;
@@ -157,6 +158,21 @@
 
 
 }
+
+
+@keyframes mymove4 {
+    from {
+        width: 400px;
+        top: 0;
+    }
+
+    100% {
+        top: 100px;
+        width: 800px;
+    }
+
+}
+
 
 
 
