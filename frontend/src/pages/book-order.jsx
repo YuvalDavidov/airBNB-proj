@@ -153,16 +153,16 @@ export function BookStay() {
 
                     <h3>Price details</h3>
                     <div className="price-details">
-                        <div> ₪ {stay.price} x {getDaysCalculate()}</div>
-                        <div>₪ {stay.price * getDaysCalculate()}</div>
+                        <div> $ {stay.price} x {getDaysCalculate()}</div>
+                        <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
                     </div>
                     <div className="service-fee">
                         <div>Service fee</div>
-                        <div>₪ {serviceFee}</div>
+                        <div>$ {serviceFee}</div>
                     </div>
                     <div className="total">
                         <div>Total</div>
-                        <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                        <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
                     </div>
                 </div>
 
@@ -235,17 +235,17 @@ export function BookStay() {
 
                             <h3>Price details</h3>
                             <div className="price-details">
-                                <div> ₪ {stay.price} x {getDaysCalculate()}</div>
-                                <div>₪ {stay.price * getDaysCalculate()}</div>
+                                <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
+                                <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
                             </div>
                             <div className="service-fee">
                                 <div>Service fee</div>
-                                <div>₪ {serviceFee}</div>
+                                <div>$ {serviceFee}</div>
                             </div>
                             <hr />
                             <div className="total">
                                 <div>Total</div>
-                                <div> ₪ {serviceFee + (stay.price * getDaysCalculate())}</div>
+                                <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
                             </div>
                         </div>
                     </section>

@@ -100,7 +100,7 @@ export function Reservations() {
                 <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
                 <td>{order.aboutOrder.stay.name}</td>
-                <td>₪{order.aboutOrder.totalPrice}</td>
+                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</td>
                 <td
                   style={{
                     fontFamily: 'Cereal-Medium',
@@ -139,15 +139,15 @@ export function Reservations() {
 
       {isMobile && <table className="mobile-reservations-table">
         <thead>
-            <tr>
-                <th className='listing-th'>Listing</th>
-                <th className='dates-th'>Dates</th>
-            </tr>
+          <tr>
+            <th className='listing-th'>Listing</th>
+            <th className='dates-th'>Dates</th>
+          </tr>
         </thead>
         <tbody>
-            {orders.map(order => <ReservationsTr key={order._id} order={order} />)}
+          {orders.map(order => <ReservationsTr key={order._id} order={order} />)}
         </tbody>
-        </table>}
+      </table>}
     </section>
   )
 }
