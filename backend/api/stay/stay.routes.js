@@ -11,7 +11,8 @@ router.get('/', log, getStays)
 router.get('/:id', getStayById)
 router.post('/', addStay) // requireAuth,
 router.put('/:id', requireAuth, updateStay)
-router.delete('/:id', requireAuth, removeStay)
+router.delete('/:id', removeStay)
+// router.delete('/:id', requireAuth, removeStay)
 // router.delete('/:id', requireAuth, requireAdmin, removeCar)
 
 router.post('/:id/msg', requireAuth, addStayMsg)
