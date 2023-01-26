@@ -38,7 +38,9 @@ export function UserTrips() {
             return (
               <tr key={order._id}>
                 <td className="destination-td">
+                  <div className="img-container">
                   <img src={order.aboutOrder.stay.imgUrls[0]} alt='Stay img' />
+                  </div>
                   <span>{order.aboutOrder.stay.name}</span>
                 </td>
                 <td className='host-td'>{order.aboutOrder.stay.host.fullname}</td>
