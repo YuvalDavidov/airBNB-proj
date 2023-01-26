@@ -140,11 +140,6 @@ export function StayDetails() {
         return diffInDays + 1
     }
 
-    function handleModuls() {
-        if (guestsModal) setGuestsModal(false)
-        if (datePickerModal) setDatePickerModal(false)
-    }
-
     function onToggleWishlist(stayId) {
         if (!user) {
             setIsSignup(false)
@@ -181,7 +176,7 @@ export function StayDetails() {
                 <div className="txt">
                     {review.txt}
                 </div>
-                {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
             </li>
         })
 
@@ -483,6 +478,7 @@ export function StayDetails() {
                                 </div>
                                 <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
                                     <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
+
                                 </div>
 
                                 <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
@@ -508,7 +504,7 @@ export function StayDetails() {
                                     <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
                                 </div>
                                 <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="end-date">
-                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
+                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? 'Add date' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
                                 </div>
 
                                 <div onClick={() => { setGuestsModal(!guestsModal) }} className="guests">
@@ -517,6 +513,7 @@ export function StayDetails() {
                             </div>
                             <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
                                 <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
+                                <button className="close-btn" onClick={() => { setDatePickerModal(!datePickerModal) }}>close</button>
                             </div>
                             <section className={`guests-modal ${guestsModal ? '' : 'close'}`}>
                                 <div className="flex guest-line-filter">
@@ -524,8 +521,8 @@ export function StayDetails() {
                                         <span className="guest-main-text">Adults</span>
                                         <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.adults === 1 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
                                         <span className="counter">{guestsAmount.adults}</span>
                                         <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
                                     </span>
@@ -535,8 +532,8 @@ export function StayDetails() {
                                         <span className="guest-main-text">Children</span>
                                         <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.children === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.children}</span>
                                         <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
                                     </span>
@@ -546,26 +543,30 @@ export function StayDetails() {
                                         <span className="guest-main-text">Infants</span>
                                         <span className="ff-cereal-book fs14 light-color">Under 2</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.infants === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.infants}</span>
                                         <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
                                     </span>
                                 </div>
                                 <div className="flex guest-line-filter">
-                                    <span className="guest-main-text">Pets</span> <span className="flex align-center">
-                                        <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
+                                    <span className="guest-main-text">Pets</span> <span className="guests-modal-btn flex align-center">
+                                        <button className={`${stayDetails.allowPets ? '' : 'not'} ${guestsAmount.pets === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.pets}</span>
                                         <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
                                     </span>
                                 </div>
+
+                                <button className="close-btn" onClick={() => { setGuestsModal(!guestsModal) }} >Close</button>
                             </section>
                             <div id="reserve-btn" >
 
                                 <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
                             </div>
 
+
                             {pickedDate.endDate ? (<div className="stay-price">
+                                <div className="wont-charge">You won't be charged yet</div>
 
 
                                 <div className="price-details flex justify-between">
@@ -659,21 +660,7 @@ export function StayDetails() {
                             </div>)}
 
                             <div className="reviews-list">
-                                {reviews.map(review => {
-                                    return <li key={review.id} className="review">
-                                        <div className="review-user">
-                                            <img src={review.by.imgUrl} />
-                                            <div>
-                                                <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
-                                            </div>
-                                        </div>
-                                        <div className="txt">
-                                            {review.txt}
-                                        </div>
-                                        {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
-                                    </li>
-                                })}
+                                {getSixReviews()}
                             </div>
 
                         </section>) :

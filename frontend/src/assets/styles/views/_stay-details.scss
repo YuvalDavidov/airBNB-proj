@@ -491,6 +491,7 @@
     &-module {
         position: sticky;
         padding: 24px;
+        padding-bottom: 10px;
         border-radius: 10px;
         top: 128px;
         width: 80%;
@@ -500,6 +501,95 @@
         border: 1px solid rgb(221, 221, 221);
         box-shadow: #0000001f 0 6px 16px;
         margin-left: 80px;
+
+        .wont-charge {
+            width: max-content;
+            color: #717171;
+            margin: 10px auto;
+        }
+
+        & .date-picker {
+            // opacity: 0.8;
+            top: 63px;
+            right: 0;
+            padding: 0 13px;
+            position: absolute;
+            z-index: 100;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgba(155, 155, 155, 0.372);
+            box-shadow: #0000001f 0 6px 16px;
+            border-radius: 15px;
+
+            width: 100%;
+
+            .close-btn {
+                margin-left: 10px;
+                margin-bottom: 15px;
+                padding: 5px 10px;
+                border-radius: 10px;
+                background-color: rgb(61, 145, 255);
+                border: 0.5px solid rgb(235, 235, 235);
+                color: #fefefe;
+            }
+
+
+            .rdrDateDisplayItem input {
+                display: none;
+
+            }
+
+            .rdrCalendarWrapper {
+                width: 337px;
+                padding: 10px;
+                border-radius: 15px;
+                // background-color: red;
+            }
+
+            .rdrDay {
+                height: 35px;
+
+                // .rdrInRange,
+                // .rdrStartEdge,
+                // .rdrEndEdge,
+                // .rdrDayToday {
+                //     color: #717171 !important;
+                // }
+            }
+
+            .rdrMonth {
+                width: auto;
+                padding: 0;
+            }
+
+            .rdrDateDisplayWrapper {
+                background-color: rgba(255, 255, 255, 0);
+
+                .rdrDateDisplay {
+                    margin: 0;
+                    height: 56px;
+
+
+
+                    .rdrDateInput {
+
+                        // padding: 10px 0;
+                        padding-top: 15px;
+                        padding-right: 60px;
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .rdrMonthsVertical {
+                // max-width: 380px;
+            }
+
+            &.close {
+                visibility: hidden;
+            }
+        }
+
+
 
         & .price {
             font-size: 1.2rem;
@@ -515,20 +605,11 @@
             text-decoration: underline;
         }
 
-        & .date-picker {
-            position: absolute;
-            z-index: 100;
-
-            &.close {
-                visibility: hidden;
-            }
-        }
-
         & .stay-price {
             margin-top: 16px;
 
-            & * {
-                padding-bottom: 16px;
+            & *:not(:last-child) {
+                padding-bottom: 10px;
                 display: flex;
                 justify-content: space-between;
             }
@@ -598,6 +679,20 @@
             }
         }
 
+        & *:not(:last-child) {
+
+            & div,
+            span {
+                z-index: 1000;
+                position: relative;
+
+            }
+        }
+
+
+
+
+
         & .start-date {
             // display: flex;
             // flex-direction: column;
@@ -638,6 +733,9 @@
                 color: black;
                 border: 0.5px solid rgba(163, 163, 163, 0.685);
                 border-radius: 50%;
+                width: 30px;
+
+
             }
 
             & button:hover {
@@ -646,9 +744,32 @@
 
             & button.not {
                 cursor: not-allowed;
-                background-color: white;
+                opacity: 0.5;
             }
 
+            & button.not:hover {
+                background-color: rgba(163, 163, 163, 0);
+
+            }
+        }
+
+        &-btn {
+            width: 90px;
+            justify-content: space-between;
+        }
+
+        .close-btn {
+            margin-left: 67%;
+            border: none;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 10px;
+            text-decoration: underline;
+            padding: 10px;
+
+            &:hover {
+                background-color: #b5b5b54c;
+            }
         }
 
         &.close {
@@ -656,6 +777,7 @@
         }
     }
 }
+
 
 .special-preks {
     padding: 15px 0;
