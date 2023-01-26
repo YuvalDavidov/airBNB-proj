@@ -314,9 +314,21 @@
 
 
 
+@keyframes mymove5 {
+    from {
+        height: 150%;
+        width: 50%;
+    }
 
+    100% {
+        height: 292%;
+        width: 96%;
+    }
+
+}
 
 @media (max-width: 850px) {
+
     .app-header.expanded {
         .logo {
             display: none;
@@ -328,6 +340,8 @@
     }
 
     .stay-header-filter.extanded {
+        animation: mymove5 .5s 1;
+
         top: 5px;
         height: 292%;
         width: 96%;
@@ -343,7 +357,7 @@
     .guest-modal-filter {
         top: 194px;
         width: 97%;
-
+        right: 20px;
 
     }
 

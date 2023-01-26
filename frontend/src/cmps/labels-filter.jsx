@@ -115,57 +115,6 @@ export function LabelsFilter() {
 
 
     </Carousel>
-    // </section>
+
 
 }
-
-
-
-// const SCROLL_IDX = 8
-// const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
-// const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
-// const [searchParams, setSearchParams] = useSearchParams()
-// const [shownLabels, setShownLabels] = useState(6)
-
-// useEffect(() => {
-//     labels = labels.slice(0, shownLabels)
-// }, [])
-// let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'National parks', 'Campers', 'Castles', 'Islands',
-//     'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
-
-// const icons = [<WiStars />, <VscKey />, <MdOutlineBeachAccess />, <GiWoodCabin />, <GiPineTree />, <FaCampground />, <GiCastle />, <GiIsland />,
-// <MdOutlineDirectionsBoatFilled />, <HiHomeModern />, <GiCircleForest />, <GiStoneTower />, <GiWindmill />, <GiFarmTractor />, <GiUndergroundCave />, <BsSnow />
-
-// ]
-// function onSetLabel(label) {
-//     setSearchParams({ ...filterBy, label })
-//     setFilterBy({ ...filterBy, label })
-//     console.log('label----->', label)
-// }
-// // labels = labels.slice(0, shownLabels)
-
-// function onScrollLabels(num) {
-
-// }
-// return (
-    // <section className="flex justify-center labels-crusal-main">
-
-
-    //     <nav className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}>
-    //         <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
-    //             <button onClick={() => { onScrollLabels(-1) }}><IoIosArrowDropleft /></button>
-    //         </IconContext.Provider>
-    //         {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item label-${idx}`} key={label}>
-    //             <IconContext.Provider value={{ className: "label-icon", size: '20px' }}>
-    //                 <span>{icons[idx]}</span>
-    //             </IconContext.Provider>
-    //             <span>{label}</span>
-
-    //         </div>)}
-
-    //     </nav>
-    //     <IconContext.Provider value={{ color: "black", className: "arrow-icon", size: '30px' }}>
-    //         <button onClick={() => { onScrollLabels(1) }}><IoIosArrowDropright /></button>
-    //     </IconContext.Provider>
-    // </section>
-// )

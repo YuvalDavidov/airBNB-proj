@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
@@ -13,12 +13,12 @@ import { useWindowSize } from '../customHooks/useWindowSize'
 import { stayService } from '../services/stay.service.local'
 
 export function AppHeader() {
+    const location = useLocation()
     const user = useSelector(storeState => storeState.userModule.user)
     const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
     const navigate = useNavigate()
     const windowSize = useWindowSize()
-
     useEffect(() => {
         if (windowSize.innerWidth < 780) setIsMobile()
         else setIsDesktop()
@@ -58,7 +58,7 @@ export function AppHeader() {
 
 
     return (
-        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''}`}>
+        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''} ${(location.pathname === '/') ? 'in-main' : ''}`}>
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 
