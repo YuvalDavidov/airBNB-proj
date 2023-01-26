@@ -31,9 +31,9 @@ export function StayDetails() {
 
     const [stay, setStay] = useState(null)
     const [pickedDate, setPickedDate] = useState({ startDate: new Date(), endDate: null })
-    const [datePickerModual, setDatePickerModual] = useState(false)
-    const [guestsModual, setGuestsModual] = useState(false)
-    const [imgsModual, setImgsModual] = useState(false)
+    const [datePickerModal, setDatePickerModal] = useState(false)
+    const [guestsModal, setGuestsModal] = useState(false)
+    const [imgsModal, setImgsModal] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const user = useSelector((storeState) => storeState.userModule.user)
     const { isMobile } = useSelector((storeState) => storeState.systemModule)
@@ -126,7 +126,7 @@ export function StayDetails() {
     function onCheckAvailabilty() {
         const { adults, children, infants, pets } = guestsAmount
         const { startDate, endDate } = pickedDate
-        if (endDate === null) return showErrorMsg('you need to pick a cheack out date')
+        if (endDate === null) return setDatePickerModal(true)
         navigate(`/book/?stayId=${stayId}&adultsAmount=${adults}&childrenAmount=${children}&infantsAmount=${infants}&petsAmount=${pets}&startDate=${startDate}&endDate=${endDate}`)
     }
 
@@ -141,8 +141,8 @@ export function StayDetails() {
     }
 
     function handleModuls() {
-        if (guestsModual) setGuestsModual(false)
-        if (datePickerModual) setDatePickerModual(false)
+        if (guestsModal) setGuestsModal(false)
+        if (datePickerModal) setDatePickerModal(false)
     }
 
     function onToggleWishlist(stayId) {
@@ -247,8 +247,8 @@ export function StayDetails() {
 
         <section className="stay-details">
 
-            <article className={`imgs-modual ${imgsModual ? 'open' : 'close'}`}>
-                <button onClick={() => { setImgsModual(false) }} >
+            <article className={`imgs-modal ${imgsModal ? 'open' : 'close'}`}>
+                <button onClick={() => { setImgsModal(false) }} >
                     <MdOutlineArrowBackIosNew />
                 </button>
                 {stay.imgUrls.map((img, idx) => {
@@ -261,8 +261,7 @@ export function StayDetails() {
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
-                        <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
-                        <span className="dote">•</span>
+                        {reviews.length > 0 && <><span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>  <span className="dote">•</span></>}
                         <span><a href="#reviews">{reviews.length} reviews</a></span>
                         <span className="dote">•</span>
                         <a href="#map">{loc.address}</a>,
@@ -284,15 +283,15 @@ export function StayDetails() {
             </>)}
 
             {isMobile ?
-                (<div onClick={() => { setImgsModual(true) }}  ><ImageSlider imgs={stay.imgUrls} /></div>)
+                (<div onClick={() => { setImgsModal(true) }}  ><ImageSlider imgs={stay.imgUrls} /></div>)
                 : (<article id="imgs-grid" className="imgs-grid">
-                    <img onClick={() => { setImgsModual(true) }} className="first" src={imgUrls[0]} />
-                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[1]} />
-                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[2]} />
-                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[3]} />
-                    <img onClick={() => { setImgsModual(true) }} src={imgUrls[4]} />
+                    <img onClick={() => { setImgsModal(true) }} className="first" src={imgUrls[0]} />
+                    <img onClick={() => { setImgsModal(true) }} src={imgUrls[1]} />
+                    <img onClick={() => { setImgsModal(true) }} src={imgUrls[2]} />
+                    <img onClick={() => { setImgsModal(true) }} src={imgUrls[3]} />
+                    <img onClick={() => { setImgsModal(true) }} src={imgUrls[4]} />
 
-                    <button onClick={() => { setImgsModual(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
+                    <button onClick={() => { setImgsModal(true) }} className="flex align-center justify-between"> <TbGridDots /> <span>show all photos</span></button>
                 </article>)
             }
 
@@ -475,15 +474,15 @@ export function StayDetails() {
                                         <span> night</span>
                                     </div>
 
-                                    <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="dates">
+                                    <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="dates">
                                         <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}</span>
 
                                         {!pickedDate.endDate ? '' : <span> -{pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}</span>}
                                     </div>
 
                                 </div>
-                                <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
-                                    <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
+                                <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
+                                    <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
                                 </div>
 
                                 <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
@@ -497,28 +496,29 @@ export function StayDetails() {
                                 </div>
 
                                 <div className="flex align-center">
-                                    <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
-                                    <span className="dote">•</span>
+                                    {reviews.length > 0 && <> <AiFillStar /> {getStayReviewRateAvg(reviews)}   <span className="dote">•</span> </>}
+
+
                                     <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 </div>
                             </div>
 
                             <div className="reserve-date-guests">
-                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="start-date">
+                                <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="start-date">
                                     <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
                                 </div>
-                                <div onClick={() => { setDatePickerModual(!datePickerModual) }} className="end-date">
+                                <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="end-date">
                                     <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
                                 </div>
 
-                                <div onClick={() => { setGuestsModual(!guestsModual) }} className="guests">
+                                <div onClick={() => { setGuestsModal(!guestsModal) }} className="guests">
                                     <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
                                 </div>
                             </div>
-                            <div className={`date-picker ${datePickerModual ? '' : 'close'}`}>
-                                <StayDatePicker updateDate={updateDate} setDatePickerModual={setDatePickerModual} />
+                            <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
+                                <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
                             </div>
-                            <section className={`guests-modual ${guestsModual ? '' : 'close'}`}>
+                            <section className={`guests-modal ${guestsModal ? '' : 'close'}`}>
                                 <div className="flex guest-line-filter">
                                     <div className="flex column">
                                         <span className="guest-main-text">Adults</span>
@@ -597,7 +597,7 @@ export function StayDetails() {
 
                     <StayMap stayLoc={loc} />
 
-                    <div className="map-summary">{stay.summary}</div>
+                    {/* <div className="map-summary">{stay.summary}</div> */}
                 </div>)
                 : (<section id="reviews" >
                     {reviews.length > 0 ?
@@ -773,7 +773,7 @@ export function StayDetails() {
 
                         <StayMap stayLoc={loc} />
 
-                        <p>{stay.summary}</p>
+                        {/* <div className="map-summary">{stay.summary}</div> */}
                     </div>)
             }
 

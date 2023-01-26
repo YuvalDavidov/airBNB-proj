@@ -16,15 +16,18 @@ export function InfoTr({ stay }) {
             <td>{new Date(stay.createdAt).getDate()}/{new Date(stay.createdAt).getMonth() + 1}</td>
         </tr>
 
-        {isOpen && <tr><td colSpan={3} className="listing-stay-details">
-            <div>
+        {isOpen && <tr className="info-tr">
+            <td className="listing-stay-details">
                 <div><span>guests amount:</span>  {stay.stayDetails.guests}</div>
                 <div><span>bedrooms amount:</span> {stay.stayDetails.bedrooms}</div>
                 <div><span>price:</span> ${stay.price}</div>
-            </div>
-            <GradientButton onClickBtn={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} />
 
-        </td></tr>}
+
+            </td>
+            <td></td>
+            <td> <GradientButton onClickBtn={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} /></td>
+
+        </tr>}
     </>)
 }
 
