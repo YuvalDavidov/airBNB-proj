@@ -49,6 +49,7 @@ function _writeCarsToFile() {
             return review
         })
 
+        delete updateStay._id
         delete updateStay.capacity
         delete updateStay.bathrooms
         delete updateStay.bedrooms
