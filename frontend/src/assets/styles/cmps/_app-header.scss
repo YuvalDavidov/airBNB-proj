@@ -4,7 +4,8 @@
     background-color: white;
     z-index: 50;
     width: 100%;
-
+    min-height: 80px;
+    padding: 10px 0;
     position: relative;
 
     &.in-main {
