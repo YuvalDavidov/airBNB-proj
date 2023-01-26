@@ -13,7 +13,7 @@ export function ListingChart({ orders }) {
     }, {})
 
 
-    const labelDatas = []
+    let labelDatas = []
     const labelsValues = []
 
     for (const stayName in ordersCount) {
@@ -29,6 +29,15 @@ export function ListingChart({ orders }) {
             }
         }
     }
+    labelDatas = labelDatas.map(label => {
+        let labelArray = label.split(' ')
+        if (labelArray.length > 3) {
+            label = labelArray.slice(0, 3).join(' ') + '...'
+        } else {
+            label = labelArray.slice(0, 3).join(' ')
+        }
+        return label
+    })
     const data = {
         labels: labelDatas,
         datasets: [

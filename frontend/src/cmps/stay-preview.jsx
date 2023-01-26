@@ -36,8 +36,8 @@ export function StayPreview({ stay, userLocation }) {
     var R = 6371 // km
     var dLat = converToRad(lat2 - lat1)
     var dLng = converToRad(lng2 - lng1)
-    var lat1 = converToRad(lat1)
-    var lat2 = converToRad(lat2)
+    lat1 = converToRad(lat1)
+    lat2 = converToRad(lat2)
 
     var a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
