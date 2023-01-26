@@ -3,10 +3,14 @@
     margin-bottom: 10px;
     background-color: white;
     z-index: 50;
-    height: 100%;
     width: 100%;
-
+    min-height: 80px;
+    padding: 10px 0;
     position: relative;
+
+    &.in-main {
+        position: fixed;
+    }
 
     &.expanded {
         animation: mymove3 .5s 1;
