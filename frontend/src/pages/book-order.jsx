@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { FaArrowLeft } from 'react-icons/fa';
-import { SlDiamond } from 'react-icons/sl';
-import { stayService } from "../services/stay.service.local";
-import { AiFillStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
+
+import { stayService } from "../services/stay.service";
 import { orderService } from "../services/order.service";
 import { showSuccessMsg } from "../services/event-bus.service";
-import { GradientButton } from "../cmps/gradient-button";
+
 import { setIsModalOpen } from "../store/user.actions";
+
+import { GradientButton } from "../cmps/gradient-button";
+
+import { FaArrowLeft } from 'react-icons/fa';
+import { SlDiamond } from 'react-icons/sl';
+import { AiFillStar } from "react-icons/ai";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -30,7 +34,7 @@ export function BookStay() {
 
     }, [])
 
-    function getOrderPickes() {
+    async function getOrderPickes() {
         let newOrder = {
             stayId: '',
             adultsAmount: '',
@@ -43,11 +47,13 @@ export function BookStay() {
         for (const field in newOrder) {
             newOrder[field] = searchParams.get(field)
         }
-        stayService.getById(newOrder.stayId)
-            .then((stay) => {
-                newOrder.stay = stay
-                setOrder(newOrder)
-            })
+        const currStay = await stayService.getById(newOrder.stayId)
+        newOrder.stay = currStay
+        setOrder(newOrder)
+        // stayService.getById(newOrder.stayId)
+        //     .then((stay) => {
+        //         setOrder(newOrder)
+        //     })
     }
 
     function getGuestsAmount() {

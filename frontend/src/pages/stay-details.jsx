@@ -7,7 +7,7 @@ import { StayDatePicker } from "../cmps/stay-date-picker";
 import { GradientButton } from "../cmps/gradient-button";
 import { ImageSlider } from "../cmps/image-slider";
 
-import { stayService } from "../services/stay.service.local";
+import { stayService } from "../services/stay.service";
 import { showErrorMsg } from "../services/event-bus.service";
 
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
@@ -331,7 +331,7 @@ export function StayDetails() {
                                 <span className="dote">•</span>
                                 <span>{stayDetails.beds} Beds</span>
                                 <span className="dote">•</span>
-                                <span>{stayDetails.sharedBath} Bath</span>
+                                <span>{stayDetails.bath} Bath</span>
                             </p>
                         </div>
                         <img src={host.imgUrl} />

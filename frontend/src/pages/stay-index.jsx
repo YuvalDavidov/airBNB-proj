@@ -4,7 +4,7 @@ import { LabelsFilter } from '../cmps/labels-filter'
 
 import { loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
-import { stayService } from '../services/stay.service.local'
+import { stayService } from '../services/stay.service'
 import { useSearchParams } from 'react-router-dom'
 
 export function StayIndex() {
