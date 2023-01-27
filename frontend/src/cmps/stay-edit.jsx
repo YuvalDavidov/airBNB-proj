@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { Await, useNavigate, useParams } from "react-router"
-import { stayService } from "../services/stay.service.local"
+import { stayService } from "../services/stay.service"
 import { uploadService } from "../services/upload.service"
 import { MultiAmenitiesSelect } from "./multi-amenities-select"
 import { MultiLabelsSelect } from "./multi-select-lables"

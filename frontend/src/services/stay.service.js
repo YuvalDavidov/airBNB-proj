@@ -30,7 +30,6 @@ async function query(filterBy) {
 }
 
 function getById(stayId) {
-  console.log('hi');
   return httpService.get(BASE_URL + stayId)
 }
 

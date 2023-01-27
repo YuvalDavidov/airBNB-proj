@@ -25,6 +25,17 @@ export function StayDatePicker({ updateDate, setDatePickerModal }) {
         }
     }
 
+    function getDisabledDates() {
+        let dates = []
+        let d = new Date()
+
+        for (let i = 1; i <= 60; i++) {
+            dates.push(d.setDate(d.getDate() - 1))
+        }
+
+        return dates
+    }
+
     return (
         <div>
             <DateRange
@@ -32,6 +43,7 @@ export function StayDatePicker({ updateDate, setDatePickerModal }) {
                 onChange={item => setState([item.selection])}
                 moveRangeOnFirstSelection={false}
                 ranges={state}
+                disabledDates={getDisabledDates()}
             />
 
         </div>
