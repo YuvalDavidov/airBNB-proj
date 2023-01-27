@@ -5,7 +5,7 @@ import { PlaceFilter } from './place-filter.jsx'
 import { DateFilter } from './date-filter.jsx'
 import { GuestFilter } from './guest-filter.jsx'
 
-import { stayService } from "../services/stay.service.local"
+import { stayService } from "../services/stay.service"
 import { utilService } from "../services/util.service.js"
 import { setFilterBy, toggleExpand } from "../store/stay.actions.js"
 

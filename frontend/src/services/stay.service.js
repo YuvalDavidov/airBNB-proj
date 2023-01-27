@@ -25,7 +25,7 @@ export const stayService = {
 _createStays()
 
 async function query(filterBy) {
-  const queryPatams = ``
+  const queryPatams = `?loactionCountry=${filterBy.loactionCountry}&loactionCity=${filterBy.loactionCity}&guests=${filterBy.guests}&label=${filterBy.label}`
   return httpService.get(BASE_URL + queryPatams)
 }
 
