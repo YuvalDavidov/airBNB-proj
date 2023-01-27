@@ -23,6 +23,7 @@ import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator, TbGridDots } from 'react-icons/tb';
 import { IconContext } from "react-icons";
 import { TiHeartFullOutline } from "react-icons/ti";
+import { TxtReview } from "../cmps/txt-review";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -173,10 +174,8 @@ export function StayDetails() {
                         <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
                     </div>
                 </div>
-                <div className="txt">
-                    {review.txt}
-                </div>
-                {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
+                <TxtReview reviewTxt={review.txt} />
+
             </li>
         })
 
@@ -203,7 +202,7 @@ export function StayDetails() {
                 <div className="reserve-btn-header">
                     <div className="reserve-btn-header-details">
                         <div>
-                            <span> $ {price.toLocaleString('en-US')}</span>  night
+                            <span> ${price.toLocaleString('en-US')}</span>  night
 
                         </div>
 
@@ -508,7 +507,7 @@ export function StayDetails() {
                                 </div>
 
                                 <div onClick={() => { setGuestsModal(!guestsModal) }} className="guests">
-                                    <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
+                                    <div> GUESTS</div>   <span>{guestsAmount.total} {guestsAmount.total > 1 ? 'Guests' : 'Guest'}</span>
                                 </div>
                             </div>
                             <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
@@ -570,17 +569,17 @@ export function StayDetails() {
 
 
                                 <div className="price-details flex justify-between">
-                                    <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
-                                    <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
+                                    <div> ${stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
+                                    <div>${(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
                                 </div>
                                 <div className="service-fee flex justify-between">
                                     <div>Service fee</div>
-                                    <div>$ {serviceFee}</div>
+                                    <div>{serviceFee}</div>
                                 </div>
 
                                 <div className="total flex justify-between">
                                     <div>Total</div>
-                                    <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
+                                    <div> ${(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
                                 </div>
                             </div>) : ''}
 
@@ -680,55 +679,6 @@ export function StayDetails() {
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
-
-                            {!isMobile && (<div className="reviews-bar">
-                                <div className="cleanliness">
-                                    <p>Cleanliness</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                                        <span> {getReviewsRateByType('cleanliness')}</span>
-                                    </div>
-                                </div>
-                                <div className="accuracy">
-                                    <p>Accuracy</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                                        <span> {getReviewsRateByType('accuracy')}</span>
-                                    </div>
-                                </div>
-
-
-                                <div className="communication">
-                                    <p>Communication</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                                        <span> {getReviewsRateByType('communication')}</span>
-                                    </div>
-                                </div>
-                                <div className="location">
-                                    <p>Location</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                                        <span> {getReviewsRateByType('location')}</span>
-                                    </div>
-                                </div>
-                                <div className="check-in">
-                                    <p>Check-in</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                                        <span> {getReviewsRateByType('checkIn')}</span>
-                                    </div>
-                                </div>
-
-                                <div className="value">
-                                    <p>Value</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                                        <span> {getReviewsRateByType('value')}</span>
-                                    </div>
-                                </div>
-
-                            </div>)}
 
                             <div className="reviews-list">
                                 {reviews.map(review => {
