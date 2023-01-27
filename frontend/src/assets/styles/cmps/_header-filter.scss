@@ -1,7 +1,11 @@
-.head-filter-form {
+.form-header-extanded {
     height: 100%;
     align-items: center;
     // justify-content: space-between;
+}
+
+.form-header {
+    width: 347px;
 }
 
 .location-container {
@@ -193,6 +197,10 @@
 
 }
 
+.place-modal {
+    left: 0px;
+}
+
 .guest-modal-filter {
     button {
         border: 0;
@@ -205,7 +213,7 @@
 
 .search-icon {
     // padding: 10px;
-    margin: 5px 5px 5px 0px;
+    margin: 0px 0px 0px 5px;
 }
 
 
@@ -343,11 +351,11 @@
         animation: mymove5 .5s 1;
 
         top: 5px;
-        height: 292%;
+        height: 245%;
         width: 96%;
     }
 
-    .head-filter-form {
+    .form-header-extanded {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -355,11 +363,13 @@
     .place-modal,
     .date-modal,
     .guest-modal-filter {
-        top: 194px;
-        width: 97%;
-        right: 20px;
+        top: 207px;
+        width: 100%;
+        right: 0px;
 
     }
+
+
 
     .location-container {
         padding-inline-start: 1.5rem;

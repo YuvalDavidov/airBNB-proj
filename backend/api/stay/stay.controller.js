@@ -3,10 +3,15 @@ const stayService = require('./stay.service.js')
 const logger = require('../../services/logger.service')
 
 async function getStays(req, res) {
+  let { query } = req
   try {
     logger.debug('Getting Stays')
     const filterBy = {
-      txt: req.query.txt || ''
+      locationCountry: query.locationCountry || '',
+      locationCity: query.locationCity || '',
+      guests: query.guests || 0,
+      label: query.label || 'Trending'
+
     }
     const stays = await stayService.query(filterBy)
     res.json(stays)

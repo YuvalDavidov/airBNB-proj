@@ -1,13 +1,12 @@
-.lables-filter-nav {
+.labels-container {
     width: 100%;
-    height: 80px;
-    z-index: 5;
+    height: 135px;
     background-color: #fff;
-    margin-bottom: 20px;
     position: fixed;
     top: 64px;
     left: 0px;
     box-shadow: 1px 4px 13px 1px rgb(184 178 178 / 20%);
+    z-index: 5;
 
     &.hidden {
         height: 0px;
@@ -15,11 +14,21 @@
     }
 }
 
+.lables-filter-nav {
+    padding-top: 35px;
+
+
+}
+
+.react-multi-carousel-track {}
+
 .label-item {
     flex-direction: column;
     color: grey;
     cursor: pointer;
     padding-bottom: 10px;
+    font-size: 12px;
+    width: 100%;
     border-bottom: rgba(206, 201, 201, 0) solid 3px;
 
     &:hover {
@@ -33,7 +42,9 @@
 
 }
 
-
+.react-multi-carousel-item.react-multi-carousel-item--active {
+    width: 80px;
+}
 
 .react-multiple-carousel__arrow {
     position: absolute;
@@ -79,7 +90,7 @@
     position: absolute;
     z-index: 1;
     bottom: 0;
-    right: 0;
+    left: -15px;
     pointer-events: none;
     background-image: linear-gradient(to right,
             rgba(255, 255, 255, 0),
@@ -97,7 +108,7 @@
     position: absolute;
     z-index: 1;
     bottom: 0;
-    left: 0;
+    right: -15px;
     pointer-events: none;
     background-image: linear-gradient(to left,
             rgba(255, 255, 255, 0),
@@ -108,11 +119,11 @@
 }
 
 .react-multiple-carousel__arrow--right {
-    top: 20px;
+    top: 65px;
     right: 5px;
 }
 
 .react-multiple-carousel__arrow--left {
-    top: 20px;
+    top: 65px;
     left: 5px;
 }
