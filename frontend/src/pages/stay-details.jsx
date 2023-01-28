@@ -192,7 +192,6 @@ export function StayDetails() {
                     </div>
                 </div>
                 <TxtReview reviewTxt={review.txt} />
-
             </li>
         })
 
@@ -717,7 +716,7 @@ export function StayDetails() {
                                         <div className="txt">
                                             {review.txt}
                                         </div>
-                                        {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+
                                     </li>
                                 })}
                             </div>
