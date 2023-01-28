@@ -113,7 +113,7 @@ export function BookStay() {
     orderToSave.aboutOrder.bookDate = Date.now()
     orderToSave.aboutOrder.status = 'Pending'
     orderToSave.aboutUser = {
-      id: user._id,
+      _id: user._id,
       fullname: user.fullname,
       imgUrl: user.imgUrl,
     }

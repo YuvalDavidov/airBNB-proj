@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { LabelsFilter } from '../cmps/labels-filter'
+import { useSearchParams } from 'react-router-dom'
 
 import { loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service'
-import { useSearchParams } from 'react-router-dom'
+import { showSuccessMsg } from '../services/event-bus.service'
 
 export function StayIndex() {
 
@@ -28,6 +29,7 @@ export function StayIndex() {
 
   useEffect(() => {
     getUserLocation()
+    showSuccessMsg('testtttttt')
   }, [])
 
   async function onLoadStays(filterBy) {

@@ -18,7 +18,7 @@ async function query(filterBy = { txt: '' }) {
 
         if (filterBy.userId) {
             criteria = {
-                "aboutUser.id": { $regex: filterBy.userId, $options: 'i' }
+                "aboutUser._id": { $regex: filterBy.userId, $options: 'i' }
             }
         }
 

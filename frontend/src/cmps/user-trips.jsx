@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { loadOrders } from '../store/order.actions'
 import { userService } from '../services/user.service'
 import { utilService } from '../services/util.service'
+import { socketService } from '../services/socket.service'
 import { UserTripsTr } from './user-trips-tr'
 
 export function UserTrips() {
@@ -12,6 +13,9 @@ export function UserTrips() {
 
   useEffect(() => {
     loadOrders({ userId: userService.getLoggedinUser()._id })
+    socketService.on('reviewed-order', updatedOrder => {
+      loadOrders({ userId: userService.getLoggedinUser()._id })
+    })
   }, [])
 
   if (orders.length <= 0) return <div>you have no trips</div>
@@ -34,7 +38,7 @@ export function UserTrips() {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => {
+          {orders.sort((a,b) => a.aboutOrder.bookDate - b.aboutOrder.bookDate).map((order) => {
             return (
               <tr key={order._id}>
                 <td className="destination-td">
@@ -63,7 +67,7 @@ export function UserTrips() {
             </tr>
         </thead>
         <tbody>
-            {orders.map(order => <UserTripsTr key={order._id} order={order} />)}
+            {orders.sort((a,b) => a.aboutOrder.bookDate - b.aboutOrder.bookDate).map(order => <UserTripsTr key={order._id} order={order} />)}
         </tbody>
         </table>}
     </section>

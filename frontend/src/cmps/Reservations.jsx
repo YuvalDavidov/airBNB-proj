@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { userService } from '../services/user.service'
 import { utilService } from '../services/util.service'
+import { socketService } from '../services/socket.service'
 import { loadOrders, setOrderStatus } from '../store/order.actions'
 
 import { ListingChart } from './listing-chart'
@@ -17,6 +18,9 @@ export function Reservations() {
 
   useEffect(() => {
     loadOrders({ hostId: userService.getLoggedinUser()._id })
+    socketService.on('recieved-order', addedOrder => {
+      loadOrders({ hostId: userService.getLoggedinUser()._id })
+    })
   }, [])
 
   return (
@@ -85,7 +89,7 @@ export function Reservations() {
             <th className='status-td'>Status</th>
             <th className='todo-td'>To do</th>
           </tr>
-          {orders.map((order) => {
+          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map((order) => {
             return (
               <tr key={order._id} className='data'>
                 <td className='guest-td'>
@@ -145,7 +149,7 @@ export function Reservations() {
           </tr>
         </thead>
         <tbody>
-          {orders.map(order => <ReservationsTr key={order._id} order={order} />)}
+          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map(order => <ReservationsTr key={order._id} order={order} />)}
         </tbody>
       </table>}
     </section>

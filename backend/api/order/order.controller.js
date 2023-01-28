@@ -1,4 +1,5 @@
 const orderService = require('./order.service.js')
+const socketService = require('../../services/socket.service.js')
 
 const logger = require('../../services/logger.service')
 
@@ -22,6 +23,8 @@ async function addOrder(req, res) {
     try {
         const order = req.body
         const addedOrder = await orderService.add(order)
+        console.log('userId from addOrder', order.aboutOrder.stay.host._id)
+        socketService.emitToUser({type: 'recieved-order', data: order, userId: order.aboutOrder.stay.host._id})
         res.json(addedOrder)
     } catch (err) {
         logger.error('Failed to add order', err)
@@ -33,6 +36,8 @@ async function updateOrder(req, res) {
     try {
         const order = req.body
         const updatedOrder = await orderService.update(order)
+        console.log('order from updateorder', order)
+        socketService.emitToUser({type: 'reviewed-order', data: order, userId: order.aboutUser._id})
         res.json(updatedOrder)
     } catch (err) {
         logger.error('Failed to update order', err)
