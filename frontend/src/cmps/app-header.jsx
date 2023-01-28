@@ -16,6 +16,7 @@ export function AppHeader() {
     const location = useLocation()
     const user = useSelector(storeState => storeState.userModule.user)
     const { isHeadFilterExpanded, isStayDetails } = useSelector((storeState) => storeState.stayModule)
+    const { isMobile } = useSelector((storeState) => storeState.systemModule)
     const isModalOpen = useSelector((storeState) => storeState.userModule.isModalOpen)
     const navigate = useNavigate()
     const windowSize = useWindowSize()
@@ -56,9 +57,8 @@ export function AppHeader() {
         navigate('/')
     }
 
-
     return (
-        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''} ${(location.pathname === '/') ? 'in-main' : ''}`}>
+        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isMobile ? 'in-mobile' : ''}  ${isStayDetails ? 'in-details' : ''} ${(location.pathname === '/') ? 'in-main' : ''}`}>
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 
