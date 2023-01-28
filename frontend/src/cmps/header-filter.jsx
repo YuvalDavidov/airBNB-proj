@@ -123,7 +123,10 @@ export function HeaderFilter() {
         console.log('filterByToEdit------>', filterByToEdit)
         setSearchParams({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
-            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests.total
+            startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests.total,
+            adults: filterByToEdit.guests.adults, children: filterByToEdit.guests.children, infants: filterByToEdit.guests.infants,
+            pets: filterByToEdit.guests.pets
+
         })
         setFilterBy({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,

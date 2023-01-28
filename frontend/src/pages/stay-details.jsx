@@ -24,6 +24,7 @@ import { TbElevator, TbGridDots } from 'react-icons/tb';
 import { IconContext } from "react-icons";
 import { TiHeartFullOutline } from "react-icons/ti";
 import { TxtReview } from "../cmps/txt-review";
+import { useSearchParams } from "react-router-dom";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -37,6 +38,8 @@ export function StayDetails() {
     const [imgsModal, setImgsModal] = useState(false)
     const [guestsAmount, setGuestsAmount] = useState({ total: 1, adults: 1, children: 0, infants: 0, pets: 0 })
     const user = useSelector((storeState) => storeState.userModule.user)
+    const [searchParams, setSearchParams] = useSearchParams()
+
     const { isMobile } = useSelector((storeState) => storeState.systemModule)
     const { stayId } = useParams()
     const navigate = useNavigate()
@@ -84,6 +87,20 @@ export function StayDetails() {
         try {
             const stay = await stayService.getById(stayId)
             setStay(stay)
+            if (searchParams.get('adults') || searchParams.get('startDate')) {
+                if (searchParams.get('startDate').valueOf() !== 'false') {
+                    setPickedDate({ startDate: new Date(searchParams.get('startDate')), endDate: new Date(searchParams.get('endDate')) })
+                }
+                if (searchParams.get('adults').valueOf() !== 'false') {
+                    let guests = { ...guestsAmount }
+                    guests.adults = +searchParams.get('adults')
+                    guests.children = +searchParams.get('children')
+                    guests.infants = +searchParams.get('infants')
+                    guests.pets = +searchParams.get('pets')
+                    guests.total = guests.adults + guests.children + guests.infants + guests.pets
+                    setGuestsAmount(guests)
+                }
+            }
         } catch (error) {
 
         }
