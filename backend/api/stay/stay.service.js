@@ -7,6 +7,7 @@ async function query(filterBy = { locationCity: '' }) {
     let criteria
     try {
         if (filterBy?.hostId) {
+            console.log('hi');
             criteria = { 'host._id': { $regex: filterBy.hostId } }
         } else {
             criteria = _buildCriteria(filterBy)
