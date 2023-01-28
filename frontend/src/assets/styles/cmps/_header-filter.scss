@@ -106,10 +106,6 @@
     position: relative;
     width: max-content;
 
-
-
-
-
     .header-filter-btn {
         font-family: Cereal-Bold;
         color: black;
@@ -157,6 +153,32 @@
             border: 0;
             cursor: pointer;
             background-color: transparent;
+        }
+
+        & .date-modal {
+            // background-color: red;
+            width: 100%;
+            padding: 10px;
+
+            .rdrCalendarWrapper {
+                width: 100%;
+                border-radius: 30px;
+
+                .rdrDateDisplayWrapper {
+                    background-color: rgba(255, 0, 0, 0);
+                }
+
+                .rdrMonth {
+                    width: 100%;
+                }
+            }
+
+            button {
+                &.rdrDayDisabled {
+                    cursor: not-allowed;
+                    background-color: rgb(248, 248, 248);
+                }
+            }
         }
     }
 

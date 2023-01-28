@@ -32,7 +32,6 @@ export function StayDatePicker({ updateDate, setDatePickerModal }) {
         for (let i = 1; i <= 60; i++) {
             dates.push(d.setDate(d.getDate() - 1))
         }
-
         return dates
     }
 
