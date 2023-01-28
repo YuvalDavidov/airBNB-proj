@@ -1,4 +1,4 @@
-import { stayService } from '../services/stay.service.local'
+import { stayService } from '../services/stay.service'
 import { store } from './store'
 import {
   SET_STAYS,

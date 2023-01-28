@@ -48,12 +48,12 @@ export function LabelsFilter() {
     {/* <section className="flex justify-center labels-crusal-main"></section> */ }
 
 
-    return <Carousel
+    return <section className={`labels-container main-layout ${(isHeadFilterExpanded) ? 'hidden' : ''}`}> <Carousel
         additionalTransfrom={0}
         arrows
         autoPlaySpeed={3000}
         centerMode={false}
-        className={`flex align-center lables-filter-nav ${(isHeadFilterExpanded) ? 'hidden' : ''}`}
+        className={`flex align-center lables-filter-nav`}
         containerClass="container"
         dotListClass=""
         draggable
@@ -85,10 +85,10 @@ export function LabelsFilter() {
             },
             tablet: {
                 breakpoint: {
-                    max: 1024,
+                    max: 1000,
                     min: 464
                 },
-                items: 6,
+                items: 9,
                 partialVisibilityGutter: 30
             }
         }}
@@ -104,7 +104,7 @@ export function LabelsFilter() {
 
 
 
-        {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item label-${idx}`} key={label}>
+        {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item`} key={label}>
             <IconContext.Provider value={{ className: "label-icon", size: '20px' }}>
                 <span>{icons[idx]}</span>
             </IconContext.Provider>
@@ -116,5 +116,5 @@ export function LabelsFilter() {
 
     </Carousel>
 
-
+    </section>
 }

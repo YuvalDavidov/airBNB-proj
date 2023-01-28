@@ -58,7 +58,7 @@ export function AppHeader() {
 
 
     return (
-        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''} ${(location.pathname === '/') ? 'in-main' : ''}`}>
+        <div className={`header-container full ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''} ${(location.pathname === '/') ? 'in-main' : ''}`}>
 
             <header className={`app-header ${(isHeadFilterExpanded) ? 'expanded' : ''} ${isStayDetails ? 'in-details' : ''}`}>
 

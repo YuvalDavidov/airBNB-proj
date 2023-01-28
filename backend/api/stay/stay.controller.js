@@ -1,12 +1,24 @@
 const stayService = require('./stay.service.js')
-
 const logger = require('../../services/logger.service')
 
 async function getStays(req, res) {
+  let filterBy
   try {
-    logger.debug('Getting Stays')
-    const filterBy = {
-      txt: req.query.txt || ''
+    logger.debug('Getting Stays.....')
+
+    filterBy = {
+      locationCountry: req.query.locationCountry || '',
+      locationCity: req.query.locationCity || '',
+      guests: req.query.guests || 0,
+      label: req.query.label || 'Trending'
+    }
+    console.log(req.body);
+    if (req.params.hostId) {
+      console.log('hi');
+      filterBy = {
+        hostId: req.body.hostId
+      }
+      console.log('filterBy----->', filterBy)
     }
     const stays = await stayService.query(filterBy)
     res.json(stays)
@@ -54,7 +66,7 @@ async function updateStay(req, res) {
 
 async function removeStay(req, res) {
   try {
-    const stayId = req.params.id
+    const stayId = req.body.id
     const removedId = await stayService.remove(stayId)
     res.send(removedId)
   } catch (err) {

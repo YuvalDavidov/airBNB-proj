@@ -24,13 +24,20 @@ export const stayService = {
 
 _createStays()
 
-async function query(filterBy) {
-  const queryPatams = ``
-  return httpService.get(BASE_URL + queryPatams)
+async function query(filterBy = {}) {
+  if (filterBy?.hostId) {
+    console.log(filterBy);
+
+    return httpService.get(BASE_URL, filterBy)
+  }
+  if (filterBy?.wishlist) return httpService.get(BASE_URL)
+  const queryParams = `?loactionCountry=${filterBy.loactionCountry}&loactionCity=${filterBy.loactionCity}&guests=${filterBy.guests}&label=${filterBy.label}`
+  const stays = httpService.get(BASE_URL + queryParams)
+  console.log(stays);
+  return stays
 }
 
 function getById(stayId) {
-  console.log('hi');
   return httpService.get(BASE_URL + stayId)
 }
 
@@ -53,7 +60,7 @@ async function save(stay) {
 }
 
 async function getStaysForWishlist(staysIds) {
-  const stays = await query()
+  const stays = await query({ wishlist: 'yes' })
   const filteredStays = stays.filter(stay => staysIds.includes(stay._id))
   return filteredStays
 }

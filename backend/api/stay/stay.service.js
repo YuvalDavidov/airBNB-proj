@@ -3,14 +3,19 @@ const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = { locationCity: '' }) {
+    let criteria
     try {
-        // console.log(filterBy);
-        const criteria = {
-            vendor: { $regex: filterBy.txt, $options: 'i' }
+        if (filterBy?.hostId) {
+            console.log('hi');
+            criteria = { 'host._id': { $regex: filterBy.hostId } }
+        } else {
+            criteria = _buildCriteria(filterBy)
         }
+        console.log(criteria);
         const collection = await dbService.getCollection('stay')
-        var stays = await collection.find().toArray()
+        let stays = await collection.find(criteria).toArray()
+
         return stays
     } catch (err) {
         logger.error('cannot find stays', err)
@@ -88,6 +93,21 @@ async function removeStayMsg(stayId, msgId) {
         throw err
     }
 }
+
+function _buildCriteria(filterBy = {}) {
+    let criteria = {}
+    if (filterBy?.locationCity) criteria['loc.city'] = { $regex: filterBy.locationCity, $options: 'i' }
+    if (filterBy?.locationCountry) criteria['loc.country'] = filterBy.locationCountry
+    if (filterBy?.guests) criteria['stayDetails.guests'] = { $gte: +filterBy.guests } // its a number! 
+    if (filterBy?.label !== 'Trending') criteria['labels'] = { $all: [filterBy.label] }
+    return criteria
+}
+
+// if (filterBy?.locationCity) stays = stays.filter(stay => stay.loc.city === filterBy.locationCity)
+// if (filterBy?.locationCountry) stays = stays.filter(stay => stay.loc.country === filterBy.locationCountry)
+// if (filterBy?.guests) stays = stays.filter(stay => stay.stayDetails.guests >= filterBy.guests)
+// if (filterBy?.label === 'Trending') return stays
+// if (filterBy?.label) stays = stays.filter(stay => stay.labels.includes(filterBy.label))
 
 module.exports = {
     remove,

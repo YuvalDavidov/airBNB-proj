@@ -7,7 +7,7 @@ import { StayDatePicker } from "../cmps/stay-date-picker";
 import { GradientButton } from "../cmps/gradient-button";
 import { ImageSlider } from "../cmps/image-slider";
 
-import { stayService } from "../services/stay.service.local";
+import { stayService } from "../services/stay.service";
 import { showErrorMsg } from "../services/event-bus.service";
 
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
@@ -23,6 +23,7 @@ import { GiForkKnifeSpoon } from 'react-icons/gi';
 import { TbElevator, TbGridDots } from 'react-icons/tb';
 import { IconContext } from "react-icons";
 import { TiHeartFullOutline } from "react-icons/ti";
+import { TxtReview } from "../cmps/txt-review";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const serviceFee = 18
@@ -140,11 +141,6 @@ export function StayDetails() {
         return diffInDays + 1
     }
 
-    function handleModuls() {
-        if (guestsModal) setGuestsModal(false)
-        if (datePickerModal) setDatePickerModal(false)
-    }
-
     function onToggleWishlist(stayId) {
         if (!user) {
             setIsSignup(false)
@@ -178,10 +174,8 @@ export function StayDetails() {
                         <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
                     </div>
                 </div>
-                <div className="txt">
-                    {review.txt}
-                </div>
-                {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>}
+                <TxtReview reviewTxt={review.txt} />
+
             </li>
         })
 
@@ -208,7 +202,7 @@ export function StayDetails() {
                 <div className="reserve-btn-header">
                     <div className="reserve-btn-header-details">
                         <div>
-                            <span> $ {price.toLocaleString('en-US')}</span>  night
+                            <span> ${price.toLocaleString('en-US')}</span>  night
 
                         </div>
 
@@ -337,7 +331,7 @@ export function StayDetails() {
                                 <span className="dote">•</span>
                                 <span>{stayDetails.beds} Beds</span>
                                 <span className="dote">•</span>
-                                <span>{stayDetails.sharedBath} Bath</span>
+                                <span>{stayDetails.bath} Bath</span>
                             </p>
                         </div>
                         <img src={host.imgUrl} />
@@ -483,6 +477,7 @@ export function StayDetails() {
                                 </div>
                                 <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
                                     <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
+
                                 </div>
 
                                 <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
@@ -508,15 +503,16 @@ export function StayDetails() {
                                     <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
                                 </div>
                                 <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="end-date">
-                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? '' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
+                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? 'Add date' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
                                 </div>
 
                                 <div onClick={() => { setGuestsModal(!guestsModal) }} className="guests">
-                                    <div> GUESTS</div>   <span>{guestsAmount.total} guest</span>
+                                    <div> GUESTS</div>   <span>{guestsAmount.total} {guestsAmount.total > 1 ? 'Guests' : 'Guest'}</span>
                                 </div>
                             </div>
                             <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
                                 <StayDatePicker updateDate={updateDate} setDatePickerModal={setDatePickerModal} />
+                                <button className="close-btn" onClick={() => { setDatePickerModal(!datePickerModal) }}>close</button>
                             </div>
                             <section className={`guests-modal ${guestsModal ? '' : 'close'}`}>
                                 <div className="flex guest-line-filter">
@@ -524,8 +520,8 @@ export function StayDetails() {
                                         <span className="guest-main-text">Adults</span>
                                         <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.adults === 1 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('adults', - 1) }}>-</button>
                                         <span className="counter">{guestsAmount.adults}</span>
                                         <button onClick={() => { handleGuestsAmount('adults', + 1) }}>+</button>
                                     </span>
@@ -535,8 +531,8 @@ export function StayDetails() {
                                         <span className="guest-main-text">Children</span>
                                         <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.children === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('children', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.children}</span>
                                         <button onClick={() => { handleGuestsAmount('children', + 1) }}>+</button>
                                     </span>
@@ -546,40 +542,44 @@ export function StayDetails() {
                                         <span className="guest-main-text">Infants</span>
                                         <span className="ff-cereal-book fs14 light-color">Under 2</span>
                                     </div>
-                                    <span className="flex align-center">
-                                        <button onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
+                                    <span className="guests-modal-btn flex align-center">
+                                        <button className={`${guestsAmount.infants === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('infants', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.infants}</span>
                                         <button onClick={() => { handleGuestsAmount('infants', + 1) }}>+</button>
                                     </span>
                                 </div>
                                 <div className="flex guest-line-filter">
-                                    <span className="guest-main-text">Pets</span> <span className="flex align-center">
-                                        <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
+                                    <span className="guest-main-text">Pets</span> <span className="guests-modal-btn flex align-center">
+                                        <button className={`${stayDetails.allowPets ? '' : 'not'} ${guestsAmount.pets === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >-</button>
                                         <span className="counter">{guestsAmount.pets}</span>
                                         <button className={`${stayDetails.allowPets ? '' : 'not'}`} onClick={() => { handleGuestsAmount('pets', + 1) }}>+</button>
                                     </span>
                                 </div>
+
+                                <button className="close-btn" onClick={() => { setGuestsModal(!guestsModal) }} >Close</button>
                             </section>
                             <div id="reserve-btn" >
 
                                 <GradientButton onClickBtn={() => { onCheckAvailabilty() }} label={'Check availabilty'} className={"reserve-btn"} />
                             </div>
 
+
                             {pickedDate.endDate ? (<div className="stay-price">
+                                <div className="wont-charge">You won't be charged yet</div>
 
 
                                 <div className="price-details flex justify-between">
-                                    <div> $ {stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
-                                    <div>$ {(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
+                                    <div> ${stay.price.toLocaleString('en-US')} x {getDaysCalculate()}</div>
+                                    <div>${(stay.price * getDaysCalculate()).toLocaleString('en-US')}</div>
                                 </div>
                                 <div className="service-fee flex justify-between">
                                     <div>Service fee</div>
-                                    <div>$ {serviceFee}</div>
+                                    <div>{serviceFee}</div>
                                 </div>
 
                                 <div className="total flex justify-between">
                                     <div>Total</div>
-                                    <div> $ {(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
+                                    <div> ${(serviceFee + (stay.price * getDaysCalculate())).toLocaleString('en-US')}</div>
                                 </div>
                             </div>) : ''}
 
@@ -659,21 +659,7 @@ export function StayDetails() {
                             </div>)}
 
                             <div className="reviews-list">
-                                {reviews.map(review => {
-                                    return <li key={review.id} className="review">
-                                        <div className="review-user">
-                                            <img src={review.by.imgUrl} />
-                                            <div>
-                                                <h4>{review.by.fullname}</h4>
-                                                <p>{new Date(review.createdAt).getFullYear()}/{month[new Date(review.createdAt).getMonth()]}</p>
-                                            </div>
-                                        </div>
-                                        <div className="txt">
-                                            {review.txt}
-                                        </div>
-                                        {/* {review.txt.length > 50 && <div className="show"><a href="">show more </a> {<RiArrowRightSLine />}</div>} */}
-                                    </li>
-                                })}
+                                {getSixReviews()}
                             </div>
 
                         </section>) :
@@ -693,55 +679,6 @@ export function StayDetails() {
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
-
-                            {!isMobile && (<div className="reviews-bar">
-                                <div className="cleanliness">
-                                    <p>Cleanliness</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('cleanliness')} max="5"></progress>
-                                        <span> {getReviewsRateByType('cleanliness')}</span>
-                                    </div>
-                                </div>
-                                <div className="accuracy">
-                                    <p>Accuracy</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('accuracy')} max="5"></progress>
-                                        <span> {getReviewsRateByType('accuracy')}</span>
-                                    </div>
-                                </div>
-
-
-                                <div className="communication">
-                                    <p>Communication</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('communication')} max="5"></progress>
-                                        <span> {getReviewsRateByType('communication')}</span>
-                                    </div>
-                                </div>
-                                <div className="location">
-                                    <p>Location</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('location')} max="5"></progress>
-                                        <span> {getReviewsRateByType('location')}</span>
-                                    </div>
-                                </div>
-                                <div className="check-in">
-                                    <p>Check-in</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('checkIn')} max="5"></progress>
-                                        <span> {getReviewsRateByType('checkIn')}</span>
-                                    </div>
-                                </div>
-
-                                <div className="value">
-                                    <p>Value</p>
-                                    <div className="progress">
-                                        <progress id="file" value={getReviewsRateByType('value')} max="5"></progress>
-                                        <span> {getReviewsRateByType('value')}</span>
-                                    </div>
-                                </div>
-
-                            </div>)}
 
                             <div className="reviews-list">
                                 {reviews.map(review => {

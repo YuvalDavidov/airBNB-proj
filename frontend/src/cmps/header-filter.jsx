@@ -5,7 +5,7 @@ import { PlaceFilter } from './place-filter.jsx'
 import { DateFilter } from './date-filter.jsx'
 import { GuestFilter } from './guest-filter.jsx'
 
-import { stayService } from "../services/stay.service.local"
+import { stayService } from "../services/stay.service"
 import { utilService } from "../services/util.service.js"
 import { setFilterBy, toggleExpand } from "../store/stay.actions.js"
 
@@ -147,15 +147,15 @@ export function HeaderFilter() {
                     </button> <span className="splitter"></span>
                     <button onClick={onGuestClick} className={`header-filter-btn add-guests flex ${(filterBy.guests > 0) ? `bold` : ``}`}><div>
                         {(filterBy.guests > 0) ? filterBy.guests + ' Guests' : 'Add guests'}</div></button>
-                    <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '32px' }}>
+                    <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '42px' }}>
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
-                {isHeadFilterExpanded && <div className="head-filter-form flex" >
+                {isHeadFilterExpanded && <div className="form-header-extanded flex" >
                     <div className={`flex column location-container ${(isLocationExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onLocationClick} className="header-filter-btn flex">
-                            <span className="filter-main-text">Where</span></button>
-                        <input placeholder="Search destenations" className="search-filter-input" type="text"
+                            <span onClick={onLocationClick} className="filter-main-text">Where</span></button>
+                        <input onClick={onLocationClick} placeholder="Search destenations" className="search-filter-input" type="text"
                             name="locationCity"
                             value={filterByToEdit.locationCity}
                             onChange={handleLocationChange}
@@ -164,13 +164,13 @@ export function HeaderFilter() {
                     </div>
                     <div className={`flex align-center date-container ${(isDateExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onDateClick} className="flex column">
-                            <span className="filter-main-text">Check in</span>
-                            <div className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
+                            <span onClick={onDateClick} className="filter-main-text">Check in</span>
+                            <div onClick={onDateClick} className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
                         </button>
 
                         <button onClick={onDateClick} className="flex column">
-                            <span className="filter-main-text">Check out</span>
-                            <div className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
+                            <span onClick={onDateClick} className="filter-main-text">Check out</span>
+                            <div onClick={onDateClick} className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
                         </button>
 
                         {isDateExpand && <DateFilter updateDate={updateDate} />}
@@ -178,8 +178,8 @@ export function HeaderFilter() {
 
                     <div className={`flex align-center guest-container ${(isGuestExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onGuestClick} className="flex column">
-                            <span className="filter-main-text">Who?</span>
-                            <span className="filter-sub-text">{(filterByToEdit.guests.total) ? ((filterByToEdit.guests.adults +
+                            <span onClick={onGuestClick} className="filter-main-text">Who?</span>
+                            <span onClick={onGuestClick} className="filter-sub-text">{(filterByToEdit.guests.total) ? ((filterByToEdit.guests.adults +
                                 filterByToEdit.guests.children) + ' Adults' +
                                 ((filterByToEdit.guests.infants) ? ', ' + filterByToEdit.guests.infants + ' Infants' : '') +
                                 (((filterByToEdit.guests.pets) ? ', ' + filterByToEdit.guests.pets + ' Pets' : '')))

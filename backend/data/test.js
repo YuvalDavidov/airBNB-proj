@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { makeId } = require('../../frontend/src/services/util.service');
 
 let stays = require('./stays.data.try.json')
 
@@ -21,6 +22,20 @@ function randomLabels() {
     return fourLabels
 }
 
+function randomImgs() {
+    let imgUrls = [
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ysrmbblcprixwxwwa62g.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/dxmbmocqyzdthqjq6tis.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/euxou0azal9iw7vp17vh.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ykdkmw4dzdbd9llcx8kn.jpg',
+        'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/r5lz8rqyjsaruo0lanlw.jpg',
+    ]
+    return imgUrls[getRandomIntInclusive(0, 7)]
+}
+
 _writeCarsToFile()
 // console.log(stays);
 function _writeCarsToFile() {
@@ -37,18 +52,22 @@ function _writeCarsToFile() {
             host: {
                 _id: stay.host._id,
                 fullname: stay.host.fullname,
-                imgUrl: stay.host.pictureUrl,
+                imgUrl: randomImgs(),
                 isSuperHost: Math.random() > 0.5
             },
-            type: stay.roomType
+            type: stay.roomType,
+            loc: { ...stay.loc, lng: stay.loc.lan },
+
 
         }
 
         updateStay.reviews = updateStay.reviews.map((review) => {
+            review.id = makeId()
+            review.by.imgUrl = randomImgs()
             review.moreRate = { cleanliness: getRandomIntInclusive2(3, 4), accuracy: getRandomIntInclusive2(3, 4), communication: getRandomIntInclusive2(3, 4), location: getRandomIntInclusive2(3, 4), checkIn: getRandomIntInclusive2(3, 4), value: getRandomIntInclusive2(3, 4) }
             return review
         })
-
+        delete updateStay.loc.lan
         delete updateStay._id
         delete updateStay.capacity
         delete updateStay.bathrooms

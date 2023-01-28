@@ -1,8 +1,10 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 
 const STORAGE_KEY = 'orderDB'
+const BASE_URL = 'order'
 
 export const orderService = {
     query,
@@ -18,14 +20,16 @@ export const orderService = {
 
 
 async function query(filterBy) {
-    var orders = await storageService.query(STORAGE_KEY)
 
-    if (filterBy?.hostId) {
-        orders = orders.filter(order => order.aboutOrder.stay.host._id === filterBy.hostId)
-    }
-    if (filterBy?.userId) {
-        orders = orders.filter(order => order.aboutUser.id === filterBy.userId)
-    }
+    const queryParams = `?hostId=${filterBy.hostId}&userId=${filterBy.userId}`
+    var orders = await httpService.get(BASE_URL + queryParams)
+
+    // if (filterBy?.hostId) {
+    //     orders = orders.filter(order => order.aboutOrder.stay.host._id === filterBy.hostId)
+    // }
+    // if (filterBy?.userId) {
+    //     orders = orders.filter(order => order.aboutUser.id === filterBy.userId)
+    // }
     return orders
 }
 
@@ -42,11 +46,12 @@ async function save(order) {
     console.log(order);
     var savedOrder
     if (order._id) {
-        savedOrder = await storageService.put(STORAGE_KEY, order)
+        savedOrder = await httpService.put(BASE_URL, order)
     } else {
         // Later, owner is set by the backend
         // stay.owner = userService.getLoggedinUser()
-        savedOrder = await storageService.post(STORAGE_KEY, order)
+        // savedOrder = await storageService.post(STORAGE_KEY, order)
+        savedOrder = await httpService.post(BASE_URL, order)
     }
     return savedOrder
 }

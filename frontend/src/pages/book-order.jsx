@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { FaArrowLeft } from 'react-icons/fa'
-import { SlDiamond } from 'react-icons/sl'
-import { stayService } from '../services/stay.service.local'
-import { AiFillStar } from 'react-icons/ai'
-import { useSelector } from 'react-redux'
-import { orderService } from '../services/order.service'
-import { showSuccessMsg } from '../services/event-bus.service'
-import { GradientButton } from '../cmps/gradient-button'
-import { setIsModalOpen } from '../store/user.actions'
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { stayService } from "../services/stay.service";
+import { orderService } from "../services/order.service";
+import { showSuccessMsg } from "../services/event-bus.service";
+
+import { setIsModalOpen } from "../store/user.actions";
+
+import { GradientButton } from "../cmps/gradient-button";
+
+import { FaArrowLeft } from 'react-icons/fa';
+import { SlDiamond } from 'react-icons/sl';
+import { AiFillStar } from "react-icons/ai";
 
 const month = [
   'January',
@@ -43,24 +47,25 @@ export function BookStay() {
     if (!order) return
   }, [])
 
-  function getOrderPickes() {
-    let newOrder = {
-      stayId: '',
-      adultsAmount: '',
-      childrenAmount: '',
-      infantsAmount: '',
-      petsAmount: '',
-      startDate: '',
-      endDate: '',
+    function getOrderPickes() {
+        let newOrder = {
+            stayId: '',
+            adultsAmount: '',
+            childrenAmount: '',
+            infantsAmount: '',
+            petsAmount: '',
+            startDate: '',
+            endDate: ''
+        }
+        for (const field in newOrder) {
+            newOrder[field] = searchParams.get(field)
+        }
+        stayService.getById(newOrder.stayId)
+            .then((stay) => {
+                newOrder.stay = stay
+                setOrder(newOrder)
+            })
     }
-    for (const field in newOrder) {
-      newOrder[field] = searchParams.get(field)
-    }
-    stayService.getById(newOrder.stayId).then((stay) => {
-      newOrder.stay = stay
-      setOrder(newOrder)
-    })
-  }
 
   function getGuestsAmount() {
     let sum = 0
