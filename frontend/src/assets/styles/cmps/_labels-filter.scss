@@ -91,9 +91,9 @@
     position: absolute;
     z-index: 1;
     bottom: 0;
-    left: -15px;
+    left: 0px;
     pointer-events: none;
-    background-image: linear-gradient(to right,
+    background-image: linear-gradient(to left,
             rgba(255, 255, 255, 0),
             rgba(255, 255, 255, 1) 100%);
 
@@ -109,9 +109,9 @@
     position: absolute;
     z-index: 1;
     bottom: 0;
-    right: -15px;
+    right: 0px;
     pointer-events: none;
-    background-image: linear-gradient(to left,
+    background-image: linear-gradient(to right,
             rgba(255, 255, 255, 0),
             rgba(255, 255, 255, 1) 100%);
 
@@ -120,11 +120,11 @@
 }
 
 .react-multiple-carousel__arrow--right {
-    top: 65px;
+    top: 40px;
     right: 5px;
 }
 
 .react-multiple-carousel__arrow--left {
-    top: 65px;
+    top: 40px;
     left: 5px;
 }

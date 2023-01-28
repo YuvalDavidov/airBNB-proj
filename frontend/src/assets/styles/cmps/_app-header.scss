@@ -17,9 +17,17 @@
         padding-bottom: 130px;
     }
 
-    @media (max-width: 780px) {
-        margin-bottom: 0;
+    &.in-details {
+        visibility: hidden;
+        padding: 0px;
+        margin-bottom: 0px;
     }
+
+    // @media (max-width: 780px) {
+    //     margin-bottom: 0;
+    // }
+
+
 
 }
 

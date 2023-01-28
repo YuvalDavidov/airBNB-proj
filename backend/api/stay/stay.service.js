@@ -4,8 +4,13 @@ const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
 async function query(filterBy = { locationCity: '' }) {
+    let criteria
     try {
-        const criteria = _buildCriteria(filterBy)
+        if (filterBy?.hostId) {
+            criteria = { 'host._id': { $regex: filterBy.hostId } }
+        } else {
+            criteria = _buildCriteria(filterBy)
+        }
         console.log(criteria);
         const collection = await dbService.getCollection('stay')
         let stays = await collection.find(criteria).toArray()

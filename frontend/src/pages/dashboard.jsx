@@ -27,13 +27,3 @@ export function Dashboard() {
     )
 }
 
-
-const user = {
-    "_id": "u103",
-    "fullname": "User 1",
-    "imgUrl": "/img/img1.jpg",
-    "username": "user1",
-    "password": "secret",
-    "isHost": true,
-    "staysIds": ['10006546', '10006547', '10006548']
-}
