@@ -4,7 +4,8 @@
     & nav {
         display: flex;
         justify-content: space-around;
-        min-width: 400px;
+        max-width: 400px;
+        min-width: 300px;
         margin: 0 auto;
     }
 }

@@ -1,16 +1,34 @@
 .main-area {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 
 }
 
 .book {
+    width: 1120px;
+    margin: auto;
     header {
         display: flex;
         align-items: center;
+        width: 100%;
+        margin-top: 46px;
+        .back-btn {
+            height: 48px;
+            width: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transform: translate(-15px,-1px);
+            &:hover {
+                background-color: #F7F7F7;
+            }
+        }
 
         h1 {
             margin: 0;
+            font-size: em(32px);
+            letter-spacing: 0.5px;
         }
 
         button {
@@ -20,51 +38,142 @@
     }
 }
 
-.order-details {
-    min-width: 400px;
-    padding: 20px;
+@media (max-width: 1280px) {
+ .book {
+    width: 100%;
+ }
+}
 
+hr {
+    margin: 3px;
+    border: 0;
+    border-top: 1px solid rgb(221, 221, 221);
+}
+.order-details {
+    width: 100%;
+    margin-top: 42px;
     & .rare-find {
         display: flex;
         justify-content: space-between;
         border: 1px solid rgb(221, 221, 221);
         padding: 25px;
-        border-radius: 20px;
-        margin-bottom: 30px;
+        border-radius: 12px;
+        margin-bottom: 26px;
+    }
+    h1 {
+        font-size: rem(21px);
+        letter-spacing: 0.8px;
+    }
+    .dates {
+        margin-top: 25px;
+        margin-bottom: 23px;
+        span {
+            font-family: Cereal-Bold;
+            margin-bottom: 6px;
+            display: block;
+        }
+    }
+    .guests {
+        margin-bottom: 33px;
+        span {
+            font-family: Cereal-Bold;
+            margin-bottom: 7px;
+            display: block;
+        }
     }
 
-    & .trip {
-        & * {
-            margin-bottom: 10px;
-        }
+    .reserve-btn {
+        margin-top: 33px;
     }
 }
 
 .stay-price-details {
     border: 1px solid rgb(221, 221, 221);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 23px;
+    border-radius: 12px;
     height: max-content;
-    min-width: 400px;
+    justify-self: end;
+    max-width: 83%;
+    margin-top: 42px;
+
+   
 
     & .stay {
         display: flex;
-        gap: 10px;
+        align-items:flex-start;
+        gap: 14px;
+        overflow: hidden;
 
         & img {
-            border-radius: 10px;
+            border-radius: 8px;
             width: 124px;
+            height: 108px;
+            object-fit: cover;
         }
 
         & .stay-details {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            transform: translateY(-10px);
+
+            h6 {
+                color: #717171;
+                font-family: Cereal-Book;
+            }
+            .stay-name {
+                font-size: em(14px);
+                color: #222222;
+            }
+        }
+
+        .stay-review {
+            margin-top: 33px;
+            font-size: rem(12px);
+            svg {
+                width: 12px;
+                height: 12px;
+                transform: translate(-2px,2px);
+            }
+            .total-rate {
+                font-weight: 600;
+                color: #222222;
+            }
+            .reviews-num {
+                color: #717171;
+            }
         }
     }
-
+    .air-cover {
+        color: #222222;
+        margin: 23px 0;
+    }
     & .stay-price {
+        h3 {
+            margin-top: 27px;
+            font-size: rem(22px);
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+        }
 
+        .price-details {
+            margin-bottom: 10px;
+        }
+
+        .service-fee {
+            margin-bottom: 27px;
+        }
+        .total {
+            margin-top: 27px;
+            font-family: Cereal-Bold;
+            margin-bottom: 27px;
+            color: #222222;
+
+        }
+        .deposit {
+            font-size: rem(12px);
+            margin-top: 27px;
+        }
         & * {
             display: flex;
             justify-content: space-between;
@@ -76,8 +185,8 @@
 
 
 @media (max-width: 780px) {
-    .book {
-        padding: 0 16px;
+    .book-mobile {
+        
 
         header {
             z-index: 1000;
@@ -86,28 +195,42 @@
             position: fixed;
             width: 100%;
             background-color: white;
-            height: 64px;
+            height: 85px;
+            padding: 0 24px;
+            &.modal-open {
+                background-color: rgb(128,128,128);
+            }
 
 
             button {
                 cursor: pointer;
                 position: absolute;
+                background-color: transparent;
+                border: 0;
+                margin-top: 19px;
+                transform: translateX(-5px);
             }
 
             h3 {
                 margin: 0 auto;
+                text-align: center;
+                font-size: 1em;
+                font-family: Cereal-Bold;
+                margin-top: 20px;
             }
         }
 
         .stay {
-            padding: 24px 0;
+            padding:0 24px;
             display: flex;
+            margin-bottom: 24px;
 
-            border-bottom: 0.5px solid rgba(163, 163, 163, 0.685);
 
             img {
                 border-radius: 8px;
                 width: 126px;
+                height: 95px;
+                object-fit: cover;
             }
 
             .stay-details {
@@ -115,23 +238,70 @@
                 margin-left: 12px;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                height: 95px;
+                position: relative;
+
+                small {
+                    font-size: rem(12px);
+                    color:#717171;
+                    margin-bottom: 3px;
+                }
+
+                span {
+                    font-size: rem(14px);
+                }
+
+                .reviews-details {
+                    position: absolute;
+                    bottom:1px;
+                    .reviews-rate {
+                        font-size: rem(12px);
+                        font-family: Cereal-Medium;
+                        svg {
+                            transform: translateY(2px);
+                        }
+                    }
+                    .reviews-num {
+                        font-size: rem(12px);
+                        color: #717171;
+                    }
+                }
             }
         }
-
+        hr {
+            height: 7px;
+            border: 0;
+            background-color: #ebebeb;
+        }
+        .thin-hr {
+            margin: 0 24px;
+            border: 0;
+            background-color: transparent;
+            height: 0;
+            border-top: 0.5px solid rgb(221, 221, 221);
+        }
+        .air-cover {
+            padding:24px 0 22px 24px;
+            font-size: rem(14px);
+            svg {
+                height: 11px;
+                transform: translateX(-7px);
+            }
+        }
         .trip {
-            border-bottom: 0.5px solid rgba(163, 163, 163, 0.685);
-
+            padding: 0 24px;
             h1 {
                 padding: 24px 0;
                 margin: 0;
+                font-size: rem(22px);
+                letter-spacing: 0.7px;
             }
 
             .dates {
-                padding-bottom: 24px;
+                padding-bottom: 22px;
 
                 span {
-                    font-weight: bold;
+                    font-family: Cereal-Bold;
                 }
 
                 div {
@@ -140,10 +310,10 @@
             }
 
             .guests {
-                padding-bottom: 24px;
+                padding-bottom: 21px;
 
                 span {
-                    font-weight: bold;
+                    font-family: Cereal-Bold;
                 }
 
                 div {
@@ -153,29 +323,33 @@
         }
 
         .stay-price {
+            padding: 0 24px;
             h3 {
                 padding: 24px 0;
                 margin: 0;
+                font-size: rem(22px);
+                letter-spacing: 0.5px;
             }
 
-
+            .price-details {
+                margin-bottom: 15px;
+            }
             div {
                 display: flex;
                 justify-content: space-between;
             }
 
             .total {
-                :nth-child(odd) {
-                    font-weight: bold;
-                }
+                font-family: Cereal-Bold;
 
                 margin-top: 16px;
             }
 
         }
 
-        .reserve-btn {
-            margin-top: 20px;
+        .reserve-btn-container {
+            padding: 30px 24px 0px 24px ;
+            margin-bottom: 70px;
         }
     }
 

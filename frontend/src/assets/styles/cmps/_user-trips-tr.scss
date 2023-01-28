@@ -7,9 +7,11 @@
           font-family: Cereal-Bold;
           color: rgb(34, 34, 34);
           text-overflow: ellipsis;
+          width: 85%;
         }
         .dates-td {
           text-align: center;
+          font-size: rem(14px);
         }
       }
       
@@ -26,32 +28,44 @@
           text-align: center;
         }
         .host-info {
-          font-family: Cereal-Bold;
-          color: #909399;
+          
+          color: rgb(34, 34, 34);
           margin-bottom: 10px;
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+              font-family: Cereal-Medium;
           }
         }
         .price-info {
-          font-family: Cereal-Bold;
-          color: #909399;
+          color: rgb(34, 34, 34);
           margin-bottom: 10px;
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+              font-family: Cereal-Medium;
           }
         }
         .location-info {
-          font-family: Cereal-Bold;
-          color: #909399;
-          width: max-content;
+          color: rgb(34, 34, 34);
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+              font-family: Cereal-Medium;
           }
         }
         .status-info {
-          font-family: Cereal-Bold;
-          color: #909399;
+          color: rgb(34, 34, 34);
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
         }
       }
       

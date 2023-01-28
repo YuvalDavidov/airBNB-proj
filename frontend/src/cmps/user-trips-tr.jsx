@@ -19,18 +19,18 @@ export function UserTripsTr({ order }) {
         <tr className='bottom-tr'>
           <td>
             <div className='host-info'>
-              Host: <span>{order.aboutOrder.stay.host.fullname}</span>
+              <div className="title">Host</div><span>{order.aboutOrder.stay.host.fullname}</span>
             </div>
             <div className="location-info">
-                Location: <span>{order.aboutOrder.stay.loc.city}, {order.aboutOrder.stay.loc.country}</span>
+                <div className="title">Location</div><span>{order.aboutOrder.stay.loc.city}, {order.aboutOrder.stay.loc.country}</span>
             </div>
           </td>
           <td className='right-td'>
           <div className="price-info">
-                Total price: <span>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</span>
+                <div className="title">Total price</div><span>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</span>
             </div>
             <div className="status-info">
-                Status: <span style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</span>
+                <div className="title">Status</div><span style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</span>
             </div></td>
         </tr>
       )}

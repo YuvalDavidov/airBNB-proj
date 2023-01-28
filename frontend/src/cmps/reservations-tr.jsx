@@ -19,17 +19,17 @@ export function ReservationsTr({ order }) {
       {isOpen && (
         <tr className='bottom-tr'>
           <td>
-            <div className='host-info'>
-              Guest: <span>{order.aboutOrder.stay.host.fullname}</span>
+            <div className='guest-info'>
+              <div className="title">Guest</div><span>{order.aboutOrder.stay.host.fullname}</span>
             </div>
             <div className='price-info'>
-              Total price:{' '}
+              <div className="title">Total price</div>
               <span>
                 ${order.aboutOrder.totalPrice.toLocaleString('en-US')}
               </span>
             </div>
             <div className='location-info'>
-              Location:{' '}
+              <div className="title">Location</div>
               <span>
                 {order.aboutOrder.stay.loc.city},{' '}
                 {order.aboutOrder.stay.loc.country}
@@ -37,7 +37,7 @@ export function ReservationsTr({ order }) {
             </div>
           </td>
           <td>
-            <div className='status-info'>
+            {/* <div className='status-info'>
               Status:{' '}
               <span
                 style={{
@@ -47,7 +47,7 @@ export function ReservationsTr({ order }) {
               >
                 {order.aboutOrder.status}
               </span>
-            </div>
+            </div> */}
             <div className='actions'>
               <button
                 className={

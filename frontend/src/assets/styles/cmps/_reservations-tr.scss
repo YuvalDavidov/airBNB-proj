@@ -11,6 +11,7 @@
         }
         .dates-td {
           text-align: center;
+          font-size: rem(14px);
         }
       }
       
@@ -23,29 +24,41 @@
         td {
           padding: 10px 0;
         }
-        .host-info {
-          font-family: Cereal-Bold;
-          color: #909399;
+        .guest-info {
+          display: flex;
+          flex-direction: column;
           margin-top: 0;
           margin-bottom: 10px;
+          color: rgb(34, 34, 34);
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+              font-family: Cereal-Medium;
           }
         }
         .price-info {
-          font-family: Cereal-Bold;
-          color: #909399;
+          
+          color: rgb(34, 34, 34);
           margin-bottom: 10px;
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+            font-family: Cereal-Medium;
           }
         }
         .location-info {
-          font-family: Cereal-Bold;
-          color: #909399;
-          width: max-content;
+          color: rgb(34, 34, 34);
+          
+          .title {
+            font-family: Cereal-Bold;
+            text-decoration: underline;
+          }
           span {
-              color: rgb(34, 34, 34);
+            font-family: Cereal-Medium;
           }
         }
         .status-info {

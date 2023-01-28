@@ -113,7 +113,12 @@
                 width: 95%;
                 height: 70%;
                 position: absolute;
-                bottom: 20px
+                bottom: 20px;
+            }
+            @media (max-width: 460px) {
+                .dougnut-chart {
+                    width: 90%;
+                }
             }
             .bar-chart {
                 height: 80%;
@@ -140,7 +145,13 @@
                 }
             }
         }
-    }
+
+    //     @media (max-width: 400px) {
+    //         .listing {
+    //             width: 300px;
+    //         }
+    // }   
+}
 
     @media (min-width: 768px) {
         .charts {
@@ -170,3 +181,4 @@
         }
     }
 }
+
