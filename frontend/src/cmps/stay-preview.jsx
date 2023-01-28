@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { TiHeartFullOutline } from 'react-icons/ti'
@@ -10,6 +10,8 @@ import { ImageSlider } from './image-slider'
 
 export function StayPreview({ stay, userLocation }) {
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+
   const user = useSelector((storeState) => storeState.userModule.user)
 
   function getStayReviewRateAvg(stayReviews) {
@@ -20,17 +22,17 @@ export function StayPreview({ stay, userLocation }) {
 
     stayReviews.forEach(review => {
 
-        for (const key in review.moreRate) {
-            sum += review.moreRate[key]
-            count++
-        }
-        rate += sum / count
-        rateCount++
+      for (const key in review.moreRate) {
+        sum += review.moreRate[key]
+        count++
+      }
+      rate += sum / count
+      rateCount++
     })
 
     const avg = rate / rateCount
     return avg
-}
+  }
 
   function calcAirDistance(lat1, lng1, lat2, lng2) {
     var R = 6371 // km
@@ -67,13 +69,29 @@ export function StayPreview({ stay, userLocation }) {
 
   function goTodetails(stayId) {
 
-    navigate(`details/${stayId}`)
+    let filterToDetails = {
+      adults: '',
+      infants: '',
+      children: '',
+      pets: '',
+      startDate: '',
+      endDate: ''
+    }
+
+    if (searchParams.get('adults') || searchParams.get('startDate')) {
+      for (const field in filterToDetails) {
+
+        filterToDetails[field] = searchParams.get(field)
+        if (filterToDetails[field].valueOf() === 'undefined' || filterToDetails[field].valueOf() === 'NaN' || filterToDetails[field].valueOf() === 'false') filterToDetails[field] = false
+      }
+      navigate(`details/${stayId}/?adults=${filterToDetails.adults}&children=${filterToDetails.children}&infants=${filterToDetails.infants}&pets=${filterToDetails.pets}&startDate=${filterToDetails.startDate}&endDate=${filterToDetails.endDate}`)
+    } else navigate(`details/${stayId}`)
 
   }
 
   return (
     <article className='stay-preview'>
-      <ImageSlider imgs={stay.imgUrls} stayId={stay._id} />
+      <ImageSlider imgs={stay.imgUrls} stayId={stay._id} goTodetails={goTodetails} />
       <IconContext.Provider
         value={{ className: `heart-btn ${user?.wishlist.includes(stay._id) && 'is-active'}` }}
       >
