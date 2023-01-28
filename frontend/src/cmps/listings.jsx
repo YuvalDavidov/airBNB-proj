@@ -36,8 +36,12 @@ export function Listings() {
 
     }
 
-    if (!myStays) return <div>You dont have stays!!!!!!!</div>
+    function randomDate(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
 
+    if (!myStays) return <div>You dont have stays!!!!!!!</div>
+    // if (stays[0].createdAt === undefined) console.log(randomDate(new Date(2012, 0, 1), new Date()));
 
     return (<>
 
@@ -71,6 +75,7 @@ export function Listings() {
                             <th>DATE ADDED</th>
                         </tr>
                         {stays.map((stay) => {
+                            (!stay.createdAt) ? stay.createdAt = randomDate(new Date(2012, 0, 1), new Date()) : stay.createdAt = stay.createdAt
                             return <tr key={stay._id} className="data">
                                 <td className="listing-td" ><div><a href="#"><div onClick={() => { navigate(`/details/${stay._id}`) }} className="listing-prev"><img src={stay.imgUrls[0]} /><h3 className="-name">{stay.name}</h3></div></a></div>  </td>
                                 <td><GradientButton onClickBtn={() => { navigate(`/dashboard/${stay._id}`) }} label={'Update'} className={"update-btn"} /></td>
@@ -78,7 +83,7 @@ export function Listings() {
                                 <td>{stay.stayDetails.bedrooms}</td>
                                 <td>{stay.price}</td>
                                 <td>{stay.loc.country}, {stay.loc.city}</td>
-                                <td>{new Date(stay.createdAt).getDate()}/{new Date(stay.createdAt).getMonth() + 1}</td>
+                                <td>{new Date(stay.createdAt).getDate()}/{new Date(stay.createdAt).getMonth() + 1}/{new Date(stay.createdAt).getFullYear()}</td>
                             </tr>
                         })}
 

@@ -1,4 +1,6 @@
 .user-trips {
+  margin-bottom: 75px;
+
   h1 {
     padding-top: 36px;
     padding-bottom: 24px;
@@ -9,9 +11,11 @@
     font-size: rem(24px);
     margin-bottom: 34px;
   }
+
   .trips-table {
     width: 100%;
     border-collapse: collapse;
+
     th {
       text-align: left;
       border-bottom: solid 1px #ebeef5;
@@ -23,23 +27,28 @@
 
     tbody tr {
       border-bottom: solid 1px #ebeef5;
+
       &:hover {
         background-color: #f5f7fa;
       }
     }
+
     tbody :last-child {
       border-bottom: 0;
     }
+
     td {
       padding: 10px 0;
       overflow: hidden;
       color: #606266;
     }
   }
+
   .destination-td {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     img {
       width: 100px;
       height: 66px;
@@ -47,12 +56,14 @@
       border-radius: 5px;
       margin-right: 10px;
     }
+
     span {
       font-family: Cereal-Bold;
       color: rgb(34, 34, 34);
       text-overflow: ellipsis;
     }
   }
+
   .host-td {
     font-family: Cereal-Bold;
   }
@@ -64,7 +75,7 @@
     grid-template-columns: 20px 1fr 20px;
     width: 100%;
 
-    > * {
+    >* {
       grid-column: 2;
     }
   }
@@ -72,7 +83,8 @@
 
 .mobile-trips-table {
   width: 100%;
-  border-collapse:collapse ;
+  border-collapse: collapse;
+
   th {
     text-align: left;
     border-bottom: solid 1px #ebeef5;
@@ -81,13 +93,16 @@
     // color: #909399;
     // padding-bottom: 10px;
   }
+
   .destination-th {
     width: 40%;
   }
+
   .dates-th {
     text-align: center;
     width: 40%;
   }
+
   tbody tr {
     border-bottom: solid 1px #ebeef5;
   }
