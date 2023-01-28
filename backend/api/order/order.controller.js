@@ -1,5 +1,4 @@
 const orderService = require('./order.service.js')
-const stayService = require('../stay/stay.service.js')
 
 const logger = require('../../services/logger.service')
 
@@ -30,12 +29,23 @@ async function addOrder(req, res) {
     }
 }
 
+async function updateOrder(req, res) {
+    try {
+        const order = req.body
+        const updatedOrder = await orderService.update(order)
+        res.json(updatedOrder)
+    } catch (err) {
+        logger.error('Failed to update order', err)
+        res.status(500).send({ err: 'Failed to update order' })
+    }
+}
+
 
 module.exports = {
     getOrders,
     // getStayById,
     addOrder,
-    // updateStay,
+    updateOrder,
     // removeStay,
     // addStayMsg,
     // removeStayMsg

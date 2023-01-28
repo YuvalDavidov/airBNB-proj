@@ -25,11 +25,8 @@ export const stayService = {
 _createStays()
 
 async function query(filterBy = {}) {
-  if (filterBy?.hostId) {
-    console.log(filterBy);
+  if (filterBy?.hostId) return httpService.get(BASE_URL + `?hostId=${filterBy.hostId}`)
 
-    return httpService.get(BASE_URL, filterBy)
-  }
   if (filterBy?.wishlist) return httpService.get(BASE_URL)
   const queryParams = `?loactionCountry=${filterBy.loactionCountry}&loactionCity=${filterBy.loactionCity}&guests=${filterBy.guests}&label=${filterBy.label}`
   const stays = httpService.get(BASE_URL + queryParams)

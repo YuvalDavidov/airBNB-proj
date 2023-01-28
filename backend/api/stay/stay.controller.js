@@ -12,13 +12,11 @@ async function getStays(req, res) {
       guests: req.query.guests || 0,
       label: req.query.label || 'Trending'
     }
-    console.log(req.body);
-    if (req.params.hostId) {
-      console.log('hi');
+    if (req.query.hostId) {
+      console.log('hi', req.query);
       filterBy = {
-        hostId: req.body.hostId
+        hostId: req.query.hostId
       }
-      console.log('filterBy----->', filterBy)
     }
     const stays = await stayService.query(filterBy)
     res.json(stays)

@@ -16,7 +16,7 @@ import { toggleInDetails } from "../store/stay.actions";
 import { CgAwards, CgScreen } from 'react-icons/cg';
 import { VscKey } from 'react-icons/vsc';
 import { GoLocation } from 'react-icons/go';
-import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets, MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { MdOutlineMarkChatUnread, MdSmokingRooms, MdPets, MdOutlineArrowBackIosNew, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { AiOutlineWifi, AiFillStar } from 'react-icons/ai';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { GiForkKnifeSpoon } from 'react-icons/gi';
@@ -26,7 +26,7 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import { TxtReview } from "../cmps/txt-review";
 import { useSearchParams } from "react-router-dom";
 
-const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const serviceFee = 18
 
 export function StayDetails() {
@@ -520,11 +520,18 @@ export function StayDetails() {
                                     <div>CHECK-IN</div> <span>{pickedDate.startDate.getDate()}/{pickedDate.startDate.getMonth() + 1}/{pickedDate.startDate.getFullYear()}</span>
                                 </div>
                                 <div onClick={() => { setDatePickerModal(!datePickerModal) }} className="end-date">
-                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? 'Add date' : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
+                                    <div>CHECK-OUT</div> {!pickedDate.endDate ? <span>Add date</span> : <span> {pickedDate.endDate.getDate()}/{pickedDate.endDate.getMonth() + 1}/{pickedDate.endDate.getFullYear()}</span>}
                                 </div>
 
                                 <div onClick={() => { setGuestsModal(!guestsModal) }} className="guests">
-                                    <div> GUESTS</div>   <span>{guestsAmount.total} {guestsAmount.total > 1 ? 'Guests' : 'Guest'}</span>
+                                    <div> GUESTS</div>
+                                    <span>{guestsAmount.total} {guestsAmount.total > 1 ? 'guests' : 'guest'}</span>
+                                    <div className="arrow">
+                                        <IconContext.Provider
+                                            value={{ className: "my-icons" }}>
+                                            {guestsModal ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}
+                                        </IconContext.Provider>
+                                    </div>
                                 </div>
                             </div>
                             <div className={`date-picker ${datePickerModal ? '' : 'close'}`}>
