@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e4cee993.css",
+    "main.js": "/static/js/main.2e5aed4d.js",
+    "static/media/CircularStd-Light.otf": "/static/media/CircularStd-Light.4a1a0bfcc3a53847a945.otf",
+    "static/media/CircularStd-Black.otf": "/static/media/CircularStd-Black.757b8ac8efa71be3fcd0.otf",
+    "static/media/CircularStd-Bold.otf": "/static/media/CircularStd-Bold.5c4514a8399ec0064b9b.otf",
+    "static/media/CircularStd-Medium.otf": "/static/media/CircularStd-Medium.9ffafeddf192e8c8a111.otf",
+    "static/media/CircularStd-Book.otf": "/static/media/CircularStd-Book.9048137056e4347dbbd5.otf",
+    "service-worker.js": "/service-worker.js",
+    "static/media/Cereal-Book.ttf": "/static/media/Cereal-Book.6fc8a9aa34ff32841562.ttf",
+    "static/media/Cereal-Medium.ttf": "/static/media/Cereal-Medium.c0c801d1e35f5ccdef7f.ttf",
+    "static/media/Cereal-Bold.ttf": "/static/media/Cereal-Bold.893d6e112ad84b568f1f.ttf",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "index.html": "/index.html",
+    "main.e4cee993.css.map": "/static/css/main.e4cee993.css.map",
+    "main.2e5aed4d.js.map": "/static/js/main.2e5aed4d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4cee993.css",
+    "static/js/main.2e5aed4d.js"
+  ]
+}
