@@ -26,9 +26,8 @@ export function RootCmp() {
   function dontDoNothing() {
     // console.log(`hi`)
   }
-
   return (
-    <div>
+    <div onScroll={onToggleExpand}>
       <AppHeader />
       <div onClick={isHeadFilterExpanded ? onToggleExpand : dontDoNothing} className={(isHeadFilterExpanded) ? 'back-screen' : ''}></div>
 

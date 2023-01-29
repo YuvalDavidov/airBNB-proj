@@ -10,6 +10,7 @@ import {
   SET_WISHLIST_STAYS,
   SET_MY_STAYS,
   SET_HEADER_IN_DETAILS,
+  SET_LOCATIONS
 
 } from './stay.reducer'
 
@@ -57,6 +58,27 @@ export async function loadStays(filterBy) {
   } catch (err) {
     console.log('Cannot load stays', err)
     throw err
+  }
+}
+
+export async function loadLocations() {
+  let locations
+  try {
+    let stays = await stayService.query()
+    let uniqueCities = [...new Set(stays.map(stay => { return stay.loc.city }))]
+    locations = uniqueCities.map(city => {
+      let filteredStays = stays.filter(stay => { if (stay.loc.city === city) return stay.loc.country })
+      return {
+        city, country: filteredStays[0].loc.country
+      }
+    })
+    store.dispatch({
+      type: SET_LOCATIONS,
+      locations,
+    })
+  }
+  catch (err) {
+    console.error('couldnt load locations')
   }
 }
 

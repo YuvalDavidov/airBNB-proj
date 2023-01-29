@@ -1,12 +1,11 @@
 import { IoLocationOutline } from 'react-icons/io5'
 import { IconContext } from "react-icons"
 
-export function PlaceFilter({ locations, onSetLocation, onMoveToDateFilter }) {
-
+export function PlaceFilter({ locationList, onSetLocation, onMoveToDateFilter }) {
     return (
         <section className="place-modal">
             <ul>
-                {locations && locations.map((location) => <li onClick={() => {
+                {locationList && locationList.map((location) => <li onClick={() => {
                     onSetLocation(location)
                     onMoveToDateFilter()
                 }} className="flex location-list" key={location.city}>
@@ -14,7 +13,7 @@ export function PlaceFilter({ locations, onSetLocation, onMoveToDateFilter }) {
                         <div className='flex align-center icon-wrapper'>
                             <IoLocationOutline /></div>
                     </IconContext.Provider>
-                    {location.city + ', ' + location.country.loc.country}
+                    {location.city + ', ' + location.country}
                 </li>)}
             </ul>
         </section >
