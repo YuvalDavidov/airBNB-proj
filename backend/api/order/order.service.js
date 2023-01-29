@@ -18,13 +18,12 @@ async function query(filterBy = { txt: '' }) {
 
         if (filterBy.userId) {
             criteria = {
-                "aboutUser.id": { $regex: filterBy.userId, $options: 'i' }
+                "aboutUser._id": { $regex: filterBy.userId, $options: 'i' }
             }
         }
 
         const collection = await dbService.getCollection('order')
         var orders = await collection.find(criteria).toArray()
-        console.log(orders);
         return orders
     } catch (err) {
         logger.error('cannot find orders', err)
@@ -43,13 +42,25 @@ async function add(order) {
     }
 }
 
+async function update(order) {
+    try {
+        const orderToSave = { ...order, aboutOrder: { ...order.aboutOrder, status: order.aboutOrder.status } }
+        delete orderToSave._id
+        const collection = await dbService.getCollection('order')
+        await collection.updateOne({ _id: ObjectId(order._id) }, { $set: orderToSave })
+        return orderToSave
+    } catch (err) {
+        logger.error('cannot update order', err)
+        throw err
+    }
+}
 
 module.exports = {
     // remove,
     query,
     // getById,
     add,
-    // update,
+    update,
     // addStayMsg,
     // removeStayMsg
 }

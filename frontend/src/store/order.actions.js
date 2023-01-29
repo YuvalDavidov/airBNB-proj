@@ -22,7 +22,8 @@ export async function setOrderStatus(order, status) {
     try {
         order.aboutOrder.status = status
         const savedOrder = await orderService.save(order)
-        store.dispatch({type: UPDATE_ORDER, order: savedOrder})
+        console.log(savedOrder);
+        store.dispatch({ type: UPDATE_ORDER, order: savedOrder })
     } catch (err) {
         console.log('Cannot save order', err)
         throw err

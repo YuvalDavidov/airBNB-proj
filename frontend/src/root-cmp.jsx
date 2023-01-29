@@ -13,6 +13,7 @@ import { StayEdit } from './cmps/stay-edit'
 import { Listings } from './cmps/listings'
 import { Reservations } from './cmps/reservations'
 import { MobileNav } from './cmps/mobile-nav'
+import { UserMsg } from './cmps/user-msg'
 
 export function RootCmp() {
   const { isHeadFilterExpanded } = useSelector(
@@ -57,6 +58,7 @@ export function RootCmp() {
           <Route path='user/:id' element={<UserDetails />} />
         </Routes>
       </main>
+      < UserMsg />
       {!isMobile && <AppFooter />}
       {isMobile && <MobileNav />}
     </div>

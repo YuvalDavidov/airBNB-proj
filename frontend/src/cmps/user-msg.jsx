@@ -22,6 +22,14 @@ export function UserMsg() {
       showSuccessMsg(`New review about me ${review.txt}`)
     })
 
+    socketService.on('recieved-order', addedOrder => {
+      showSuccessMsg(`${addedOrder.aboutUser.fullname} just created an order.`)
+    })
+
+    socketService.on('reviewed-order', updatedOrder => {
+      showSuccessMsg(`${updatedOrder.aboutOrder.stay.host.fullname} ${updatedOrder.aboutOrder.status === 'Approved' ? 'approved' : 'rejected'} your order.`)
+    })
+
     return () => {
       unsubscribe()
       socketService.off(SOCKET_EVENT_REVIEW_ABOUT_YOU)

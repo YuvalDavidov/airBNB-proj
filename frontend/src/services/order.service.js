@@ -43,17 +43,17 @@ async function remove(orderId) {
 }
 
 async function save(order) {
-    console.log(order);
     var savedOrder
-    if (order._id) {
-        savedOrder = await httpService.put(BASE_URL, order)
-    } else {
-        // Later, owner is set by the backend
-        // stay.owner = userService.getLoggedinUser()
-        // savedOrder = await storageService.post(STORAGE_KEY, order)
-        savedOrder = await httpService.post(BASE_URL, order)
+    try {
+        if (order._id) {
+            savedOrder = await httpService.put(BASE_URL, order)
+        } else {
+            savedOrder = await httpService.post(BASE_URL, order)
+        }
+        return savedOrder
+    } catch (error) {
+        console.log(error);
     }
-    return savedOrder
 }
 
 async function addStayMsg(stayId, txt) {

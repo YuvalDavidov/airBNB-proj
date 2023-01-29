@@ -12,7 +12,7 @@ export function TxtReview({ reviewTxt }) {
         <div className={`txt ${isOpen ? 'open' : ''}`} >
             {reviewTxt}
         </div>
-        {reviewTxt.length > 50 && <div className="show"><a onClick={() => { setIsOpen(!isOpen) }}> {isOpen ? 'show less' : 'show more'}  </a> {<RiArrowRightSLine />}</div>}
+        {reviewTxt.length > 180 && <div className="show"><a onClick={() => { setIsOpen(!isOpen) }}> {isOpen ? 'show less' : 'show more'}  </a> {<RiArrowRightSLine />}</div>}
 
     </>)
 }

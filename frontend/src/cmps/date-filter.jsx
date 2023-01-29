@@ -22,13 +22,27 @@ export function DateFilter({ updateDate }) {
         }
     }
 
+
+    function getDisabledDates() {
+        let dates = []
+        let d = new Date()
+
+        for (let i = 1; i <= 60; i++) {
+            dates.push(d.setDate(d.getDate() - 1))
+        }
+        return dates
+    }
+
+
     return (
         <div className="date-modal">
             <DateRange
                 editableDateInputs={true}
                 onChange={item => setState([item.selection])}
                 moveRangeOnFirstSelection={false}
-                ranges={state} />
+                ranges={state}
+                disabledDates={getDisabledDates()}
+            />
 
         </div>
     )

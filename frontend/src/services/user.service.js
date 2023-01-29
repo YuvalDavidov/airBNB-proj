@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
+import { socketService } from './socket.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const USER_KEY = 'userDB'
@@ -57,7 +58,7 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     const user = await httpService.post('auth/login', userCred)
     if (user) {
-        // socketService.login(user._id)
+        socketService.login(user._id)
         return saveLocalUser(user)
     }
 }
@@ -71,7 +72,7 @@ async function signup(userCred) {
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // socketService.logout()
+    socketService.logout()
     return await httpService.post('auth/logout')
 }
 
