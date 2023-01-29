@@ -362,7 +362,7 @@ export function StayDetails() {
                                 </IconContext.Provider>
                                 <div className="container">
 
-                                    <h4>{host.fullname} is a SupreHost</h4>
+                                    <h4>{host.fullname} is a SuperHost</h4>
                                     <span>
                                         Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
                                     </span>
