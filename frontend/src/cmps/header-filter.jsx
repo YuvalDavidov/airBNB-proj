@@ -26,6 +26,8 @@ export function HeaderFilter() {
     const [locationList, setLocationList] = useState(locations)
     const [isLocationExpand, setIsLocationExpand] = useState(false)
     const [isDateExpand, setIsDateExpand] = useState(false)
+    const [isCheckinExpand, setIsCheckinExpand] = useState(false)
+    const [isCheckoutExpand, setIsCheckoutExpand] = useState(false)
     const [isGuestExpand, setIsGuestExpand] = useState(false)
     const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -77,14 +79,31 @@ export function HeaderFilter() {
 
     function updateDate(date) {
         console.log(date)
+        if (isCheckinExpand) onCheckoutClick()
+        if (isCheckoutExpand) onMoveToGuestFilter()
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
     }
 
 
-
+    function onCheckInClick() {
+        setIsCheckinExpand(true)
+        setIsCheckoutExpand(false)
+        setIsDateExpand(true)
+        setIsGuestExpand(false)
+        setIsLocationExpand(false)
+    }
+    function onCheckoutClick() {
+        setIsCheckinExpand(false)
+        setIsCheckoutExpand(true)
+        setIsDateExpand(true)
+        setIsGuestExpand(false)
+        setIsLocationExpand(false)
+    }
 
     function onLocationClick() {
         toggleExpand(true)
+        setIsCheckinExpand(false)
+        setIsCheckoutExpand(false)
         setIsDateExpand(false)
         setIsGuestExpand(false)
         setIsLocationExpand(true)
@@ -92,24 +111,38 @@ export function HeaderFilter() {
 
     function onDateClick() {
         toggleExpand(true)
+        setIsCheckinExpand(true)
+        setIsCheckoutExpand(false)
         setIsDateExpand(true)
         setIsGuestExpand(false)
         setIsLocationExpand(false)
 
     }
 
-    function onMoveToDateFilter() {
-        setIsDateExpand(true)
-        setIsGuestExpand(false)
-        setIsLocationExpand(false)
-    }
 
     function onGuestClick() {
         toggleExpand(true)
         setIsDateExpand(false)
         setIsGuestExpand(true)
         setIsLocationExpand(false)
+        setIsCheckinExpand(false)
+        setIsCheckoutExpand(false)
     }
+
+    function onMoveToDateFilter() {
+        setIsCheckinExpand(true)
+        setIsDateExpand(true)
+        setIsGuestExpand(false)
+        setIsLocationExpand(false)
+    }
+
+    function onMoveToGuestFilter() {
+        setIsCheckinExpand(false)
+        setIsCheckoutExpand(false)
+        setIsDateExpand(false)
+        setIsGuestExpand(true)
+    }
+
 
     function onSubmitSearch(ev) {
         ev.preventDefault()
@@ -143,7 +176,7 @@ export function HeaderFilter() {
                     </button> <span className="splitter"></span>
                     <button onClick={onGuestClick} className={`header-filter-btn add-guests flex ${(filterBy.guests > 0) ? `bold` : ``}`}><div>
                         {(filterBy.guests > 0) ? filterBy.guests + ' Guests' : 'Add guests'}</div></button>
-                    <IconContext.Provider value={{ color: "red", className: "search-icon flex", size: '42px' }}>
+                    <IconContext.Provider value={{ color: "FF385C", className: "search-icon flex", size: '42px' }}>
                         <div onClick={onLocationClick}>
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
@@ -158,15 +191,15 @@ export function HeaderFilter() {
                         />
                         {isLocationExpand && <PlaceFilter locationList={locationList} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
                     </div>
-                    <div className={`flex align-center date-container ${(isDateExpand) ? 'filter-active' : ''}`}>
-                        <button onClick={onDateClick} className="flex column">
-                            <span onClick={onDateClick} className="filter-main-text">Check in</span>
-                            <div onClick={onDateClick} className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
+                    <div className={`flex align-center date-container`}>
+                        <button onClick={onCheckInClick} className={`flex column check-in ${(isCheckinExpand) ? 'filter-active' : ''}`}>
+                            <span onClick={onCheckInClick} className="filter-main-text">Check in</span>
+                            <div onClick={onCheckInClick} className="filter-sub-text">{(!filterByToEdit.startDate) ? 'Add dates' : months[(filterByToEdit.startDate).getMonth()] + ' ' + (filterByToEdit.startDate).getDate()}</div>
                         </button>
 
-                        <button onClick={onDateClick} className="flex column">
-                            <span onClick={onDateClick} className="filter-main-text">Check out</span>
-                            <div onClick={onDateClick} className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
+                        <button onClick={onCheckoutClick} className={`flex column check-out ${(isCheckoutExpand) ? 'filter-active' : ''}`}>
+                            <span onClick={onCheckoutClick} className="filter-main-text">Check out</span>
+                            <div onClick={onCheckoutClick} className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
                         </button>
 
                         {isDateExpand && <DateFilter updateDate={updateDate} />}
@@ -181,7 +214,7 @@ export function HeaderFilter() {
                                 (((filterByToEdit.guests.pets) ? ', ' + filterByToEdit.guests.pets + ' Pets' : '')))
                                 : 'Add guests'}</span>
                         </button>
-                        <IconContext.Provider value={{ color: "red", className: "search-icon-expand", size: '60px' }}>
+                        <IconContext.Provider value={{ color: "FF385C", className: "search-icon-expand", size: '60px' }}>
                             <div className="icon-search-container">
                                 <button onClick={onSubmitSearch}>  <IoSearchCircleSharp /> </button>
 
