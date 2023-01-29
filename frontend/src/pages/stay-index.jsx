@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom'
 import { loadLocations, loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service'
-import { showSuccessMsg } from '../services/event-bus.service'
 
 export function StayIndex() {
 
@@ -31,7 +30,6 @@ export function StayIndex() {
   useEffect(() => {
     loadLocations()
     getUserLocation()
-    showSuccessMsg('testtttttt')
   }, [])
 
   async function onLoadStays(filterBy) {
