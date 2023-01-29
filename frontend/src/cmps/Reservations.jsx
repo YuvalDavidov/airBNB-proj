@@ -104,7 +104,7 @@ export function Reservations() {
                 <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
                 <td>{order.aboutOrder.stay.name}</td>
-                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</td>
+                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
                 <td
                   style={{
                     fontFamily: 'Cereal-Medium',

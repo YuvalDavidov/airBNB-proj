@@ -20,12 +20,12 @@ export function ReservationsTr({ order }) {
         <tr className='bottom-tr'>
           <td>
             <div className='guest-info'>
-              <div className="title">Guest</div><span>{order.aboutOrder.stay.host.fullname}</span>
+              <div className="title">Guest</div><span>{order.aboutUser.fullname}</span>
             </div>
             <div className='price-info'>
               <div className="title">Total price</div>
               <span>
-                ${order.aboutOrder.totalPrice.toLocaleString('en-US')}
+                ${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}
               </span>
             </div>
             <div className='location-info'>
