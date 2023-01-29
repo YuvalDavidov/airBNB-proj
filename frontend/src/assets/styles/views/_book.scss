@@ -121,7 +121,8 @@ hr {
             object-fit: cover;
         }
 
-        & .stay-details {
+        & .stay-book-details {
+            padding-top: 10px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -139,7 +140,7 @@ hr {
         }
 
         .stay-review {
-            margin-top: 33px;
+            margin-top: 56px;
             font-size: rem(12px);
 
             svg {
