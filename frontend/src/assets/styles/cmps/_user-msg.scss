@@ -8,8 +8,8 @@
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: 0.5px solid rgba(99, 99, 99, 0.2);
     background-color: grey;
-    border-radius: 50px;
-    animation: msgMove 5s 1;
+    border-radius: 20px;
+    animation: msgMove 6s 1;
 }
 
 .user-msg button {
@@ -38,29 +38,24 @@
 @keyframes msgMove {
     from {
         opacity: 0;
-        bottom: 0;
+        bottom: 100px;
         color: rgba(255, 255, 255, 0);
-        font-size: 0em;
     }
 
     25% {
         opacity: 1;
-        bottom: 100px;
         color: rgb(0, 0, 0);
-        font-size: 1.4em;
     }
 
     50% {
         opacity: 1;
         bottom: 100px;
         color: rgb(0, 0, 0);
-        font-size: 1.4em;
     }
 
     100% {
         opacity: 0;
         color: rgba(255, 255, 255, 0);
-        font-size: 0em;
         bottom: 0;
     }
 

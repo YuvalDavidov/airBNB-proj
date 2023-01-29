@@ -17,14 +17,14 @@ export const options = {
   maintainAspectRatio: false,
   responsive: true,
   plugins: {
-      legend: {
+    legend: {
       display: false,
     },
     title: {
       display: false,
     },
     tooltip: {
-        enabled: true,
+      enabled: true,
     }
   },
 }
@@ -86,7 +86,7 @@ export function ReservBarChart({ orders }) {
       {
         label: 'Total income',
         data: monthsSum,
-        backgroundColor: ['#6c26fc', '#1d28de', '#2d83f5','#1db9de', '#21ffd3'],
+        backgroundColor: ['#6c26fc', '#1d28de', '#2d83f5', '#1db9de', '#21ffd3'],
       },
     ],
   }
