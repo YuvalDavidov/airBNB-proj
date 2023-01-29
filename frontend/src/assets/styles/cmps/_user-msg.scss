@@ -9,7 +9,7 @@
     border: 0.5px solid rgba(99, 99, 99, 0.2);
     background-color: grey;
     border-radius: 50px;
-    animation: msgMove 3s 1;
+    animation: msgMove 5s 1;
 }
 
 .user-msg button {
@@ -41,6 +41,13 @@
         bottom: 0;
         color: rgba(255, 255, 255, 0);
         font-size: 0em;
+    }
+
+    25% {
+        opacity: 1;
+        bottom: 100px;
+        color: rgb(0, 0, 0);
+        font-size: 1.4em;
     }
 
     50% {
