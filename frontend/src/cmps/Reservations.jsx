@@ -142,7 +142,11 @@ export function Reservations() {
         </tbody>
       </table>}
 
-      {isMobile && <table className="mobile-reservations-table">
+      {isMobile && <div className="mobile-reservations">
+        {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 && 
+        <>
+        <h2 style={{marginBottom: '25px'}}>Pending</h2>
+        <table className="mobile-reservations-table">
         <thead>
           <tr>
             <th className='listing-th'>Listing</th>
@@ -150,9 +154,29 @@ export function Reservations() {
           </tr>
         </thead>
         <tbody>
-          {orders.sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
+          {orders.filter(order => order.aboutOrder.status === 'Pending').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
         </tbody>
-      </table>}
+      </table>
+      </> }
+      <div className="approved-status" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '25px'}}>
+        <h2>Approved</h2>
+        <h4 style={{color: 'green'}}>Total revenue: ${orders.filter(order => order.aboutOrder.status === 'Approved').reduce((acc,order) => {
+          acc += order.aboutOrder.totalPrice
+          return acc
+        },0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</h4>
+      </div>
+      <table className="mobile-reservations-table">
+        <thead>
+          <tr>
+            <th className='listing-th'>Listing</th>
+            <th className='dates-th'>Dates</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.filter(order => order.aboutOrder.status === 'Approved').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
+        </tbody>
+      </table>
+      </div>}
     </section>
   )
 }
