@@ -26,12 +26,6 @@ export function Reservations() {
   return (
     <section className='reservations'>
       <section className='charts'>
-        <div className='listing'>
-          <h2>Revenue / month</h2>
-          <div className='bar-chart'>
-            <ReservBarChart orders={orders} />
-          </div>
-        </div>
 
         <div className='listing'>
           <h2>Reservations status</h2>
@@ -70,6 +64,13 @@ export function Reservations() {
         </div>
 
         <div className='listing'>
+          <h2>Revenue / month</h2>
+          <div className='bar-chart'>
+            <ReservBarChart orders={orders} />
+          </div>
+        </div>
+
+        <div className='listing'>
           <h2>Reservations / listing</h2>
           <div className='dougnut-chart'>
             <ListingChart orders={orders} />
@@ -89,7 +90,7 @@ export function Reservations() {
             <th className='status-td'>Status</th>
             <th className='todo-td'>To do</th>
           </tr>
-          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map((order) => {
+          {orders.sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map((order) => {
             return (
               <tr key={order._id} className='data'>
                 <td className='guest-td'>
@@ -149,7 +150,7 @@ export function Reservations() {
           </tr>
         </thead>
         <tbody>
-          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map(order => <ReservationsTr key={order._id} order={order} />)}
+          {orders.sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
         </tbody>
       </table>}
     </section>
