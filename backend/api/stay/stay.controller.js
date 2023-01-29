@@ -12,8 +12,9 @@ async function getStays(req, res) {
       guests: req.query.guests || 0,
       label: req.query.label || 'Trending'
     }
+    if (req.query.pets) filterBy.pets = true
+    console.log('filterBy------->', filterBy)
     if (req.query.hostId) {
-      console.log('hi', req.query);
       filterBy = {
         hostId: req.query.hostId
       }

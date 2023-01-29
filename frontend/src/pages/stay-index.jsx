@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { LabelsFilter } from '../cmps/labels-filter'
 import { useSearchParams } from 'react-router-dom'
 
-import { loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
+import { loadLocations, loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service'
 import { showSuccessMsg } from '../services/event-bus.service'
@@ -23,17 +23,20 @@ export function StayIndex() {
   const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
 
   useEffect(() => {
+
     toggleInDetails(false)
     onLoadStays(queryFilterBy)
   }, [filterBy])
 
   useEffect(() => {
+    loadLocations()
     getUserLocation()
     showSuccessMsg('testtttttt')
   }, [])
 
   async function onLoadStays(filterBy) {
     try {
+
       await loadStays(filterBy)
     } catch (err) {
       console.error('Cannot load stays:', err)

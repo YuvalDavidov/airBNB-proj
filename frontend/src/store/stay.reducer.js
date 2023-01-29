@@ -8,9 +8,11 @@ export const SET_HEADER_EXPAND = 'SET_HEADER_EXPAND'
 export const SET_WISHLIST_STAYS = 'SET_WISHLIST_STAYS'
 export const SET_MY_STAYS = 'SET_MY_STAYS'
 export const SET_HEADER_IN_DETAILS = 'SET_HEADER_IN_DETAILS'
+export const SET_LOCATIONS = 'SET_LOCATIONS'
 
 const initialState = {
   stays: [],
+  locations: [],
   myStays: [],
   staysForWishlist: [],
   filterBy: stayService.getDefaultFilter(),
@@ -56,6 +58,11 @@ export function stayReducer(state = initialState, action) {
     // dashboard stays
     case SET_MY_STAYS:
       return { ...state, myStays: action.stays }
+
+    // locations for filter
+
+    case SET_LOCATIONS:
+      return { ...state, locations: action.locations }
 
 
     default:

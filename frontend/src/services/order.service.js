@@ -43,21 +43,17 @@ async function remove(orderId) {
 }
 
 async function save(order) {
-
     var savedOrder
-
     try {
         if (order._id) {
             savedOrder = await httpService.put(BASE_URL, order)
         } else {
-
             savedOrder = await httpService.post(BASE_URL, order)
         }
         return savedOrder
     } catch (error) {
         console.log(error);
     }
-
 }
 
 async function addStayMsg(stayId, txt) {

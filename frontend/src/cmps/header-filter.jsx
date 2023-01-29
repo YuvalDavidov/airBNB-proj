@@ -21,23 +21,39 @@ export function HeaderFilter() {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
+    const locations = useSelector((storeState) => storeState.stayModule.locations)
+    const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
+    const [locationList, setLocationList] = useState(locations)
     const [isLocationExpand, setIsLocationExpand] = useState(false)
     const [isDateExpand, setIsDateExpand] = useState(false)
     const [isGuestExpand, setIsGuestExpand] = useState(false)
-    const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
     const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
-    const [locations, setLocations] = useState([])
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    function setShownLocations() {
+
+        const regex = new RegExp(filterByToEdit.locationCity, 'i')
+
+        let filteredByLocations
+        if (filterByToEdit.locationCity) {
+            filteredByLocations = locations.filter(location => regex.test(location.city))
+            if (!filteredByLocations.length) filteredByLocations = locations.filter(location => regex.test(location.country))
+            setLocationList(filteredByLocations)
+        } else setLocationList(locations)
+    }
+
+
 
 
     useEffect(() => {
-        loadLocations()
+        setShownLocations()
+
 
     }, [filterByToEdit.locationCity])
 
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
-
+        setLocationList(locations)
     }, [isHeadFilterExpanded])
 
     function handleLocationChange({ target }) {
@@ -47,7 +63,7 @@ export function HeaderFilter() {
 
     function onSetLocation(location) {
         let city = location.city
-        let country = location.country.loc.country
+        let country = location.country
 
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, locationCity: city, locationCountry: country }))
 
@@ -64,30 +80,7 @@ export function HeaderFilter() {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
     }
 
-    async function loadLocations() {
-        let uniqueLocations
-        try {
-            const listOfStays = await stayService.query(stayService.getDefaultFilter())
-            let uniqueCities = [...new Set(listOfStays.map(stay => { return stay.loc.city }))]
-            uniqueLocations = uniqueCities.map(city => {
-                return {
-                    city, country: listOfStays.find(stay => {
-                        if (stay.loc.city === city) return stay.loc.country
-                    })
-                }
-            })
-        } catch (err) {
-            console.error('couldnt load locations')
-        }
-        const regex = new RegExp(filterByToEdit.locationCity, 'i')
 
-        let filteredBy
-        if (filterByToEdit.locationCity) {
-            filteredBy = uniqueLocations.filter(location => regex.test(location.city))
-            if (!filteredBy.length) filteredBy = uniqueLocations.filter(location => regex.test(location.country.loc.country))
-            setLocations(filteredBy)
-        } else setLocations(uniqueLocations)
-    }
 
 
     function onLocationClick() {
@@ -163,7 +156,7 @@ export function HeaderFilter() {
                             value={filterByToEdit.locationCity}
                             onChange={handleLocationChange}
                         />
-                        {isLocationExpand && <PlaceFilter locations={locations} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
+                        {isLocationExpand && <PlaceFilter locationList={locationList} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
                     </div>
                     <div className={`flex align-center date-container ${(isDateExpand) ? 'filter-active' : ''}`}>
                         <button onClick={onDateClick} className="flex column">

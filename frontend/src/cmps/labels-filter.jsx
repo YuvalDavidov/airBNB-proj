@@ -48,7 +48,7 @@ export function LabelsFilter() {
     {/* <section className="flex justify-center labels-crusal-main"></section> */ }
 
 
-    return <section className={`labels-container main-layout ${(isHeadFilterExpanded) ? 'hidden' : ''}`}> <Carousel
+    return <section className={`labels-container ${(isHeadFilterExpanded) ? 'hidden' : ''}`}> <Carousel
         additionalTransfrom={0}
         arrows
         autoPlaySpeed={3000}

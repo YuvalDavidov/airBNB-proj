@@ -1,23 +1,58 @@
 .user-msg {
-    color:white;
+    color: rgb(255, 255, 255);
     padding: 10px;
     font-size: 1.4em;
     position: fixed;
-    top:50%;
-    right:0;
+    bottom: 100px;
+    right: 50%;
     background-color: grey;
+    border-radius: 50px;
+    animation: msgMove 3s 1;
 }
+
 .user-msg button {
-    float:right;
-    border:0;
+    opacity: 0;
+    float: right;
+    border: 0;
     border-radius: 50%;
     margin: 5px;
     background-color: #222;
+
+    &:hover {
+        opacity: 1;
+
+    }
 }
 
 .user-msg.success {
     background-color: rgb(41, 189, 73);
 }
+
 .user-msg.error {
     background-color: rgb(216, 59, 59);
+}
+
+
+@keyframes msgMove {
+    from {
+        opacity: 0;
+        bottom: 0;
+        color: rgba(255, 255, 255, 0);
+        font-size: 0em;
+    }
+
+    50% {
+        opacity: 1;
+        bottom: 100px;
+        color: rgb(255, 255, 255);
+        font-size: 1.4em;
+    }
+
+    100% {
+        opacity: 0;
+        color: rgba(255, 255, 255, 0);
+        font-size: 0em;
+        bottom: 0;
+    }
+
 }
