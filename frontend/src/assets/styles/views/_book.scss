@@ -122,11 +122,12 @@ hr {
         }
 
         & .stay-book-details {
-            padding-top: 10px;
+            position: relative;
+            height: 108px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            transform: translateY(-10px);
+            margin-bottom: 20px;
 
             h6 {
                 color: #717171;
@@ -140,7 +141,9 @@ hr {
         }
 
         .stay-review {
-            margin-top: 56px;
+            // margin-top: 56px;
+            position: absolute;
+            bottom: 0;
             font-size: rem(12px);
 
             svg {

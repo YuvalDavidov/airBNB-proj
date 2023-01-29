@@ -38,7 +38,7 @@ export function UserTrips() {
           </tr>
         </thead>
         <tbody>
-          {orders.sort((a,b) => a.aboutOrder.bookDate - b.aboutOrder.bookDate).map((order) => {
+          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map((order) => {
             return (
               <tr key={order._id}>
                 <td className="destination-td">
@@ -51,7 +51,7 @@ export function UserTrips() {
                 <td>{utilService.getFullDate(order.aboutOrder.startDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
-                <td>${order.aboutOrder.totalPrice.toFixed(2)}</td>
+                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
                 <td style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</td>
               </tr>
             )

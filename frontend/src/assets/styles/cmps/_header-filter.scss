@@ -31,25 +31,67 @@
 }
 
 .date-container {
-    gap: 20px;
     width: 33.3%;
     justify-content: center;
 
-    &.filter-active {
-        background-color: white;
-        padding-inline-start: 0px;
+    .check-in {
+        width: 50%;
+        align-items: center;
+        justify-content: center;
         height: 100%;
         border-radius: 50px;
-        width: 33.3%;
-        justify-content: center;
-        box-shadow: 0 6px 20px #0003;
+
+        &.filter-active {
+            background-color: white;
+            padding-inline-start: 0px;
+            height: 100%;
+            border-radius: 50px;
+            width: 50%;
+            justify-content: center;
+            padding: 12px;
+
+            box-shadow: 0 6px 20px #0003;
+        }
+
+        &:hover:not(.filter-active) {
+            background-color: #ddd;
+            border-radius: 50px;
+            height: 100%;
+            padding: 12px;
+
+        }
     }
 
-    &:hover:not(.filter-active) {
-        background-color: #ddd;
-        border-radius: 50px;
+    .check-out {
+        width: 50%;
         height: 100%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+
+        &.filter-active {
+            background-color: white;
+            padding-inline-start: 0px;
+            height: 100%;
+            border-radius: 50px;
+            width: 50%;
+            padding: 12px;
+
+            justify-content: center;
+            box-shadow: 0 6px 20px #0003;
+        }
+
+        &:hover:not(.filter-active) {
+            background-color: #ddd;
+            border-radius: 50px;
+            height: 100%;
+            padding: 12px;
+
+        }
     }
+
+
+
 }
 
 .guest-container {

@@ -17,6 +17,7 @@
         justify-content: space-around;
 
         .nav-item {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,6 +39,19 @@
                 span {
                     color: rgb(34,34,34);
                 }
+            }
+            .pending-count {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                top:-5px;
+                right: 0px;
+                background-color: rgb(255, 56, 92);
+                color: white;
             }
         }
     }

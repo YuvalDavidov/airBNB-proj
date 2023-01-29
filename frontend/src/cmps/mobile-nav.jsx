@@ -2,15 +2,21 @@ import { useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import { logout } from '../store/user.actions'
-
+import { socketService } from '../services/socket.service'
+import { loadOrders } from '../store/order.actions'
 
 export function MobileNav() {
   const location = useLocation()
   const navigate = useNavigate()
   const mobileNavRef = useRef()
   const user = useSelector((storeState) => storeState.userModule.user)
+  const { orders } = useSelector((storeState) => storeState.orderModule)
 
   useEffect(() => {
+    loadOrders({ hostId: user._id })
+    socketService.on('recieved-order', addedOrder => {
+      loadOrders({ hostId: user._id })
+    })
     return () => {
       window.onscroll = () => {
         return
@@ -120,6 +126,7 @@ export function MobileNav() {
                 location.pathname === '/dashboard/reservations' && 'is-active'
               }`}
             >
+              {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 && <div className='pending-count'>{orders.filter(order => order.aboutOrder.status === 'Pending').length}</div>}
               <svg
                 width='24px'
                 height='24px'
