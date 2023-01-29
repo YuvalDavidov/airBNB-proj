@@ -232,6 +232,12 @@
         margin: 5px;
         cursor: pointer;
         background-color: transparent;
+
+        &.not {
+            cursor: not-allowed;
+            opacity: 0.5;
+
+        }
     }
 }
 
