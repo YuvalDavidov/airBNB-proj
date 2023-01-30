@@ -13,6 +13,7 @@ export function MobileNav() {
   const { orders } = useSelector((storeState) => storeState.orderModule)
 
   useEffect(() => {
+    if (!user) return
     loadOrders({ hostId: user._id })
     socketService.on('recieved-order', addedOrder => {
       loadOrders({ hostId: user._id })
@@ -71,9 +72,8 @@ export function MobileNav() {
         </div>
         <div
           onClick={() => navigate('/wishlist')}
-          className={`nav-item ${
-            location.pathname === '/wishlist' && 'is-active'
-          }`}
+          className={`nav-item ${location.pathname === '/wishlist' && 'is-active'
+            }`}
         >
           <svg
             viewBox='0 0 32 32'
@@ -99,9 +99,8 @@ export function MobileNav() {
           <>
             <div
               onClick={() => navigate('/trips')}
-              className={`nav-item ${
-                location.pathname === '/trips' && 'is-active'
-              }`}
+              className={`nav-item ${location.pathname === '/trips' && 'is-active'
+                }`}
             >
               <svg
                 viewBox='0 0 32 32'
@@ -122,9 +121,8 @@ export function MobileNav() {
             </div>
             <div
               onClick={() => navigate('/dashboard/reservations')}
-              className={`nav-item ${
-                location.pathname === '/dashboard/reservations' && 'is-active'
-              }`}
+              className={`nav-item ${location.pathname === '/dashboard/reservations' && 'is-active'
+                }`}
             >
               {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 && <div className='pending-count'>{orders.filter(order => order.aboutOrder.status === 'Pending').length}</div>}
               <svg
@@ -195,9 +193,8 @@ export function MobileNav() {
         {!user && (
           <div
             onClick={() => navigate('/login')}
-            className={`nav-item ${
-              location.pathname === '/login' && 'is-active'
-            }`}
+            className={`nav-item ${location.pathname === '/login' && 'is-active'
+              }`}
           >
             <svg
               viewBox='0 0 32 32'
