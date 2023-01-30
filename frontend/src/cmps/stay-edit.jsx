@@ -273,19 +273,22 @@ export function StayEdit() {
                     onChange={handleChange}
                     value={stayToEdit.stayDetails.allowPets} /></label>
 
+            <div className="edit-labels-container">
 
-            <label htmlFor="">Labels
+                <label htmlFor="">Labels
 
-                <MultiLabelsSelect handleSelectChange={handleLablesSelectChange} />
-                <p>{errs.labelsErr}</p>
-            </label>
+                    <MultiLabelsSelect handleSelectChange={handleLablesSelectChange} />
+                    <p>{errs.labelsErr}</p>
+                </label>
 
-            <label htmlFor="">Amenites
+                <label htmlFor="">Amenites
 
-                <MultiAmenitiesSelect handleSelectChange={handleAmenitiesSelectChange} />
-                <p>{errs.labelsErr}</p>
+                    <MultiAmenitiesSelect handleSelectChange={handleAmenitiesSelectChange} />
+                    <p>{errs.labelsErr}</p>
 
-            </label>
+                </label>
+            </div>
+
             <label htmlFor="">Summary</label>
             <textarea value={stayToEdit.summary} placeholder="Write somthing on your stay" name="summary" id="summary" onChange={handleChange} cols="30" rows="4"></textarea>
 
