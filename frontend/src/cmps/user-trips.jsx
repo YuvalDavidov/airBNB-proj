@@ -67,7 +67,7 @@ export function UserTrips() {
             </tr>
         </thead>
         <tbody>
-            {orders.sort((a,b) => a.aboutOrder.bookDate - b.aboutOrder.bookDate).map(order => <UserTripsTr key={order._id} order={order} />)}
+            {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map(order => <UserTripsTr key={order._id} order={order} />)}
         </tbody>
         </table>}
     </section>

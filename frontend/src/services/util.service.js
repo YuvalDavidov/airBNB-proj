@@ -79,7 +79,7 @@ function getFullDate(date) {
     let month = new Date(date).getMonth() + 1
     let year = new Date(date).getFullYear()
 
-    return `${month}/${day}/${year}`
+    return `${day}/${month}/${year}`
 }
 
 function getStatusColor(status) {
