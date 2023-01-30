@@ -11,6 +11,7 @@ export function ReservationsTr({ order }) {
       <tr className='top-tr' onClick={() => setIsOpen(!isOpen)}>
         <td className='destination-td'>{order.aboutOrder.stay.name}</td>
 
+        {/* <td className='dates-td' style={{color: utilService.getStatusColor(order.aboutOrder.status)}}> */}
         <td className='dates-td'>
           {utilService.getFullDate(order.aboutOrder.startDate) +
             ' - ' +

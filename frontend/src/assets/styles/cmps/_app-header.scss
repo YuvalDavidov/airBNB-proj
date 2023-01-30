@@ -5,7 +5,7 @@
     z-index: 2000;
     width: 100%;
     min-height: 80px;
-    padding: 10px 0;
+    // padding: 10px 0;
     position: relative;
 
     &.in-main {
@@ -95,6 +95,10 @@
         margin: 0;
         grid-column: 2/3;
         color: #ff5171;
+
+        svg {
+            transform: translateY(2px);
+        }
     }
 
     .stay-header-filter {

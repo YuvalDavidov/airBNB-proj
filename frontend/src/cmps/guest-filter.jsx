@@ -30,8 +30,8 @@ export function GuestFilter({ onSetGuestFilter }) {
                     <span className="guest-main-text">Adults</span>
                     <span className="ff-cereal-book fs14 light-color">Ages 13 or above..</span>
                 </div>
-                <span className="flex align-center">
-                    <button onClick={() => { handleGuestsAmount('adults', - 1) }}>{minus}</button>
+                <span className=" flex align-center">
+                    <button className={`${guestsAmount.adults === 1 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('adults', - 1) }}>{minus}</button>
                     {guestsAmount.adults}
                     <button onClick={() => { handleGuestsAmount('adults', + 1) }}>{plus}</button>
                 </span>
@@ -42,7 +42,7 @@ export function GuestFilter({ onSetGuestFilter }) {
                     <span className="ff-cereal-book fs14 light-color">Ages 2-12</span>
                 </div>
                 <span className="flex align-center">
-                    <button onClick={() => { handleGuestsAmount('children', - 1) }} >{minus}</button>
+                    <button className={`${guestsAmount.children === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('children', - 1) }} >{minus}</button>
                     {guestsAmount.children}
                     <button onClick={() => { handleGuestsAmount('children', + 1) }}>{plus}</button>
                 </span>
@@ -53,14 +53,14 @@ export function GuestFilter({ onSetGuestFilter }) {
                     <span className="ff-cereal-book fs14 light-color">Under 2</span>
                 </div>
                 <span className="flex align-center">
-                    <button onClick={() => { handleGuestsAmount('infants', - 1) }} >{minus}</button>
+                    <button className={`${guestsAmount.infants === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('infants', - 1) }} >{minus}</button>
                     {guestsAmount.infants}
                     <button onClick={() => { handleGuestsAmount('infants', + 1) }}>{plus}</button>
                 </span>
             </div>
             <div className="flex guest-line-filter">
                 <span className="guest-main-text">Pets</span> <span className="flex align-center">
-                    <button onClick={() => { handleGuestsAmount('pets', - 1) }} >{minus}</button>
+                    <button className={`${guestsAmount.pets === 0 ? 'not' : ''}`} onClick={() => { handleGuestsAmount('pets', - 1) }} >{minus}</button>
                     {guestsAmount.pets}
                     <button onClick={() => { handleGuestsAmount('pets', + 1) }}>{plus}</button>
                 </span>

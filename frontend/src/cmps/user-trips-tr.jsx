@@ -27,7 +27,7 @@ export function UserTripsTr({ order }) {
           </td>
           <td className='right-td'>
           <div className="price-info">
-                <div className="title">Total price</div><span>${order.aboutOrder.totalPrice.toLocaleString('en-US')}</span>
+                <div className="title">Total price</div><span>${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
             </div>
             <div className="status-info">
                 <div className="title">Status</div><span style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</span>

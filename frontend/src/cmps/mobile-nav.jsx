@@ -2,15 +2,22 @@ import { useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import { logout } from '../store/user.actions'
-
+import { socketService } from '../services/socket.service'
+import { loadOrders } from '../store/order.actions'
 
 export function MobileNav() {
   const location = useLocation()
   const navigate = useNavigate()
   const mobileNavRef = useRef()
   const user = useSelector((storeState) => storeState.userModule.user)
+  const { orders } = useSelector((storeState) => storeState.orderModule)
 
   useEffect(() => {
+    if (!user) return
+    loadOrders({ hostId: user._id })
+    socketService.on('recieved-order', addedOrder => {
+      loadOrders({ hostId: user._id })
+    })
     return () => {
       window.onscroll = () => {
         return
@@ -65,9 +72,8 @@ export function MobileNav() {
         </div>
         <div
           onClick={() => navigate('/wishlist')}
-          className={`nav-item ${
-            location.pathname === '/wishlist' && 'is-active'
-          }`}
+          className={`nav-item ${location.pathname === '/wishlist' && 'is-active'
+            }`}
         >
           <svg
             viewBox='0 0 32 32'
@@ -93,9 +99,8 @@ export function MobileNav() {
           <>
             <div
               onClick={() => navigate('/trips')}
-              className={`nav-item ${
-                location.pathname === '/trips' && 'is-active'
-              }`}
+              className={`nav-item ${location.pathname === '/trips' && 'is-active'
+                }`}
             >
               <svg
                 viewBox='0 0 32 32'
@@ -116,10 +121,10 @@ export function MobileNav() {
             </div>
             <div
               onClick={() => navigate('/dashboard/reservations')}
-              className={`nav-item ${
-                location.pathname === '/dashboard/reservations' && 'is-active'
-              }`}
+              className={`nav-item ${location.pathname === '/dashboard/reservations' && 'is-active'
+                }`}
             >
+              {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 && <div className='pending-count'>{orders.filter(order => order.aboutOrder.status === 'Pending').length}</div>}
               <svg
                 width='24px'
                 height='24px'
@@ -188,9 +193,8 @@ export function MobileNav() {
         {!user && (
           <div
             onClick={() => navigate('/login')}
-            className={`nav-item ${
-              location.pathname === '/login' && 'is-active'
-            }`}
+            className={`nav-item ${location.pathname === '/login' && 'is-active'
+              }`}
           >
             <svg
               viewBox='0 0 32 32'

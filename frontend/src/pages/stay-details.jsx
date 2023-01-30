@@ -347,7 +347,7 @@ export function StayDetails() {
                                 <span className="dote">•</span>
                                 <span>{stayDetails.beds} Beds</span>
                                 <span className="dote">•</span>
-                                <span>{stayDetails.bath} Bath</span>
+                                <span>{stayDetails.bathrooms} Bath</span>
                             </p>
                         </div>
                         <img src={host.imgUrl} />
