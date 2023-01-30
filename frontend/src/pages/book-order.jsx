@@ -106,8 +106,9 @@ export function BookStay() {
     return diffInDays + 1
   }
 
-  function onOrder() {
-    let orderToSave = orderService.getEmptyOrder()
+  async function onOrder() {
+    try {
+      let orderToSave = orderService.getEmptyOrder()
     orderToSave.aboutOrder = order
     orderToSave.aboutOrder.totalPrice = stay.price * getDaysCalculate()
     orderToSave.aboutOrder.bookDate = Date.now()
@@ -117,10 +118,14 @@ export function BookStay() {
       fullname: user.fullname,
       imgUrl: user.imgUrl,
     }
-    orderService.save(orderToSave)
+    const backOrder = await orderService.save(orderToSave)
     showSuccessMsg('Order has been made')
     setIsOrderDone(true)
     navigate('/trips')
+    } catch (error) {
+      throw new Error(error)
+    }
+    
   }
 
   if (!order) return <div>Somthing whent wrong with the order</div>
