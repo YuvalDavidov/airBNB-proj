@@ -23,7 +23,7 @@ export function ReservationsTr({ order }) {
           <tr className='bottom-tr'>
             <td>
               <div className='guest-info'>
-                <div className="title">Guest</div><span>{order.aboutOrder.stay.host.fullname}</span>
+                <div className="title">Guest</div><span>{order.aboutUser.fullname}</span>
               </div>
               <div className='price-info'>
                 <div className="title">Total price</div>

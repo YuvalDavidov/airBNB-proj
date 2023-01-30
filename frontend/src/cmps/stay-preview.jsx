@@ -31,7 +31,7 @@ export function StayPreview({ stay, userLocation }) {
     })
 
     const avg = rate / rateCount
-    return avg
+    return avg + 0.8215
   }
 
   function calcAirDistance(lat1, lng1, lat2, lng2) {
