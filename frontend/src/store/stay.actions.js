@@ -50,7 +50,7 @@ export function toggleInDetails(boolean) {
 export async function loadStays(filterBy) {
   try {
     const stays = await stayService.query(filterBy)
-    console.log('Stays from DB:', stays)
+    // console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_STAYS,
       stays,
@@ -85,7 +85,7 @@ export async function loadLocations() {
 export async function loadMyStays(filterBy) {
   try {
     const stays = await stayService.query(filterBy)
-    console.log('Stays from DB:', stays)
+    // console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_MY_STAYS,
       stays,

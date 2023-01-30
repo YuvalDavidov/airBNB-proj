@@ -28,7 +28,6 @@ function randomLabels() {
     let labels = ['Trending', 'New', 'Beachfront', 'Cabins', 'Parks', 'Campers', 'Castles', 'Islands',
         'Boats', 'Home', 'Tropical', 'Towers', 'Windmills', 'Farms', 'Cave', 'Ski']
     let fourLabels = [labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)], labels[getRandomIntInclusive(0, 15)]]
-    console.log(fourLabels)
     return fourLabels
 }
 
