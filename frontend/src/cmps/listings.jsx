@@ -54,7 +54,6 @@ export function Listings() {
                     <tr>
                         <th>LISTING</th>
                         <th>LOCATION</th>
-                        <th>DATE ADDED</th>
                     </tr>
 
                     {stays.map(stay => <InfoTr key={stay._id} stay={stay} />)}
