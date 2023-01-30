@@ -47,16 +47,28 @@ export function HeaderFilter() {
 
 
 
+
     useEffect(() => {
         setShownLocations()
 
 
     }, [filterByToEdit.locationCity])
-
+    function handleScroll() {
+        toggleExpand(false)
+    }
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
         setLocationList(locations)
+        console.log(isHeadFilterExpanded)
+        if (isHeadFilterExpanded) {
+
+            document.addEventListener("scroll", (handleScroll))
+
+        } else document.removeEventListener("scroll", (handleScroll))
+
     }, [isHeadFilterExpanded])
+
+
 
     function handleLocationChange({ target }) {
         let { value, name: field } = target
@@ -168,9 +180,9 @@ export function HeaderFilter() {
     return (
         <Fragment>
             <section className={`stay-header-filter ${(isHeadFilterExpanded) ? 'extanded' : ''}`}>
-                {!isHeadFilterExpanded && <div className="form-header flex align-center"><button onClick={onLocationClick} className="header-filter-btn flex"><div>
+                {!isHeadFilterExpanded && <div className="form-header flex align-center"><button onClick={onLocationClick} className="header-filter-btn header-text flex"><div>
                     {(filterBy.locationCity) ? filterBy.locationCity : 'Anywhere'}</div></button> <span className="splitter"></span>
-                    <button onClick={onDateClick} className="header-filter-btn flex"><div>
+                    <button onClick={onDateClick} className="header-filter-btn header-text flex"><div>
                         {(filterBy.startDate) ? (months[(filterBy.startDate).getMonth()] + ' ' + (filterBy.startDate).getDate()) + ' ' +
                             months[(filterBy.endDate).getMonth()] + ' ' + (filterBy.endDate).getDate() : 'Any week'}</div>
                     </button> <span className="splitter"></span>

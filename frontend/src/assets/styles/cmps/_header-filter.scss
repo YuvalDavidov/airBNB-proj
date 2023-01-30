@@ -134,7 +134,7 @@
 
 
 .splitter {
-    height: 32px;
+    height: 24px;
     width: 1px;
     background-color: rgb(221, 221, 221);
     flex: 0 0 1px;
@@ -169,6 +169,10 @@
             &.bold {
                 font-family: Cereal-Bold;
             }
+        }
+
+        &.header-text {
+            font-family: cereal-medium;
         }
 
     }
