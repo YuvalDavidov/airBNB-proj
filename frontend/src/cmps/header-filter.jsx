@@ -53,18 +53,11 @@ export function HeaderFilter() {
 
 
     }, [filterByToEdit.locationCity])
-    function handleScroll() {
-        toggleExpand(false)
-    }
+
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
         setLocationList(locations)
         console.log(isHeadFilterExpanded)
-        if (isHeadFilterExpanded) {
-
-            document.addEventListener("scroll", (handleScroll))
-
-        } else document.removeEventListener("scroll", (handleScroll))
 
     }, [isHeadFilterExpanded])
 

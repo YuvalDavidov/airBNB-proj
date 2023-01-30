@@ -7,7 +7,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getFullDate,
-    getStatusColor
+    getStatusColor,
+    getRandomDate
 }
 
 function makeId(length = 6) {
@@ -65,6 +66,12 @@ function debounce(func, timeout = 300) {
     }
 }
 
+
+function getRandomDate() {
+    const maxDate = Date.now();
+    const timestamp = Math.floor(Math.random() * maxDate);
+    return new Date(timestamp);
+}
 function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
 }

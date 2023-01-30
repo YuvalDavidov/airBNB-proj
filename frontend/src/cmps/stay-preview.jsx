@@ -7,10 +7,12 @@ import { IconContext } from 'react-icons'
 import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '../store/user.actions'
 
 import { ImageSlider } from './image-slider'
+import { utilService } from '../services/util.service'
 
 export function StayPreview({ stay, userLocation }) {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   const user = useSelector((storeState) => storeState.userModule.user)
 
@@ -145,7 +147,7 @@ export function StayPreview({ stay, userLocation }) {
           ).toLocaleString('en-US')}{' '}
           kilometers away
         </div>
-        <div className='dates'>Jan 17 – 22</div>
+        <div className='dates'>{months[utilService.getRandomDate().getMonth()] + ' ' + utilService.getRandomIntInclusive(1, 15) + '–' + utilService.getRandomIntInclusive(16, 30)}</div>
         <div className='price'>
           <span>${stay.price.toLocaleString('en-US')}</span> night
         </div>
