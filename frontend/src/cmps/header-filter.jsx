@@ -1,36 +1,39 @@
 import { Fragment, useState } from "react"
 import { useSelector } from "react-redux"
-
 import { PlaceFilter } from './place-filter.jsx'
 import { DateFilter } from './date-filter.jsx'
 import { GuestFilter } from './guest-filter.jsx'
-
-import { stayService } from "../services/stay.service"
-import { utilService } from "../services/util.service.js"
 import { setFilterBy, toggleExpand } from "../store/stay.actions.js"
-
 import { IoSearchCircleSharp } from 'react-icons/io5'
 import { IconContext } from "react-icons"
 import { useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
-import { CgUnsplash } from "react-icons/cg"
 
 
 export function HeaderFilter() {
-
     const [searchParams, setSearchParams] = useSearchParams()
 
     const isHeadFilterExpanded = useSelector((storeState) => storeState.stayModule.isHeadFilterExpanded)
     const locations = useSelector((storeState) => storeState.stayModule.locations)
     const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
     const [locationList, setLocationList] = useState(locations)
-    const [isLocationExpand, setIsLocationExpand] = useState(false)
-    const [isDateExpand, setIsDateExpand] = useState(false)
+    const [modal, setModal] = useState('')
     const [isCheckinExpand, setIsCheckinExpand] = useState(false)
     const [isCheckoutExpand, setIsCheckoutExpand] = useState(false)
-    const [isGuestExpand, setIsGuestExpand] = useState(false)
     const [filterByToEdit, setFilterByToEdit] = useState({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    useEffect(() => {
+        setShownLocations()
+    }, [filterByToEdit.locationCity])
+
+    useEffect(() => {
+        setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
+        setLocationList(locations)
+        console.log(isHeadFilterExpanded)
+
+    }, [isHeadFilterExpanded])
+
 
     function setShownLocations() {
 
@@ -45,35 +48,13 @@ export function HeaderFilter() {
     }
 
 
-
-
-
-    useEffect(() => {
-        setShownLocations()
-
-
-    }, [filterByToEdit.locationCity])
-
-    useEffect(() => {
-        setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
-        setLocationList(locations)
-        console.log(isHeadFilterExpanded)
-
-    }, [isHeadFilterExpanded])
-
-
-
     function handleLocationChange({ target }) {
         let { value, name: field } = target
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    function onSetLocation(location) {
-        let city = location.city
-        let country = location.country
-
+    function onSetLocation({ city, country }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, locationCity: city, locationCountry: country }))
-
     }
 
     function onSetGuestFilter(numOfGuests) {
@@ -89,63 +70,44 @@ export function HeaderFilter() {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
     }
 
-
-    function onCheckInClick() {
-        setIsCheckinExpand(true)
-        setIsCheckoutExpand(false)
-        setIsDateExpand(true)
-        setIsGuestExpand(false)
-        setIsLocationExpand(false)
-    }
-    function onCheckoutClick() {
-        setIsCheckinExpand(false)
-        setIsCheckoutExpand(true)
-        setIsDateExpand(true)
-        setIsGuestExpand(false)
-        setIsLocationExpand(false)
-    }
-
     function onLocationClick() {
         toggleExpand(true)
+        setModal('location')
         setIsCheckinExpand(false)
         setIsCheckoutExpand(false)
-        setIsDateExpand(false)
-        setIsGuestExpand(false)
-        setIsLocationExpand(true)
     }
 
     function onDateClick() {
         toggleExpand(true)
+        setModal('Date')
         setIsCheckinExpand(true)
         setIsCheckoutExpand(false)
-        setIsDateExpand(true)
-        setIsGuestExpand(false)
-        setIsLocationExpand(false)
-
     }
 
-
+    function onCheckInClick() {
+        setModal('Date')
+        setIsCheckinExpand(true)
+        setIsCheckoutExpand(false)
+    }
+    function onCheckoutClick() {
+        setModal('Date')
+        setIsCheckinExpand(false)
+        setIsCheckoutExpand(true)
+    }
     function onGuestClick() {
         toggleExpand(true)
-        setIsDateExpand(false)
-        setIsGuestExpand(true)
-        setIsLocationExpand(false)
-        setIsCheckinExpand(false)
-        setIsCheckoutExpand(false)
+        setModal('Guests')
     }
-
     function onMoveToDateFilter() {
+        setModal('Date')
         setIsCheckinExpand(true)
-        setIsDateExpand(true)
-        setIsGuestExpand(false)
-        setIsLocationExpand(false)
+
     }
 
     function onMoveToGuestFilter() {
+        setModal('Guests')
         setIsCheckinExpand(false)
         setIsCheckoutExpand(false)
-        setIsDateExpand(false)
-        setIsGuestExpand(true)
     }
 
 
@@ -186,7 +148,7 @@ export function HeaderFilter() {
                             <IoSearchCircleSharp /></div>
                     </IconContext.Provider></div>}
                 {isHeadFilterExpanded && <div className="form-header-extanded flex" >
-                    <div className={`flex column location-container ${(isLocationExpand) ? 'filter-active' : ''}`}>
+                    <div className={`flex column location-container ${(modal === 'location') ? 'filter-active' : ''}`}>
                         <button onClick={onLocationClick} className="header-filter-btn flex">
                             <span onClick={onLocationClick} className="filter-main-text">Where</span></button>
                         <input onClick={onLocationClick} placeholder="Search destenations" className="search-filter-input" type="text"
@@ -194,7 +156,7 @@ export function HeaderFilter() {
                             value={filterByToEdit.locationCity}
                             onChange={handleLocationChange}
                         />
-                        {isLocationExpand && <PlaceFilter locationList={locationList} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
+                        {(modal === 'location') && <PlaceFilter locationList={locationList} onSetLocation={onSetLocation} onMoveToDateFilter={onMoveToDateFilter} />}
                     </div>
                     <div className={`flex align-center date-container`}>
                         <button onClick={onCheckInClick} className={`flex column check-in ${(isCheckinExpand) ? 'filter-active' : ''}`}>
@@ -207,10 +169,10 @@ export function HeaderFilter() {
                             <div onClick={onCheckoutClick} className="filter-sub-text">{(!filterByToEdit.endDate) ? 'Add dates' : months[(filterByToEdit.endDate).getMonth()] + ' ' + (filterByToEdit.endDate).getDate()}</div>
                         </button>
 
-                        {isDateExpand && <DateFilter updateDate={updateDate} />}
+                        {(modal === 'Date') && <DateFilter updateDate={updateDate} />}
                     </div>
 
-                    <div className={`flex align-center guest-container ${(isGuestExpand) ? 'filter-active' : ''}`}>
+                    <div className={`flex align-center guest-container ${(modal === 'Guests') ? 'filter-active' : ''}`}>
                         <button onClick={onGuestClick} className="flex column">
                             <span onClick={onGuestClick} className="filter-main-text">Who?</span>
                             <span onClick={onGuestClick} className="filter-sub-text">{(filterByToEdit.guests.total) ? ((filterByToEdit.guests.adults +
@@ -225,20 +187,12 @@ export function HeaderFilter() {
 
                             </div>
                         </IconContext.Provider>
-                        {isGuestExpand && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
+                        {(modal === 'Guests') && <GuestFilter onSetGuestFilter={onSetGuestFilter} />}
                     </div>
 
                 </div>}
 
             </section>
-
-
-
-
-
-
-
-
         </Fragment>)
 
 }
