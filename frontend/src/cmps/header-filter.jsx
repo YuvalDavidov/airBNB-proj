@@ -57,7 +57,7 @@ export function HeaderFilter() {
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
         setLocationList(locations)
-        console.log(isHeadFilterExpanded)
+        // console.log(isHeadFilterExpanded)
 
     }, [isHeadFilterExpanded])
 
