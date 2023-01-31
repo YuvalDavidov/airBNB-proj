@@ -12,7 +12,8 @@ export function UserTrips() {
   const { isMobile } = useSelector((storeState) => storeState.systemModule)
 
   useEffect(() => {
-    loadOrders({ userId: userService.getLoggedinUser()._id })
+    setTimeout(() => {loadOrders({ userId: userService.getLoggedinUser()._id })},300)
+    // loadOrders({ userId: userService.getLoggedinUser()._id })
     socketService.on('reviewed-order', updatedOrder => {
       loadOrders({ userId: userService.getLoggedinUser()._id })
     })

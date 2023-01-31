@@ -64,7 +64,7 @@ export function HeaderFilter() {
 
 
 
-
+>>>>>>> 601a005d468c62f216ac5fbd4962c8d22a8766bd
     function handleLocationChange({ target }) {
         let { value, name: field } = target
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))

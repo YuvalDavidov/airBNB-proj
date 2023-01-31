@@ -67,7 +67,7 @@ async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSgdMa3-zfBbsMOTEYwMDhWumoaLYOb4kbOBP9Mmwdt9AwdzYCaL0VS1zKzlKc5DnPoWUSfVA25uggiN0o'
     // const user = await storageService.post(USER_KEY, userCred)
     const user = await httpService.post('auth/signup', userCred)
-    // socketService.login(user._id)
+    socketService.login(user._id)
     return saveLocalUser(user)
 }
 async function logout() {
