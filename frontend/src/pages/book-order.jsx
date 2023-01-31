@@ -109,26 +109,26 @@ export function BookStay() {
   async function onOrder() {
     try {
       let orderToSave = orderService.getEmptyOrder()
-    orderToSave.aboutOrder = order
-    orderToSave.aboutOrder.totalPrice = stay.price * getDaysCalculate()
-    orderToSave.aboutOrder.bookDate = Date.now()
-    orderToSave.aboutOrder.status = 'Pending'
-    orderToSave.aboutUser = {
-      _id: user._id,
-      fullname: user.fullname,
-      imgUrl: user.imgUrl,
-    }
-    const backOrder = await orderService.save(orderToSave)
-    showSuccessMsg('Order has been made')
-    setIsOrderDone(true)
-    navigate('/trips')
+      orderToSave.aboutOrder = order
+      orderToSave.aboutOrder.totalPrice = stay.price * getDaysCalculate()
+      orderToSave.aboutOrder.bookDate = Date.now()
+      orderToSave.aboutOrder.status = 'Pending'
+      orderToSave.aboutUser = {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+      }
+      const backOrder = await orderService.save(orderToSave)
+      showSuccessMsg('Order has been made')
+      setIsOrderDone(true)
+      navigate('/trips')
     } catch (error) {
       throw new Error(error)
     }
-    
+
   }
 
-  if (!order) return <div>Somthing whent wrong with the order</div>
+  if (!order) return <div>Loading...</div>
 
   const { stay, startDate, endDate, stayId } = order
 
