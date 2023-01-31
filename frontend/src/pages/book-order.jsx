@@ -128,7 +128,7 @@ export function BookStay() {
 
   }
 
-  if (!order) return <div>Loading...</div>
+  if (!order) return <div>Loading..</div>
 
   const { stay, startDate, endDate, stayId } = order
 
