@@ -6,8 +6,6 @@ import { loadMyStays } from "../store/stay.actions";
 
 
 export function Dashboard() {
-
-
     useEffect(() => {
         loadMyStays({ hostId: userService.getLoggedinUser()._id })
     }, [])
