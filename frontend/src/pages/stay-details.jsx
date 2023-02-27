@@ -107,26 +107,6 @@ export function StayDetails() {
 
     }
 
-    function getStayReviewRateAvg(stayReviews) {
-        let rate = 0
-        let rateCount = 0
-        let sum = 0
-        let count = 0
-
-        stayReviews.forEach(review => {
-
-            for (const key in review.moreRate) {
-                sum += review.moreRate[key]
-                count++
-            }
-            rate += sum / count
-            rateCount++
-        })
-
-        const avg = (parseFloat(rate / rateCount) + 0.8215).toFixed(2)
-        return avg
-    }
-
     function handleGuestsAmount(type, diff) {
         let cloneState = { ...guestsAmount }
         if (cloneState.adults === 1 && type === 'adults' && diff === -1) return
@@ -223,7 +203,7 @@ export function StayDetails() {
                         </div>
 
                         <div className="header-review flex align-center">
-                            <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}
+                            <AiFillStar /> {reviews.length > 0 ? stayService.getStayReviewRateAvg(reviews) : '0'}
                             <span className="dote">•</span>
                             <span><a href="#reviews">{reviews.length} reviews</a></span>
 
@@ -271,7 +251,7 @@ export function StayDetails() {
                 <h2>{name}</h2>
                 <div className="stay-mini-sumerry align-center">
                     <div className="flex align-center">
-                        {reviews.length > 0 && <><span> <AiFillStar /> {getStayReviewRateAvg(reviews)}</span>  <span className="dote">•</span></>}
+                        {reviews.length > 0 && <><span> <AiFillStar /> {stayService.getStayReviewRateAvg(reviews)}</span>  <span className="dote">•</span></>}
                         <span><a href="#reviews">{reviews.length} reviews</a></span>
                         <span className="dote">•</span>
                         <a href="#map">{loc.address}</a>,
@@ -314,7 +294,7 @@ export function StayDetails() {
                         <h2>{name}</h2>
                         <div className="stay-mini-sumerry align-center">
                             <div className="flex align-center">
-                                <span> <AiFillStar /> {reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
+                                <span> <AiFillStar /> {reviews.length > 0 ? stayService.getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span className="dote">•</span>
                                 <span><a href="#reviews">{reviews.length} reviews</a></span>
                                 <span className="dote">•</span>
@@ -507,7 +487,7 @@ export function StayDetails() {
                                 </div>
 
                                 <div className="flex align-center">
-                                    {reviews.length > 0 && <> <AiFillStar /> {getStayReviewRateAvg(reviews)}   <span className="dote">•</span> </>}
+                                    {reviews.length > 0 && <> <AiFillStar /> {stayService.getStayReviewRateAvg(reviews)}   <span className="dote">•</span> </>}
 
 
                                     <span><a href="#reviews">{reviews.length} reviews</a></span>
@@ -627,7 +607,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? stayService.getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>
@@ -698,7 +678,7 @@ export function StayDetails() {
                         (<section className="reviews">
                             <h2 className="flex">
                                 <AiFillStar />
-                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? getStayReviewRateAvg(reviews) : '0'}</span>
+                                <span style={{ 'marginLeft': '5px' }}>{reviews.length > 0 ? stayService.getStayReviewRateAvg(reviews) : '0'}</span>
                                 <span style={{ 'marginLeft': '5px' }} className="dote">•</span>
                                 <span style={{ 'marginLeft': '5px' }}>{reviews.length} reviews</span>
                             </h2>

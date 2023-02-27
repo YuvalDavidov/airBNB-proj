@@ -8,6 +8,7 @@ import { addToWishlist, removeFromWishlist, setIsModalOpen, setIsSignup } from '
 
 import { ImageSlider } from './image-slider'
 import { utilService } from '../services/util.service'
+import { stayService } from '../services/stay.service'
 
 export function StayPreview({ stay, userLocation }) {
   const navigate = useNavigate()
@@ -15,26 +16,6 @@ export function StayPreview({ stay, userLocation }) {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   const user = useSelector((storeState) => storeState.userModule.user)
-
-  function getStayReviewRateAvg(stayReviews) {
-    let rate = 0
-    let rateCount = 0
-    let sum = 0
-    let count = 0
-
-    stayReviews.forEach(review => {
-
-      for (const key in review.moreRate) {
-        sum += review.moreRate[key]
-        count++
-      }
-      rate += sum / count
-      rateCount++
-    })
-
-    const avg = rate / rateCount
-    return avg + 0.8215
-  }
 
   function calcAirDistance(lat1, lng1, lat2, lng2) {
     var R = 6371 // km
@@ -129,9 +110,9 @@ export function StayPreview({ stay, userLocation }) {
               ></path>
             </svg>}
             <span className='rate-num'>
-              {stay.reviews.length > 0 ? getStayReviewRateAvg(stay.reviews) % 1 !== 0
-                ? getStayReviewRateAvg(stay.reviews).toFixed(2)
-                : getStayReviewRateAvg(stay.reviews).toFixed(1)
+              {stay.reviews.length > 0 ? stayService.getStayReviewRateAvg(stay.reviews) % 1 !== 0
+                ? stayService.getStayReviewRateAvg(stay.reviews)
+                : stayService.getStayReviewRateAvg(stay.reviews)
                 : ''}
             </span>
           </span>
