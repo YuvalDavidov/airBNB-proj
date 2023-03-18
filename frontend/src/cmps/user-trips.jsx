@@ -1,18 +1,18 @@
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
-
 import { loadOrders } from '../store/order.actions'
 import { userService } from '../services/user.service'
 import { utilService } from '../services/util.service'
 import { socketService } from '../services/socket.service'
 import { UserTripsTr } from './user-trips-tr'
+import { Link } from 'react-router-dom'
 
 export function UserTrips() {
   const { orders } = useSelector((storeState) => storeState.orderModule)
   const { isMobile } = useSelector((storeState) => storeState.systemModule)
 
   useEffect(() => {
-    setTimeout(() => {loadOrders({ userId: userService.getLoggedinUser()._id })},300)
+    setTimeout(() => { loadOrders({ userId: userService.getLoggedinUser()._id }) }, 300)
     // loadOrders({ userId: userService.getLoggedinUser()._id })
     socketService.on('reviewed-order', updatedOrder => {
       loadOrders({ userId: userService.getLoggedinUser()._id })
@@ -29,7 +29,7 @@ export function UserTrips() {
       {!isMobile && <table className='trips-table'>
         <thead>
           <tr>
-            <th style={{width: '350px'}}>Destination</th>
+            <th style={{ width: '350px' }}>Destination</th>
             <th>Host</th>
             <th>Check-in</th>
             <th>Check-out</th>
@@ -39,12 +39,12 @@ export function UserTrips() {
           </tr>
         </thead>
         <tbody>
-          {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map((order) => {
+          {orders.sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map((order) => {
             return (
               <tr key={order._id}>
                 <td className="destination-td">
                   <div className="img-container">
-                  <img src={order.aboutOrder.stay.imgUrls[0]} alt='Stay img' />
+                    <img src={order.aboutOrder.stay.imgUrls[0]} alt='Stay img' />
                   </div>
                   <span>{order.aboutOrder.stay.name}</span>
                 </td>
@@ -52,8 +52,13 @@ export function UserTrips() {
                 <td>{utilService.getFullDate(order.aboutOrder.startDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
-                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                <td style={{fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status)}}>{order.aboutOrder.status}</td>
+                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                <section className='flex column'>
+                  <td style={{ fontFamily: 'Cereal-Medium', color: utilService.getStatusColor(order.aboutOrder.status) }}>{order.aboutOrder.status}</td>
+                  <td><button><Link to={`/chat/${order.aboutOrder.stay.host._id}`}>
+                    Chat with Guest
+                  </Link></button></td>
+                </section>
               </tr>
             )
           })}
@@ -62,15 +67,15 @@ export function UserTrips() {
 
       {isMobile && <table className="mobile-trips-table">
         <thead>
-            <tr>
-                <th className='destination-th'>Destination</th>
-                <th className='dates-th'>Dates</th>
-            </tr>
+          <tr>
+            <th className='destination-th'>Destination</th>
+            <th className='dates-th'>Dates</th>
+          </tr>
         </thead>
         <tbody>
-            {orders.sort((a,b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate)*-1).map(order => <UserTripsTr key={order._id} order={order} />)}
+          {orders.sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <UserTripsTr key={order._id} order={order} />)}
         </tbody>
-        </table>}
+      </table>}
     </section>
   )
 }

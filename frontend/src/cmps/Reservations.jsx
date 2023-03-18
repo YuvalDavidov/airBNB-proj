@@ -9,6 +9,7 @@ import { loadOrders, setOrderStatus } from '../store/order.actions'
 import { ListingChart } from './listing-chart'
 import { ReservBarChart } from './reservations-bar-chart'
 import { ReservationsTr } from './reservations-tr'
+import { Link } from 'react-router-dom'
 
 export function Reservations() {
   // const [orders, setOrders] = useState(null)
@@ -22,6 +23,8 @@ export function Reservations() {
       loadOrders({ hostId: userService.getLoggedinUser()._id })
     })
   }, [])
+
+
 
   return (
     <section className='reservations'>
@@ -105,7 +108,7 @@ export function Reservations() {
                 <td>{utilService.getFullDate(order.aboutOrder.endDate)}</td>
                 <td>{utilService.getFullDate(order.aboutOrder.bookDate)}</td>
                 <td>{order.aboutOrder.stay.name}</td>
-                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
+                <td>${order.aboutOrder.totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                 <td
                   style={{
                     fontFamily: 'Cereal-Medium',
@@ -135,6 +138,11 @@ export function Reservations() {
                   >
                     Reject
                   </button>
+                  <button>
+                    <Link to={`/chat/${order.aboutUser._id}`}>
+                      Chat with Guest
+                    </Link>
+                  </button>
                 </td>
               </tr>
             )
@@ -143,39 +151,40 @@ export function Reservations() {
       </table>}
 
       {isMobile && <div className="mobile-reservations">
-        {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 && 
-        <>
-        <h2 style={{marginBottom: '25px'}}>Pending</h2>
+        {orders.filter(order => order.aboutOrder.status === 'Pending').length > 0 &&
+          <>
+            <h2 style={{ marginBottom: '25px' }}>Pending</h2>
+            <table className="mobile-reservations-table">
+              <thead>
+                <tr>
+                  <th className='listing-th'>Listing</th>
+                  <th className='dates-th'>Dates</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.filter(order => order.aboutOrder.status === 'Pending').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
+
+              </tbody>
+            </table>
+          </>}
+        <div className="approved-status" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '25px' }}>
+          <h2>Approved</h2>
+          <h4 style={{ color: 'green' }}>Total revenue: ${orders.filter(order => order.aboutOrder.status === 'Approved').reduce((acc, order) => {
+            acc += order.aboutOrder.totalPrice
+            return acc
+          }, 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</h4>
+        </div>
         <table className="mobile-reservations-table">
-        <thead>
-          <tr>
-            <th className='listing-th'>Listing</th>
-            <th className='dates-th'>Dates</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.filter(order => order.aboutOrder.status === 'Pending').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
-        </tbody>
-      </table>
-      </> }
-      <div className="approved-status" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '25px'}}>
-        <h2>Approved</h2>
-        <h4 style={{color: 'green'}}>Total revenue: ${orders.filter(order => order.aboutOrder.status === 'Approved').reduce((acc,order) => {
-          acc += order.aboutOrder.totalPrice
-          return acc
-        },0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</h4>
-      </div>
-      <table className="mobile-reservations-table">
-        <thead>
-          <tr>
-            <th className='listing-th'>Listing</th>
-            <th className='dates-th'>Dates</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.filter(order => order.aboutOrder.status === 'Approved').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
-        </tbody>
-      </table>
+          <thead>
+            <tr>
+              <th className='listing-th'>Listing</th>
+              <th className='dates-th'>Dates</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.filter(order => order.aboutOrder.status === 'Approved').sort((a, b) => (a.aboutOrder.bookDate - b.aboutOrder.bookDate) * -1).map(order => <ReservationsTr key={order._id} order={order} />)}
+          </tbody>
+        </table>
       </div>}
     </section>
   )

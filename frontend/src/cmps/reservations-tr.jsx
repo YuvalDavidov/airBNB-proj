@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { setOrderStatus } from '../store/order.actions'
 import { utilService } from '../services/util.service'
+import { Link } from 'react-router-dom'
 
 export function ReservationsTr({ order }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -73,6 +74,11 @@ export function ReservationsTr({ order }) {
                   onClick={() => setOrderStatus(order, 'Rejected')}
                 >
                   Reject
+                </button>
+                <button>
+                  <Link to={`/chat/${order.aboutUser.id}`}>
+                    Chat with Guest
+                  </Link>
                 </button>
               </div>
             </td>

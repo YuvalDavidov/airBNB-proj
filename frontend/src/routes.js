@@ -6,6 +6,7 @@ import { BookStay } from './pages/book-order.jsx'
 import { Wishlist } from './pages/wishlist.jsx'
 import { UserTrips } from './cmps/user-trips.jsx'
 import { LoginPage } from './pages/login-page.jsx'
+import { ChatApp } from './pages/chat-app.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
         path: 'admin',
         component: <AdminApp />,
         label: 'Admin Only'
+    },
+    {
+        path: 'chat/:guestId',
+        component: <ChatApp />,
+        label: 'Chat with Guest'
     }
 ]
 
