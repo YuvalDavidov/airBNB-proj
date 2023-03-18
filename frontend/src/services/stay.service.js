@@ -15,12 +15,11 @@ export const stayService = {
   addStayMsg,
   getFilterFromSearchParams,
   getDefaultFilter,
-  getStaysForWishlist
-  // getDefaultHeaderFilter,
-  // getDefaultLabelsFilter,
-  // getDefaultModalFilter
+  getStaysForWishlist,
+  getStayReviewRateAvg
+
 }
-// window.cs = stayService
+
 
 async function query(filterBy = getDefaultFilter()) {
   if (filterBy?.hostId) return httpService.get(BASE_URL + `?hostId=${filterBy.hostId}`)
@@ -107,8 +106,6 @@ function getEmptyStay() {
   }
 }
 
-
-
 function getDefaultFilter() {
   return {
     locationCountry: '',
@@ -134,3 +131,22 @@ function getFilterFromSearchParams(searchParams) {
   return filterBy
 }
 
+function getStayReviewRateAvg(stayReviews) {
+  let rate = 0
+  let rateCount = 0
+  let sum = 0
+  let count = 0
+
+  stayReviews.forEach(review => {
+
+    for (const key in review.moreRate) {
+      sum += review.moreRate[key]
+      count++
+    }
+    rate += sum / count
+    rateCount++
+  })
+
+  const avg = (parseFloat(rate / rateCount) + 0.8215).toFixed(2)
+  return avg
+}
