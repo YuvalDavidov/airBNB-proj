@@ -22,7 +22,6 @@ const initialState = {
 
 export function stayReducer(state = initialState, action) {
   let stays
-  let mySortedStays
 
   // stays
   switch (action.type) {

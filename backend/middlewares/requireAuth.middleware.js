@@ -10,7 +10,10 @@ function requireAuth(req, res, next) {
     req.loggedinUser = { _id: '', fullname: 'Guest' }
     return next()
   }
-  if (!loggedinUser) return res.status(401).send('Not Authenticated')
+  if (!loggedinUser) {
+    logger.warn('attempted to call the back without auth')
+    return res.status(401).send('Not Authenticated')
+  }
   next()
 }
 

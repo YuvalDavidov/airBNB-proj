@@ -24,6 +24,7 @@ export function LabelsFilter() {
     const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
     const [searchParams, setSearchParams] = useSearchParams()
     const [shownLabels, setShownLabels] = useState(6)
+    const [selectedLabel, setSelectedLabel] = useState('')
 
     useEffect(() => {
         labels = labels.slice(0, shownLabels)
@@ -38,7 +39,7 @@ export function LabelsFilter() {
     function onSetLabel(label) {
         setSearchParams({ ...filterBy, label })
         setFilterBy({ ...filterBy, label })
-        console.log('label----->', label)
+        setSelectedLabel(label)
     }
     // labels = labels.slice(0, shownLabels)
 
@@ -104,7 +105,12 @@ export function LabelsFilter() {
 
 
 
-        {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item`} key={label}>
+        {labels && labels.map((label, idx) => <div onClick={() => onSetLabel(label)} className={`flex align-center label-item`} style={{
+            cursor: 'pointer',
+            color: selectedLabel === label ? 'black' : '',
+            borderBottomColor: selectedLabel === label ? 'black' : '',
+            transition: 'all 0.3s ease',
+          }} key={label}>
             <IconContext.Provider value={{ className: "label-icon", size: '20px' }}>
                 <span>{icons[idx]}</span>
             </IconContext.Provider>

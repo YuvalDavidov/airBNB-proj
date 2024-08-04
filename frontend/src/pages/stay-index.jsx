@@ -6,6 +6,8 @@ import { useSearchParams } from 'react-router-dom'
 import { loadLocations, loadStays, saveStay, toggleInDetails } from '../store/stay.actions'
 import { StayList } from '../cmps/stay-list'
 import { stayService } from '../services/stay.service'
+import LoadingElement from '../cmps/loading-element.jsx'
+import MsgDisplay from '../cmps/msg-display.jsx'
 
 export function StayIndex() {
 
@@ -17,6 +19,7 @@ export function StayIndex() {
     lat: 32.078618,
     lng: 34.774071,
   })
+  const [isStaysNotExist, setIsStaysNotExist] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [stayToEdit, setStayToEdit] = useState(stayService.getEmptyStay())
   const filterBy = useSelector((storeState) => storeState.stayModule.filterBy)
@@ -26,6 +29,13 @@ export function StayIndex() {
     toggleInDetails(false)
     onLoadStays(queryFilterBy)
   }, [filterBy])
+
+  useEffect(() => {
+    setTimeout(()=> {
+      if (stays.length) setIsStaysNotExist(true)
+        else setIsStaysNotExist(false)
+    }, 8000)
+  }, [stays])
 
   useEffect(() => {
     loadLocations()
@@ -80,16 +90,13 @@ export function StayIndex() {
   }
 
   return (
-    <section className='stay-index'>
-      {/* <button className='add-btn' onClick={() => setAddModal(true)}>
-        Add Stay
-      </button> */}
+    stays.length ? <section className='stay-index'>
       <LabelsFilter />
       <StayList
         stays={stays}
         userLocation={userLocation}
         onUpdateStay={onUpdateStay}
       />
-    </section>
+    </section> : (isStaysNotExist) ? <MsgDisplay message={'There are not any stays available'} /> : <LoadingElement  text={'Loading stays, please wait...'}  />
   )
 }
