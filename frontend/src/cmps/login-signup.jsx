@@ -11,6 +11,8 @@ export function LoginSignup() {
     fullname: '',
   })
 
+  const [isLoginError, setIsLoginError] = useState(false)
+
   const isSignup = useSelector((storeState) => storeState.userModule.isSignup)
 
   function handleChange({ target }) {
@@ -18,14 +20,19 @@ export function LoginSignup() {
     setCredentials((prev) => ({ ...prev, [field]: value }))
   }
 
-  function onLogin(ev) {
+  async function onLogin(ev) {
     ev.preventDefault()
     if (!credentials.username || !credentials.password) return
     if (isSignup && !credentials.fullname) return
-    if (isSignup) signup(credentials)
-    else login(credentials)
-    setIsModalOpen(false)
+    try {
+      if (isSignup) signup(credentials)
+        else await login(credentials)
+        setIsModalOpen(false)
+    } catch (error) {
+        setIsLoginError(true)
+        setTimeout(()=> setIsLoginError(false), 2500)
   }
+}
 
   return (
     <section className='login-signup'>
@@ -87,6 +94,7 @@ export function LoginSignup() {
               onChange={handleChange}
             />
           </div>
+            {isLoginError && <span style={{color: 'red'}}>Password or username are not correct, please try again!</span>}
           < GradientButton className="signin-btn" label={isSignup ? 'Sign up' : 'Log in'} />
         </form>
         <div className='or-line'>
@@ -94,7 +102,7 @@ export function LoginSignup() {
           <span>or</span>
           <hr />
         </div>
-        < GradientButton className="signin-btn" label="Continue as a guest" />
+        {/* < GradientButton className="signin-btn" label="Continue as a guest" /> */}
         <button
           className='toggle-signup'
           onClick={() => setIsSignup(!isSignup)}

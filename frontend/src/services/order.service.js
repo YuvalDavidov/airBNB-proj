@@ -52,7 +52,6 @@ async function save(order) {
         }
         return savedOrder
     } catch (error) {
-        console.log(error);
     }
 }
 

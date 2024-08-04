@@ -11,6 +11,7 @@ export function LoginPage() {
     password: '',
     fullname: '',
   })
+  const [isLoginError, setIsLoginError] = useState(false)
 
   const isSignup = useSelector((storeState) => storeState.userModule.isSignup)
   const navigate = useNavigate()
@@ -20,13 +21,17 @@ export function LoginPage() {
     setCredentials((prev) => ({ ...prev, [field]: value }))
   }
 
-  function onLogin(ev) {
+ async function onLogin(ev) {
     ev.preventDefault()
     if (!credentials.username || !credentials.password) return
     if (isSignup && !credentials.fullname) return
-    if (isSignup) signup(credentials)
-    else login(credentials)
-    navigate('/')
+    try {
+      if (isSignup) signup(credentials)
+        else await login(credentials)
+    } catch (error) {
+        setIsLoginError(true)
+        setTimeout(()=> setIsLoginError(false), 2500)
+    }
   }
 
   return (
@@ -68,6 +73,7 @@ export function LoginPage() {
               onChange={handleChange}
             />
           </div>
+              {isLoginError && <span style={{color: 'red'}}>Password or username are not correct, please try again!</span>}
           < GradientButton className="signin-btn" label={isSignup ? 'Sign up' : 'Log in'} />
         </form>
         <div className='or-line'>
@@ -75,7 +81,7 @@ export function LoginPage() {
           <span>or</span>
           <hr />
         </div>
-        < GradientButton className="signin-btn" label="Continue as a guest" />
+        {/* < GradientButton className="signin-btn" label="Continue as a guest" /> */}
         <button
           className='toggle-signup'
           onClick={() => setIsSignup(!isSignup)}

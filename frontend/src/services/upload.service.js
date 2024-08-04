@@ -43,7 +43,6 @@ function uploadImgNew(file) {
 }
 
 function uploadMany(ev) {
-  console.log(ev.target.files);
   let imgsArr = []
 
   for (const file in ev.target.files) {

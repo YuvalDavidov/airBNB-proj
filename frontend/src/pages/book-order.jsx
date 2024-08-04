@@ -39,7 +39,6 @@ export function BookStay() {
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
-  console.log(order)
 
   useEffect(() => {
     getOrderPickes()

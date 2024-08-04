@@ -24,10 +24,8 @@ export const stayService = {
 async function query(filterBy = getDefaultFilter()) {
   if (filterBy?.hostId) return httpService.get(BASE_URL + `?hostId=${filterBy.hostId}`)
   if (filterBy?.wishlist) return httpService.get(BASE_URL)
-  // console.log('filterBy------->', filterBy)
 
   const queryParams = `?locationCountry=${filterBy.locationCountry}&locationCity=${filterBy.locationCity}&guests=${filterBy.guests}&label=${filterBy.label}&pets=${(+filterBy.pets > 0) ? 'true' : ''}`
-  // console.log('queryParams------->', queryParams)
   const stays = httpService.get(BASE_URL + queryParams)
 
   return stays
@@ -44,7 +42,6 @@ async function remove(stayId) {
 
 async function save(stay) {
   let savedStay
-  console.log(stay);
   if (stay._id) {
     savedStay = await httpService.put(BASE_URL + stay._id, stay)
   } else {

@@ -20,7 +20,6 @@ export async function loadReviews() {
     store.dispatch({ type: SET_REVIEWS, reviews })
 
   } catch (err) {
-    console.log('ReviewActions: err in loadReviews', err)
     throw err
   }
 }
@@ -32,7 +31,6 @@ export async function addReview(review) {
     const { score } = addedReview.byUser
     store.dispatch({ type: SET_SCORE, score })
   } catch (err) {
-    console.log('ReviewActions: err in addReview', err)
     throw err
   }
 }
@@ -42,7 +40,6 @@ export async function removeReview(reviewId) {
     await reviewService.remove(reviewId)
     store.dispatch(getActionRemoveReview(reviewId))
   } catch (err) {
-    console.log('ReviewActions: err in removeReview', err)
     throw err
   }
 }

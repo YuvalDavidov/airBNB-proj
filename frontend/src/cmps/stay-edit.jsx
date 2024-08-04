@@ -29,7 +29,6 @@ export function StayEdit() {
     const [stayToEdit, setStayToEdit] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
     const { stayId } = useParams()
-    console.log(stayToEdit);
     useEffect(() => {
         const button = document.querySelector('.edit-btn')
         button.addEventListener('mousemove', e => {
@@ -108,7 +107,6 @@ export function StayEdit() {
 
     function onRemoveImg(imgUrl) {
         let filteredImgs = stayToEdit.imgUrls.filter(url => url !== imgUrl)
-        console.log(filteredImgs);
 
         return setStayToEdit((prevStay) => ({ ...prevStay, imgUrls: filteredImgs }))
     }

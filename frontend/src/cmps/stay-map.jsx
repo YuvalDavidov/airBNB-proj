@@ -7,14 +7,12 @@ import { MdLocationOn } from "react-icons/md";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export function StayMap({ stayLoc }) {
-    // console.log(stayLoc);
     const [coordinates, serCoordinates] = useState({ lat: stayLoc.lat, lng: stayLoc.lng })
 
     const zoom = 11
 
 
     const handleClick = (x) => {
-        console.log(x);
     }
 
 

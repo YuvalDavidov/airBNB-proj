@@ -30,7 +30,6 @@ export function HeaderFilter() {
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
         setLocationList(locations)
-        console.log(isHeadFilterExpanded)
 
     }, [isHeadFilterExpanded])
 
@@ -58,7 +57,6 @@ export function HeaderFilter() {
     useEffect(() => {
         setFilterByToEdit({ locationCity: '', locationCountry: '', startDate: false, endDate: false, guests: { total: 0 } })
         setLocationList(locations)
-        // console.log(isHeadFilterExpanded)
 
     }, [isHeadFilterExpanded])
 
@@ -74,13 +72,11 @@ export function HeaderFilter() {
     }
 
     function onSetGuestFilter(numOfGuests) {
-        console.log(numOfGuests)
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: numOfGuests }))
     }
 
 
     function updateDate(date) {
-        console.log(date)
         if (isCheckinExpand) onCheckoutClick()
         if (isCheckoutExpand) onMoveToGuestFilter()
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, startDate: date.startDate, endDate: date.endDate }))
@@ -129,7 +125,6 @@ export function HeaderFilter() {
 
     function onSubmitSearch(ev) {
         ev.preventDefault()
-        console.log('filterByToEdit------>', filterByToEdit)
         setSearchParams({
             ...filterBy, locationCountry: filterByToEdit.locationCountry, locationCity: filterByToEdit.locationCity,
             startDate: filterByToEdit.startDate, endDate: filterByToEdit.endDate, guests: filterByToEdit.guests.total,
@@ -143,7 +138,6 @@ export function HeaderFilter() {
         })
 
         toggleExpand(false)
-        console.log('submited')
     }
 
 

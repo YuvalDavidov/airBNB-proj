@@ -50,13 +50,11 @@ export function toggleInDetails(boolean) {
 export async function loadStays(filterBy) {
   try {
     const stays = await stayService.query(filterBy)
-    // console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_STAYS,
       stays,
     })
   } catch (err) {
-    console.log('Cannot load stays', err)
     throw err
   }
 }
@@ -85,13 +83,11 @@ export async function loadLocations() {
 export async function loadMyStays(filterBy) {
   try {
     const stays = await stayService.query(filterBy)
-    // console.log('Stays from DB:', stays)
     store.dispatch({
       type: SET_MY_STAYS,
       stays,
     })
   } catch (err) {
-    console.log('Cannot load stays', err)
     throw err
   }
 }
@@ -101,7 +97,6 @@ export async function removeStay(stayId) {
     await stayService.remove(stayId)
     store.dispatch(getActionRemoveStay(stayId))
   } catch (err) {
-    console.log('Cannot remove stay', err)
     throw err
   }
 }
@@ -139,7 +134,6 @@ export async function saveStay(stay) {
     store.dispatch(getActionSaveStay(savedStay))
     return savedStay
   } catch (err) {
-    console.log('Cannot save stay', err)
     throw err
   }
 }
@@ -150,7 +144,6 @@ export async function getStaysForWishlist(staysIds) {
     store.dispatch({ type: SET_WISHLIST_STAYS, wishlistStays })
     return wishlistStays
   } catch (err) {
-    console.log('cannot set wishlist stays')
     throw err
   }
 }

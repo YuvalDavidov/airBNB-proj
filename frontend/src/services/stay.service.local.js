@@ -51,7 +51,6 @@ async function remove(stayId) {
 
 async function save(stay) {
   let savedStay
-  console.log(stay);
   if (stay._id) {
     savedStay = await storageService.put(STORAGE_KEY, stay)
   } else {

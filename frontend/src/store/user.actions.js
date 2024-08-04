@@ -11,7 +11,6 @@ export async function loadUsers() {
         const users = await userService.getUsers()
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
-        console.log('UserActions: err in loadUsers', err)
     } finally {
         store.dispatch({ type: LOADING_DONE })
     }
@@ -22,14 +21,13 @@ export async function removeUser(userId) {
         await userService.remove(userId)
         store.dispatch({ type: REMOVE_USER, userId })
     } catch (err) {
-        console.log('UserActions: err in removeUser', err)
     }
 }
 
 export async function addToWishlist(stayId) {
     try {
         const user = await userService.addToWishlist(stayId)
-        store.dispatch({ type: SET_USER, user})
+        store.dispatch({ type: SET_USER, user })
         return user
     } catch (err) {
         throw err
@@ -39,7 +37,7 @@ export async function addToWishlist(stayId) {
 export async function removeFromWishlist(stayId) {
     try {
         const user = await userService.removeFromWishlist(stayId)
-        store.dispatch({ type: SET_USER, user})
+        store.dispatch({ type: SET_USER, user })
         return user
     } catch (err) {
         throw err
@@ -55,7 +53,6 @@ export async function login(credentials) {
         })
         return user
     } catch (err) {
-        console.log('Cannot login', err)
         throw err
     }
 }
@@ -69,7 +66,6 @@ export async function signup(credentials) {
         })
         return user
     } catch (err) {
-        console.log('Cannot signup', err)
         throw err
     }
 }
@@ -82,17 +78,16 @@ export async function logout() {
             user: null
         })
     } catch (err) {
-        console.log('Cannot logout', err)
         throw err
     }
 }
 
 export function setIsModalOpen(isModalOpen) {
-    store.dispatch({type: SET_IS_MODAL_OPEN, isModalOpen})
+    store.dispatch({ type: SET_IS_MODAL_OPEN, isModalOpen })
 }
 
 export function setIsSignup(isSignup) {
-    store.dispatch({type: SET_IS_SIGNUP, isSignup})
+    store.dispatch({ type: SET_IS_SIGNUP, isSignup })
 }
 
 export async function loadUser(userId) {
@@ -101,6 +96,5 @@ export async function loadUser(userId) {
         store.dispatch({ type: SET_WATCHED_USER, user })
     } catch (err) {
         showErrorMsg('Cannot load user')
-        console.log('Cannot load user', err)
     }
 }

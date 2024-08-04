@@ -37,7 +37,6 @@ function randomImgs() {
 }
 
 _writeCarsToFile()
-// console.log(stays);
 function _writeCarsToFile() {
     stays = stays.map((stay) => {
         let updateStay = {

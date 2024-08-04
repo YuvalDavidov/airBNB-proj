@@ -13,7 +13,6 @@ async function getStays(req, res) {
       label: req.query.label || 'Trending'
     }
     if (req.query.pets) filterBy.pets = true
-    console.log('filterBy------->', filterBy)
     if (req.query.hostId) {
       filterBy = {
         hostId: req.query.hostId
@@ -32,7 +31,6 @@ async function getStayById(req, res) {
     logger.debug('Getting Stay')
     const stayId = req.params.id
     const stay = await stayService.getById(stayId)
-    console.log(stay);
     res.json(stay)
   } catch (err) {
     logger.error('Failed to get stay', err)

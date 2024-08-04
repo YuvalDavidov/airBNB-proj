@@ -25,7 +25,6 @@ export function RootCmp() {
     toggleExpand(false)
   }
   function dontDoNothing() {
-    // console.log(`hi`)
   }
   return (
     <div onScroll={onToggleExpand}>

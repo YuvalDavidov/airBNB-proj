@@ -41,7 +41,6 @@ export function Listings() {
     }
 
     if (!myStays) return <div>You dont have stays!!!!!!!</div>
-    // if (stays[0].createdAt === undefined) console.log(randomDate(new Date(2012, 0, 1), new Date()));
 
     return (<>
 

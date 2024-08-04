@@ -24,7 +24,6 @@ export function ChatApp() {
 
 
     function addMsg(newMsg) {
-        console.log(msgs)
         setMsgs(prevMsgs => [...prevMsgs, newMsg])
     }
 
