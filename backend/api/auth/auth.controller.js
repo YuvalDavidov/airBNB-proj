@@ -13,6 +13,7 @@ async function login(req, res) {
         logger.error('Failed to Login ' + err)
         res.status(401).send({ err: `Failed to Login ${err}` })
     }
+    console.log('hi')
 }
 
 async function signup(req, res) {
