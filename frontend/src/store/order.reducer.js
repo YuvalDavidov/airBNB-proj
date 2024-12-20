@@ -22,9 +22,9 @@ export function orderReducer(state = initialState, action) {
             return { ...state, orders: action.orders }
         case UPDATE_ORDER:
             orders = state.orders.map(order => order._id === action.order._id ? action.order : order)
-            return {...state, orders, hostOrders:orders}
+            return { ...state, orders, hostOrders: orders }
         case SET_HOST_ORDERS:
-            return {...state, hostOrders: action.hostOrders}
+            return { ...state, hostOrders: action.hostOrders }
         default:
             return state
     }
