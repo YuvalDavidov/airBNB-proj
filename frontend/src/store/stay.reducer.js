@@ -68,8 +68,3 @@ export function stayReducer(state = initialState, action) {
       return state
   }
 }
-
-
-function _compareNumbers(a, b) {
-  return a - b;
-}
